@@ -17,6 +17,11 @@ To shutdown the containers:
 docker-compose down
 ```
 
+To restart the containers use:
+```bash
+docker-compose restart
+```
+
 ## Folder structure
 
     .
