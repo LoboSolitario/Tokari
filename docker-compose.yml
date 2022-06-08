@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+# booting up the nodejs server
+  server:
+    build:
+      context: ./server
+      args:
+        - APP_SERVER_PORT=${APP_SERVER_PORT}
+    restart: always
+    volumes: 
+      - './server:/app'
+      - /app/node_modules
+    depends_on: 
+      - mongo
+    container_name: nodejs_server
+    ports:
+      - "${APP_SERVER_PORT}:${APP_SERVER_PORT}"
+    networks:
+      - mern-network
+
+# booting up the react server
+  app:
+    build:
+      context: ./client
+      args:
+        - REACT_APP_API_URL=${REACT_APP_API_URL}
+    container_name: react_client
+    ports:
+      - "${REACT_APP_PORT}:80"
+    networks:
+      - mern-network
+
+#booting up the mongo database 
+  mongo:
+    container_name: mongo_db
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=homestead
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=tokari-db
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - mern-network
+    ports: 
+      - 27017:27017
+
+#Network connecting all the containers.
+networks:
+  mern-network:
+    driver: bridge
+
+volumes:
+  mongodata:

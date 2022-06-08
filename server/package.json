@@ -1,0 +1,25 @@
+{
+  "name": "tokari",
+  "version": "0.0.1",
+  "description": "One stop solution to crypto investing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start:prod": "node index.js",
+    "build": "cd client && npm install && npm run build"
+  },
+  "author": "Shouvik Ghosh",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongoose": "^5.13.14",
+    "nodemon": "^2.0.16",
+    "password-generator": "^2.3.2"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}
