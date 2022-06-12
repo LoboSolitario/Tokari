@@ -1,18 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 
 const app = express();
 
 // import routeUsers from "./src/routes/users.js";
 // import routeBaskets from "./src/routes/baskets.js";
-const routeUsers = require('./src/routes/users.js');
-const routeBaskets = require('./src/routes/baskets.js');
+const routeUsers = require('./src/routes/user.js');
+const routeBaskets = require('./src/routes/basket.js');
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cors())
 
 
 app.use('/api/users', routeUsers, (req, res) => res.sendStatus(401));
