@@ -4,19 +4,25 @@ const cors = require('cors');
 
 const app = express();
 
-const routeTasks = require('./src/routes/tasks');
+// import routeUsers from "./src/routes/users.js";
+// import routeBaskets from "./src/routes/baskets.js";
+const routeUsers = require('./src/routes/users.js');
+const routeBaskets = require('./src/routes/baskets.js');
 
-app.use(cors())
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors())
 
-app.use('/api/tasks', routeTasks, (req, res) => res.sendStatus(401));
 
-app.get('*', (req, res) => {
-  res.send('hello world');
-});
+app.use('/api/users', routeUsers, (req, res) => res.sendStatus(401));
+app.use('/api/baskets', routeBaskets, (req, res) => res.sendStatus(401));
 
-const port = process.env.PORT || 5000;
+// app.get('*', (req, res) => {
+//   res.send('hello world');
+// });
+
+const port = process.env.PORT || 4600;
 app.listen(port);
 
 console.log(`listening on ${port}`);
