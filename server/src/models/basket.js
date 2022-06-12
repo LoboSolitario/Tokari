@@ -6,7 +6,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 
 
 const basketSchema = new mongoose.Schema({
-    basketName: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true}, // is it unique?
+    basketName: { type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9 ]+$/, 'is invalid'], index: true }, // is it unique?
     overview: String,
     details: String,
     status: Boolean,
@@ -15,9 +15,9 @@ const basketSchema = new mongoose.Schema({
     rebalanceFreq: Number,
     subscriptionFee: Number
     // owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
-}, {timestamps: true});
+}, { timestamps: true });
 
-basketSchema.plugin(uniqueValidator, {message: 'is already taken.'});
+basketSchema.plugin(uniqueValidator, { message: 'is already taken.' });
 
 const Basket = mongoose.model('Basket', basketSchema);
 

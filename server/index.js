@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 
 const app = express();
 
@@ -11,8 +11,8 @@ const routeBaskets = require('./src/routes/basket.js');
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cors())
 
 
 app.use('/api/users', routeUsers, (req, res) => res.sendStatus(401));
