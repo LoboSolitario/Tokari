@@ -6,8 +6,8 @@ const app = express();
 
 // import routeUsers from "./src/routes/users.js";
 // import routeBaskets from "./src/routes/baskets.js";
-const routeUsers = require('./src/routes/users.js');
-const routeBaskets = require('./src/routes/baskets.js');
+const routeUsers = require('./src/routes/user.js');
+const routeBaskets = require('./src/routes/basket.js');
 
 
 app.use(bodyParser.json());

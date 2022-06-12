@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/createUser', (req, res) => {
-    console.log(req.body);
   const newUser = new User({ 
       username: req.body.username,
       email: req.body.email
@@ -29,24 +28,25 @@ router.post('/createUser', (req, res) => {
     .catch(err => res.json(500, err));
 });
 
-router.delete('/deleteUser/:id', (req, res) => {
-  const id = req.params.id;
-
-  User.findByIdAndDelete(id)
+router.delete('/deleteUser/:name', (req, res) => {
+  const userName = req.params.name;
+  User.findOneAndDelete({"username": userName })
     .then(user => res.json(user))
     .catch(err => res.json(500, err));
 });
 
-router.put('/replaceUser/:id', (req, res) => {
+router.put('/replaceUser/:name', (req, res) => {
+    const userName = req.params.name;
     User.replaceOne(
-        {_id: req.params.id},
+        {"username": userName},
         req.body).then(user => res.json(user))
     .catch(err => res.json(500, err));
 });
 
-router.patch('/updateUser/:id', (req, res) => {
+router.patch('/updateUser/:name', (req, res) => {
+    const userName = req.params.name;
     User.updateOne(
-        {_id: req.params._id},
+        {"username": userName },
         req.body).then(user => res.json(user))
     .catch(err => res.json(500, err));
 });
