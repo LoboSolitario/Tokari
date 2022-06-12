@@ -1,4 +1,4 @@
-require('dotenv').config({path: __dirname + '/../../.env'});
+require('dotenv').config({ path: __dirname + '/../../.env' });
 const mongoose = require('mongoose');
 const dbName = "tokariDB";
 const url = `mongodb+srv://team26:${process.env.DB_PASSWORD}@cluster0.rpoa9.mongodb.net/${dbName}`;
