@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-// import './App.css';
+import React from "react";
+// Screens
 import Landing from "./screens/Landing.jsx";
 
-const App = () => {
-
-
+export default function App() {
   return (
     <>
       <Landing />
     </>
   );
-};
+}
 
-export default App;

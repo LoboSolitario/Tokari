@@ -4,7 +4,6 @@ import styled from "styled-components";
 import FullButton from "../Buttons/FullButton";
 // Assets
 import HeaderImage from "../../assets/img/header-img.png";
-import QuotesIcon from "../../assets/svg/Quotes";
 import Dots from "../../assets/svg/Dots";
 
 export default function Header() {
@@ -110,25 +109,6 @@ const Img = styled.img`
     width: 80%;
     height: auto;
   }
-`;
-const QuoteWrapper = styled.div`
-  position: absolute;
-  left: 0;
-  bottom: 50px;
-  max-width: 330px;
-  padding: 30px;
-  z-index: 99;
-  @media (max-width: 960px) {
-    left: 20px;
-  }
-  @media (max-width: 560px) {
-    bottom: -50px;
-  }
-`;
-const QuotesWrapper = styled.div`
-  position: absolute;
-  left: -20px;
-  top: -10px;
 `;
 const DotsWrapper = styled.div`
   position: absolute;
