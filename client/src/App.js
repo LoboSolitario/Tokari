@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import './App.css';
+// import './App.css';
+import Landing from "./screens/Landing.jsx";
 
 const App = () => {
 
 
   return (
-    <div className="App">
-      <div></div>
-    </div>
+    <>
+      <Landing />
+    </>
   );
 };
 
