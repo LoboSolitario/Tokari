@@ -2,11 +2,14 @@ import React from 'react'
 import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
 
+// JWT
+// POST request to create a new account 
+
 export default function SignUp() {
     return (
     <Wrapper className="container flexSpaceCenter">
       <form>
-        <h3>Sign Up</h3>
+        <h3 className='semiBold'>Sign Up</h3>
         <br/>
         <div className="mb-3">
           <label>First name</label>
@@ -38,7 +41,7 @@ export default function SignUp() {
         </div>
         <div className="d-grid">
           <BtnWrapper>
-            <FullButton title="Submit" />
+            <FullButton title="Register" />
           </BtnWrapper>
         </div>
       </form>

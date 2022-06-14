@@ -2,11 +2,13 @@ import React from 'react'
 import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
 
+// handle Sign In here and save the auth token/user role
+
 export default function SignIn(){
     return (
     <Wrapper className="container flexSpaceCenter">
       <form>
-        <h3 className="font43 Bold">Sign In</h3>
+        <h3 className='semiBold'>Sign In</h3>
         <br />
         <div className="mb-3">
           <label>Email address</label>
@@ -26,7 +28,7 @@ export default function SignIn(){
         </div>
         <div className="d-grid">
           <BtnWrapper>
-            <FullButton title="Submit" />
+            <FullButton title="Login" />
           </BtnWrapper>
         </div>
       </form>
