@@ -14,7 +14,7 @@ app.use(cors())
 app.use('/api/users', routeUsers, (req, res) => res.sendStatus(401));
 app.use('/api/baskets', routeBaskets, (req, res) => res.sendStatus(401));
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.send('hello world');
 });
 
