@@ -18,11 +18,8 @@ app.get('/', (req, res) => {
   res.send('hello world');
 });
 
-<<<<<<< HEAD
-=======
 app.use(errorHandler)
 
->>>>>>> backend
 const port = process.env.PORT || 4600;
 app.listen(port);
 
