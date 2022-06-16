@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
-export default function BasketBox({ tag, title, text, action, author, priceChange, marketCap}) {
+import FullButton from "../Buttons/FullButton";
+export default function BasketBox({ tag, title, text, action, author, Volacity, priceChange, marketCap}) {
   return (
     <WrapperBtn className="animate pointer" onClick={action ? () => action() : null}>
       <Wrapper className="whiteBg radius8 shadow">
@@ -24,8 +24,15 @@ export default function BasketBox({ tag, title, text, action, author, priceChang
         
            <div className="flex">
           <p className="tag coralBg radius6 font13 extraBold">{tag}</p>
+          <p className="tag coralBg radius6 font13 extraBold">{Volacity}</p>
+        </div>
+        <div className="row flexRight">
+            <div style={{ width: "100px" }}>
+              <FullButton title="Details" action={() => alert("clicked")} />
+            </div>
         </div>
       </Wrapper>
+      
     </WrapperBtn>
   );
 }
