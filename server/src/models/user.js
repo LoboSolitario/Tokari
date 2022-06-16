@@ -5,8 +5,24 @@ var uniqueValidator = require('mongoose-unique-validator');
 
 
 const userSchema = new mongoose.Schema({
-    username: { type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9 ]+$/, 'is invalid'], index: true },
-    email: { type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true },
+    name: { 
+        type: String, 
+        required: [true, "Please add a name."], 
+        match: [/^[a-zA-Z0-9 ]+$/, 'Name is invalid.'], 
+        index: true 
+    },
+    email: { 
+        type: String, 
+        lowercase: true, 
+        unique: true, 
+        required: [true, "Please add an email."], 
+        match: [/\S+@\S+\.\S+/, 'Email is invalid'], 
+        index: true 
+    },
+    password:{
+        type: String,
+        required: [true, "Please enter a password."]
+    },
     subscribedBaskets: [
         {
             basketID:

@@ -1,17 +1,16 @@
 const express = require('express');
-
-// import User from '../models/user.js';
-// const {User, userSchema} = require('../models/user');
-// const User = require('../models/user');
-// const bodyParser = require('body-parser');
-const {getUsers, registerUser, deleteUser, updateUser} = require('../controllers/userController')
-
+const { getAllUsers, getUser, registerUser, loginUser, deleteUser, updateUser } = require('../controllers/userController')
 const router = express.Router();
+const { protect } = require('../middleware/authMiddleware')
 
 
-router.get('/', getUsers);
+router.get('/', getAllUsers);
 
 router.post('/register', registerUser);
+
+router.post('/login', loginUser);
+
+router.get('/userDetails', protect, getUser);
 
 router.delete('/deleteUser/:name', deleteUser);
 

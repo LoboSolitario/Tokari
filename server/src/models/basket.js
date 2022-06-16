@@ -6,7 +6,19 @@ var uniqueValidator = require('mongoose-unique-validator');
 // const {Crypto, cryptoSchema} = require('./crypto')
 
 const basketSchema = new mongoose.Schema({
-    basketName: { type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9 ]+$/, 'is invalid'], index: true }, // is it unique?
+    basketName: { 
+        type: String, 
+        lowercase: true,
+        unique: true,
+        required: [true, "Enter a basket Name."],
+        match: [/^[a-zA-Z0-9 ]+$/, 'is invalid'],
+        index: true 
+    }, 
+    owner: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User',
+        required: true
+    },
     overview: String,
     details: String,
     status: Boolean,
@@ -20,7 +32,7 @@ const basketSchema = new mongoose.Schema({
         cryptoPrice: Number,
         weight: Number
     }]
-    // owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    
 }, { timestamps: true });
 
 basketSchema.plugin(uniqueValidator, { message: 'is already taken.' });
