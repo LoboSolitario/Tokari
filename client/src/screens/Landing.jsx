@@ -3,7 +3,6 @@ import React from "react";
 import TopNavbar from "../components/Nav/TopNavbar";
 import Header from "../components/Sections/Header";
 import Products from "../components/Sections/Products";
-import Pricing from "../components/Sections/Pricing";
 import Footer from "../components/Sections/Footer"
 
 export default function Landing() {
@@ -12,7 +11,6 @@ export default function Landing() {
       <TopNavbar />
       <Header />
       <Products />
-      <Pricing />
       <Footer />
     </>
   );

@@ -16,7 +16,7 @@ export default function Contact() {
         <div className="container">
           <InnerWrapper className="flexSpaceCenter" style={{ padding: "30px 0" }}>
             <Link className="flexCenter animate pointer" to="home" smooth={true} offset={-80}>
-              <LogoImg />
+              <LogoImg/>
               <h1 className="font15 extraBold whiteColor" style={{ marginLeft: "15px" }}>
                 tokari
               </h1>
@@ -25,9 +25,6 @@ export default function Contact() {
               © {getCurrentYear()} - <span className="purpleColor font13">tokari</span> All Right Reserved
             </StyleP>
 
-            <Link className="whiteColor animate pointer font13" to="home" smooth={true} offset={-80}>
-              Back to top
-            </Link>
           </InnerWrapper>
         </div>
       </div>
