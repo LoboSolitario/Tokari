@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import axios from "../../api/Axios"
 import Form from 'react-bootstrap/Form'
 
-const REGISTER_URL = '/';
+const REGISTER_URL = '/users/register';
 const SignUp = () => {
 
   const errRef = useRef();
@@ -30,7 +30,7 @@ const SignUp = () => {
 
       try {
           const response = await axios.post(REGISTER_URL,
-              JSON.stringify({ user, pwd }),
+              JSON.stringify({ user, email, pwd }),
               {
                   headers: { 'Content-Type': 'application/json' },
                   withCredentials: true
