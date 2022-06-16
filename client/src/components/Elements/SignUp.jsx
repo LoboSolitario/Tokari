@@ -1,15 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
-import { useRef, useState, useEffect } from "react";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef, useState } from "react";
 import axios from "../../api/Axios"
+import Form from 'react-bootstrap/Form'
 
-
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const REGISTER_URL = '/';
-
 const SignUp = () => {
 
   const errRef = useRef();
@@ -93,6 +89,7 @@ const SignUp = () => {
             required
           />
         </div>
+        
         <div className="mb-3">
           <label>Password</label>
           <input
@@ -116,10 +113,32 @@ const SignUp = () => {
             placeholder="Confirm password"
             required
           />
-          <br />
-          <p style={{color:"red", width: "150px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
         </div>
         <div className="d-grid">
+        
+        <label>Role: </label>
+        <Form>
+          {['radio'].map((type) => (
+            <div key={`inline-${type}`} className="mb-3">
+              <Form.Check
+                style={{marginLeft: "30px"}}
+                label="I'm an investor"
+                name="group1"
+                type={type}
+                defaultChecked
+                id={`inline-${type}-1`}
+              />
+              <Form.Check
+                style={{marginLeft: "30px"}}
+                label="I'm a fund manager"
+                name="group1"
+                type={type}
+                id={`inline-${type}-2`}
+              />
+            </div>
+          ))}
+        </Form>
+        <p style={{color:"red", width: "150px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
           <BtnWrapper>
             <FullButton title="Register" />
           </BtnWrapper>
