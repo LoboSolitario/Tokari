@@ -2,10 +2,9 @@ import React from 'react'
 import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
 import { useRef, useState } from "react";
-import axios from "../../api/Axios"
 import Form from 'react-bootstrap/Form'
+import {useNavigate}  from "react-router-dom";
 
-const REGISTER_URL = '/users/register';
 const SignUp = () => {
 
   const errRef = useRef();
@@ -15,7 +14,7 @@ const SignUp = () => {
   const [matchPwd, setMatchPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
-
+  let navigate = useNavigate();
   const handleSubmit = async (e) => {
       e.preventDefault();
 
@@ -29,22 +28,35 @@ const SignUp = () => {
       }
 
       try {
-          const response = await axios.post(REGISTER_URL,
-              JSON.stringify({ user, email, pwd }),
-              {
-                  headers: { 'Content-Type': 'application/json' },
-                  withCredentials: true
-              }
-          );
-          console.log(response?.data);
-          console.log(response?.accessToken);
-          console.log(JSON.stringify(response))
-          setSuccess(true);
-          setUser('');
-          setPwd('');
-          setMatchPwd('');
-
-      } catch (err) {
+        let headers = {
+          "Content-Type": "application/json"
+        };
+        const options = {
+          method: "POST", 
+          body: JSON.stringify({
+              "name": user,
+              "email": email,
+              "password": pwd
+            })
+        };
+        const configOptions = (method, headers) => {
+          options.headers = headers == null ? new Headers() : headers;
+          options.method = method
+        };
+        
+        const baseUrl = "http://localhost:4600/api/users/register";  
+        configOptions("POST", headers)
+        const response = await fetch(`${baseUrl}`, options);
+        
+        console.log(response);
+       
+        navigate("/");
+        setSuccess(true);
+        setUser('');
+        setPwd('');
+        setMatchPwd('');
+      }
+       catch (err) {
           if (!err?.response) {
               setErrMsg('No Server Response');
           } else if (err.response?.status === 409) {
@@ -57,12 +69,6 @@ const SignUp = () => {
   }
 
     return (
-    <>
-     {success ? (
-                <section>
-                    <h1>Success!</h1>
-                </section>
-            ) : (
     <Wrapper className="container flexSpaceCenter">
       <form onSubmit={handleSubmit}> 
         <h3 className='semiBold'>Sign Up</h3>
@@ -145,9 +151,6 @@ const SignUp = () => {
         </div>
       </form>
     </Wrapper>
-  
-    )}
-    </>
     )
 }
 
@@ -165,5 +168,7 @@ const BtnWrapper = styled.div`
     margin: 0 auto;
   }
 `;
+
+
 
 export default SignUp
