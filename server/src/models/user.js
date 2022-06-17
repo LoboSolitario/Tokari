@@ -21,7 +21,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter a password."]
     },
-    role: String,
+    role: {
+        type: String,
+        enum: { values: ['admin', 'investor', 'manager'], message: '{VALUE} is not supported' },
+        required: true
+    },
     createdBaskets: [{ basketId: { type: mongoose.Schema.Types.ObjectId, ref: 'Basket' } }],
     subscribedBaskets: [{ basketId: { type: mongoose.Schema.Types.ObjectId, ref: 'Basket' } }]//to be implemented after adding user roles.
 }, { timestamps: true });

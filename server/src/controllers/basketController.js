@@ -3,10 +3,19 @@ const User = require('../models/user');
 const asyncHandler = require('express-async-handler')
 var ObjectId = require('mongoose').Types.ObjectId;
 
-// @desc get list of all the baskets
+// @desc get list of all the baskets 
 // @route GET /api/baskets/
 // @access public
 const getBaskets = asyncHandler(async (req, res) => {
+    const baskets = await Basket.find({})
+    res.status(200).json(baskets)
+})
+
+
+// @desc get list of all the baskets of a user
+// @route GET /api/baskets/userBaskets
+// @access public
+const getUserBaskets = asyncHandler(async (req, res) => {
     const baskets = await Basket.find({ owner: req.user.id })
     res.status(200).json(baskets)
 })
@@ -117,6 +126,7 @@ const rebalanceBasket = asyncHandler(async (req, res) => {
 
 module.exports = {
     getBaskets,
+    getUserBaskets,
     createBasket,
     deleteBasket,
     rebalanceBasket,

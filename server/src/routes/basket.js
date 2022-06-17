@@ -1,16 +1,19 @@
 const express = require('express');
 // const Basket = require('../models/basket');
 const router = express.Router();
-const { getBaskets, createBasket, deleteBasket, rebalanceBasket } = require('../controllers/basketController')
-const { protect } = require('../middleware/authMiddleware')
+const {ROLE} = require('../permissions')
+const { getBaskets, getUserBaskets, createBasket, deleteBasket, rebalanceBasket } = require('../controllers/basketController')
+const { protect, authRole } = require('../middleware/authMiddleware')
 
-router.get('/', protect, getBaskets);
+router.get('/', getBaskets);
 
-router.post('/createBasket', protect, createBasket);
+router.get('/userBaskets', protect, getUserBaskets);
 
-router.delete('/deleteBasket/:id', protect, deleteBasket);
+router.post('/createBasket', protect, authRole(ROLE.MANAGER), createBasket);
 
-router.put('/rebalanceBasket/:id', protect, rebalanceBasket);
+router.delete('/deleteBasket/:id', protect, authRole(ROLE.MANAGER), deleteBasket);
+
+router.put('/rebalanceBasket/:id', protect, authRole(ROLE.MANAGER), rebalanceBasket);
 
 // export default router;
 module.exports = router;
