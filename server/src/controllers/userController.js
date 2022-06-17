@@ -83,11 +83,11 @@ const registerUser = asyncHandler(async (req, res) => {
 }) 
 
 // @desc delete user account.
-// @route DELETE /api/users/deleteUser/:name
+// @route DELETE /api/users/deleteUser/:id
 // @access Private
 const deleteUser = (req, res) => {
     const userName = req.params.name;
-    User.findOneAndDelete({ "username": userName })
+    User.findByIdAndDelete(req.params.id)
         .then(user => res.json(user))
         .catch(err => res.json(500, err));
 }
