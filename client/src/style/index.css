@@ -147,6 +147,11 @@
     justify-content: center;
     align-items: center;
   }
+  .flexRight {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+  }
   .flexSpaceNull {
     display: flex;
     justify-content: space-between;

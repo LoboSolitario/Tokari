@@ -1,13 +1,56 @@
 import React from 'react'
 import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
-
+import { useRef, useState } from "react";
+import {useNavigate}  from "react-router-dom";
 // handle Sign In here and save the auth token/user role
 
 export default function SignIn(){
+    const errRef = useRef();
+    const [email, setEmail] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    // const [success, setSuccess] = useState(false);
+    let navigate = useNavigate();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            let headers = {
+            "Content-Type": "application/json"
+            };
+            const options = {
+            method: "POST", 
+            body: JSON.stringify({
+                "email": email,
+                "password": pwd
+                })
+            };
+            const configOptions = (method, headers) => {
+            options.headers = headers == null ? new Headers() : headers;
+            options.method = method
+            };
+            
+            const baseUrl = "http://localhost:4600/api/users/login";  
+            configOptions("POST", headers)
+            const response = await fetch(`${baseUrl}`, options);
+            console.log(response);
+            if(response.status !== 200){
+              alert('Sign in Failed');
+              setErrMsg('Sign in Failed')
+            }
+            else{
+              navigate("/");
+              setPwd('');
+            }  
+        }
+        catch (err) {
+            console.log(err);
+            errRef.current.focus();
+        }
+    }
     return (
     <Wrapper className="container flexSpaceCenter">
-      <form>
+      <form onSubmit={handleSubmit}>
         <h3 className='semiBold'>Sign In</h3>
         <br />
         <div className="mb-3">
@@ -16,6 +59,8 @@ export default function SignIn(){
             type="email"
             className="form-control font13"
             placeholder="Enter email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
         </div>
         <div className="mb-3">
@@ -24,6 +69,8 @@ export default function SignIn(){
             type="password"
             className="form-control font13"
             placeholder="Enter password"
+            onChange={(e) => setPwd(e.target.value)}
+            value={pwd}
           />
         </div>
         <div className="d-grid">

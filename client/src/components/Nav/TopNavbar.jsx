@@ -52,14 +52,14 @@ export default function TopNavbar() {
             </li>
           </NavLink>
         
-          <NavLink
+          {/* <NavLink
             to="/baskets"
             className={"disabled-link"}
           >
             <li className="semiBold font15 pointer" style={{ padding: "10px 15px" }}>
               Baskets
             </li>
-          </NavLink>
+          </NavLink> */}
 
           <NavLink
             to="/login"

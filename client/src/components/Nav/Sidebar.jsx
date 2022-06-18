@@ -41,12 +41,12 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             activeClass="active"
             className="whiteColor"
             style={{ padding: "10px 15px" }}
-            to="services"
+            to="/login"
             spy={true}
             smooth={true}
             offset={-60}
           >
-            Products
+            Login
           </Link>
         </li>
 
@@ -54,19 +54,19 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
           <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
             activeClass="active"
-            className="whiteColor"
+            className="semiBold font15 pointer radius8 lightBg"
             style={{ padding: "10px 15px" }}
-            to="pricing"
+            to="/discover"
             spy={true}
             smooth={true}
             offset={-60}
           >
-            Pricing
+            Discover
           </Link>
         </li>
   
       </UlStyle>
-      <UlStyle className="flexSpaceCenter">
+      {/* <UlStyle className="flexSpaceCenter">
         <li className="semiBold font15 pointer">
           <a href="/" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
             Log in
@@ -77,7 +77,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             Get Started
           </a>
         </li>
-      </UlStyle>
+      </UlStyle> */}
     </Wrapper>
   );
 }
