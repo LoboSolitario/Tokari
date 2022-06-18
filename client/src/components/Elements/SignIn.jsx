@@ -50,7 +50,7 @@ export default function SignIn(){
     }
     return (
     <Wrapper className="container flexSpaceCenter">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}>
         <h3 className='semiBold'>Sign In</h3>
         <br />
         <div className="mb-3">

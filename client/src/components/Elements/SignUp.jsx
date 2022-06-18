@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect} from "react";
 import Form from 'react-bootstrap/Form'
 import {useNavigate}  from "react-router-dom";
 
@@ -11,10 +11,14 @@ const SignUp = () => {
   const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
-  const [role, setRole] = useState('');  
+  const [role, setRole] = useState('investor');  
   const [matchPwd, setMatchPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+      setErrMsg('');
+  }, [pwd]);
 
   let navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -29,48 +33,37 @@ const SignUp = () => {
         return;
       }
       else{
-        try {
           options.body = JSON.stringify({
-                "name": user,
-                "email": email,
-                "password": pwd,
-                "role": role
-              });
+            "name": user,
+            "email": email,
+            "password": pwd,
+            "role": role
+          });
           const configOptions = (method, headers) => {
             options.headers = headers == null ? new Headers() : headers;
             options.method = method
           };
-          
           const baseUrl = "http://localhost:4600/api/users/register";  
           configOptions("POST", headers)
           const response = await fetch(`${baseUrl}`, options);
-          
           console.log(response);
-         
-          navigate("/");
-          setSuccess(true);
-          setUser('');
-          setPwd('');
-          setMatchPwd('');
-          setRole("");
-          options.body = JSON.stringify({});
-        }
-         catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 409) {
-                setErrMsg('Username Taken');
-            } else {
-                setErrMsg('Registration Failed')
-            }
-            errRef.current.focus();
-        }
+          if(response.ok){
+            navigate("/");
+            setSuccess(true);
+            setUser('');
+            setPwd('');
+            setMatchPwd('');
+            setRole("");
+            options.body = JSON.stringify({});
+          }else{
+            setErrMsg('Registration Failed: ' + response.statusText)
+          } 
       }
   }
 
     return (
     <Wrapper className="container flexSpaceCenter">
-      <form onSubmit={handleSubmit}> 
+      <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}> 
         <h3 className='semiBold'>Sign Up</h3>
         <br/>
         <div className="mb-3">
@@ -127,7 +120,9 @@ const SignUp = () => {
           {['radio'].map((type) => (
             <div key={`inline-${type}`} 
                  className="mb-3" 
-                 onChange={(e)=> setRole(e.target.value)}>
+                 onChange={(e)=> {setRole(e.target.value);
+                  console.log(role);
+                 }}>
               <Form.Check 
                 style={{marginLeft: "30px"}}
                 label="I'm an investor"
@@ -148,7 +143,7 @@ const SignUp = () => {
             </div>
           ))}
         </Form>
-        <p style={{color:"red", width: "150px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+        <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
           <BtnWrapper>
             <FullButton title="Register" />
           </BtnWrapper>
@@ -180,5 +175,6 @@ const headers = {
 let options = {
   method: "POST" 
 };
+
 
 export default SignUp
