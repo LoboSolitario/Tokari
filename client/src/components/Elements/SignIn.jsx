@@ -10,6 +10,7 @@ export default function SignIn(){
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const baseUrl = process.env.REACT_APP_BASE_URL;  
     // const [success, setSuccess] = useState(false);
     let navigate = useNavigate();
     const handleSubmit = async (e) => {
@@ -29,10 +30,9 @@ export default function SignIn(){
             options.headers = headers == null ? new Headers() : headers;
             options.method = method
             };
-            
-            const baseUrl = "http://localhost:4600/api/users/login";  
+             
             configOptions("POST", headers)
-            const response = await fetch(`${baseUrl}`, options);
+            const response = await fetch(`${baseUrl}/api/users/login`, options);
             console.log(response);
             if(response.status !== 200){
               alert('Sign in Failed');

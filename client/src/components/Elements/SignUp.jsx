@@ -15,7 +15,8 @@ const SignUp = () => {
   const [matchPwd, setMatchPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;  
+  
   useEffect(() => {
       setErrMsg('');
   }, [pwd]);
@@ -23,7 +24,6 @@ const SignUp = () => {
   let navigate = useNavigate();
   const handleSubmit = async (e) => {
       e.preventDefault();
-
       if (!((pwd).length > 5)) {
           setErrMsg("Password must be at least 5 characters long!");
           return;
@@ -43,9 +43,8 @@ const SignUp = () => {
             options.headers = headers == null ? new Headers() : headers;
             options.method = method
           };
-          const baseUrl = "http://localhost:4600/api/users/register";  
           configOptions("POST", headers)
-          const response = await fetch(`${baseUrl}`, options);
+          const response = await fetch(`${baseUrl}/api/users/register`, options);
           console.log(response);
           if(response.ok){
             navigate("/");
@@ -120,9 +119,7 @@ const SignUp = () => {
           {['radio'].map((type) => (
             <div key={`inline-${type}`} 
                  className="mb-3" 
-                 onChange={(e)=> {setRole(e.target.value);
-                  console.log(role);
-                 }}>
+                 onChange={(e)=> {setRole(e.target.value);}}>
               <Form.Check 
                 style={{marginLeft: "30px"}}
                 label="I'm an investor"
@@ -175,6 +172,5 @@ const headers = {
 let options = {
   method: "POST" 
 };
-
 
 export default SignUp
