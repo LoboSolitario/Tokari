@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
-export default function BasketBox({ tag, title, text, action, author, priceChange, marketCap}) {
+import FullButton from "../Buttons/FullButton";
+export default function BasketBox({ tag, title, text, action, author, Volatility}) {
   return (
     <WrapperBtn className="animate pointer" onClick={action ? () => action() : null}>
       <Wrapper className="whiteBg radius8 shadow">
@@ -10,22 +10,30 @@ export default function BasketBox({ tag, title, text, action, author, priceChang
           {text}
         </p>
       
-        <WrapperItemInfo className="flex flexRow flexSpaceNull">
+        {/* <WrapperItemInfo className="flex flexRow flexSpaceNull">
           <p className="font13 extraBold">{priceChange}</p>
           <p className="font13 extraBold">{marketCap}</p>
-        </WrapperItemInfo>
+        </WrapperItemInfo> */}
 
-        <WrapperItemInfo className="flex flexRow flexSpaceNull">
+        {/* <WrapperItemInfo className="flex flexRow flexSpaceNull">
           <p className="font13 extraBold">{"7d Price Change"}</p>
           <p className="font13 extraBold">{"Market Cap"}</p>
-        </WrapperItemInfo>
-        <br />
+        </WrapperItemInfo> */}
+        {/* <br /> */}
         <p className="font13 extraBold">{author}</p>
-        
-           <div className="flex">
-          <p className="tag coralBg radius6 font13 extraBold">{tag}</p>
+        <div className="flex">
+          <p className="tag coralBg radius6 font11 extraBold">{tag}</p>
+        </div>
+        <div className="flex">
+          <p className="tag coralBg radius6 font11 extraBold">{Volatility}</p>
+        </div>
+        <div className="row flexRight">
+            <div style={{ width: "100px" }}>
+              <FullButton title="Details" action={() => alert("clicked")} />
+            </div>
         </div>
       </Wrapper>
+      
     </WrapperBtn>
   );
 }

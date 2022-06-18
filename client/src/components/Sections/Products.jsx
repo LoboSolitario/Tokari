@@ -23,8 +23,7 @@ export default function Prodcuts() {
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
                 author="Adam Smith"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
+                Volatility="Volatility: Low"
                 action={() => alert("clicked")}
               />
             </div>
@@ -34,8 +33,7 @@ export default function Prodcuts() {
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
                 author="Karl Marx"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
+                Volatility="Volatility: Medium"
                 action={() => alert("clicked")}
               />
             </div>
@@ -45,8 +43,7 @@ export default function Prodcuts() {
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
                 author="Satoshi Nakamoto"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
+                Volatility="Volatility: Low"
                 action={() => alert("clicked")}
               />
             </div>
@@ -58,8 +55,7 @@ export default function Prodcuts() {
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
                 author="Neil deGrasse Tyson"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
+                Volatility="Volatility: High"
                 action={() => alert("clicked")}
               />
             </div>
@@ -69,6 +65,7 @@ export default function Prodcuts() {
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
                 author="Albert Einstein"
+                Volatility="Volatility: Medium"
                 action={() => alert("clicked")}
               />
             </div>
@@ -78,15 +75,14 @@ export default function Prodcuts() {
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
                 author="Alan Turing"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
+                Volatility="Volatility: High"
                 action={() => alert("clicked")}
               />
             </div>
           </div>
           <div className="row flexCenter">
             <div style={{ margin: "50px 0", width: "200px" }}>
-              <FullButton title="Load More" action={() => alert("clicked")} />
+              <FullButton title="Discover" action={() => alert("clicked")} />
             </div>
           </div>
         </div>
