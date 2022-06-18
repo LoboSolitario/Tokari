@@ -22,7 +22,7 @@ export default function Prodcuts() {
                 title="Basket 1"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Adam Smith"
                 priceChange={"-9%"}
                 marketCap={"$210K"}
@@ -34,7 +34,7 @@ export default function Prodcuts() {
                 title="Basket 1"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Karl Marx"
                 priceChange={"-9%"}
                 marketCap={"$210K"}
@@ -46,7 +46,7 @@ export default function Prodcuts() {
                 title="Basket 2"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Satoshi Nakamoto"
                 priceChange={"-9%"}
                 marketCap={"$210K"}
@@ -60,7 +60,7 @@ export default function Prodcuts() {
                 title="Basket 3"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Neil deGrasse Tyson"
                 priceChange={"-9%"}
                 marketCap={"$210K"}
@@ -72,7 +72,7 @@ export default function Prodcuts() {
                 title="Basket 4"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Albert Einstein"
                 action={() => alert("clicked")}
               />
@@ -82,7 +82,7 @@ export default function Prodcuts() {
                 title="Basket 5"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
-                Volacity={"Volacity: High"}
+                Volatility={"Volatility: High"}
                 author="Alan Turing"
                 priceChange={"-9%"}
                 marketCap={"$210K"}
