@@ -11,6 +11,7 @@ const SignUp = () => {
   const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
+  const [role, setRole] = useState('');  
   const [matchPwd, setMatchPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
@@ -32,7 +33,8 @@ const SignUp = () => {
           options.body = JSON.stringify({
                 "name": user,
                 "email": email,
-                "password": pwd
+                "password": pwd,
+                "role": role
               });
           const configOptions = (method, headers) => {
             options.headers = headers == null ? new Headers() : headers;
@@ -50,6 +52,7 @@ const SignUp = () => {
           setUser('');
           setPwd('');
           setMatchPwd('');
+          setRole("");
           options.body = JSON.stringify({});
         }
          catch (err) {
@@ -122,11 +125,14 @@ const SignUp = () => {
         <label>Role: </label>
         <Form>
           {['radio'].map((type) => (
-            <div key={`inline-${type}`} className="mb-3">
-              <Form.Check
+            <div key={`inline-${type}`} 
+                 className="mb-3" 
+                 onChange={(e)=> setRole(e.target.value)}>
+              <Form.Check 
                 style={{marginLeft: "30px"}}
                 label="I'm an investor"
                 name="group1"
+                value="investor"
                 type={type}
                 defaultChecked
                 id={`inline-${type}-1`}
@@ -134,6 +140,7 @@ const SignUp = () => {
               <Form.Check
                 style={{marginLeft: "30px"}}
                 label="I'm a fund manager"
+                value="manager"
                 name="group1"
                 type={type}
                 id={`inline-${type}-2`}
