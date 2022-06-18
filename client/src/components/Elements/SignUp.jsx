@@ -4,6 +4,7 @@ import FullButton from "../Buttons/FullButton";
 import { useRef, useState, useEffect} from "react";
 import Form from 'react-bootstrap/Form'
 import {useNavigate}  from "react-router-dom";
+import configOptions from '../../api/configOptions';
 
 const SignUp = () => {
 
@@ -33,27 +34,32 @@ const SignUp = () => {
         return;
       }
       else{
-          options.body = JSON.stringify({
-            "name": user,
-            "email": email,
-            "password": pwd,
-            "role": role
-          });
-          const configOptions = (method, headers) => {
-            options.headers = headers == null ? new Headers() : headers;
-            options.method = method
-          };
-          configOptions("POST", headers)
+          
+          const options = {
+            body: JSON.stringify({
+              "name": user,
+              "email": email,
+              "password": pwd,
+              "role": role
+                })
+            };
+
+          const headers = {
+            "Content-Type": "application/json"
+            };
+
+          configOptions("POST", headers, options);
+          
           const response = await fetch(`${baseUrl}/api/users/register`, options);
           console.log(response);
           if(response.ok){
-            navigate("/");
             setSuccess(true);
             setUser('');
             setPwd('');
             setMatchPwd('');
             setRole("");
             options.body = JSON.stringify({});
+            navigate("/");
           }else{
             setErrMsg('Registration Failed: ' + response.statusText)
           } 
@@ -165,12 +171,5 @@ const BtnWrapper = styled.div`
   }
 `;
 
-const headers = {
-  "Content-Type": "application/json"
-};
-
-let options = {
-  method: "POST" 
-};
 
 export default SignUp
