@@ -14,6 +14,7 @@ const SignUp = () => {
   const [matchPwd, setMatchPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
+
   let navigate = useNavigate();
   const handleSubmit = async (e) => {
       e.preventDefault();
@@ -26,45 +27,41 @@ const SignUp = () => {
         setErrMsg("Passwords don't match!");
         return;
       }
-
-      try {
-        let headers = {
-          "Content-Type": "application/json"
-        };
-        const options = {
-          method: "POST", 
-          body: JSON.stringify({
-              "name": user,
-              "email": email,
-              "password": pwd
-            })
-        };
-        const configOptions = (method, headers) => {
-          options.headers = headers == null ? new Headers() : headers;
-          options.method = method
-        };
-        
-        const baseUrl = "http://localhost:4600/api/users/register";  
-        configOptions("POST", headers)
-        const response = await fetch(`${baseUrl}`, options);
-        
-        console.log(response);
-       
-        navigate("/");
-        setSuccess(true);
-        setUser('');
-        setPwd('');
-        setMatchPwd('');
-      }
-       catch (err) {
-          if (!err?.response) {
-              setErrMsg('No Server Response');
-          } else if (err.response?.status === 409) {
-              setErrMsg('Username Taken');
-          } else {
-              setErrMsg('Registration Failed')
-          }
-          errRef.current.focus();
+      else{
+        try {
+          options.body = JSON.stringify({
+                "name": user,
+                "email": email,
+                "password": pwd
+              });
+          const configOptions = (method, headers) => {
+            options.headers = headers == null ? new Headers() : headers;
+            options.method = method
+          };
+          
+          const baseUrl = "http://localhost:4600/api/users/register";  
+          configOptions("POST", headers)
+          const response = await fetch(`${baseUrl}`, options);
+          
+          console.log(response);
+         
+          navigate("/");
+          setSuccess(true);
+          setUser('');
+          setPwd('');
+          setMatchPwd('');
+          options.body = JSON.stringify({});
+        }
+         catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 409) {
+                setErrMsg('Username Taken');
+            } else {
+                setErrMsg('Registration Failed')
+            }
+            errRef.current.focus();
+        }
       }
   }
 
@@ -169,6 +166,12 @@ const BtnWrapper = styled.div`
   }
 `;
 
+const headers = {
+  "Content-Type": "application/json"
+};
 
+let options = {
+  method: "POST" 
+};
 
 export default SignUp
