@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {useNavigate}  from "react-router-dom";
+import configOptions from '../../api/configOptions';
 // handle Sign In here and save the auth token/user role
 
 export default function SignIn(){
@@ -10,43 +11,40 @@ export default function SignIn(){
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
     const baseUrl = process.env.REACT_APP_BASE_URL;  
     // const [success, setSuccess] = useState(false);
+    useEffect(() => {
+      setErrMsg('');
+    }, [pwd]);
+  
     let navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            let headers = {
-            "Content-Type": "application/json"
-            };
-            const options = {
-            method: "POST", 
-            body: JSON.stringify({
-                "email": email,
-                "password": pwd
-                })
-            };
-            const configOptions = (method, headers) => {
-            options.headers = headers == null ? new Headers() : headers;
-            options.method = method
-            };
-             
-            configOptions("POST", headers)
-            const response = await fetch(`${baseUrl}/api/users/login`, options);
-            console.log(response);
-            if(response.status !== 200){
-              alert('Sign in Failed');
-              setErrMsg('Sign in Failed')
-            }
-            else{
-              navigate("/");
-              setPwd('');
-            }  
+        const options = {
+          body: JSON.stringify({
+              "email": email,
+              "password": pwd
+          })
+        };
+        const headers = {
+          "Content-Type": "application/json"
+        };
+
+        configOptions("POST", headers, options);  
+
+        const response = await fetch(`${baseUrl}/api/users/login`, options);
+        console.log(response);
+        if(response.ok){
+          setSuccess(true);
+          setPwd('');
+          options.body = JSON.stringify({});
+          navigate("/"); 
         }
-        catch (err) {
-            console.log(err);
-            errRef.current.focus();
-        }
+        else{
+          setErrMsg('Sign in Failed: ' + response.statusText);
+          // alert('Sign in Failed ');
+        }  
     }
     return (
     <Wrapper className="container flexSpaceCenter">
@@ -74,6 +72,7 @@ export default function SignIn(){
           />
         </div>
         <div className="d-grid">
+        <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
           <BtnWrapper>
             <FullButton title="Login" />
           </BtnWrapper>
