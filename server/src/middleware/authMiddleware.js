@@ -1,6 +1,3 @@
-
-
-
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/user')
@@ -21,10 +18,9 @@ const protect = asyncHandler(async (req, res, next) => {
 
       // Get user from the token
       req.user = await User.findById(decoded.id).select('-password')
-
+      // go to the next middleware in the route
       next()
     } catch (error) {
-      console.log(error)
       res.status(401)
       throw new Error('Not authorized')
     }
@@ -36,4 +32,16 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 })
 
-module.exports = { protect }
+function authRole(role) {
+  //return a middleware for the route
+  return (req, res, next) => {
+    //check if the current user role is allowed to access the route
+    if (req.user.role !== role) {
+      res.status(401)
+      return res.send('Unauthorized role access')
+    }
+    next()
+  }
+}
+
+module.exports = { protect, authRole }
