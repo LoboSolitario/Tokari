@@ -1,18 +1,17 @@
 const express = require('express');
-// const Basket = require('../models/basket');
 const router = express.Router();
-const {getBaskets, createBasket, deleteBasket, rebalanceBasket, updateBasket} = require('../controllers/basketController')
-const { protect } = require('../middleware/authMiddleware')
+const {ROLE} = require('../permissions')
+const { getBaskets, getUserBaskets, createBasket, deleteBasket, rebalanceBasket } = require('../controllers/basketController')
+const { protect, authRole } = require('../middleware/authMiddleware')
 
-router.get('/', protect, getBaskets);
+router.get('/', getBaskets);
 
-router.post('/createBasket', protect, createBasket);
-//discuss the workflow with jamba -> change it to id
-router.delete('/deleteBasket/:id', protect, deleteBasket);
+router.get('/userBaskets', protect, getUserBaskets);
 
-router.put('/rebalanceBasket/:id', protect, rebalanceBasket);
+router.post('/createBasket', protect, authRole(ROLE.MANAGER), createBasket);
 
-router.patch('/updateBasket/:id', protect, updateBasket);
+router.delete('/deleteBasket/:id', protect, authRole(ROLE.MANAGER), deleteBasket);
 
-// export default router;
+router.put('/rebalanceBasket/:id', protect, authRole(ROLE.MANAGER), rebalanceBasket);
+
 module.exports = router;

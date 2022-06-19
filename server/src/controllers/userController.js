@@ -45,9 +45,9 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route POST /api/users/register
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-    const {name, email, password} = req.body;
+    const {name, email, password, role} = req.body;
 
-    if (!name||!email||!password){
+    if (!name||!email||!password||!role){
         res.status(400)
         throw new Error('Please add all fields')
     }
@@ -64,13 +64,15 @@ const registerUser = asyncHandler(async (req, res) => {
     const newUser = await User.create({
         name: name,
         email: email,
-        password: hashedPassword        
+        password: hashedPassword,
+        role: role       
     });
     if(newUser){
         res.status(201).json({
             _id: newUser.id,
             name: newUser.name,
             email: newUser.email,
+            role: newUser.role,
             token: generateToken(newUser._id)
         })
     }else{
@@ -83,22 +85,20 @@ const registerUser = asyncHandler(async (req, res) => {
 }) 
 
 // @desc delete user account.
-// @route DELETE /api/users/deleteUser/:name
+// @route DELETE /api/users/deleteUser/:id
 // @access Private
 const deleteUser = (req, res) => {
-    const userName = req.params.name;
-    User.findOneAndDelete({ "username": userName })
+    User.findByIdAndDelete(req.params.id)
         .then(user => res.json(user))
         .catch(err => res.json(500, err));
 }
 
 // @desc update user details
-// @route PATCH /api/users/updateUser/:name
+// @route PATCH /api/users/updateUser/:id
 // @access Private
 const updateUser = (req, res) => {
-    const userName = req.params.name;
-    User.updateOne(
-        { "username": userName },
+    User.findByIdAndUpdate(
+        req.params.id,
         req.body).then(user => res.json(user))
         .catch(err => res.json(500, err));
 }
