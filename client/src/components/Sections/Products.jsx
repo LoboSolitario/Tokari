@@ -24,7 +24,7 @@ export default function Prodcuts() {
                 tag="Risk: Low"
                 author="Adam Smith"
                 Volatility="Volatility: Low"
-                action={() => alert("clicked")}
+                // action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -34,7 +34,7 @@ export default function Prodcuts() {
                 tag="Risk: Medium"
                 author="Karl Marx"
                 Volatility="Volatility: Medium"
-                action={() => alert("clicked")}
+                //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -44,7 +44,7 @@ export default function Prodcuts() {
                 tag="Risk: Low"
                 author="Satoshi Nakamoto"
                 Volatility="Volatility: Low"
-                action={() => alert("clicked")}
+                //action={() => alert("clicked")}
               />
             </div>
           </div>
@@ -56,7 +56,7 @@ export default function Prodcuts() {
                 tag="Risk: High"
                 author="Neil deGrasse Tyson"
                 Volatility="Volatility: High"
-                action={() => alert("clicked")}
+                //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -66,7 +66,7 @@ export default function Prodcuts() {
                 tag="Risk: Medium"
                 author="Albert Einstein"
                 Volatility="Volatility: Medium"
-                action={() => alert("clicked")}
+                //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -76,7 +76,7 @@ export default function Prodcuts() {
                 tag="Risk: High"
                 author="Alan Turing"
                 Volatility="Volatility: High"
-                action={() => alert("clicked")}
+                //action={() => alert("clicked")}
               />
             </div>
           </div>
