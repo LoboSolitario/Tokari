@@ -88,19 +88,17 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route DELETE /api/users/deleteUser/:id
 // @access Private
 const deleteUser = (req, res) => {
-    const userName = req.params.name;
     User.findByIdAndDelete(req.params.id)
         .then(user => res.json(user))
         .catch(err => res.json(500, err));
 }
 
 // @desc update user details
-// @route PATCH /api/users/updateUser/:name
+// @route PATCH /api/users/updateUser/:id
 // @access Private
 const updateUser = (req, res) => {
-    const userName = req.params.name;
-    User.updateOne(
-        { "username": userName },
+    User.findByIdAndUpdate(
+        req.params.id,
         req.body).then(user => res.json(user))
         .catch(err => res.json(500, err));
 }
