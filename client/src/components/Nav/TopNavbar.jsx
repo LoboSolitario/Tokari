@@ -71,8 +71,8 @@ export default function TopNavbar() {
           </NavLink>
 
           <NavLink
-            to="/discover"
-            className={"disabled-link"}
+            to="/baskets"
+            className={({ isActive }) => (isActive ? "active" : "link")}
           >
             <li className="semiBold font15 pointer radius8 lightBg" style={{ padding: "10px 15px" }}>
               Discover
