@@ -1,5 +1,5 @@
 # Create image based on the official Node 10 image from dockerhub
-FROM node:15.13-alpine as builder
+FROM node:10-alpine
 
 # Create a directory where our app will be placed
 RUN mkdir -p /app

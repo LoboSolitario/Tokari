@@ -22,6 +22,7 @@ export default function Prodcuts() {
                 title="Basket 1"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
+                Volacity={"Volacity: Low"}
                 author="Adam Smith"
                 Volatility="Volatility: Low"
                 // action={() => alert("clicked")}
@@ -32,6 +33,7 @@ export default function Prodcuts() {
                 title="Basket 1"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
+                Volacity={"Volacity: Low"}
                 author="Karl Marx"
                 Volatility="Volatility: Medium"
                 //action={() => alert("clicked")}
@@ -42,6 +44,7 @@ export default function Prodcuts() {
                 title="Basket 2"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
+                Volacity={"Volacity: Low"}
                 author="Satoshi Nakamoto"
                 Volatility="Volatility: Low"
                 //action={() => alert("clicked")}
@@ -54,6 +57,7 @@ export default function Prodcuts() {
                 title="Basket 3"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
+                Volacity={"Volacity: Low"}
                 author="Neil deGrasse Tyson"
                 Volatility="Volatility: High"
                 //action={() => alert("clicked")}
@@ -64,6 +68,7 @@ export default function Prodcuts() {
                 title="Basket 4"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
+                Volacity={"Volacity: Low"}
                 author="Albert Einstein"
                 Volatility="Volatility: Medium"
                 //action={() => alert("clicked")}
@@ -74,6 +79,7 @@ export default function Prodcuts() {
                 title="Basket 5"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
+                Volacity={"Volacity: High"}
                 author="Alan Turing"
                 Volatility="Volatility: High"
                 //action={() => alert("clicked")}
