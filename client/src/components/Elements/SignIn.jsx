@@ -36,14 +36,18 @@ export default function SignIn(){
         const response = await fetch(`${baseUrl}/api/users/login`, options);
         console.log(response);
         if(response.ok){
+          response.json().then(data => {
+            console.log("data: ", data.token);
+            localStorage.setItem("token", data.token);
+          })
           setSuccess(true);
           setPwd('');
+          setEmail('');
           options.body = JSON.stringify({});
           navigate("/"); 
         }
         else{
           setErrMsg('Sign in Failed: ' + response.statusText);
-          // alert('Sign in Failed ');
         }  
     }
     return (

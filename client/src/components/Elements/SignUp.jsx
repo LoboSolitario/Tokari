@@ -53,6 +53,10 @@ const SignUp = () => {
           const response = await fetch(`${baseUrl}/api/users/register`, options);
           console.log(response);
           if(response.ok){
+            response.json().then(data => {
+              console.log("data: ", data.token);
+              localStorage.setItem("token", data.token);
+            })
             setSuccess(true);
             setUser('');
             setPwd('');
