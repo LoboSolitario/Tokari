@@ -4,6 +4,7 @@ import PrivateRoutes from './uitils/PrivateRoutes'
 // Screens
 import Landing from "./screens/Landing.jsx";
 import Login from "./screens/Login.jsx";
+import Register from "./screens/Register";
 
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
         </Route>
         
         <Route element={<Login/>} path="/login"/>
+        <Route element={<Register/>} path="/signup"/>
 
       </Routes>
     </Router>
