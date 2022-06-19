@@ -26,7 +26,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
       e.preventDefault();
       if (!((pwd).length > 5)) {
-          setErrMsg("Password must be at least 5 characters long!");
+          setErrMsg("Password must be at least 6 characters long!");
           return;
       }
       else if (pwd !== matchPwd) {
