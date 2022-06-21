@@ -5,10 +5,10 @@ import BasketBox from "../Elements/BasketBox";
 import FullButton from "../Buttons/FullButton";
 import FaqSlider from "../Elements/FaqSlider";
 
-export default function Prodcuts() {
+export default function Products() {
   return (
     <Wrapper id="products">
-      <div className="lightBg">
+      <div className="lightBg" style={{padding: '50px 0 0'}}>
         <div className="container">
           <HeaderInfo>
             <h1 className="font40 extraBold">Our Products</h1>
