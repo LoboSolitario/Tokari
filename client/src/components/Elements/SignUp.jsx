@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
 import { useRef, useState, useEffect} from "react";
 import Form from 'react-bootstrap/Form'
-import {useNavigate}  from "react-router-dom";
+import {useNavigate, NavLink}  from "react-router-dom";
 import configOptions from '../../api/configOptions';
 
 const SignUp = () => {
@@ -56,6 +56,7 @@ const SignUp = () => {
             response.json().then(data => {
               console.log("data: ", data.token);
               localStorage.setItem("token", data.token);
+              localStorage.setItem("auth", "true");
             })
             setSuccess(true);
             setUser('');
@@ -63,7 +64,7 @@ const SignUp = () => {
             setMatchPwd('');
             setRole("");
             options.body = JSON.stringify({});
-            navigate("/");
+            window.location.reload();
           }else{
             setErrMsg('Registration Failed: ' + response.statusText)
           } 
@@ -71,6 +72,15 @@ const SignUp = () => {
   }
 
     return (
+      <>
+    {localStorage.getItem("token")?(
+        <Wrapper className="container flexSpaceCenter flexColumn">
+            <div style={{marginBottom: "20px"}} className="p">You have been successfully registered!</div>
+          <BtnWrapper onClick={ ()=>{navigate("/");}}>
+            <FullButton title="visit home page" to="/"/>
+          </BtnWrapper>
+        </Wrapper>
+    ):(
     <Wrapper className="container flexSpaceCenter">
       <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}> 
         <h3 className='semiBold'>Sign Up</h3>
@@ -155,13 +165,27 @@ const SignUp = () => {
             <FullButton title="Register" />
           </BtnWrapper>
         </div>
+
+        <div style={{display: "flex", marginTop: "20px"}}>Already have an account?
+          <NavLink
+            style={{marginLeft: "10px", color: "#7620FF"}}
+            to="/login"
+          >
+            <div className="semiBold font13 pointer">
+              Login
+            </div>
+          </NavLink>
+        </div>
       </form>
     </Wrapper>
     )
+  }
+  </>
+  )
 }
 
 const Wrapper = styled.section`
-    padding-top: 50px;
+    padding-top: 10px;
     width: max-content;
     @media (max-width: 960px) {
         padding-bottom: 40px;
@@ -174,6 +198,5 @@ const BtnWrapper = styled.div`
     margin: 0 auto;
   }
 `;
-
 
 export default SignUp

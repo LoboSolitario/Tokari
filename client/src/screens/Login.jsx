@@ -5,11 +5,10 @@ import SignUp from "../components/Elements/SignUp";
 import TopNavbar from "../components/Nav/TopNavbar";
 import Footer from "../components/Sections/Footer"
 
-
 export default function Login() {
   return (
     <>
-      <TopNavbar />
+      <TopNavbar/>
       <Wrapper className="container flexSpaceCenter">  
           <SignIn/>
       </Wrapper>

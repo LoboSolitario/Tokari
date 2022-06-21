@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import styled from "styled-components";
-import { useNavigate} from 'react-router';
 import {Link, NavLink} from 'react-router-dom';
+
 
 // Components
 import Sidebar from "../Nav/Sidebar";
@@ -14,7 +14,6 @@ import BurgerIcon from "../../assets/svg/BurgerIcon";
 export default function TopNavbar() {
   const [y, setY] = useState(window.scrollY);
   const [sidebarOpen, toggleSidebar] = useState(false);
-  let navigate = useNavigate();
 
   useEffect(() => {
     window.addEventListener("scroll", () => setY(window.scrollY));
@@ -22,7 +21,6 @@ export default function TopNavbar() {
       window.removeEventListener("scroll", () => setY(window.scrollY));
     };
   }, [y]);
-
 
   return (
     <>
@@ -52,15 +50,18 @@ export default function TopNavbar() {
             </li>
           </NavLink>
         
-          {/* <NavLink
-            to="/baskets"
-            className={"disabled-link"}
+         {localStorage.getItem("token")?(
+          <NavLink onClick={()=>{
+            localStorage.clear();
+          }}
+            to="/login"
+            className={({ isActive }) => (isActive ? "active" : "link")}
           >
             <li className="semiBold font15 pointer" style={{ padding: "10px 15px" }}>
-              Baskets
+              Logout
             </li>
-          </NavLink> */}
-
+          </NavLink>
+         ):( 
           <NavLink
             to="/login"
             className={({ isActive }) => (isActive ? "active" : "link")}
@@ -69,6 +70,7 @@ export default function TopNavbar() {
               Login
             </li>
           </NavLink>
+         )}
 
           <NavLink
             to="/baskets"
