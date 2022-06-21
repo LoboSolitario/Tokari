@@ -107,7 +107,7 @@ const SignUp = () => {
             onChange={(e) => setPwd(e.target.value)}
             className="form-control font13"
             placeholder="Enter password"
-            reqired
+            required
           />
         </div>
         <div className="mb-3">
@@ -141,7 +141,7 @@ const SignUp = () => {
               />
               <Form.Check
                 style={{marginLeft: "30px"}}
-                label="I'm a fund manager"
+                label="I'm a portfolio manager"
                 value="manager"
                 name="group1"
                 type={type}
