@@ -9,7 +9,6 @@ export default function Login() {
   return (
     <>
       <TopNavbar/>
-      <TopNavbar/>
       <Wrapper className="container flexSpaceCenter">  
           <SignIn/>
           <SignUp/>
