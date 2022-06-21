@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState} from "react";
 import styled from "styled-components";
-import { useNavigate} from 'react-router';
 import {Link, NavLink} from 'react-router-dom';
-import { useLayoutEffect } from "react";
+
 
 // Components
 import Sidebar from "../Nav/Sidebar";
@@ -15,8 +14,6 @@ import BurgerIcon from "../../assets/svg/BurgerIcon";
 export default function TopNavbar() {
   const [y, setY] = useState(window.scrollY);
   const [sidebarOpen, toggleSidebar] = useState(false);
-  // const hasUserSignedIn = useRef();
-  // const hasUserSignedIn = null
 
   useEffect(() => {
     window.addEventListener("scroll", () => setY(window.scrollY));
@@ -24,14 +21,6 @@ export default function TopNavbar() {
       window.removeEventListener("scroll", () => setY(window.scrollY));
     };
   }, [y]);
-
-  // useLayoutEffect(() => {
-    //  hasUserSignedIn.current = localStorage.getItem("auth");
-    //  console.log("auth status: ", hasUserSignedIn.current);
-    //check local token or something
-  // }, []);
-  // console.log("hasUserSignedIn: ", hasUserSignedIn.current)
-  // });
 
   return (
     <>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
 import { useRef, useState, useEffect} from "react";
 import Form from 'react-bootstrap/Form'
-import {useNavigate}  from "react-router-dom";
+import {useNavigate, NavLink}  from "react-router-dom";
 import configOptions from '../../api/configOptions';
 
 const SignUp = () => {
@@ -165,6 +165,17 @@ const SignUp = () => {
             <FullButton title="Register" />
           </BtnWrapper>
         </div>
+
+        <div style={{display: "flex", marginTop: "20px"}}>Already have an account?
+          <NavLink
+            style={{marginLeft: "10px", color: "#7620FF"}}
+            to="/login"
+          >
+            <div className="semiBold font13 pointer">
+              Login
+            </div>
+          </NavLink>
+        </div>
       </form>
     </Wrapper>
     )
@@ -174,7 +185,7 @@ const SignUp = () => {
 }
 
 const Wrapper = styled.section`
-    padding-top: 50px;
+    padding-top: 10px;
     width: max-content;
     @media (max-width: 960px) {
         padding-bottom: 40px;
@@ -187,6 +198,5 @@ const BtnWrapper = styled.div`
     margin: 0 auto;
   }
 `;
-
 
 export default SignUp

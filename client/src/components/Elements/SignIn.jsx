@@ -81,14 +81,18 @@ export default function SignIn(){
             <FullButton title="Login" />
           </BtnWrapper>
         </div>
-        <NavLink
-          to="/signup"
-          className={({ isActive }) => (isActive ? "active" : "link")}
-        >
-          <div className="semiBold font15 pointer tag textCenter" style={{ padding: "10px 15px" }}>
-            Sign Up
-          </div>
-        </NavLink>
+
+        <div style={{display: "flex", marginTop: "20px"}}>New to Tokari?
+          <NavLink
+            style={{marginLeft: "10px"}}
+            to="/signup"
+            className={"active"}
+          >
+            <div className="semiBold font13 pointer">
+              Sign Up
+            </div>
+          </NavLink>
+        </div>
       </form>
     </Wrapper>
     )
