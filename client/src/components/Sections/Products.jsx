@@ -24,9 +24,8 @@ export default function Prodcuts() {
                 tag="Risk: Low"
                 Volacity={"Volacity: Low"}
                 author="Adam Smith"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: Low"
+                // action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -36,9 +35,8 @@ export default function Prodcuts() {
                 tag="Risk: Medium"
                 Volacity={"Volacity: Low"}
                 author="Karl Marx"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: Medium"
+                //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -48,9 +46,8 @@ export default function Prodcuts() {
                 tag="Risk: Low"
                 Volacity={"Volacity: Low"}
                 author="Satoshi Nakamoto"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: Low"
+                //action={() => alert("clicked")}
               />
             </div>
           </div>
@@ -62,9 +59,8 @@ export default function Prodcuts() {
                 tag="Risk: High"
                 Volacity={"Volacity: Low"}
                 author="Neil deGrasse Tyson"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: High"
+                //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -74,7 +70,8 @@ export default function Prodcuts() {
                 tag="Risk: Medium"
                 Volacity={"Volacity: Low"}
                 author="Albert Einstein"
-                action={() => alert("clicked")}
+                Volatility="Volatility: Medium"
+                //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -84,9 +81,8 @@ export default function Prodcuts() {
                 tag="Risk: High"
                 Volacity={"Volacity: High"}
                 author="Alan Turing"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: High"
+                //action={() => alert("clicked")}
               />
             </div>
           </div>
