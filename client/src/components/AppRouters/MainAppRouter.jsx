@@ -15,7 +15,7 @@ export default function App() {
           <Route element={<PrivateRoutes/>}>
             <Route element={<Baskets/>} path="/baskets"/>
           </Route>
-          <Route element={<Landing />} path="/" exact/>
+          <Route element={<Landing/>} path="/" exact/>
           <Route element={<Login/>} path="/login"/>
         </Routes>
       </Router>

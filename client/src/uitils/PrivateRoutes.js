@@ -3,8 +3,6 @@ import configOptions from '../api/configOptions';
 
 const PrivateRoutes =  () => {
     // e.preventDefault();
-    // need to save token globally => done
-    // maybe we can use JWT token => done
 
     // implement the Get Request that will give us the user role
     // depends on their role status, they can visit private pages
@@ -13,8 +11,8 @@ const PrivateRoutes =  () => {
     const baseUrl = process.env.REACT_APP_BASE_URL;  
     // let role = ""
 
-    console.log("your token: ", token);
-    console.log("auth status: ", auth);
+    // console.log("your token: ", token);
+    // console.log("auth status: ", auth);
     
     // const options = {
     //     body: JSON.stringify({
@@ -39,7 +37,7 @@ const PrivateRoutes =  () => {
     // }
 
     const role = "investor"
-    if(role === "fund manager"){
+    if(role === "investor"){
         return(
             auth ? <Outlet/> : <Navigate to="/baskets"/>
         )

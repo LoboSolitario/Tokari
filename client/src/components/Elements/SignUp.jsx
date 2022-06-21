@@ -56,6 +56,7 @@ const SignUp = () => {
             response.json().then(data => {
               console.log("data: ", data.token);
               localStorage.setItem("token", data.token);
+              localStorage.setItem("auth", "true");
             })
             setSuccess(true);
             setUser('');
@@ -63,7 +64,7 @@ const SignUp = () => {
             setMatchPwd('');
             setRole("");
             options.body = JSON.stringify({});
-            navigate("/");
+            window.location.reload();
           }else{
             setErrMsg('Registration Failed: ' + response.statusText)
           } 
@@ -71,6 +72,15 @@ const SignUp = () => {
   }
 
     return (
+      <>
+    {localStorage.getItem("token")?(
+        <Wrapper className="container flexSpaceCenter flexColumn">
+            <div style={{marginBottom: "20px"}} className="p">You have been successfully registered!</div>
+          <BtnWrapper onClick={ ()=>{navigate("/");}}>
+            <FullButton title="visit home page" to="/"/>
+          </BtnWrapper>
+        </Wrapper>
+    ):(
     <Wrapper className="container flexSpaceCenter">
       <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}> 
         <h3 className='semiBold'>Sign Up</h3>
@@ -158,6 +168,9 @@ const SignUp = () => {
       </form>
     </Wrapper>
     )
+  }
+  </>
+  )
 }
 
 const Wrapper = styled.section`

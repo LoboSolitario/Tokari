@@ -9,7 +9,7 @@ export default function Baskets() {
   return (
     <>
       <TopNavbar />
-      <h1 style={{marginTop:"100px"}}>Baskets Page fellas</h1>
+      <h1 style={{marginTop:"100px"}}>Baskets Page</h1>
       <Products />
       <Footer />
     </>
