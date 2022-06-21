@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
 import { useRef, useState, useEffect } from "react";
-import {useNavigate}  from "react-router-dom";
+import {useNavigate, NavLink}  from "react-router-dom";
 import configOptions from '../../api/configOptions';
 // handle Sign In here and save the auth token/user role
 
@@ -81,6 +81,14 @@ export default function SignIn(){
             <FullButton title="Login" />
           </BtnWrapper>
         </div>
+        <NavLink
+          to="/signup"
+          className={({ isActive }) => (isActive ? "active" : "link")}
+        >
+          <div className="semiBold font15 pointer tag textCenter" style={{ padding: "10px 15px" }}>
+            Sign Up
+          </div>
+        </NavLink>
       </form>
     </Wrapper>
     )

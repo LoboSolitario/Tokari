@@ -79,9 +79,6 @@
   }
 
   /* HELLPERS */
-  .textCenter {
-    text-align: center
-  }
   .animate {
     transition: 0.3s ease;
   }
