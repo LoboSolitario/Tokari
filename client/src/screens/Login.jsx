@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import SignIn from "../components/Elements/SignIn";
-import SignUp from "../components/Elements/SignUp";
 import TopNavbar from "../components/Nav/TopNavbar";
 import Footer from "../components/Sections/Footer"
 

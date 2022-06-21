@@ -39,6 +39,7 @@ export default function SignIn(){
           response.json().then(data => {
             console.log("data: ", data.token);
             localStorage.setItem("token", data.token);
+            localStorage.setItem("auth", "true");
           })
           setSuccess(true);
           setPwd('');

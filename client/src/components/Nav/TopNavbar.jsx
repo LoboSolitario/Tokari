@@ -15,12 +15,12 @@ export default function TopNavbar() {
   const [y, setY] = useState(window.scrollY);
   const [sidebarOpen, toggleSidebar] = useState(false);
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => setY(window.scrollY));
-    return () => {
-      window.removeEventListener("scroll", () => setY(window.scrollY));
-    };
-  }, [y]);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => setY(window.scrollY));
+  //   return () => {
+  //     window.removeEventListener("scroll", () => setY(window.scrollY));
+  //   };
+  // }, [y]);
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function TopNavbar() {
       <Wrapper className="flexCenter animate whiteBg" style={y > 100 ? { height: "60px" } : { height: "80px" }}>
         <NavInner className="container flexSpaceCenter">
 
-           <Link className="pointer flexNullCenter" to="/" smooth={true}>
+           <Link className="pointer flexNullCenter" to="/">
             <LogoIcon />
             <h1 style={{ marginLeft: "5px" }} className="font20 extraBold">
               tokari

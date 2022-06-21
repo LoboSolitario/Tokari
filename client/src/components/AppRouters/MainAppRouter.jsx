@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import PrivateRoutes from "../../uitils/PrivateRoutes";
+import PrivateRoutes from "./PrivateRoutes";
 
 // Screens
 import Landing from "../../screens/Landing";

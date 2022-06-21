@@ -28,7 +28,7 @@ export default function BasketBox({ tag, title, text, action, author, Volatility
           <p className="tag coralBg radius6 font11 extraBold">{Volatility}</p>
         </div>
         <div className="row flexRight">
-            <div style={{ width: "100px" }}>
+            <div style={{ width: "120px" }}>
               <FullButton title="Details" action={() => alert("clicked")} />
             </div>
         </div>
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   padding: 20px 30px;
   margin-top: 30px;
 `;
-const WrapperBtn = styled.button`
+const WrapperBtn = styled.div`
   border: 0px;
   outline: none;
   background-color: transparent;

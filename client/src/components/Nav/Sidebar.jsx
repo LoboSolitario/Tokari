@@ -24,12 +24,10 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
         <li className="semiBold font15 pointer">
           <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
-            activeClass="active"
+            activeclass="active"
             className="whiteColor"
             style={{ padding: "10px 15px" }}
             to="/"
-            spy={true}
-            smooth={true}
             offset={-60}
           >
             Home
@@ -38,12 +36,10 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
         <li className="semiBold font15 pointer">
           <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
-            activeClass="active"
+            activeclass="active"
             className="whiteColor"
             style={{ padding: "10px 15px" }}
             to="/login"
-            spy={true}
-            smooth={true}
             offset={-60}
           >
             Login
@@ -53,12 +49,10 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
         <li className="semiBold font15 pointer">
           <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
-            activeClass="active"
+            activeclass="active"
             className="semiBold font15 pointer radius8 lightBg"
             style={{ padding: "10px 15px" }}
             to="/discover"
-            spy={true}
-            smooth={true}
             offset={-60}
           >
             Discover
