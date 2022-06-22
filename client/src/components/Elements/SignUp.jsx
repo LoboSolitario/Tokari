@@ -93,6 +93,7 @@ const SignUp = () => {
             onChange={(e) => setUser(e.target.value)}
             placeholder="Full name"
             required
+            value={user}
           />
         </div>
 
