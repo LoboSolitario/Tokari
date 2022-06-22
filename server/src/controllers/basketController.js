@@ -47,7 +47,6 @@ const createBasket = asyncHandler(async (req, res) => {
         rebalanceFreq: req.body.rebalanceFreq,
         subscriptionFee: req.body.subscriptionFee,
         cryptoAlloc: req.body.cryptoAlloc
-        //   owner: req.body.owner
     });
     //save the new basket
     newBasket.save()
@@ -75,7 +74,7 @@ const deleteBasket = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Basket not found");
     }
-    //find the user who is trying to create the basket.
+    //find the user who is trying to delete the basket.
     const user = await User.findById(req.user.id);
     //check if there is a user 
     if (!user) {
@@ -101,13 +100,13 @@ const rebalanceBasket = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("Incorrect basket id")
     }
-    //find the basket to be deleted
+    //find the basket to be rebalanced
     const basket = await Basket.findById(req.params.id);
     if (!basket) {
         res.status(400);
         throw new Error("Basket not found");
     }
-    //find the user who is trying to delete the basket
+    //find the user who is trying to rebalance the basket
     const user = await User.findById(req.user.id);
     //check if there is a user 
     if (!user) {
