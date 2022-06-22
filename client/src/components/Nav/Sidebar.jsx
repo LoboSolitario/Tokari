@@ -34,16 +34,30 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
           </Link>
         </li>
         <li className="semiBold font15 pointer">
-          <Link
-            onClick={() => toggleSidebar(!sidebarOpen)}
-            activeclass="active"
-            className="whiteColor"
-            style={{ padding: "10px 15px" }}
-            to="/login"
-            offset={-60}
-          >
-            Login
-          </Link>
+          {localStorage.getItem("token")?(
+            <Link onClick={()=>{
+              localStorage.clear();
+            }}
+              to="/login"
+              activeclass="active"
+              className="whiteColor"
+              style={{ padding: "10px 15px" }}
+              offset={-60}
+              >
+                Logout
+            </Link>
+          ):( 
+            <Link
+              onClick={() => toggleSidebar(!sidebarOpen)}
+              activeclass="active"
+              className="whiteColor"
+              style={{ padding: "10px 15px" }}
+              to="/login"
+              offset={-60}
+            >
+              Login
+            </Link>
+          )}
         </li>
 
         <li className="semiBold font15 pointer">

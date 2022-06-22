@@ -45,59 +45,72 @@ export default function SignIn(){
           setPwd('');
           setEmail('');
           options.body = JSON.stringify({});
-          navigate("/"); 
+          // navigate("/"); 
+          window.location.reload();
         }
         else{
           setErrMsg('Sign in Failed: ' + response.statusText);
         }  
     }
     return (
-    <Wrapper className="container flexSpaceCenter">
-      <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}>
-        <h3 className='semiBold'>Sign In</h3>
-        <br />
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control font13"
-            placeholder="Enter email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </div>
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control font13"
-            placeholder="Enter password"
-            onChange={(e) => setPwd(e.target.value)}
-            value={pwd}
-          />
-        </div>
-        <div className="d-grid">
-        <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-          <BtnWrapper>
-            <FullButton title="Login" />
+      <>
+    {localStorage.getItem("token")?(
+      <Wrapper className="container flexSpaceCenter flexColumn">
+            <div style={{marginBottom: "20px"}} className="p">You have been successfully logged in!</div>
+          <BtnWrapper onClick={ ()=>{navigate("/");}}>
+            <FullButton title="visit home page" to="/"/>
           </BtnWrapper>
-        </div>
+        </Wrapper>
+    ):(
+      <Wrapper className="container flexSpaceCenter">
+        <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}>
+          <h3 className='semiBold'>Sign In</h3>
+          <br />
+          <div className="mb-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              className="form-control font13"
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </div>
+          <div className="mb-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control font13"
+              placeholder="Enter password"
+              onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
+            />
+          </div>
+          <div className="d-grid">
+          <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+            <BtnWrapper>
+              <FullButton title="Login" />
+            </BtnWrapper>
+          </div>
 
-        <div style={{display: "flex", marginTop: "20px"}}>New to Tokari?
-          <NavLink
-            style={{marginLeft: "10px"}}
-            to="/signup"
-            className={"active"}
-          >
-            <div className="semiBold font13 pointer">
-              Sign Up
-            </div>
-          </NavLink>
-        </div>
-      </form>
-    </Wrapper>
+          <div style={{display: "flex", marginTop: "20px"}}>New to Tokari?
+            <NavLink
+              style={{marginLeft: "10px"}}
+              to="/signup"
+              className={"active"}
+            >
+              <div className="semiBold font13 pointer">
+                Sign Up
+              </div>
+            </NavLink>
+          </div>
+        </form>
+      </Wrapper>
     )
   }
+  </>
+  )
+}
 
 
 const Wrapper = styled.section`

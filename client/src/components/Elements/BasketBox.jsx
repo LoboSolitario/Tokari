@@ -53,10 +53,10 @@ const WrapperBtn = styled.div`
   }
 `;
 
-const WrapperItemInfo = styled.button`
-  border: none;
-  outline: none;
-  display: flex;
-  background-color: transparent;
-  width: 100%;
-`;
+// const WrapperItemInfo = styled.button`
+//   border: none;
+//   outline: none;
+//   display: flex;
+//   background-color: transparent;
+//   width: 100%;
+// `;
