@@ -42,9 +42,6 @@ export default function TopNavbar() {
               Home
             </li>
           </NavLink>
-<<<<<<< HEAD
-
-=======
         
          {localStorage.getItem("token")?(
           <NavLink onClick={()=>{
@@ -58,7 +55,6 @@ export default function TopNavbar() {
             </li>
           </NavLink>
          ):( 
->>>>>>> front-end-auth
           <NavLink
             to="/login"
             className={({ isActive }) => (isActive ? "active" : "link")}
@@ -108,11 +104,8 @@ const BurderWrapper = styled.button`
   }
 `;
 
-
 const UlWrapperRight = styled.ul`
   @media (max-width: 760px) {
     display: none;
   }
 `;
-
-

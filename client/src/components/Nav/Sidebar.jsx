@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Navink } from "react-router-dom";
+import { Link } from "react-router-dom";
 // Assets
 import CloseIcon from "../../assets/svg/CloseIcon";
 import LogoIcon from "../../assets/svg/Logo";
@@ -22,7 +22,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
 
       <UlStyle className="flexNullCenter flexColumn">
         <li className="semiBold font15 pointer">
-          <NavLink
+          <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
             activeclass="active"
             className="whiteColor"
@@ -31,7 +31,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             offset={-60}
           >
             Home
-          </NavLink>
+          </Link>
         </li>
         <li className="semiBold font15 pointer">
           {localStorage.getItem("token")?(
@@ -61,7 +61,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
         </li>
 
         <li className="semiBold font15 pointer">
-          <NavLink
+          <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
             activeclass="active"
             className="semiBold font15 pointer radius8 lightBg"
@@ -70,7 +70,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             offset={-60}
           >
             Discover
-          </NavLink>
+          </Link>
         </li>
   
       </UlStyle>
