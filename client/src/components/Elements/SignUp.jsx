@@ -1,70 +1,88 @@
 import React from 'react'
 import styled from 'styled-components';
 import FullButton from "../Buttons/FullButton";
-import { useRef, useState } from "react";
-import axios from "../../api/Axios"
+import { useRef, useState, useEffect} from "react";
 import Form from 'react-bootstrap/Form'
+import {useNavigate, NavLink}  from "react-router-dom";
+import configOptions from '../../api/configOptions';
 
-const REGISTER_URL = '/';
 const SignUp = () => {
 
   const errRef = useRef();
   const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
+  const [role, setRole] = useState('investor');  
   const [matchPwd, setMatchPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
+  const baseUrl = process.env.REACT_APP_BASE_URL;  
+  
+  useEffect(() => {
+      setErrMsg('');
+  }, [pwd]);
 
+  let navigate = useNavigate();
   const handleSubmit = async (e) => {
       e.preventDefault();
-
       if (!((pwd).length > 5)) {
-          setErrMsg("Password must be at least 5 characters long!");
+          setErrMsg("Password must be at least 6 characters long!");
           return;
       }
       else if (pwd !== matchPwd) {
         setErrMsg("Passwords don't match!");
         return;
       }
+      else{
+          
+          const options = {
+            body: JSON.stringify({
+              "name": user,
+              "email": email,
+              "password": pwd,
+              "role": role
+                })
+            };
 
-      try {
-          const response = await axios.post(REGISTER_URL,
-              JSON.stringify({ user, pwd }),
-              {
-                  headers: { 'Content-Type': 'application/json' },
-                  withCredentials: true
-              }
-          );
-          console.log(response?.data);
-          console.log(response?.accessToken);
-          console.log(JSON.stringify(response))
-          setSuccess(true);
-          setUser('');
-          setPwd('');
-          setMatchPwd('');
+          const headers = {
+            "Content-Type": "application/json"
+            };
 
-      } catch (err) {
-          if (!err?.response) {
-              setErrMsg('No Server Response');
-          } else if (err.response?.status === 409) {
-              setErrMsg('Username Taken');
-          } else {
-              setErrMsg('Registration Failed')
-          }
-          errRef.current.focus();
+          configOptions("POST", headers, options);
+          
+          const response = await fetch(`${baseUrl}/api/users/register`, options);
+          console.log(response);
+          if(response.ok){
+            response.json().then(data => {
+              console.log("data: ", data.token);
+              localStorage.setItem("token", data.token);
+              localStorage.setItem("auth", "true");
+            })
+            setSuccess(true);
+            setUser('');
+            setPwd('');
+            setMatchPwd('');
+            setRole("");
+            options.body = JSON.stringify({});
+            window.location.reload();
+          }else{
+            setErrMsg('Registration Failed: ' + response.statusText)
+          } 
       }
   }
 
     return (
-    <>
-     {success ? (
-                <section>
-                    <h1>Success!</h1>
-                </section>
-            ) : (
+      <>
+    {localStorage.getItem("token")?(
+        <Wrapper className="container flexSpaceCenter flexColumn">
+            <div style={{marginBottom: "20px"}} className="p">You have been successfully registered!</div>
+          <BtnWrapper onClick={ ()=>{navigate("/");}}>
+            <FullButton title="visit home page" to="/"/>
+          </BtnWrapper>
+        </Wrapper>
+    ):(
     <Wrapper className="container flexSpaceCenter">
-      <form onSubmit={handleSubmit}> 
+      <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}> 
         <h3 className='semiBold'>Sign Up</h3>
         <br/>
         <div className="mb-3">
@@ -75,6 +93,7 @@ const SignUp = () => {
             onChange={(e) => setUser(e.target.value)}
             placeholder="Full name"
             required
+            value={user}
           />
         </div>
 
@@ -99,7 +118,7 @@ const SignUp = () => {
             onChange={(e) => setPwd(e.target.value)}
             className="form-control font13"
             placeholder="Enter password"
-            reqired
+            required
           />
         </div>
         <div className="mb-3">
@@ -119,18 +138,22 @@ const SignUp = () => {
         <label>Role: </label>
         <Form>
           {['radio'].map((type) => (
-            <div key={`inline-${type}`} className="mb-3">
-              <Form.Check
+            <div key={`inline-${type}`} 
+                 className="mb-3" 
+                 onChange={(e)=> {setRole(e.target.value);}}>
+              <Form.Check 
                 style={{marginLeft: "30px"}}
                 label="I'm an investor"
                 name="group1"
+                value="investor"
                 type={type}
                 defaultChecked
                 id={`inline-${type}-1`}
               />
               <Form.Check
                 style={{marginLeft: "30px"}}
-                label="I'm a fund manager"
+                label="I'm a portfolio manager"
+                value="manager"
                 name="group1"
                 type={type}
                 id={`inline-${type}-2`}
@@ -138,21 +161,32 @@ const SignUp = () => {
             </div>
           ))}
         </Form>
-        <p style={{color:"red", width: "150px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+        <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
           <BtnWrapper>
             <FullButton title="Register" />
           </BtnWrapper>
         </div>
+
+        <div style={{display: "flex", marginTop: "20px"}}>Already have an account?
+          <NavLink
+            style={{marginLeft: "10px", color: "#7620FF"}}
+            to="/login"
+          >
+            <div className="semiBold font13 pointer">
+              Login
+            </div>
+          </NavLink>
+        </div>
       </form>
     </Wrapper>
-  
-    )}
-    </>
     )
+  }
+  </>
+  )
 }
 
 const Wrapper = styled.section`
-    padding-top: 50px;
+    padding-top: 10px;
     width: max-content;
     @media (max-width: 960px) {
         padding-bottom: 40px;

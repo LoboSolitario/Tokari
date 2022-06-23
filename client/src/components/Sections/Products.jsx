@@ -3,12 +3,12 @@ import styled from "styled-components";
 // Components
 import BasketBox from "../Elements/BasketBox";
 import FullButton from "../Buttons/FullButton";
-import FaqSlider from "../Elements/FaqSlider";
 
-export default function Prodcuts() {
+
+export default function Products() {
   return (
     <Wrapper id="products">
-      <div className="lightBg">
+      <div className="lightBg" style={{padding: '50px 0 0'}}>
         <div className="container">
           <HeaderInfo>
             <h1 className="font40 extraBold">Our Products</h1>
@@ -22,7 +22,7 @@ export default function Prodcuts() {
                 title="Basket 1"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Adam Smith"
                 Volatility="Volatility: Low"
                 // action={() => alert("clicked")}
@@ -33,7 +33,7 @@ export default function Prodcuts() {
                 title="Basket 1"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Karl Marx"
                 Volatility="Volatility: Medium"
                 //action={() => alert("clicked")}
@@ -44,7 +44,7 @@ export default function Prodcuts() {
                 title="Basket 2"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Satoshi Nakamoto"
                 Volatility="Volatility: Low"
                 //action={() => alert("clicked")}
@@ -57,7 +57,7 @@ export default function Prodcuts() {
                 title="Basket 3"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Neil deGrasse Tyson"
                 Volatility="Volatility: High"
                 //action={() => alert("clicked")}
@@ -68,7 +68,7 @@ export default function Prodcuts() {
                 title="Basket 4"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
-                Volacity={"Volacity: Low"}
+                Volatility={"Volatility: High"}
                 author="Albert Einstein"
                 Volatility="Volatility: Medium"
                 //action={() => alert("clicked")}
@@ -79,7 +79,7 @@ export default function Prodcuts() {
                 title="Basket 5"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
-                Volacity={"Volacity: High"}
+                Volatility={"Volatility: High"}
                 author="Alan Turing"
                 Volatility="Volatility: High"
                 //action={() => alert("clicked")}
@@ -93,17 +93,7 @@ export default function Prodcuts() {
           </div>
         </div>
       </div>
-      <div className="whiteBg" style={{padding: '50px 0'}}>
-        <div className="container">
-          <HeaderInfo>
-            <h1 className="font40 extraBold">Frequently Asked Questions</h1>
-            <p className="font13">
-              Can't find the answer? Check our extended FAQ on GitBook or contact us.
-            </p>
-          </HeaderInfo>
-          <FaqSlider />
-        </div>
-      </div>
+
     </Wrapper>
   );
 }
