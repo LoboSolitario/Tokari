@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {Link, NavLink} from 'react-router-dom';
 
@@ -14,14 +14,7 @@ import BurgerIcon from "../../assets/svg/BurgerIcon";
 export default function TopNavbar() {
   const [y, setY] = useState(window.scrollY);
   const [sidebarOpen, toggleSidebar] = useState(false);
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => setY(window.scrollY));
-  //   return () => {
-  //     window.removeEventListener("scroll", () => setY(window.scrollY));
-  //   };
-  // }, [y]);
-
+  
   return (
     <>
       <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />

@@ -9,46 +9,37 @@ const PrivateRoutes = async () => {
     const auth =  localStorage.getItem("auth")
     const token = localStorage.getItem("token")
     const baseUrl = process.env.REACT_APP_BASE_URL;  
-    // let role = ""
+    let role = "";
 
     console.log("your token: ", token);
     console.log("auth status: ", auth);
     
     const options = {
         withCredentials: true,
-        credentials: 'include'
+        credentials: 'include',
+        mode: 'no-cors'
         };
 
     const headers = {
         "Content-Type": "application/json",
-        "Autherization": "Bearer " + token
+        "Authorization": "Bearer " + token
     };
 
     configOptions("GET", headers, options);
-    
+
     const response = await fetch(`${baseUrl}/api/users/userDetails`, options);
     console.log(response);
     if(response.ok){
     response.json().then(data => {
         console.log("data: ", data.role);
         role = data.role
-    })
+    });
     options.body = JSON.stringify({});
     }
 
-    const role = "investor"
-    if(role === "investor"){
-        return(
-            <p>hello world</p>
-            // auth ? <Outlet/> : <Navigate to="/baskets"/>
-        )
-    }
-    else{
-        return(
-            <div className="p">hello world2 !</div>
-        //    <Navigate to="/"/>
-        )
-    }
+    return(
+        auth ? <Outlet/> : <Navigate to="/baskets"/>
+    )
 }
 
 export default PrivateRoutes

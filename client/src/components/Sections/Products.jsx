@@ -3,7 +3,7 @@ import styled from "styled-components";
 // Components
 import BasketBox from "../Elements/BasketBox";
 import FullButton from "../Buttons/FullButton";
-import FaqSlider from "../Elements/FaqSlider";
+
 
 export default function Products() {
   return (
@@ -97,17 +97,7 @@ export default function Products() {
           </div>
         </div>
       </div>
-      <div className="whiteBg" style={{padding: '50px 0'}}>
-        <div className="container">
-          <HeaderInfo>
-            <h1 className="font40 extraBold">Frequently Asked Questions</h1>
-            <p className="font13">
-              Can't find the answer? Check our extended FAQ on GitBook or contact us.
-            </p>
-          </HeaderInfo>
-          <FaqSlider />
-        </div>
-      </div>
+
     </Wrapper>
   );
 }
