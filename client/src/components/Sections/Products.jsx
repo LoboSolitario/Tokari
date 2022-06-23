@@ -24,7 +24,6 @@ export default function Products() {
                 tag="Risk: Low"
                 Volatility={"Volatility: High"}
                 author="Adam Smith"
-                Volatility="Volatility: Low"
                 // action={() => alert("clicked")}
               />
             </div>
@@ -35,7 +34,6 @@ export default function Products() {
                 tag="Risk: Medium"
                 Volatility={"Volatility: High"}
                 author="Karl Marx"
-                Volatility="Volatility: Medium"
                 //action={() => alert("clicked")}
               />
             </div>
@@ -46,7 +44,6 @@ export default function Products() {
                 tag="Risk: Low"
                 Volatility={"Volatility: High"}
                 author="Satoshi Nakamoto"
-                Volatility="Volatility: Low"
                 //action={() => alert("clicked")}
               />
             </div>
@@ -59,7 +56,6 @@ export default function Products() {
                 tag="Risk: High"
                 Volatility={"Volatility: High"}
                 author="Neil deGrasse Tyson"
-                Volatility="Volatility: High"
                 //action={() => alert("clicked")}
               />
             </div>
@@ -70,7 +66,6 @@ export default function Products() {
                 tag="Risk: Medium"
                 Volatility={"Volatility: High"}
                 author="Albert Einstein"
-                Volatility="Volatility: Medium"
                 //action={() => alert("clicked")}
               />
             </div>
@@ -81,7 +76,6 @@ export default function Products() {
                 tag="Risk: High"
                 Volatility={"Volatility: High"}
                 author="Alan Turing"
-                Volatility="Volatility: High"
                 //action={() => alert("clicked")}
               />
             </div>
