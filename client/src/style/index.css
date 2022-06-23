@@ -144,10 +144,19 @@
     justify-content: center;
     align-items: center;
   }
+  .flexHorizontalCenter {
+    display: flex;
+    justify-content: center;
+  }
   .flexRight {
     display: flex;
     justify-content: right;
-    align-items: right;
+    /* align-items: right; */
+  }
+  .flexLeft {
+    display: flex;
+    justify-content: left;
+    /* align-items: right; */
   }
   .flexSpaceNull {
     display: flex;
