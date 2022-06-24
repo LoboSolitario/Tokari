@@ -24,16 +24,15 @@ const PortfolioBasket = ({
           {risk}
         </p>
   
-        <p className="font13 extraBold">{author}</p>
+        {/* <p className="font13 extraBold">{author}</p> */}
         <p className="font13 extraBold">{risk}</p>
-        <p className="font13 extraBold">{details}</p>
-        <p className="font13 extraBold">{subscriptionfFee}</p>
-
-        <div className="flex">
-          <p className="tag coralBg radius6 font11 extraBold">{id}</p>
-        </div>
         <div className="flex">
           <p className="tag coralBg radius6 font11 extraBold">{volatility}</p>
+        </div>
+        {/* <p className="font13 extraBold">{details}</p> */}
+        <p className="font13 extraBold">{subscriptionfFee}</p>
+        <div className="flex">
+          <p className="tag coralBg radius6 font11 extraBold">{id}</p>
         </div>
         <div className="row flexRight">
             <div style={{ width: "120px" }}>

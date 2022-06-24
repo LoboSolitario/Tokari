@@ -5,7 +5,7 @@ import TopNavbar from '../Nav/TopNavbar';
 import PortfolioHome from '../PortfolioMngmt/PortfolioHome';
 import PortfolioHeader from '../PortfolioMngmt/PortfolioHeader';
 import BasketContext from '../contexts/BasketContext';
-
+import Footer from '../../components/Sections/Footer';
 
 // Screens
 function PortfolioRouters() {
@@ -18,6 +18,7 @@ function PortfolioRouters() {
             <TopNavbar/>
             <PortfolioHeader/>
             <PortfolioHome/>
+            <Footer/>
           </BasketContext.Provider>
           </>
         } path="/" exact>
