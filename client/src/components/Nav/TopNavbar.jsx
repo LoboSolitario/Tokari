@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
-import { useNavigate} from 'react-router';
 import {Link, NavLink} from 'react-router-dom';
+
 
 // Components
 import Sidebar from "../Nav/Sidebar";
@@ -14,16 +14,7 @@ import BurgerIcon from "../../assets/svg/BurgerIcon";
 export default function TopNavbar() {
   const [y, setY] = useState(window.scrollY);
   const [sidebarOpen, toggleSidebar] = useState(false);
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => setY(window.scrollY));
-    return () => {
-      window.removeEventListener("scroll", () => setY(window.scrollY));
-    };
-  }, [y]);
-
-
+  
   return (
     <>
       <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
@@ -31,7 +22,7 @@ export default function TopNavbar() {
       <Wrapper className="flexCenter animate whiteBg" style={y > 100 ? { height: "60px" } : { height: "80px" }}>
         <NavInner className="container flexSpaceCenter">
 
-           <Link className="pointer flexNullCenter" to="/" smooth={true}>
+           <Link className="pointer flexNullCenter" to="/">
             <LogoIcon />
             <h1 style={{ marginLeft: "5px" }} className="font20 extraBold">
               tokari
@@ -51,7 +42,19 @@ export default function TopNavbar() {
               Home
             </li>
           </NavLink>
-
+        
+         {localStorage.getItem("token")?(
+          <NavLink onClick={()=>{
+            localStorage.clear();
+          }}
+            to="/login"
+            className={({ isActive }) => (isActive ? "active" : "link")}
+          >
+            <li className="semiBold font15 pointer" style={{ padding: "10px 15px" }}>
+              Logout
+            </li>
+          </NavLink>
+         ):( 
           <NavLink
             to="/login"
             className={({ isActive }) => (isActive ? "active" : "link")}
@@ -60,10 +63,20 @@ export default function TopNavbar() {
               Login
             </li>
           </NavLink>
+         )}
 
           <NavLink
-            to="/discover"
-            className={"disabled-link"}
+            to="/portfoliomain"
+            className={({ isActive }) => (isActive ? "active" : "link")}
+          >
+            <li className="semiBold font15 pointer pointer" style={{ padding: "10px 15px" }}>
+              Management
+            </li>
+          </NavLink>
+
+          <NavLink
+            to="/baskets"
+            className={({ isActive }) => (isActive ? "active" : "link")}
           >
             <li className="semiBold font15 pointer radius8 lightBg" style={{ padding: "10px 15px" }}>
               Discover
@@ -100,11 +113,8 @@ const BurderWrapper = styled.button`
   }
 `;
 
-
 const UlWrapperRight = styled.ul`
   @media (max-width: 760px) {
     display: none;
   }
 `;
-
-
