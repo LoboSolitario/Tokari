@@ -56,6 +56,10 @@ export default function Products() {
                 tag="Risk: High"
                 Volatility={"Volatility: High"}
                 author="Neil deGrasse Tyson"
+<<<<<<< HEAD
+=======
+       
+>>>>>>> portfolioCRUD
                 //action={() => alert("clicked")}
               />
             </div>

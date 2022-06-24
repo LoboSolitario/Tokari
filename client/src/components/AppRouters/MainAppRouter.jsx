@@ -21,7 +21,6 @@ export default function MainAppRouter() {
           {/* <Route element={<PrivateRoutes/>}> */}
             <Route element={<InvestorRouters/>} path="/investormain/*"/>
           {/* </Route> */}
-          
           <Route element={<Landing/>} path="/" exact/>
           <Route element={<Login/>} path="/login"/>
           <Route element={<Register/>} path="/signup"/>
