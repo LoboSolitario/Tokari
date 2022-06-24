@@ -22,10 +22,10 @@ export default function Prodcuts() {
                 title="Basket 1"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
+                Volacity={"Volacity: Low"}
                 author="Adam Smith"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: Low"
+                // action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -33,10 +33,10 @@ export default function Prodcuts() {
                 title="Basket 1"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
+                Volacity={"Volacity: Low"}
                 author="Karl Marx"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: Medium"
+                //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -44,10 +44,10 @@ export default function Prodcuts() {
                 title="Basket 2"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Low"
+                Volacity={"Volacity: Low"}
                 author="Satoshi Nakamoto"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: Low"
+                //action={() => alert("clicked")}
               />
             </div>
           </div>
@@ -57,10 +57,10 @@ export default function Prodcuts() {
                 title="Basket 3"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
+                Volacity={"Volacity: Low"}
                 author="Neil deGrasse Tyson"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: High"
+                //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -68,8 +68,10 @@ export default function Prodcuts() {
                 title="Basket 4"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: Medium"
+                Volacity={"Volacity: Low"}
                 author="Albert Einstein"
-                action={() => alert("clicked")}
+                Volatility="Volatility: Medium"
+                //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -77,16 +79,16 @@ export default function Prodcuts() {
                 title="Basket 5"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 tag="Risk: High"
+                Volacity={"Volacity: High"}
                 author="Alan Turing"
-                priceChange={"-9%"}
-                marketCap={"$210K"}
-                action={() => alert("clicked")}
+                Volatility="Volatility: High"
+                //action={() => alert("clicked")}
               />
             </div>
           </div>
           <div className="row flexCenter">
             <div style={{ margin: "50px 0", width: "200px" }}>
-              <FullButton title="Load More" action={() => alert("clicked")} />
+              <FullButton title="Discover" action={() => alert("clicked")} />
             </div>
           </div>
         </div>

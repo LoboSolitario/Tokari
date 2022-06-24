@@ -12,9 +12,8 @@ router.post('/login', loginUser);
 
 router.get('/userDetails', protect, getUser);
 
-router.delete('/deleteUser/:name', deleteUser);
+router.delete('/deleteUser/:id', deleteUser);
 
-router.patch('/updateUser/:name', updateUser);
+router.patch('/updateUser/:id', updateUser);
 
-// export default router;
 module.exports = router;

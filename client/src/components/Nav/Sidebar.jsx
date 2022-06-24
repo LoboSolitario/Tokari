@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-scroll";
+import {NavLink} from 'react-router-dom';
+// import { Link } from "react-scroll";
 // Assets
 import CloseIcon from "../../assets/svg/CloseIcon";
 import LogoIcon from "../../assets/svg/Logo";
@@ -22,61 +23,49 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
 
       <UlStyle className="flexNullCenter flexColumn">
         <li className="semiBold font15 pointer">
-          <Link
+          <NavLink
             onClick={() => toggleSidebar(!sidebarOpen)}
             activeClass="active"
             className="whiteColor"
             style={{ padding: "10px 15px" }}
-            to="home"
+            to="/"
             spy={true}
             smooth={true}
             offset={-60}
           >
             Home
-          </Link>
+          </NavLink>
         </li>
         <li className="semiBold font15 pointer">
-          <Link
+          <NavLink
             onClick={() => toggleSidebar(!sidebarOpen)}
             activeClass="active"
             className="whiteColor"
             style={{ padding: "10px 15px" }}
-            to="services"
+            to="/login"
             spy={true}
             smooth={true}
             offset={-60}
           >
-            Products
-          </Link>
+            Login
+          </NavLink>
         </li>
 
         <li className="semiBold font15 pointer">
-          <Link
+          <NavLink
             onClick={() => toggleSidebar(!sidebarOpen)}
             activeClass="active"
             className="whiteColor"
             style={{ padding: "10px 15px" }}
-            to="pricing"
+            to="/discover"
             spy={true}
             smooth={true}
             offset={-60}
           >
-            Pricing
-          </Link>
+            Discover
+          </NavLink>
         </li>
-  
-      </UlStyle>
-      <UlStyle className="flexSpaceCenter">
-        <li className="semiBold font15 pointer">
-          <a href="/" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
-            Log in
-          </a>
-        </li>
-        <li className="semiBold font15 pointer flexCenter">
-          <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
-            Get Started
-          </a>
-        </li>
+
       </UlStyle>
     </Wrapper>
   );
