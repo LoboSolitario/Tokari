@@ -6,15 +6,12 @@ import BasketContext from "../contexts/BasketContext";
 import PortfolioBasket from "./PortfolioBasket";
 import _ from 'lodash';
 
-
-
 export default function PortfolioHome() {
 
   const { baskets, setBaskets } = useContext(BasketContext);
   
   const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
-
   const baseUrl = process.env.REACT_APP_BASE_URL;  
 
   useEffect( ()=>{
@@ -40,7 +37,6 @@ export default function PortfolioHome() {
               setBaskets(temp);
               // console.log("temp: ", temp);
               // console.log("baskets: ", baskets);
-
          }
     }
   }, []);
@@ -48,7 +44,6 @@ export default function PortfolioHome() {
   return (
     <React.Fragment>
         <div className="flexList container">
-
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
                     <PortfolioBasket {...basket} />

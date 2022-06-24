@@ -120,6 +120,12 @@
     color: black;
     background: orange;
   }
+  /* Form */
+  .main-form {
+    color: #222222;
+    font-size: 12px;
+    width: 70%;
+  }
   /* FLEXBOX */
   .flex {
     display: flex;
@@ -204,6 +210,20 @@
     font-size: 3.75rem;
     line-height: 4.5rem;
   }
+
+    /* Overriding styles */
+
+  ::-webkit-input-placeholder {
+    font-size: 13px!important;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+      font-size: 13px!important;
+  }
+  ::-moz-placeholder {  /* Firefox 19+ */
+      font-size: 13px!important;
+  }
+  
   @media only screen and (max-width: 859px) {
     .font11 {
       font-size: 0.688rem;
