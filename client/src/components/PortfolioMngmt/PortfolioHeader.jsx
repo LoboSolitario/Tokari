@@ -5,7 +5,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
  export default function PortfolioHeader() {
   return (
-    <div className="flexLeft" style={{marginTop: "100px", marginLeft: "20px"}}>
+    <div className="flexLeft container" style={{marginTop: "100px", marginBottom: "50px"}}>
     <div className="semiBold font30 pointer">Porfolio Management</div>
         <BtnWrapper>
             <button style={{border: "none", background: "none"}}>

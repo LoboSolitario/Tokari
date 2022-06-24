@@ -162,6 +162,12 @@
     display: flex;
     justify-content: space-between;
   }
+  .flexList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 
   /* FONT SIZES */
   .font11 {
