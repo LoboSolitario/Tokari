@@ -7,10 +7,12 @@ import Footer from "../components/Sections/Footer"
 export default function Login() {
   return (
     <>
-      <TopNavbar/>
-      <Wrapper className="container flexSpaceCenter">  
-          <SignIn/>
-      </Wrapper>
+      <TopNavbar />
+        <div className="lightBg">
+          <Wrapper className="container flexSpaceCenter">
+            <SignIn />
+          </Wrapper>
+        </div>
       <Footer/>
     </>
   )

@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import FullButton from "../Buttons/FullButton";
-
+import ViewButton from "../Buttons/viewButton";
 const BasketBox = ({ 
-  tag, 
+  risk, 
   title, 
   text, 
-  action, 
   author, 
-  Volatility}) => {
+  volatility,
+  free}) => {
     
   return (
       <Wrapper className="whiteBg radius8 shadow basket">
@@ -16,21 +16,19 @@ const BasketBox = ({
         <p className="font13" style={{ padding: "30px 0" }}>
           {text}
         </p>
-  
-        <p className="font13" style={{ padding: "30px 0" }}>
-          {action}
-        </p>
-  
-        <p className="font13 extraBold">{author}</p>
-        <div className="flex">
-          <p className="tag coralBg radius6 font11 extraBold">{tag}</p>
+        <div className="flexSpaceNull">
+          <p className="font13 extraBold">{author}</p>
+          <p className="font13 greenColor extraBold">{free?"Free Access": ""}</p>
         </div>
-        <div className="flex">
-          <p className="tag coralBg radius6 font11 extraBold">{Volatility}</p>
+        
+        <div className="flexSpaceNull">
+          <p className={' tag  radius6 font11 extraBold '+ (risk=="High"? "redBg" : risk=="Medium"? "orangeBg":"greenBg")}>Risk: {risk}</p>
+          <p className={' tag  radius6 font11 extraBold '+ (volatility=="High"? "redBg" : volatility=="Medium"? "orangeBg":"greenBg")}>Volatility: {volatility}</p>
         </div>
-        <div className="row flexRight">
-            <div style={{ width: "120px" }}>
-              <FullButton title="Details" action={() => alert("clicked")} />
+
+        <div className="row flexHorizontalCenter">
+            <div style={{ width: "150px" }}>
+              <ViewButton title="View Basket" action={() => alert("clicked")} />
             </div>
         </div>
       </Wrapper>

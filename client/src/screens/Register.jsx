@@ -9,9 +9,11 @@ export default function Register() {
   return (
     <>
       <TopNavbar />
+      <div className="lightBg">
       <Wrapper className="container flexSpaceCenter">  
           <SignUp/>
       </Wrapper>
+      </div>
       <Footer/>
     </>
   )
