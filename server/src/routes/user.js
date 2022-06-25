@@ -16,5 +16,4 @@ router.delete('/deleteUser/:id', deleteUser);
 
 router.patch('/updateUser/:id', updateUser);
 
-// export default router;
 module.exports = router;
