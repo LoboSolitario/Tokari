@@ -1,6 +1,6 @@
+import { faTruckMedical } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
 import FullButton from "../Buttons/FullButton";
 
 const PortfolioForm = (props) => {
@@ -31,7 +31,7 @@ const PortfolioForm = (props) => {
       return value !== '' && value !== '0';
     });
 
-    if (true) {
+    if (allFieldsFilled) {
       const basket = {
         overview,
         basketName,
@@ -49,19 +49,16 @@ const PortfolioForm = (props) => {
   };
 
   const handleInputChange = (event) => {
-    const { basketName, value } = event.target;
+    const { name, value } = event.target;
     setBasket((prevState) => ({
       ...prevState,
-      [basketName]: value
+      [name]: value
     }));
   };
 
   return (
     <div className="main-form flexHorizontalCenter container" style={{minHeight: "70vh"}}>
       <Form className='font13' onSubmit={handleOnSubmit}>
-        
-        <p className='font20 semiBold'>Create a basket</p>
-        
         <Form.Group controlId="basketName" style={{marginBottom: "10px"}}>
             <Form.Label>Basket Name</Form.Label>
             <Form.Control
@@ -102,7 +99,7 @@ const PortfolioForm = (props) => {
             <Form.Label>Subscription Fee</Form.Label>
             <Form.Control
               className="input-control"
-              type="text"
+              type="number"
               name="subscriptionFee"
               value={subscriptionFee}
               placeholder="Enter the subscription fee"
@@ -148,10 +145,10 @@ const PortfolioForm = (props) => {
 
         <div className='font14' style={{ width: "100px", marginTop: "20px", marginBottom: "20px"}}>
               <FullButton title="Submit"/>
-        </div>    
-        {errorMsg && <p className="errorMsg">{errorMsg}</p>}
-         
+        </div>
+        {errorMsg && <p style={{marginTop: "20px", marginBottom: "20px"}} className="errorMsg">{errorMsg}</p>}      
       </Form>
+       
     </div>
   );
 };

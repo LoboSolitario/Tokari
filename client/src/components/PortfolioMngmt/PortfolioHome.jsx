@@ -19,7 +19,7 @@ export default function PortfolioHome() {
     async function fetchData (){
         const response = await axios.get(`${baseUrl}/api/baskets/userBaskets`, { headers: { Authorization: "Bearer: " + token } });
         if(response.statusText === "OK"){
-            console.log(response.data);
+            // console.log(response.data);
             let temp = [];
             response.data.map(item =>{
                 let obj = {
