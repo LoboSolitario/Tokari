@@ -43,13 +43,13 @@ export default function PortfolioHome() {
 
   return (
     <React.Fragment>
-        <div className="flexList container">
+        <div className="flexList container" style={{minHeight: "70vh"}}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
                     <PortfolioBasket {...basket} />
                 ))
              ) : (
-                <p>"Currently, there is no basket."</p>
+                <p>Currently, there is no basket.</p>
              )}
         </div>
     </React.Fragment>

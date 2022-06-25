@@ -1,4 +1,3 @@
-import { faTruckMedical } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import FullButton from "../Buttons/FullButton";
