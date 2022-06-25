@@ -19,21 +19,23 @@ export default function Products() {
           <div className="row textCenter">
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
-                title="Basket 1"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: Low"
-                Volatility={"Volatility: High"}
+                title="All Weather Investing"
+                text="One investment for all market conditions. Works for everyone"
+                risk="Medium"
+                volatility="Low"
                 author="Adam Smith"
+                free = 'true'
                 // action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
-                title="Basket 1"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: Medium"
-                Volatility={"Volatility: High"}
+                title="The professional's choice"
+                text="Modern strategies focused on generating extra returns & dividend income"  
+                risk="Medium"
+                volatility="Medium"
                 author="Karl Marx"
+                free="true"
                 //action={() => alert("clicked")}
               />
             </div>
@@ -41,8 +43,8 @@ export default function Products() {
               <BasketBox
                 title="Basket 2"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: Low"
-                Volatility={"Volatility: High"}
+                risk="Low"
+                volatility={"Low"}
                 author="Satoshi Nakamoto"
                 //action={() => alert("clicked")}
               />
@@ -53,20 +55,20 @@ export default function Products() {
               <BasketBox
                 title="Basket 3"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: High"
-                Volatility={"Volatility: High"}
+                risk="High"
+                volatility="High"
                 author="Neil deGrasse Tyson"
-       
-                //action={() => alert("clicked")}
+                // action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
                 title="Basket 4"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: Medium"
-                Volatility={"Volatility: High"}
+                risk="Medium"
+                volatility="High"
                 author="Albert Einstein"
+                free="true"
                 //action={() => alert("clicked")}
               />
             </div>
@@ -74,8 +76,8 @@ export default function Products() {
               <BasketBox
                 title="Basket 5"
                 text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: High"
-                Volatility={"Volatility: High"}
+                risk="High"
+                volatility="Medium"
                 author="Alan Turing"
                 //action={() => alert("clicked")}
               />

@@ -53,68 +53,74 @@ export default function SignIn(){
         }  
     }
     return (
-      <>
-    {localStorage.getItem("token")?(
-      <Wrapper className="container flexSpaceCenter flexColumn">
-            <div style={{marginBottom: "20px"}} className="p">You have been successfully logged in!</div>
-          <BtnWrapper onClick={ ()=>{navigate("/");}}>
-            <FullButton title="visit home page" to="/"/>
-          </BtnWrapper>
-        </Wrapper>
-    ):(
-      <Wrapper className="container flexSpaceCenter">
-        <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}>
-          <h3 className='semiBold'>Sign In</h3>
-          <br />
-          <div className="mb-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              className="form-control font13"
-              placeholder="Enter email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </div>
-          <div className="mb-3">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control font13"
-              placeholder="Enter password"
-              onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
-            />
-          </div>
-          <div className="d-grid">
-          <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <BtnWrapper>
-              <FullButton title="Login" />
-            </BtnWrapper>
-          </div>
-
-          <div style={{display: "flex", marginTop: "20px"}}>New to Tokari?
-            <NavLink
-              style={{marginLeft: "10px"}}
-              to="/signup"
-              className={"active"}
-            >
-              <div className="semiBold font13 pointer">
-                Sign Up
+      <WrapperLogin className="whiteBg radius8 shadow container">
+        {localStorage.getItem("token")?(
+          <Wrapper className="container flexSpaceCenter flexColumn">
+                <div style={{marginBottom: "20px"}} className="p">You have been successfully logged in!</div>
+              <BtnWrapper onClick={ ()=>{navigate("/");}}>
+                <FullButton title="visit home page" to="/"/>
+              </BtnWrapper>
+            </Wrapper>
+        ):(
+          <Wrapper className="container flexSpaceCenter">
+            <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}>
+              <h3 className='semiBold textCenter'>Sign In</h3>
+              <br />
+              <div className="mb-3">
+                <label>Email address</label>
+                <input
+                  type="email"
+                  className="form-control font13"
+                  placeholder="Enter email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                />
               </div>
-            </NavLink>
-          </div>
-        </form>
+              <div className="mb-3">
+                <label>Password</label>
+                <input
+                  type="password"
+                  className="form-control font13"
+                  placeholder="Enter password"
+                  onChange={(e) => setPwd(e.target.value)}
+                  value={pwd}
+                />
+              </div>
+              <div className="d-grid">
+              <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                <BtnWrapper>
+                  <FullButton title="Login" />
+                </BtnWrapper>
+              </div>
+              
+              <div style={{marginTop: "20px",fontSize: "12px"}} className="flexSpaceCenter">New to Tokari?
+                <NavLink
+                  style={{marginLeft: "10px", color: "#7620FF"}}
+                  to="/signup"
+                  className={"active"}
+                >
+                  <div className="flexSpaceCenter semiBold font13 pointer">
+                    Sign Up
+                  </div>
+                </NavLink>
+              </div>
+            </form>
       </Wrapper>
     )
   }
-  </>
+  </WrapperLogin>
   )
 }
 
+const WrapperLogin = styled.div`
+  width: max-content;
+  text-align: left;
+  padding: 20px 30px;
+  margin-top: 30px;
+`;
 
 const Wrapper = styled.section`
-    padding-top: 50px;
+    padding-top: 25px;
     width: max-content;
     @media (max-width: 960px) {
     padding-bottom: 40px;
@@ -122,7 +128,7 @@ const Wrapper = styled.section`
 `;
 
 const BtnWrapper = styled.div`
-  max-width: 190px;
+  max-width: 200px;
   @media (max-width: 960px) {
     margin: 0 auto;
   }

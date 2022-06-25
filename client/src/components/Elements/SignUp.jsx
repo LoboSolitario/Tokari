@@ -72,118 +72,126 @@ const SignUp = () => {
   }
 
     return (
-      <>
-    {localStorage.getItem("token")?(
-        <Wrapper className="container flexSpaceCenter flexColumn">
-            <div style={{marginBottom: "20px"}} className="p">You have been successfully registered!</div>
-          <BtnWrapper onClick={ ()=>{navigate("/");}}>
-            <FullButton title="visit home page" to="/"/>
-          </BtnWrapper>
+      <WrapperLogin className="whiteBg radius8 shadow container" style={{marginBottom: "20px"}}>
+        {localStorage.getItem("token")?(
+            <Wrapper className="container flexSpaceCenter flexColumn">
+                <div style={{marginBottom: "20px"}} className="p">You have been successfully registered!</div>
+              <BtnWrapper onClick={ ()=>{navigate("/");}}>
+                <FullButton title="visit home page" to="/"/>
+              </BtnWrapper>
+            </Wrapper>
+        ):(
+        <Wrapper className="container flexSpaceCenter">
+          <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}> 
+            <h3 className='semiBold textCenter'>Sign Up</h3>
+            <br/>
+            <div className="mb-3">
+              <label htmlFor="username">Full name</label>
+              <input
+                type="text"
+                className="form-control font13"
+                onChange={(e) => setUser(e.target.value)}
+                placeholder="Full name"
+                required
+                value={user}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label>Email address</label>
+              <input
+                type="email"
+                className="form-control font13"
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter email"
+                value={email}
+                required
+              />
+            </div>
+            
+            <div className="mb-3">
+              <label>Password</label>
+              <input
+                type="password"
+                id="password"
+                value={pwd}
+                onChange={(e) => setPwd(e.target.value)}
+                className="form-control font13"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label>Confirm password</label>
+              <input
+                type="password"
+                id="confirm_pwd"
+                onChange={(e) => setMatchPwd(e.target.value)}
+                value={matchPwd}
+                className="form-control font13"
+                placeholder="Confirm password"
+                required
+              />
+            </div>
+            <div className="d-grid">
+            
+            <label>Role: </label>
+            <Form>
+              {['radio'].map((type) => (
+                <div key={`inline-${type}`} 
+                    className="mb-3" 
+                    onChange={(e)=> {setRole(e.target.value);}}>
+                  <Form.Check 
+                    style={{marginLeft: "30px", fontSize: "13px"}}
+                    label="I'm an investor"
+                    name="group1"
+                    value="investor"
+                    type={type}
+                    defaultChecked
+                    id={`inline-${type}-1`}
+                  />
+                  <Form.Check
+                    style={{marginLeft: "30px", fontSize: "13px"}}
+                    label="I'm a portfolio manager"
+                    value="manager"
+                    name="group1"
+                    type={type}
+                    id={`inline-${type}-2`}
+                  />
+                </div>
+              ))}
+            </Form>
+            <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+              <BtnWrapper>
+                <FullButton title="Register" />
+              </BtnWrapper>
+            </div>
+
+            <div style={{marginTop: "20px", fontSize: "12px"}} className="flexSpaceCenter">Already have an account?
+              <NavLink
+                style={{marginLeft: "10px", color: "#7620FF"}}
+                to="/login"
+                className={"active"}
+              >
+                <div className="flexSpaceCenter semiBold font13 pointer">
+                  Login
+                </div>
+              </NavLink>
+            </div>
+          </form>
         </Wrapper>
-    ):(
-    <Wrapper className="container flexSpaceCenter">
-      <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}> 
-        <h3 className='semiBold'>Sign Up</h3>
-        <br/>
-        <div className="mb-3">
-          <label htmlFor="username">Full name</label>
-          <input
-            type="text"
-            className="form-control font13"
-            onChange={(e) => setUser(e.target.value)}
-            placeholder="Full name"
-            required
-            value={user}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control font13"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter email"
-            value={email}
-            required
-          />
-        </div>
-        
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            id="password"
-            value={pwd}
-            onChange={(e) => setPwd(e.target.value)}
-            className="form-control font13"
-            placeholder="Enter password"
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label>Confirm password</label>
-          <input
-            type="password"
-            id="confirm_pwd"
-            onChange={(e) => setMatchPwd(e.target.value)}
-            value={matchPwd}
-            className="form-control font13"
-            placeholder="Confirm password"
-            required
-          />
-        </div>
-        <div className="d-grid">
-        
-        <label>Role: </label>
-        <Form>
-          {['radio'].map((type) => (
-            <div key={`inline-${type}`} 
-                 className="mb-3" 
-                 onChange={(e)=> {setRole(e.target.value);}}>
-              <Form.Check 
-                style={{marginLeft: "30px"}}
-                label="I'm an investor"
-                name="group1"
-                value="investor"
-                type={type}
-                defaultChecked
-                id={`inline-${type}-1`}
-              />
-              <Form.Check
-                style={{marginLeft: "30px"}}
-                label="I'm a portfolio manager"
-                value="manager"
-                name="group1"
-                type={type}
-                id={`inline-${type}-2`}
-              />
-            </div>
-          ))}
-        </Form>
-        <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-          <BtnWrapper>
-            <FullButton title="Register" />
-          </BtnWrapper>
-        </div>
-
-        <div style={{display: "flex", marginTop: "20px"}}>Already have an account?
-          <NavLink
-            style={{marginLeft: "10px", color: "#7620FF"}}
-            to="/login"
-          >
-            <div className="semiBold font13 pointer">
-              Login
-            </div>
-          </NavLink>
-        </div>
-      </form>
-    </Wrapper>
-    )
-  }
-  </>
+        )
+      }
+  </WrapperLogin>
   )
 }
+
+const WrapperLogin = styled.div`
+  width: max-content;
+  text-align: left;
+  padding: 20px 30px;
+  margin-top: 30px;
+`;
 
 const Wrapper = styled.section`
     padding-top: 10px;
@@ -194,7 +202,7 @@ const Wrapper = styled.section`
 `;
 
 const BtnWrapper = styled.div`
-  max-width: 190px;
+  max-width: 200px;
   @media (max-width: 960px) {
     margin: 0 auto;
   }
