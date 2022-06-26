@@ -15,7 +15,7 @@ export default function MainAppRouter() {
       <>
       <Router>
         <Routes>
-          {/* <Route element={<PrivateRoutes/>}> */}
+          {/* <Route element={<PrivateRoutes/>} > */}
            <Route element={<PortfolioRouters/>} path="/portfoliomain/*" exact={true}/>
           {/* </Route> */}
           {/* <Route element={<PrivateRoutes/>}> */}
