@@ -6,15 +6,12 @@ import BasketContext from "../contexts/BasketContext";
 import PortfolioBasket from "./PortfolioBasket";
 import _ from 'lodash';
 
-
-
 export default function PortfolioHome() {
 
   const { baskets, setBaskets } = useContext(BasketContext);
   
   const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
-
   const baseUrl = process.env.REACT_APP_BASE_URL;  
 
   useEffect( ()=>{
@@ -22,7 +19,7 @@ export default function PortfolioHome() {
     async function fetchData (){
         const response = await axios.get(`${baseUrl}/api/baskets/userBaskets`, { headers: { Authorization: "Bearer: " + token } });
         if(response.statusText === "OK"){
-            console.log(response.data);
+            // console.log(response.data);
             let temp = [];
             response.data.map(item =>{
                 let obj = {
@@ -40,21 +37,19 @@ export default function PortfolioHome() {
               setBaskets(temp);
               // console.log("temp: ", temp);
               // console.log("baskets: ", baskets);
-
          }
     }
   }, []);
 
   return (
     <React.Fragment>
-        <div className="flexList container">
-
+        <div className="flexList container" style={{minHeight: "70vh"}}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
                     <PortfolioBasket {...basket} />
                 ))
              ) : (
-                <p>"Currently, there is no basket."</p>
+                <p>Currently, there is no basket.</p>
              )}
         </div>
     </React.Fragment>
