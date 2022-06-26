@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import BasketContext from "../contexts/BasketContext";
 import PortfolioBasket from "./PortfolioBasket";
+import configOptions from '../../api/configOptions';
 import _ from 'lodash';
 
 export default function PortfolioHome() {
@@ -17,13 +18,14 @@ export default function PortfolioHome() {
   useEffect( ()=>{
     fetchData();
     async function fetchData (){
+      
         const response = await axios.get(`${baseUrl}/api/baskets/userBaskets`, { headers: { Authorization: "Bearer: " + token } });
         if(response.statusText === "OK"){
             // console.log(response.data);
             let temp = [];
             response.data.map(item =>{
                 let obj = {
-                    "id": item.id,
+                    "id": item._id,
                     "author": item.author,
                     "basketName": item.basketName,
                     "risk": item.risk,
@@ -41,12 +43,38 @@ export default function PortfolioHome() {
     }
   }, []);
 
+  const handleRemoveBox = async (id) => {
+
+    const headers = {
+      "content-type": "application/json",
+      "Authorization": "Bearer: " + token
+    };
+
+    const options = {
+      json: true 
+    };
+
+    configOptions("DELETE", headers, options);
+
+    const response = await fetch(`${baseUrl}/api/baskets/deleteBasket/${id}`, options);
+    console.log(response);
+    if(response.ok){
+      response.json().then(() => {
+        // console.log(response.statusText);
+        setBaskets(baskets.filter((basket) => basket.id !== id));
+      })
+    }
+    else{
+      console.log(response.statusText);
+    }  
+  };
+
   return (
     <React.Fragment>
         <div className="flexList container" style={{minHeight: "70vh"}}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
-                    <PortfolioBasket {...basket} />
+                    <PortfolioBasket key={basket.id} {...basket} handleRemoveBox={handleRemoveBox} />
                 ))
              ) : (
                 <p>Currently, there is no basket.</p>
@@ -55,13 +83,4 @@ export default function PortfolioHome() {
     </React.Fragment>
   )
 }
-
-const Wrapper = styled.section`
-  padding-top: 80px;
-  width: 100%;
-  min-height: 840px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
-`;
 
