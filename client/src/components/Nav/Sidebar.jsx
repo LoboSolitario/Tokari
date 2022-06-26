@@ -66,7 +66,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             activeclass="active"
             className="semiBold font15 pointer radius8 lightBg"
             style={{ padding: "10px 15px" }}
-            to="/baskets"
+            to="/discover"
             offset={-60}
           >
             Discover
