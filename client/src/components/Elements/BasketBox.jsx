@@ -2,23 +2,28 @@ import React from "react";
 import styled from "styled-components";
 import FullButton from "../Buttons/FullButton";
 import ViewButton from "../Buttons/viewButton";
+import FreeIcon from "../../assets/svg/Services/FreeIcon";
+
 const BasketBox = ({ 
   risk, 
-  title, 
-  text, 
-  author, 
+  basketName, 
+  overview, 
+  owner, 
   volatility,
-  free}) => {
+  subscriptionFee}) => {
     
   return (
       <Wrapper className="whiteBg radius8 shadow basket">
-        <h3 className="font20 extraBold">{title}</h3>
+        <div className="flexSpaceNull">
+          <h3 className="font20 extraBold">{basketName}</h3>
+          {subscriptionFee==0?<FreeIcon />: ""}
+        </div>
+        
         <p className="font13" style={{ padding: "30px 0" }}>
-          {text}
+          {overview}
         </p>
         <div className="flexSpaceNull">
-          <p className="font13 extraBold">{author}</p>
-          <p className="font13 greenColor extraBold">{free?"Free Access": ""}</p>
+          <p className="font13 extraBold">{owner}</p>
         </div>
         
         <div className="flexSpaceNull">
