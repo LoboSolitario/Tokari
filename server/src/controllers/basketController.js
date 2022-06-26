@@ -1,7 +1,50 @@
 const Basket = require('../models/basket');
 const User = require('../models/user');
+const Crypto = require('../models/crypto')
 const asyncHandler = require('express-async-handler')
 var ObjectId = require('mongoose').Types.ObjectId;
+
+// @desc seed for crypto data
+// @route GET /api/baskets/cryptoseed
+// @access public
+const seedCrypto = asyncHandler(async (req, res) => {
+    const cryptoList = [
+        {
+            "cryptoName" : "Bitcoin",
+            "cryptoSymbol" : "BTC",
+            "cryptoPrice" : "20900.21312"
+        },
+        {
+            "cryptoName" : "Ethereum",
+            "cryptoSymbol" : "ETH",
+            "cryptoPrice" : "3214"
+        },
+        {
+            "cryptoName" : "Litecoin",
+            "cryptoSymbol" : "LTC",
+            "cryptoPrice" : "123.21312"
+        },
+        {
+            "cryptoName" : "Tron",
+            "cryptoSymbol" : "TRX",
+            "cryptoPrice" : "29500.21312"
+        },
+        {
+            "cryptoName" : "XRP",
+            "cryptoSymbol" : "XRP",
+            "cryptoPrice" : "30.21312"
+        },
+        {
+            "cryptoName" : "Binancecoin",
+            "cryptoSymbol" : "BNB",
+            "cryptoPrice" : "20320.21312"
+        }
+    ]
+
+    const newCrypto =   await Crypto.create(cryptoList).catch(err => res.status(400, err));
+    res.status(200).json(newCrypto)
+})
+
 
 // @desc get list of all the baskets 
 // @route GET /api/baskets/
@@ -25,7 +68,7 @@ const getUserBaskets = asyncHandler(async (req, res) => {
 // @access public
 const createBasket = asyncHandler(async (req, res) => {
     // if basketName is not written
-    if (!req.body.basketName) {
+    if (!req.body.basketName && !req.body.cryptoAlloc) {
         res.status(400);
         throw new Error('Please add required fields.')
     }
@@ -35,6 +78,10 @@ const createBasket = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("User not found who is creating the basket");
     }
+
+    //parse string to array
+    const cryptoAlloc = JSON.parse(req.body.cryptoAlloc);
+
     //create the new basket
     const newBasket = await new Basket({
         basketName: req.body.basketName,
@@ -46,7 +93,7 @@ const createBasket = asyncHandler(async (req, res) => {
         risk: req.body.risk,
         rebalanceFreq: req.body.rebalanceFreq,
         subscriptionFee: req.body.subscriptionFee,
-        cryptoAlloc: req.body.cryptoAlloc
+        cryptoAlloc: cryptoAlloc
     });
     //save the new basket
     newBasket.save()
@@ -56,8 +103,75 @@ const createBasket = asyncHandler(async (req, res) => {
             const updatedUser = await User.findByIdAndUpdate(req.user.id, { $push: { createdBaskets: newBasket } }, { new: true });
             res.json(basket)
         })
-        .catch(err => res.json(500, err));
+        .catch(err => res.status(400).json(err));
 })
+
+
+// @desc Edit basket Details
+// @route GET /api/baskets/editBasket/:id
+// @access Private
+const editBasket = asyncHandler(async (req, res) => {
+    //Check if the passed :id is a valid mongodb _id
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(401);
+        throw new Error("Incorrect basket id")
+    }
+    //find the basket to be rebalanced
+    const basket = await Basket.findById(req.params.id);
+    if (!basket) {
+        res.status(400);
+        throw new Error("Basket not found");
+    }
+    //find the user who is trying to rebalance the basket
+    const user = await User.findById(req.user.id);
+    //check if there is a user 
+    if (!user) {
+        res.status(401)
+        throw new Error('User not found.');
+    }
+    //check if the user created the basket
+    if (basket.owner.toString() !== user.id) {
+        res.status(401);
+        throw new Error("Unauthorised rebalance.")
+    }
+    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(updatedBasket);
+})
+
+
+// @desc Rebalance Basket
+// @route GET /api/baskets/rebalanceBasket/:id
+// @access Private
+const rebalanceBasket = asyncHandler(async (req, res) => {
+    //Check if the passed :id is a valid mongodb _id
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(401);
+        throw new Error("Incorrect basket id")
+    }
+    //find the basket to be rebalanced
+    const basket = await Basket.findById(req.params.id);
+    if (!basket) {
+        res.status(400);
+        throw new Error("Basket not found");
+    }
+    //find the user who is trying to rebalance the basket
+    const user = await User.findById(req.user.id);
+    //check if there is a user 
+    if (!user) {
+        res.status(401)
+        throw new Error('User not found.');
+    }
+    //check if the user created the basket
+    if (basket.owner.toString() !== user.id) {
+        res.status(401);
+        throw new Error("Unauthorised rebalance.")
+    }
+
+    const cryptoAlloc = JSON.parse(req.body.cryptoAlloc)
+    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, {cryptoAlloc: cryptoAlloc}, { new: true });
+    res.status(200).json(updatedBasket);
+})
+
 
 // @desc delete a specific basket
 // @route GET /api/baskets/deleteBasket/:id
@@ -90,43 +204,12 @@ const deleteBasket = asyncHandler(async (req, res) => {
     res.status(200).json(deletedBasket);
 })
 
-
-// @desc rebalance a basket
-// @route GET /api/baskets/rebalanceBasket/:id
-// @access Private
-const rebalanceBasket = asyncHandler(async (req, res) => {
-    //Check if the passed :id is a valid mongodb _id
-    if (!ObjectId.isValid(req.params.id)) {
-        res.status(401);
-        throw new Error("Incorrect basket id")
-    }
-    //find the basket to be rebalanced
-    const basket = await Basket.findById(req.params.id);
-    if (!basket) {
-        res.status(400);
-        throw new Error("Basket not found");
-    }
-    //find the user who is trying to rebalance the basket
-    const user = await User.findById(req.user.id);
-    //check if there is a user 
-    if (!user) {
-        res.status(401)
-        throw new Error('User not found.');
-    }
-    //check if the user created the basket
-    if (basket.owner.toString() !== user.id) {
-        res.status(401);
-        throw new Error("Unauthorised rebalance.")
-    }
-    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json(updatedBasket);
-})
-
-
 module.exports = {
+    seedCrypto,
     getBaskets,
     getUserBaskets,
     createBasket,
     deleteBasket,
     rebalanceBasket,
+    editBasket
 }
