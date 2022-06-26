@@ -42,7 +42,7 @@ const AllBasket = ({
 }
 
 const Wrapper = styled.div`
-width: 350px;
+width: 90%;
 text-align: left;
 padding: 20px 30px;
 margin-top: 30px;
