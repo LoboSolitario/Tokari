@@ -143,7 +143,12 @@
     flex-direction: column;
   }
   .flexRow{
+    display: flex;
     flex-direction: row;
+  }
+  .flexRowReverse{
+    display: flex;
+    flex-direction: row-reverse;
   }
   .flexCenter {
     display: flex;
@@ -163,6 +168,14 @@
     display: flex;
     justify-content: left;
     /* align-items: right; */
+  }
+  .flexEnd {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .flexStart {
+    display: flex;
+    justify-content: flex-start;
   }
   .flexSpaceNull {
     display: flex;

@@ -74,7 +74,7 @@ export default function PortfolioHome() {
         <div className="flexList container" style={{minHeight: "70vh"}}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
-                    <PortfolioBasket key={basket.id} {...basket} handleRemoveBox={handleRemoveBox} />
+                    <PortfolioBasket key={basket.basketName} {...basket} handleRemoveBox={handleRemoveBox} />
                 ))
              ) : (
                 <p>Currently, there is no basket.</p>
