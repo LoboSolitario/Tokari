@@ -56,7 +56,7 @@ const createBasket = asyncHandler(async (req, res) => {
             const updatedUser = await User.findByIdAndUpdate(req.user.id, { $push: { createdBaskets: newBasket } }, { new: true });
             res.json(basket)
         })
-        .catch(err => res.json(500, err));
+        .catch(err => res.json(400, err));
 })
 
 // @desc delete a specific basket
