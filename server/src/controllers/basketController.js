@@ -79,8 +79,7 @@ const createBasket = asyncHandler(async (req, res) => {
         throw new Error("User not found who is creating the basket");
     }
 
-    //parse string to array
-    const cryptoAlloc = JSON.parse(req.body.cryptoAlloc);
+
 
     //create the new basket
     const newBasket = await new Basket({
@@ -93,7 +92,7 @@ const createBasket = asyncHandler(async (req, res) => {
         risk: req.body.risk,
         rebalanceFreq: req.body.rebalanceFreq,
         subscriptionFee: req.body.subscriptionFee,
-        cryptoAlloc: cryptoAlloc
+        cryptoAlloc: req.body.cryptoAlloc
     });
     //save the new basket
     newBasket.save()

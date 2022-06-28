@@ -17,7 +17,14 @@ const PortfolioBasket = ({
     
   return (
       <Wrapper className="whiteBg radius8 shadow basket">
-              <h3 className="font20 extraBold">{basketName}</h3>
+        <div className="wrapper-header flexSpaceCenter">
+          <h3 className="font20 extraBold">{basketName}
+                </h3>
+                <div style={{ width: "100px" }}>
+                <ViewButton title="Delete"  action={() => handleRemoveBox(id)}/>
+              </div>
+        </div>
+            
         <p className="font13" style={{ padding: "30px 0" }}>
           {details}
         </p>
@@ -33,13 +40,10 @@ const PortfolioBasket = ({
 
         <div className="row flexHorizontalCenter">
             <div style={{ width: "100px" }}>
-              <ViewButton title="Add" action={() => alert("clicked")} />
+              <ViewButton title="Rebalance" action={() => alert("clicked")} />
             </div>
             <div style={{ width: "100px" }}>
               <ViewButton title="Edit" action={() => alert("clicked")} />
-            </div>
-            <div style={{ width: "100px" }}>
-              <ViewButton title="Delete"  action={() => handleRemoveBox(id)}/>
             </div>
         </div>
       </Wrapper>
