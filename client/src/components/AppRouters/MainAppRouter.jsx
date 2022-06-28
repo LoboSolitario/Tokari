@@ -24,7 +24,7 @@ export default function MainAppRouter() {
           <Route element={<Landing/>} path="/" exact/>
           <Route element={<Login/>} path="/login"/>
           <Route element={<Register/>} path="/signup"/>
-          <Route element={<Discover/>} path="/discover"/>
+          <Route element={<Discover/>} path="/discover/*"/>
         </Routes>
       </Router>
       </>

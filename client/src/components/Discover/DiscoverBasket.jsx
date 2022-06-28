@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 export default function DiscoverBasket() {
 
-  const { baskets, setBaskets } = useContext(DiscoverContext);
+  const { baskets, setBaskets, allBaskets, setAllBaskets } = useContext(DiscoverContext);
   const baseUrl = process.env.REACT_APP_BASE_URL;  
 
   useEffect( ()=>{
@@ -20,6 +20,7 @@ export default function DiscoverBasket() {
             let temp = [];
             response.data.map(item =>{
                 let obj = {
+                    "key": item.id,
                     "id": item.id,
                     "author": item.author,
                     "basketName": item.basketName,
@@ -32,6 +33,7 @@ export default function DiscoverBasket() {
                 temp.push(obj);             
             })
               setBaskets(temp);
+              setAllBaskets(temp);
          }
     }
   }, []);

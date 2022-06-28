@@ -10,11 +10,12 @@ import Filtering from '../components/Discover/Filtering';
 // Screens
 function Discover() {
   const [baskets, setBaskets] = useState([]);
+  const [allBaskets, setAllBaskets] = useState([]);
   return (
     <>
         <TopNavbar/>
         <DiscoverHeader/>
-        <DiscoverContext.Provider value={{baskets, setBaskets}}>
+        <DiscoverContext.Provider value={{baskets, setBaskets, allBaskets, setAllBaskets}}>
         <div className="flex flexRow">
           <Filtering/>
             <Routes>
