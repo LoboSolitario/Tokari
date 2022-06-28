@@ -92,8 +92,8 @@ export default function SignIn(){
                   <FullButton title="Login" />
                 </BtnWrapper>
               </div>
-
-              <div style={{marginTop: "20px"}} className="flexSpaceCenter">New to Tokari?
+              
+              <div style={{marginTop: "20px",fontSize: "12px"}} className="flexSpaceCenter">New to Tokari?
                 <NavLink
                   style={{marginLeft: "10px", color: "#7620FF"}}
                   to="/signup"

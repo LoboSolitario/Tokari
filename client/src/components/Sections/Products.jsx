@@ -19,31 +19,33 @@ export default function Products() {
           <div className="row textCenter">
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
-                title="Basket 1"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: Low"
-                Volatility={"Volatility: High"}
-                author="Adam Smith"
+                basketName="All Weather Investing"
+                overview="One investment for all market conditions. Works for everyone"
+                risk="Medium"
+                volatility="Low"
+                owner="Adam Smith"
+                subscriptionFee = '0'
                 // action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
-                title="Basket 1"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: Medium"
-                Volatility={"Volatility: High"}
-                author="Karl Marx"
+                basketName="The professional's choice"
+                overview="Modern strategies focused on generating extra returns & dividend income"  
+                risk="Medium"
+                volatility="Medium"
+                owner="Karl Marx"
+                subscriptionFee="0"
                 //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
-                title="Basket 2"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: Low"
-                Volatility={"Volatility: High"}
-                author="Satoshi Nakamoto"
+                basketName="Basket 2"
+                overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
+                risk="Low"
+                volatility={"Low"}
+                owner="Satoshi Nakamoto"
                 //action={() => alert("clicked")}
               />
             </div>
@@ -51,31 +53,31 @@ export default function Products() {
           <div className="row textCenter">
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
-                title="Basket 3"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: High"
-                Volatility={"Volatility: High"}
-                author="Neil deGrasse Tyson"
-       
+                basketName="Basket 3"
+                overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
+                risk="High"
+                volatility="High"
+                owner="Neil deGrasse Tyson"
+                // action={() => alert("clicked")}
+              />
+            </div>
+            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <BasketBox
+                basketName="Basket 4"
+                overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
+                risk="Medium"
+                volatility="High"
+                owner="Albert Einstein"
+                subscriptionFee= '0'
                 //action={() => alert("clicked")}
               />
             </div>
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
-                title="Basket 4"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: Medium"
-                Volatility={"Volatility: High"}
-                author="Albert Einstein"
-                //action={() => alert("clicked")}
-              />
-            </div>
-            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-              <BasketBox
-                title="Basket 5"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
-                tag="Risk: High"
-                Volatility={"Volatility: High"}
+                basketName="Basket 5"
+                overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
+                risk="High"
+                volatility="Medium"
                 author="Alan Turing"
                 //action={() => alert("clicked")}
               />

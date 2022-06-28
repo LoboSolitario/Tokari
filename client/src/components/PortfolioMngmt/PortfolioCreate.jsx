@@ -13,6 +13,12 @@ const PortfolioCreate = () => {
    
     const handleOnSubmit = async (basket) => {
         setBaskets([basket,...baskets]);
+        console.log(basket)
+
+        const headers = {
+          "content-type": "application/json",
+          "Authorization": "Bearer: " + token
+        };
         
         const options = {
           body: JSON.stringify({
@@ -21,10 +27,9 @@ const PortfolioCreate = () => {
                 "details": basket.details,
                 "volatility": basket.volatility, 
                 "risk": basket.risk,  
-                "rebalanceFee": basket.rebalanceFee,
+                "rebalanceFee": "12312",
                 "subscriptionFee": basket.subscriptionFee,
-                "status": true
-                // "cryptoAlloc": "[[cryptoName: bitcoin, weight:20 ], [cryptoName: bitcoin, weight:20 ]]" 
+                "cryptoAlloc": basket.cryptoAlloc
           }),
           json: true 
         };
@@ -35,23 +40,17 @@ const PortfolioCreate = () => {
         //         "basketName": "new" + Date.now(), 
         //         "overview": "new123", 
         //         "details": "new123",
-        //         "status": true,
         //         "volatility": "new123", 
         //         "risk": "new123",  
-        //         "rebalanceFee": "new123",
-        //         "subscriptionFee": 5
+        //         "rebalanceFee": 1,
+        //         "subscriptionFee": 5,
+        //         "cryptoAlloc": basket.cryptoAlloc
         //   }),
         //   json: true 
         // };
         // configOptions("POST", headers, optionsDebug); 
 
-        const headers = {
-          "content-type": "application/json",
-          "Authorization": "Bearer: " + token
-        };
-
         configOptions("POST", headers, options);  
-
         const response = await fetch(`${baseUrl}/api/baskets/createBasket`, options);
         console.log(response);
         if(response.ok){

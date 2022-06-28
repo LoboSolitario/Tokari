@@ -8,14 +8,14 @@ import Login from "../../screens/Login";
 import Register from "../../screens/Register";
 import InvestorRouters from "./InvestorRouters";
 import PortfolioRouters from "./PortfolioRouters";
-import Baskets from "../../screens/Baskets"
+import Discover from "../../screens/Discover";
 
 export default function MainAppRouter() {
     return (
       <>
       <Router>
         <Routes>
-          {/* <Route element={<PrivateRoutes/>}> */}
+          {/* <Route element={<PrivateRoutes/>} > */}
            <Route element={<PortfolioRouters/>} path="/portfoliomain/*" exact={true}/>
           {/* </Route> */}
           {/* <Route element={<PrivateRoutes/>}> */}
@@ -24,7 +24,7 @@ export default function MainAppRouter() {
           <Route element={<Landing/>} path="/" exact/>
           <Route element={<Login/>} path="/login"/>
           <Route element={<Register/>} path="/signup"/>
-          <Route element={<Baskets/>} path="/baskets"/>
+          <Route element={<Discover/>} path="/discover/*"/>
         </Routes>
       </Router>
       </>
