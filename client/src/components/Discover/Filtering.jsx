@@ -64,6 +64,7 @@ export default function Filtering() {
         console.log(activeVolatility);
         console.log(activeSubscriptionType);
         console.log(activeRiskType);
+        console.log(searchKeyword);
       });
     
       return (
@@ -81,6 +82,8 @@ export default function Filtering() {
                             placeholder="Try &quot;All weather&quot; or &quot;Momentum&quot;"
                             required
                             value={searchKeyword}
+                            onClick={handleSearch}
+                            onKeyPress={(e) => {if (e.key == "Enter") handleSearch()}}
                         />
 
                     </div>
