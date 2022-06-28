@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 import DiscoverContext from "../contexts/DiscoverContext";
@@ -9,46 +9,48 @@ import _ from 'lodash';
 export default function DiscoverBasket() {
 
   const { baskets, setBaskets, allBaskets, setAllBaskets } = useContext(DiscoverContext);
-  const baseUrl = process.env.REACT_APP_BASE_URL;  
+  const baseUrl = process.env.REACT_APP_BASE_URL;
 
-  useEffect( ()=>{
+  useEffect(() => {
     fetchData();
-    async function fetchData (){
-        const response = await axios.get(`${baseUrl}/api/baskets`);
-        if(response.statusText === "OK"){
-            // console.log(response.data);
-            let temp = [];
-            response.data.map(item =>{
-                let obj = {
-                    "key": item.id,
-                    "id": item.id,
-                    "author": item.author,
-                    "basketName": item.basketName,
-                    "risk": item.risk,
-                    "volatility": item.volatility,
-                    "subscriptionFee": item.subscriptionFee,
-                    "overview": item.overview,
-                    "details": item.details
-                }
-                temp.push(obj);             
-            })
-              setBaskets(temp);
-              setAllBaskets(temp);
-         }
+    async function fetchData() {
+      const response = await axios.get(`${baseUrl}/api/baskets`);
+      if (response.statusText === "OK") {
+        // console.log(response.data);
+        let temp = [];
+        response.data.map(item => {
+          let obj = {
+            "key": item.id,
+            "id": item.id,
+            "author": item.author,
+            "basketName": item.basketName,
+            "risk": item.risk,
+            "volatility": item.volatility,
+            "subscriptionFee": item.subscriptionFee,
+            "overview": item.overview,
+            "details": item.details
+          }
+          temp.push(obj);
+        })
+        setBaskets(temp);
+        setAllBaskets(temp);
+      }
     }
   }, []);
 
   return (
     <React.Fragment>
-        <div className="flexList container" style={{minHeight: "70vh"}}>
-             {!_.isEmpty(baskets) ? (
-                baskets.map((basket)=>(
-                    <AllBasket {...basket} />
-                ))
-             ) : (
-                <p>No matching results.</p>
-             )}
-        </div>
+
+      <div className="flexList container searchBasket">
+
+        {!_.isEmpty(baskets) ? (
+          baskets.map((basket) => (
+            <AllBasket {...basket} />
+          ))
+        ) : (
+          <p>No matching results.</p>
+        )}
+      </div>
     </React.Fragment>
   )
 }

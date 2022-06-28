@@ -9,7 +9,6 @@ export default function DiscoverHeader() {
                 marginBottom: "50px"}}
                 >
             <div className="semiBold font30 pointer">
-                Matching Results:
             </div>
         </div>
     )

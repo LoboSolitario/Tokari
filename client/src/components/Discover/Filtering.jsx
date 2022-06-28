@@ -36,78 +36,69 @@ export default function Filtering() {
     
       return (
         <>
-            <Wrapper className="container">
+            <Wrapper className="container searchBar">
                 <form onSubmit={handleSubmit}> 
                 {/* <form>  */}
                     <div className="mb-3">
-                        <label className="flexHorizontalCenter" style={{margin: "10px 0"}}>Search</label>
                         <input
-                            type="text"
-                            className="form-control font13"
+                            type="search"
+                            className="form-control font13 nosubmit"
                             onChange={(e) => setSearchKeyword(e.target.value)}
-                            placeholder="Search"
+                            placeholder="Try &quot;All weather&quot; or &quot;Momentum&quot;"
                             required
                             value={searchKeyword}
                         />
-                        <BtnWrapper className="flexHorizontalCenter">
-                            <ViewButton title="Search" action={handleSearch}/>
-                        </BtnWrapper>
+
                     </div>
 
                     <ColoredLine color="grey"></ColoredLine>
 
-                    <TogglerWrapper>
-                        <label style={{margin: "10px 0"}} className="flexHorizontalCenter">Volatility</label>
+                   
+                        <label style={{margin: "10px 0 0 0"}} className="flexLeft semiBold">Volatility</label>
                         <div>
-                            <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-                                <ToggleButton id="tbg-radio-1" value={1} style={{background: "#7620FF"}}>
+                            <ToggleButtonGroup type="radio" name="Volatility" defaultValue={1}>
+                                <ToggleButton id="tbg-radio-1" value={1} className="tagStyle">
                                     Low
                                 </ToggleButton>
-                                <ToggleButton id="tbg-radio-2" value={2} style={{margin: "0 5px", background: "#7620FF"}}>
+                                <ToggleButton id="tbg-radio-2" value={2} className="tagStyle">
                                     Moderate
                                 </ToggleButton>
-                                <ToggleButton id="tbg-radio-3" value={3} style={{background: "#7620FF"}}>
+                                <ToggleButton id="tbg-radio-3" value={3} className="tagStyle">
                                     High
                                 </ToggleButton>
                             </ToggleButtonGroup>
                         </div>
-                    </TogglerWrapper>
+                   
 
-                    <TogglerWrapper>
-                        <label style={{margin: "10px 0"}} className="flexHorizontalCenter">Subscription Type</label>
+                        <label style={{margin: "20px 0 0 0"}} className="flexLeft semiBold">Subscription Type</label>
                         <div>
-                            <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-                                <div className="flexSpaceCenter">
-                                    <ToggleButton id="tbg-radio-1" value={1} style={{background: "#7620FF"}}>
-                                        Show All
-                                    </ToggleButton>
-                                    <ToggleButton id="tbg-radio-2" value={2} style={{margin: "0 5px", background: "#7620FF"}}>
-                                        Free Access
-                                    </ToggleButton>
-                                    <ToggleButton id="tbg-radio-3" value={3} style={{background: "#7620FF"}}>
-                                        Fee Based
-                                    </ToggleButton>
-                                </div>
+                             <ToggleButtonGroup type="radio" name="fee" defaultValue={1}>
+                                <ToggleButton id="tbg-radio-4" value={1} className="tagStyle">
+                                    Show all
+                                </ToggleButton>
+                                <ToggleButton id="tbg-radio-5" value={2} className="tagStyle">
+                                    Free Access
+                                </ToggleButton>
+                                <ToggleButton id="tbg-radio-6" value={3} className="tagStyle">
+                                    Fee Based
+                                </ToggleButton>
                             </ToggleButtonGroup>
                         </div>
-                    </TogglerWrapper>
 
-                    <TogglerWrapper>
-                        <label style={{margin: "10px 0"}} className="flexHorizontalCenter">Risk Type</label>
+                        <label style={{margin: "20px 0 0 0 "}} className="flexLeft semiBold">Risk Type</label>
                         <div>
-                            <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-                                <ToggleButton id="tbg-radio-1" value={1} style={{background: "#7620FF"}}>
+                        <ToggleButtonGroup type="radio" name="risk  " defaultValue={1}>
+                                <ToggleButton id="tbg-radio-7" value={1} className="tagStyle">
                                     Low
                                 </ToggleButton>
-                                <ToggleButton id="tbg-radio-2" value={2} style={{margin: "0 5px", background: "#7620FF"}}>
-                                    Moderate 
+                                <ToggleButton id="tbg-radio-8" value={2} className="tagStyle">
+                                    Moderate
                                 </ToggleButton>
-                                <ToggleButton id="tbg-radio-3" value={3} style={{background: "#7620FF"}}>
+                                <ToggleButton id="tbg-radio-9" value={3} className="tagStyle">
                                     High
                                 </ToggleButton>
                             </ToggleButtonGroup>
                         </div>
-                    </TogglerWrapper>
                 </form>
             </Wrapper>
         </>
