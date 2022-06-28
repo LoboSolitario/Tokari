@@ -68,22 +68,21 @@ export default function Filtering() {
     
       return (
         <>
-            <Wrapper className="container">
-                <form onSubmit={handleSubmit}>
-                {/* {searchKeyword && <p>{searchKeyword}</p>} */}
+
+            <Wrapper className="container searchBar">
+                <form onSubmit={handleSubmit}> 
+                {/* <form>  */}
+
                     <div className="mb-3">
-                        <label className="flexHorizontalCenter" style={{margin: "10px 0"}}>Search</label>
                         <input
-                            type="text"
-                            className="form-control font13"
+                            type="search"
+                            className="form-control font13 nosubmit"
                             onChange={(e) => setSearchKeyword(e.target.value)}
-                            placeholder="Search"
+                            placeholder="Try &quot;All weather&quot; or &quot;Momentum&quot;"
                             required
                             value={searchKeyword}
                         />
-                        <BtnWrapper className="flexHorizontalCenter">
-                            <ViewButton title="Search" action={handleSearch}/>
-                        </BtnWrapper>
+
                     </div>
 
                     <ColoredLine color="grey"></ColoredLine>
