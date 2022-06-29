@@ -45,6 +45,48 @@ const seedCrypto = asyncHandler(async (req, res) => {
     res.status(200).json(newCrypto)
 })
 
+// @desc get the details of a specific basket 
+// @route GET /api/baskets/basket/:id
+// @access public
+const getSpecificBasket = asyncHandler(async (req, res) => {
+    const basketId = req.params.id;
+    console.log(res.locals.authenticated);
+
+    //Check if the passed :id is a valid mongodb _id
+    if (!ObjectId.isValid(basketId)) {
+        res.status(401);
+        throw new Error("Incorrect basket id")
+    }
+    
+    //find the basket to be viewed
+    const basket = await Basket.findById(basketId);
+    if (!basket) {
+        res.status(400);
+        throw new Error("Basket not found");
+    }
+
+    // If the basket is free, send the basket with cryptoAlloc data
+    if (basket.subscriptionFee == 0){
+        res.status(200).json(basket);
+    } else {        // If the basket is not free, check whether the user have access to the cryptoAlloc Data
+        // Check if the user is authenticated
+        if (res.locals.authenticated){
+            //find the user who is trying to view the basket
+            const user = await User.findById(req.user.id);
+            
+            // Check if there is a user and they have access to the basket
+            if (user && ((user.subscribedBaskets.some(el => el.basketId.toString() === basketId)) || (basket.owner.toString() !== user.id))) {
+                res.status(200).json(basket)
+            } else {
+                basket.cryptoAlloc = null;
+                res.status(200).json(basket)
+            }
+        } else {        // When the user is not authenticated, send the data without cryptoAlloc data
+            basket.cryptoAlloc = null;
+            res.status(200).json(basket)
+        }
+    }
+})
 
 // @desc get list of all the baskets 
 // @route GET /api/baskets/
@@ -205,6 +247,7 @@ const deleteBasket = asyncHandler(async (req, res) => {
 
 module.exports = {
     seedCrypto,
+    getSpecificBasket,
     getBaskets,
     getUserBaskets,
     createBasket,
