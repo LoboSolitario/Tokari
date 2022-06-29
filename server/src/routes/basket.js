@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const {ROLE} = require('../permissions')
-const { seedCrypto, getBaskets, getUserBaskets, createBasket, deleteBasket, rebalanceBasket, editBasket } = require('../controllers/basketController')
-const { protect, authRole } = require('../middleware/authMiddleware')
+const { seedCrypto, getSpecificBasket, getBaskets, getUserBaskets, createBasket, deleteBasket, rebalanceBasket, editBasket } = require('../controllers/basketController')
+const { protect, isLoggedIn, authRole } = require('../middleware/authMiddleware')
 
 router.get('/', getBaskets);
+
+router.get('/basket/:id', isLoggedIn, getSpecificBasket);
 
 // router.get('/seedcrypto', seedCrypto)
 
