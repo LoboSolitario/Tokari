@@ -32,7 +32,7 @@ const AllBasket = ({
           </div>
 
           <div style={{ width: "100px" }}>
-            <ViewButton title="View Basket"  action={() => handleDetailBox(id)}/>
+            <ViewButton title="View Basket"  action={() => handleDetailBox()}/>
           </div>
           {/* <div className="row flexHorizontalCenter">
               <div style={{ width: "150px" }}>

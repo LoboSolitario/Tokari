@@ -54,15 +54,15 @@ export default function DiscoverBasket() {
       json: true 
     };
 
-    configOptions("DELETE", headers, options);
+    configOptions("GET", headers, options);
 
-    const response = await fetch(`${baseUrl}/api/baskets/deleteBasket/${id}`, options);
+    const response = await fetch(`${baseUrl}/api/baskets/basket/62bc3fd44a4212f012996997`, options);
     console.log(response);
     if(response.ok){
       response.json().then(() => {
         // console.log(response.statusText);
         // setBaskets(baskets.filter((basket) => basket.id !== id));
-        navigate(`/${id}`)
+        navigate("/62bc3fd44a4212f012996997")
       })
     }
     else{
