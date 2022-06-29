@@ -9,6 +9,7 @@ import Register from "../../screens/Register";
 import InvestorRouters from "./InvestorRouters";
 import PortfolioRouters from "./PortfolioRouters";
 import Discover from "../../screens/Discover";
+import Detail from "../../screens/Detail";
 
 export default function MainAppRouter() {
     return (
@@ -25,6 +26,7 @@ export default function MainAppRouter() {
           <Route element={<Login/>} path="/login"/>
           <Route element={<Register/>} path="/signup"/>
           <Route element={<Discover/>} path="/discover/*"/>
+          <Route exact path="/:id" component={Detail}/>
         </Routes>
       </Router>
       </>

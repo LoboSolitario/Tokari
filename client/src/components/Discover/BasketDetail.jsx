@@ -3,18 +3,15 @@ import React, { useContext } from "react";
 import { useEffect } from "react";
 import {useNavigate, NavLink}  from "react-router-dom";
 import styled from "styled-components";
-import DiscoverContext from "../contexts/DiscoverContext";
-import AllBasket from "./AllBasket";
+import SingleContext from "../contexts/SingleContext";
+import SingleBasket from "./SingleBasket";
 import configOptions from '../../api/configOptions';
 import _ from 'lodash';
 
-export default function DiscoverBasket() {
+export default function BasketDetail(id) {
 
-  const { baskets, setBaskets, allBaskets, setAllBaskets } = useContext(DiscoverContext);
+  const { baskets, setBaskets } = useContext(SingleContext);
   const baseUrl = process.env.REACT_APP_BASE_URL;
-  const auth =  localStorage.getItem("auth")
-  const token = localStorage.getItem("token")
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -38,38 +35,11 @@ export default function DiscoverBasket() {
           temp.push(obj);
         })
         setBaskets(temp);
-        setAllBaskets(temp);
       }
     }
   }, []);
-
-  const handleDetailBox = async (id) => {
-
-    const headers = {
-      "content-type": "application/json",
-      "Authorization": "Bearer: " + token
-    };
-
-    const options = {
-      json: true 
-    };
-
-    configOptions("DELETE", headers, options);
-
-    const response = await fetch(`${baseUrl}/api/baskets/deleteBasket/${id}`, options);
-    console.log(response);
-    if(response.ok){
-      response.json().then(() => {
-        // console.log(response.statusText);
-        // setBaskets(baskets.filter((basket) => basket.id !== id));
-        navigate(`/${id}`)
-      })
-    }
-    else{
-      console.log(response.statusText);
-    }  
-  };
-
+ 
+  setBaskets(baskets.filter((basket) => basket.id === id));
 
   return (
     <React.Fragment>
@@ -78,7 +48,7 @@ export default function DiscoverBasket() {
 
         {!_.isEmpty(baskets) ? (
           baskets.map((basket) => (
-            <AllBasket {...basket} handleDetailBox={handleDetailBox}/>
+            <SingleBasket {...basket}/>
           ))
         ) : (
           <p>No matching results.</p>

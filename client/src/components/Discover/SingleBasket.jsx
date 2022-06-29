@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ViewButton from "../Buttons/viewButton";
 
-const AllBasket = ({ 
+const SingleBasket = ({ 
     id, 
     basketName, 
     details, 
@@ -52,4 +52,4 @@ margin-top: 30px;
 `;
   
 
-export default AllBasket;
+export default SingleBasket;
