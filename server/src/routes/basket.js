@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {ROLE} = require('../permissions')
-const { seedCrypto, getSpecificBasket, getBaskets, getUserBaskets, createBasket, deleteBasket, rebalanceBasket, editBasket } = require('../controllers/basketController')
+const { seedCrypto, getSpecificBasket, getBaskets, getUserBaskets, createBasket, deleteBasket, rebalanceBasket, editBasket, subscribeBasket, payment} = require('../controllers/basketController')
 const { protect, isLoggedIn, authRole } = require('../middleware/authMiddleware')
 
 router.get('/', getBaskets);
@@ -19,4 +19,9 @@ router.delete('/deleteBasket/:id', protect, authRole(ROLE.MANAGER), deleteBasket
 router.put('/editBasket/:id', protect, authRole(ROLE.MANAGER), editBasket);
 
 router.put('/rebalanceBasket/:id', protect, authRole(ROLE.MANAGER), rebalanceBasket)
+
+router.post('/subscribeBasket/:id', protect, authRole(ROLE.INVESTOR), subscribeBasket);
+
+router.post('/payment', payment);
+
 module.exports = router;

@@ -73,6 +73,15 @@ export default function TopNavbar() {
               Management
             </li>
           </NavLink>
+          
+          <NavLink
+            to="/payment"
+            className={({ isActive }) => (isActive ? "active" : "link")}
+          >
+            <li className="semiBold font15 pointer pointer" style={{ padding: "10px 15px" }}>
+              Payment
+            </li>
+          </NavLink>
 
           <NavLink
             to="/discover"

@@ -3,6 +3,8 @@ const User = require('../models/user');
 const Crypto = require('../models/crypto')
 const asyncHandler = require('express-async-handler')
 var ObjectId = require('mongoose').Types.ObjectId;
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
+
 
 // @desc seed for crypto data
 // @route GET /api/baskets/cryptoseed
@@ -10,38 +12,38 @@ var ObjectId = require('mongoose').Types.ObjectId;
 const seedCrypto = asyncHandler(async (req, res) => {
     const cryptoList = [
         {
-            "cryptoName" : "Bitcoin",
-            "cryptoSymbol" : "BTC",
-            "cryptoPrice" : "20900.21312"
+            "cryptoName": "Bitcoin",
+            "cryptoSymbol": "BTC",
+            "cryptoPrice": "20900.21312"
         },
         {
-            "cryptoName" : "Ethereum",
-            "cryptoSymbol" : "ETH",
-            "cryptoPrice" : "3214"
+            "cryptoName": "Ethereum",
+            "cryptoSymbol": "ETH",
+            "cryptoPrice": "3214"
         },
         {
-            "cryptoName" : "Litecoin",
-            "cryptoSymbol" : "LTC",
-            "cryptoPrice" : "123.21312"
+            "cryptoName": "Litecoin",
+            "cryptoSymbol": "LTC",
+            "cryptoPrice": "123.21312"
         },
         {
-            "cryptoName" : "Tron",
-            "cryptoSymbol" : "TRX",
-            "cryptoPrice" : "29500.21312"
+            "cryptoName": "Tron",
+            "cryptoSymbol": "TRX",
+            "cryptoPrice": "29500.21312"
         },
         {
-            "cryptoName" : "XRP",
-            "cryptoSymbol" : "XRP",
-            "cryptoPrice" : "30.21312"
+            "cryptoName": "XRP",
+            "cryptoSymbol": "XRP",
+            "cryptoPrice": "30.21312"
         },
         {
-            "cryptoName" : "Binancecoin",
-            "cryptoSymbol" : "BNB",
-            "cryptoPrice" : "20320.21312"
+            "cryptoName": "Binancecoin",
+            "cryptoSymbol": "BNB",
+            "cryptoPrice": "20320.21312"
         }
     ]
 
-    const newCrypto =   await Crypto.create(cryptoList).catch(err => res.status(400, err));
+    const newCrypto = await Crypto.create(cryptoList).catch(err => res.status(400, err));
     res.status(200).json(newCrypto)
 })
 
@@ -57,7 +59,7 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("Incorrect basket id")
     }
-    
+
     //find the basket to be viewed
     const basket = await Basket.findById(basketId);
     if (!basket) {
@@ -66,14 +68,14 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
     }
 
     // If the basket is free, send the basket with cryptoAlloc data
-    if (basket.subscriptionFee == 0){
+    if (basket.subscriptionFee == 0) {
         res.status(200).json(basket);
     } else {        // If the basket is not free, check whether the user have access to the cryptoAlloc Data
         // Check if the user is authenticated
-        if (res.locals.authenticated){
+        if (res.locals.authenticated) {
             //find the user who is trying to view the basket
             const user = await User.findById(req.user.id);
-            
+
             // Check if there is a user and they have access to the basket
             if (user && ((user.subscribedBaskets.some(el => el.basketId.toString() === basketId)) || (basket.owner.toString() !== user.id))) {
                 res.status(200).json(basket)
@@ -109,7 +111,7 @@ const getUserBaskets = asyncHandler(async (req, res) => {
 // @route POST /api/baskets/createBasket
 // @access public
 const createBasket = asyncHandler(async (req, res) => {
-    // if basketName is not written
+    // if basketName and cryptoAlloc is not sent
     if (!req.body.basketName && !req.body.cryptoAlloc) {
         res.status(400);
         throw new Error('Please add required fields.')
@@ -186,7 +188,7 @@ const editBasket = asyncHandler(async (req, res) => {
 const rebalanceBasket = asyncHandler(async (req, res) => {
     //Check if the passed :id is a valid mongodb _id
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(401);
+        res.status(400);
         throw new Error("Incorrect basket id")
     }
     //find the basket to be rebalanced
@@ -209,7 +211,7 @@ const rebalanceBasket = asyncHandler(async (req, res) => {
     }
 
     const cryptoAlloc = JSON.parse(req.body.cryptoAlloc)
-    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, {cryptoAlloc: cryptoAlloc}, { new: true });
+    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, { cryptoAlloc: cryptoAlloc }, { new: true });
     res.status(200).json(updatedBasket);
 })
 
@@ -220,7 +222,7 @@ const rebalanceBasket = asyncHandler(async (req, res) => {
 const deleteBasket = asyncHandler(async (req, res) => {
     //Check if the passed :id is a valid mongodb _id
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(401);
+        res.status(400);
         throw new Error("Incorrect basket id")
     }
     //find the basket to be deleted using the basket id
@@ -245,6 +247,71 @@ const deleteBasket = asyncHandler(async (req, res) => {
     res.status(200).json(deletedBasket);
 })
 
+
+// @desc delete a specific basket
+// @route GET /api/baskets/subscribeBasket/:id
+// @access Private
+const subscribeBasket = asyncHandler(async (req, res) => {
+    const basketId = req.params.id;
+    console.log("check")
+    //Check if the passed :id is a valid mongodb _id
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400);
+        throw new Error("Incorrect basket id")
+    }
+    //find the basket to be subscribed using the basket id
+    const basket = await Basket.findById(basketId);
+    if (!basket) {
+        res.status(400);
+        throw new Error("Basket not found");
+    }
+
+    const exists = await User.findOne({ "subscribedBaskets._id": basketId });
+    if (!exists) {
+        //find the user who is trying to subscribe to the basket and add it to the subscribedBaskets list
+        const user = await User.findByIdAndUpdate(req.user.id, { $push: { subscribedBaskets: basket } }, { new: true });
+        //check if there is a user 
+        if (!user) {
+            res.status(401)
+            throw new Error('User not found.');
+        }
+        res.status(200).json(user);
+    }
+    else {
+        res.status(400);
+        throw new Error('Basket already subscribed by user')
+    }
+
+
+
+})
+
+
+const payment = asyncHandler(async (req, res) => {
+    let { amount, id } = req.body
+    try {
+        const payment = await stripe.paymentIntents.create({
+            amount,
+            currency: "USD",
+            description: "Spatula company",
+            payment_method: id,
+            confirm: true
+        })
+        console.log("Payment", payment)
+        res.json({
+            message: "Payment successful",
+            success: true
+        })
+    } catch (error) {
+        console.log("Error", error)
+        res.json({
+            message: "Payment failed",
+            success: false
+        })
+    }
+})
+
+
 module.exports = {
     seedCrypto,
     getSpecificBasket,
@@ -253,5 +320,7 @@ module.exports = {
     createBasket,
     deleteBasket,
     rebalanceBasket,
-    editBasket
+    editBasket,
+    subscribeBasket,
+    payment
 }

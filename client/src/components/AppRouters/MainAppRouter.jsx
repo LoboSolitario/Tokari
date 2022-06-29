@@ -9,7 +9,7 @@ import Register from "../../screens/Register";
 import InvestorRouters from "./InvestorRouters";
 import PortfolioRouters from "./PortfolioRouters";
 import Discover from "../../screens/Discover";
-
+import Payment from "../../screens/Payment"
 export default function MainAppRouter() {
     return (
       <>
@@ -25,6 +25,8 @@ export default function MainAppRouter() {
           <Route element={<Login/>} path="/login"/>
           <Route element={<Register/>} path="/signup"/>
           <Route element={<Discover/>} path="/discover/*"/>
+          <Route element={<Payment/>} path="/payment"/>
+
         </Routes>
       </Router>
       </>

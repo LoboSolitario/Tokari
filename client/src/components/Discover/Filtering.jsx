@@ -86,53 +86,53 @@ export default function Filtering() {
                     </div>
 
                     <ColoredLine color="grey"></ColoredLine>
-
-                    <>
-                        <TogglerWrapper>
-                            <label style={{margin: "10px 0"}} className="flexHorizontalCenter">Volatility</label>
-                            <ToggleButtonGroup type="radio" name="options" onChange={(e) => setActiveVolatility(e)}>
-                                <ToggleButton id="valatility-low" value={1} style={{background: "#7620FF"}}>
+                    <label style={{margin: "10px 0 0 0"}} className="flexLeft semiBold">Volatility</label>
+                        <div>
+                            <ToggleButtonGroup type="radio" name="Volatility" defaultValue={1}>
+                                <ToggleButton id="tbg-radio-1" value={1} className="tagStyle">
                                     Low
                                 </ToggleButton>
-                                <ToggleButton id="valatility-moderate" value={2} style={{margin: "0 5px", background: "#7620FF"}}>
+                                <ToggleButton id="tbg-radio-2" value={2} className="tagStyle">
                                     Moderate
                                 </ToggleButton>
-                                <ToggleButton id="valatility-high" value={3} style={{background: "#7620FF"}}>
+                                <ToggleButton id="tbg-radio-3" value={3} className="tagStyle">
                                     High
                                 </ToggleButton>
                             </ToggleButtonGroup>
-                        </TogglerWrapper>
+                        </div>
+                   
 
-                        <TogglerWrapper>
-                            <label style={{margin: "10px 0"}} className="flexHorizontalCenter">Subscription Type</label>
-                            <ToggleButtonGroup type="radio" name="options" defaultValue={4} onChange={(e) => setActiveSubscriptionType(e)}>
-                                    <ToggleButton id="subscription-type-show-all" value={4} style={{background: "#7620FF", active: true}}>
-                                        Show All
-                                    </ToggleButton>
-                                    <ToggleButton id="subscription-type-free-access" value={5} style={{margin: "0 5px", background: "#7620FF"}}>
-                                        Free Access
-                                    </ToggleButton>
-                                    <ToggleButton id="subscription-type-fee-based" value={6} style={{background: "#7620FF"}}>
-                                        Fee Based
-                                    </ToggleButton>
+                        <label style={{margin: "20px 0 0 0"}} className="flexLeft semiBold">Subscription Type</label>
+                        <div>
+                             <ToggleButtonGroup type="radio" name="fee" defaultValue={1}>
+                                <ToggleButton id="tbg-radio-4" value={1} className="tagStyle">
+                                    Show all
+                                </ToggleButton>
+                                <ToggleButton id="tbg-radio-5" value={2} className="tagStyle">
+                                    Free Access
+                                </ToggleButton>
+                                <ToggleButton id="tbg-radio-6" value={3} className="tagStyle">
+                                    Fee Based
+                                </ToggleButton>
                             </ToggleButtonGroup>
-                        </TogglerWrapper>
+                        </div>
 
-                        <TogglerWrapper>
-                            <label style={{margin: "10px 0"}} className="flexHorizontalCenter">Risk Type</label>
-                            <ToggleButtonGroup type="radio" name="options" onChange={(e) => setActiveRiskType(e)}>
-                                <ToggleButton id="risk-type-low" value={7} style={{background: "#7620FF"}}>
+                        <label style={{margin: "20px 0 0 0 "}} className="flexLeft semiBold">Risk Type</label>
+                        <div>
+                        <ToggleButtonGroup type="radio" name="risk  " defaultValue={1}>
+                                <ToggleButton id="tbg-radio-7" value={1} className="tagStyle">
                                     Low
                                 </ToggleButton>
-                                <ToggleButton id="risk-type-moderate" value={8} style={{margin: "0 5px", background: "#7620FF"}}>
-                                    Moderate 
+                                <ToggleButton id="tbg-radio-8" value={2} className="tagStyle">
+                                    Moderate
                                 </ToggleButton>
-                                <ToggleButton id="risk-type-high" value={9} style={{background: "#7620FF"}}>
+                                <ToggleButton id="tbg-radio-9" value={3} className="tagStyle">
                                     High
                                 </ToggleButton>
                             </ToggleButtonGroup>
-                        </TogglerWrapper>
-                    </>
+                        </div>
+
+                    
                 </form>
             </Wrapper>
         </>
