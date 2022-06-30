@@ -196,7 +196,12 @@
   .flexGrow1{
     flex-grow: 4;
   }
-
+  .flexLeftWrapper{
+    width: 70%
+  }
+  .flexRightWrapper{
+    width: 20%
+  }
   /* FONT SIZES */
   .font11 {
     font-size: 0.688rem;

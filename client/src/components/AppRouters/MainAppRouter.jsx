@@ -9,6 +9,7 @@ import Register from "../../screens/Register";
 import InvestorRouters from "./InvestorRouters";
 import PortfolioRouters from "./PortfolioRouters";
 import Discover from "../../screens/Discover";
+import Detail from "../../screens/Detail";
 import BasketDetail from "../Discover/BasketDetail";
 
 export default function MainAppRouter() {
