@@ -114,6 +114,9 @@
   .borderShow {
     border: 1px solid #7620FF;
   }
+  .borderBottom {
+    border-bottom: 1px solid;
+  }
   .shadow {
     box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
     -webkit-box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
@@ -196,10 +199,10 @@
   .flexGrow1{
     flex-grow: 4;
   }
-  .flexLeftWrapper{
+  .flexWrapper70{
     width: 70%
   }
-  .flexRightWrapper{
+  .flexWrapper20{
     width: 20%
   }
   /* FONT SIZES */
