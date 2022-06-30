@@ -12,16 +12,9 @@ function Detail(props) {
 //   const id = props.match.params.id
 //   const [singlebaskets, setSingleBaskets] = useContext({})
   return (
-    
-    <h3>ID is {props.match.params.id}</h3>
-
-    )
-}
-export default Detail
-
-// <>
-    //   <TopNavbar />
-      {/* <div className="lightBg">
+    <>
+       <TopNavbar />
+      <div className="lightBg">
         <DiscoverHeader />
         <div className="flex ">
         <SingleContext.Provider value={{ singlebaskets, setSingleBaskets }}>
@@ -30,7 +23,14 @@ export default Detail
               </Routes>
         </SingleContext.Provider>
         </div>
-      </div> */}
+      </div>
       
-      {/* <Footer />
-    </> */}
+      <Footer />
+    </>
+
+
+    )
+}
+export default Detail
+
+

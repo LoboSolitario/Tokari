@@ -56,13 +56,13 @@ export default function DiscoverBasket() {
 
     configOptions("GET", headers, options);
 
-    const response = await fetch(`${baseUrl}/api/baskets/basket/62bc3fd44a4212f012996997`, options);
+    const response = await fetch(`${baseUrl}/api/baskets/basket/${id}`, options);
     console.log(response);
     if(response.ok){
       response.json().then(() => {
         // console.log(response.statusText);
         // setBaskets(baskets.filter((basket) => basket.id !== id));
-        navigate("/62bc3fd44a4212f012996997")
+        navigate(`/${id}`)
       })
     }
     else{
