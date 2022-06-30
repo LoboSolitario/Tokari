@@ -4,6 +4,7 @@ import styled from "styled-components";
 import TopNavbar from "../components/Nav/TopNavbar";
 import Footer from "../components/Sections/Footer";
 import StripeContainer from "../components/payment/StripeContainer";
+
 export default function Payment() {
   const [showItem, setShowItem] = useState(false);
   return (
@@ -11,7 +12,7 @@ export default function Payment() {
       <TopNavbar />
       <div className="lightBg">
         <Wrapper className="container flexSpaceCenter">
-          <div className='container App'>
+          {/* <div className='container App'>
              <h1>Payment</h1>
             {showItem ? (
               <StripeContainer />
@@ -21,7 +22,11 @@ export default function Payment() {
                 <button onClick={() => setShowItem(true)}>Subscribe to a basket</button>
               </>
             )}
+          </div> */}
+          <div className="container">
+            <StripeContainer />
           </div>
+
         </Wrapper>
       </div>
       <Footer />
