@@ -61,9 +61,9 @@ export default function Filtering() {
     // }
 
     useEffect(()=>{
-        console.log(activeVolatility);
-        console.log(activeSubscriptionType);
-        console.log(activeRiskType);
+        // console.log(activeVolatility);
+        // console.log(activeSubscriptionType);
+        // console.log(activeRiskType);
       });
     
       return (

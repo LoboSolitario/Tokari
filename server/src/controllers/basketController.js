@@ -50,7 +50,6 @@ const seedCrypto = asyncHandler(async (req, res) => {
 // @access public
 const getSpecificBasket = asyncHandler(async (req, res) => {
     const basketId = req.params.id;
-    console.log(res.locals.authenticated);
 
     //Check if the passed :id is a valid mongodb _id
     if (!ObjectId.isValid(basketId)) {

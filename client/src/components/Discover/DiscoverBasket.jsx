@@ -25,8 +25,8 @@ export default function DiscoverBasket() {
         let temp = [];
         response.data.map(item => {
           let obj = {
-            "key": item.id,
-            "id": item.id,
+            "key": item._id,
+            "id": item._id,
             "author": item.author,
             "basketName": item.basketName,
             "risk": item.risk,
@@ -55,14 +55,10 @@ export default function DiscoverBasket() {
     };
 
     configOptions("GET", headers, options);
-
-    const response = await fetch(`${baseUrl}/api/baskets/basket/62bc3fd44a4212f012996997`, options);
-    console.log(response);
+    const response = await fetch(`${baseUrl}/api/baskets/basket/${id}`, options);
     if(response.ok){
-      response.json().then(() => {
-        // console.log(response.statusText);
-        // setBaskets(baskets.filter((basket) => basket.id !== id));
-        navigate("/62bc3fd44a4212f012996997")
+      response.json().then((data) => {
+        navigate(`/basket/${id}`, {state:data});
       })
     }
     else{
@@ -78,7 +74,7 @@ export default function DiscoverBasket() {
 
         {!_.isEmpty(baskets) ? (
           baskets.map((basket) => (
-            <AllBasket {...basket} handleDetailBox={handleDetailBox}/>
+            <AllBasket basket={basket} handleDetailBox={handleDetailBox}/>
           ))
         ) : (
           <p>No matching results.</p>

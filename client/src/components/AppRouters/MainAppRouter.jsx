@@ -26,7 +26,7 @@ export default function MainAppRouter() {
           <Route element={<Login/>} path="/login"/>
           <Route element={<Register/>} path="/signup"/>
           <Route element={<Discover/>} path="/discover/*"/>
-          <Route element={<Discover/>} path="/62bc3fd44a4212f012996997"/>
+          <Route element={<Detail/>} path="/basket/:id"/>
           {/* <Route exact path="/:id" component={Detail}/> */}
         </Routes>
       </Router>
