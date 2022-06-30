@@ -144,7 +144,32 @@ const createBasket = asyncHandler(async (req, res) => {
             //after creating the basket, append the basket id to the user schema for createdBaskets.
             const newBasket = { basketId: basket._id }
             const updatedUser = await User.findByIdAndUpdate(req.user.id, { $push: { createdBaskets: newBasket } }, { new: true });
-            res.json(basket)
+            console.log("Reached")
+            let product, price;
+            //create a product in stripe
+            try {
+                product = await stripe.products.create({
+                    name: req.body.basketName
+                });
+
+            } catch (err) {
+                res.status(400).json(err)
+            }
+            //add a price to that product
+            try {
+                price = await stripe.prices.create({
+                    unit_amount: req.body.subscriptionFee * 100,
+                    currency: 'usd',
+                    recurring: { interval: 'month' },
+                    product: product.id,
+                    //we use lookup key to place orders
+                    lookup_key: String(basket._id)
+                });
+
+            } catch (err) {
+                res.status(400).json(err)
+            }
+            res.status(200).json(basket)
         })
         .catch(err => res.status(400).json(err));
 })
@@ -288,28 +313,46 @@ const subscribeBasket = asyncHandler(async (req, res) => {
 
 
 const payment = asyncHandler(async (req, res) => {
-    let { amount, id } = req.body
-    try {
-        const payment = await stripe.paymentIntents.create({
-            amount,
-            currency: "USD",
-            description: "Spatula company",
-            payment_method: id,
-            confirm: true
-        })
-        console.log("Payment", payment)
-        res.json({
-            message: "Payment successful",
-            success: true
-        })
-    } catch (error) {
-        console.log("Error", error)
-        res.json({
-            message: "Payment failed",
-            success: false
-        })
-    }
+
+    const prices = await stripe.prices.list({
+        lookup_keys: [req.body.lookup_key],
+        expand: ['data.product'],
+    });
+    const session = await stripe.checkout.sessions.create({
+        billing_address_collection: 'auto',
+        line_items: [
+            {
+                price: prices.data[0].id,
+                // For metered billing, do not pass quantity
+                quantity: 1,
+
+            },
+        ],
+        mode: 'subscription',
+        success_url: `http://localhost:3000/payment/?success=true&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `http://localhost:3000/payment/?canceled=true`,
+    });
+
+    res.redirect(303, session.url);
 })
+
+const createPortalSession = asyncHandler(async (req, res) => {
+    // For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
+    // Typically this is stored alongside the authenticated user in your database.
+    const { session_id } = req.body;
+    const checkoutSession = await stripe.checkout.sessions.retrieve(session_id);
+
+    // This is the url to which the customer will be redirected when they are done
+    // managing their billing with the portal.
+    const returnUrl = "http://localhost:3000/payment";
+
+    const portalSession = await stripe.billingPortal.sessions.create({
+        customer: checkoutSession.customer,
+        return_url: returnUrl,
+    });
+
+    res.redirect(303, portalSession.url);
+});
 
 
 module.exports = {
@@ -317,10 +360,12 @@ module.exports = {
     getSpecificBasket,
     getBaskets,
     getUserBaskets,
+    createPortalSession,
     createBasket,
     deleteBasket,
     rebalanceBasket,
     editBasket,
     subscribeBasket,
     payment
+
 }
