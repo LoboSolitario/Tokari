@@ -18,7 +18,7 @@ console.log(basket);
     <p>{basket._id}</p>
     <p>{basket.basketName}</p>
     <p>{basket.createdAt}</p>
-    {basket.cryptoAlloc.map(allocation => 
+    {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation => 
       <div>
         <p>{allocation.cryptoSymbol}</p>
         <p>{allocation.weight}</p>
