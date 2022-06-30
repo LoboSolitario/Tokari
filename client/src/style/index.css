@@ -111,11 +111,15 @@
     padding: 5px 10px;
     margin: 10px 0;
   }
+  .box {  
+    padding: 5px 0;
+    margin: 10px 0; 
+  }
   .borderShow {
     border: 1px solid #7620FF;
   }
   .borderBottom {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #707070;
   }
   .shadow {
     box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
