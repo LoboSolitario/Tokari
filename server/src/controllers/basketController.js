@@ -63,7 +63,7 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Basket not found");
     }
-
+    
     // If the basket is free, send the basket with cryptoAlloc data
     if (basket.subscriptionFee == 0){
         res.status(200).json(basket);
@@ -74,7 +74,7 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
             const user = await User.findById(req.user.id);
             
             // Check if there is a user and they have access to the basket
-            if (user && ((user.subscribedBaskets.some(el => el.basketId.toString() === basketId)) || (basket.owner.toString() !== user.id))) {
+            if (user && ((user.subscribedBaskets.some(el => el.basketId.toString() === basketId)) || (basket.owner.toString() === user.id))) {
                 res.status(200).json(basket)
             } else {
                 basket.cryptoAlloc = null;
