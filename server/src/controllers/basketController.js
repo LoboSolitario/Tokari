@@ -278,7 +278,6 @@ const deleteBasket = asyncHandler(async (req, res) => {
 // @access Private
 const subscribeBasket = asyncHandler(async (req, res) => {
     const basketId = req.params.id;
-    console.log("check")
     //Check if the passed :id is a valid mongodb _id
     if (!ObjectId.isValid(req.params.id)) {
         res.status(400);
@@ -332,8 +331,9 @@ const payment = asyncHandler(async (req, res) => {
         success_url: `http://localhost:3000/payment/?success=true&session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `http://localhost:3000/payment/?canceled=true`,
     });
-
+    
     res.redirect(303, session.url);
+    
 })
 
 const createPortalSession = asyncHandler(async (req, res) => {

@@ -24,6 +24,6 @@ router.post('/subscribeBasket/:id', protect, authRole(ROLE.INVESTOR), subscribeB
 
 router.post('/payment', payment);
 
-router.post('/portalSession', createPortalSession);
+// router.post('/portalSession', createPortalSession);
 
 module.exports = router;

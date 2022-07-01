@@ -436,3 +436,20 @@ input.nosubmit {
 	padding: 11px 15px 11px 0;
 }
 
+.subscribeButton{
+  border: 1px solid #7620ff;
+  background-color:  transparent;
+  width: 100%;
+  padding: 8px;
+  margin-top:10px;
+  outline: none;
+  font-size: 12px;
+  color: #7620ff;
+  
+}
+
+.subscribeButton:hover {
+  background-color: #580cd2;
+  border: 1px solid #7620ff;
+  color:#7620ff;
+}

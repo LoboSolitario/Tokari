@@ -20,8 +20,8 @@ export default function DiscoverBasket() {
         let temp = [];
         response.data.map(item => {
           let obj = {
-            "key": item.id,
-            "id": item.id,
+            "key": item._id,
+            "id": item._id,
             "author": item.author,
             "basketName": item.basketName,
             "risk": item.risk,
