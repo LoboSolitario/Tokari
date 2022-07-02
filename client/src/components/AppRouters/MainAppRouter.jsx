@@ -15,12 +15,15 @@ export default function MainAppRouter() {
       <>
       <Router>
         <Routes>
-          {/* <Route element={<PrivateRoutes/>} > */}
-           <Route element={<PortfolioRouters/>} path="/portfoliomain/*" exact={true}/>
-          {/* </Route> */}
-          {/* <Route element={<PrivateRoutes/>}> */}
-            <Route element={<InvestorRouters/>} path="/investormain" exact={true}/>
-          {/* </Route> */}
+      
+          <Route element={<PrivateRoutes/>} >
+            <Route path="/portfoliomain/*" element={ <PortfolioRouters/>} />
+          </Route>
+          
+          <Route element={<PrivateRoutes/>}>
+            <Route path="/investormain/*"  element={<InvestorRouters/>}/>
+          </Route>
+
           <Route element={<Landing/>} path="/" exact/>
           <Route element={<Login/>} path="/login"/>
           <Route element={<Register/>} path="/signup"/>
