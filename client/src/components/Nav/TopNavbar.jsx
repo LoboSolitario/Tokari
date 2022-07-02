@@ -11,7 +11,7 @@ import LogoIcon from "../../assets/svg/Logo";
 import BurgerIcon from "../../assets/svg/BurgerIcon";
 
 export default function TopNavbar() {
-  const [y, setY] = useState(window.scrollY);
+  const [y] = useState(window.scrollY);
   const [sidebarOpen, toggleSidebar] = useState(false);
   
   return (

@@ -12,7 +12,6 @@ export default function SignIn(){
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
     const baseUrl = process.env.REACT_APP_BASE_URL;  
   
     useEffect(() => {
@@ -65,7 +64,6 @@ export default function SignIn(){
             hasUserCreated(data.token);
           })
 
-          setSuccess(true);
           setPwd('');
           setEmail('');
           

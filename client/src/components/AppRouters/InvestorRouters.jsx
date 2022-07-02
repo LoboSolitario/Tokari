@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import PrivateRoutes from "./PrivateRoutes";
+import { BrowserRouter as Routes, Route} from 'react-router-dom'
 import TopNavbar from '../Nav/TopNavbar';
 
 function InvestorRouters() {

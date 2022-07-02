@@ -16,7 +16,6 @@ const SignUp = () => {
   const [role, setRole] = useState('investor');  
   const [matchPwd, setMatchPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
   const baseUrl = process.env.REACT_APP_BASE_URL;  
   let navigate = useNavigate();
 
@@ -83,7 +82,6 @@ const SignUp = () => {
               hasUserCreated(data.token);
             })
 
-            setSuccess(true);
             setUser('');
             setPwd('');
             setMatchPwd('');
