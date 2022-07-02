@@ -64,6 +64,11 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
         throw new Error("Basket not found");
     }
     
+    basket.cryptoAlloc = basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0)
+    basket.cryptoNumber = basket.cryptoAlloc.length
+    
+    // basket.cryptoNumber = basket.cryptoAlloc
+    
     // If the basket is free, send the basket with cryptoAlloc data
     if (basket.subscriptionFee == 0){
         res.status(200).json(basket);
