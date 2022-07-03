@@ -57,7 +57,7 @@ export default function TopNavbar() {
            className={({ isActive }) => (isActive ? "active" : "link")}
          >
            <li className="semiBold font15 pointer pointer" style={{ padding: "10px 15px" }}>
-             Management
+            Management
            </li>
          </NavLink>)
          :

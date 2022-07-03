@@ -4,9 +4,9 @@ import TopNavbar from '../Nav/TopNavbar';
 
 function InvestorRouters() {
   return (
-    <Routes>
-      <Route element={<TopNavbar/>} path="/" exact></Route>
-    </Routes>
+      <div>
+        <TopNavbar/>
+      </div>
   )
 }
 
