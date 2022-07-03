@@ -29,7 +29,8 @@ const PortfolioCreate = () => {
                 "risk": basket.risk,  
                 "rebalanceFee": "12312",
                 "subscriptionFee": basket.subscriptionFee,
-                "cryptoAlloc": basket.cryptoAlloc
+                "cryptoAlloc": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0),
+                "cryptoNumber": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0).length
           }),
           json: true 
         };
@@ -44,7 +45,8 @@ const PortfolioCreate = () => {
         //         "risk": "new123",  
         //         "rebalanceFee": 1,
         //         "subscriptionFee": 5,
-        //         "cryptoAlloc": basket.cryptoAlloc
+        //         "cryptoAlloc": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0),
+        //         "cryptoNumber": basket.cryptoAlloc.length
         //   }),
         //   json: true 
         // };

@@ -63,11 +63,8 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Basket not found");
     }
-    
-    basket.cryptoAlloc = basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0)
-    basket.cryptoNumber = basket.cryptoAlloc.length
-    
-    // basket.cryptoNumber = basket.cryptoAlloc
+
+    console.log(basket);
     
     // If the basket is free, send the basket with cryptoAlloc data
     if (basket.subscriptionFee == 0){
@@ -138,6 +135,7 @@ const createBasket = asyncHandler(async (req, res) => {
         risk: req.body.risk,
         rebalanceFreq: req.body.rebalanceFreq,
         subscriptionFee: req.body.subscriptionFee,
+        cryptoNumber: req.body.cryptoNumber,
         cryptoAlloc: req.body.cryptoAlloc
     });
     //save the new basket
@@ -213,7 +211,7 @@ const rebalanceBasket = asyncHandler(async (req, res) => {
     }
 
     const cryptoAlloc = JSON.parse(req.body.cryptoAlloc)
-    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, {cryptoAlloc: cryptoAlloc}, { new: true });
+    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, {cryptoAlloc: cryptoAlloc, cryptoNumber: req.body.cryptoNumber}, { new: true });
     res.status(200).json(updatedBasket);
 })
 
