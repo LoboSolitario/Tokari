@@ -33,7 +33,8 @@ export default function DiscoverBasket() {
             "volatility": item.volatility,
             "subscriptionFee": item.subscriptionFee,
             "overview": item.overview,
-            "details": item.details
+            "details": item.details,
+            "cryptoNumber" : item.cryptoNumber
           }
           temp.push(obj);
         })
