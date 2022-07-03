@@ -22,6 +22,7 @@ const basketSchema = new mongoose.Schema({
     risk: String,
     rebalanceFreq: Number,
     subscriptionFee: Number,
+    cryptoNumber: Number,
     cryptoAlloc: [{
         cryptoSymbol: String,
         weight: Number

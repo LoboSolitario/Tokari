@@ -56,7 +56,7 @@ console.log(basket);
                       <div className='flexSpaceCenter borderBottom'>
                         <div className='flexWrapper20'>                          
                           <p className='font13'>CryptoCurrencies</p>
-                          <p className='font13'>4</p>                        
+                          <p className='font13'>{basket.cryptoNumber}</p>                        
                           <p className='font13'>Last Rebalance</p>
                           <p className='font13'>4</p>                       
                         </div>                     
