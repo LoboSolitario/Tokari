@@ -54,47 +54,52 @@ console.log(basket);
                         <p className="font11 darkColor regular" style={{ padding: "5px 15px" }}>Watchlisted by over 10K investors</p>
                       </div>
                     </div>
+                    <div className='borderBottom'>
+                      <Wrapper style={{ padding: "0 0 20px 0px"}}>
+                        <p className='box semiBold'>Detail</p>
+                        <p className='font13'>{basket.details}</p>
+                      </Wrapper>
+                    </div>
                     <div>
                       <p className='box semiBold'>At a Glance</p>
-                      <div className='flexSpaceCenter borderBottom'>
-                        <div className='flexWrapper20'>                          
-                          <p className='font13'>CryptoCurrencies</p>
+                      <div className='borderBottom'>
+                      <div className='flexSpaceCenter' style={{ padding: "0 0 20px 0px"}}>
+                        <div className='flexWrapper60'>                          
+                          <p className='font13'>Cryptocurrencies</p>
                           <p className='font13'>{basket.cryptoNumber}</p>                        
-                          <p className='font13'>Last Rebalance</p>
+                          <p className='font13'>Last rebalance</p>
                           <p className='font13'>4</p>                       
                         </div>                     
-                        <div className='flexWrapper70'>
-                          <p className='font13'>Rebalance Frequency</p>
+                        <div className='flexWrapper30'>
+                          <p className='font13'>Rebalance frequency</p>
                           <p className='font13'>4</p>
-                          <p className='font13'>Next Rebalance</p>
+                          <p className='font13'>Next rebalance</p>
                           <p className='font13'>4</p>
                         </div>
+                      </div>
                       </div>                     
                     </div>
-                    <Wrapper>
-                      <p className='box semiBold'>Detail</p>
-                      <p className='font13 borderBottom'>{basket.details}</p>
-                    </Wrapper>
+                    
                     
                     <Wrapper>
                       <p className='box semiBold'>CryptoCurrencies & Weights</p>
-                      <div className='flexSpaceCenter' style={{ padding: "0 0 5px 0" }}>
-                        <p className='flexWrapper60 font13'>CryptoCurrency</p>
-                        <p className='flexWrapper20 font13'>Weightage(%)</p>
+                      <div className='flexSpaceNull' style={{ padding: "0 0 5px 0" }}>
+                        <p className='flexWrapper60 font13 semiBold'>Cryptocurrency</p>
+                        <p className='flexWrapper30 font13 semiBold textLeft'>Weights(%)</p>
                       </div>
                     {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation => 
                         <div className='flexSpaceCenter'>                           
                           <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>
-                          <p className='flexWrapper20 font13 flexCenter'>{allocation.weight}</p>                        
+                          <p className='flexWrapper30 font13 flexCenter'>{allocation.weight}</p>                        
                         </div>)}
                     </Wrapper>
                   </div>
                   <div className="flexWrapper20">
+                  <FullButton title={basket.subscriptionFee==0 ? "Invest now" : "Subscribe now"}/>
                     <div className='box textCenter'>
-                      <p>Subscription Fee</p> 
-                      <p>{basket.subscriptionFee} €</p>
+                      <p>Subscription fee {basket.subscriptionFee} €</p> 
                     </div>                   
-                    <FullButton title={basket.subscriptionFee==0 ? "Invest Now" : "Subscribe Now"}/>
+                    
                   </div>
                 </div>       
             </div>
@@ -108,7 +113,6 @@ console.log(basket);
 const Wrapper = styled.div`
 width: 100%;
 text-align: left;
-
 margin-top: 30px;
 `;
 export default Detail
