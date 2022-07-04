@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     createdBaskets: [{ basketId: { type: mongoose.Schema.Types.ObjectId, ref: 'Basket' } }],
-    subscribedBaskets: [{ basketId: { type: mongoose.Schema.Types.ObjectId, ref: 'Basket' } }]
+    subscribedBaskets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Basket' }]
 }, { timestamps: true });
 
 

@@ -12,7 +12,7 @@ const SuccessDisplay = ({ sessionId }) => {
       <Wrapper className="container flexSpaceCenter flexColumn">
         <div style={{ marginBottom: "20px" }} className="p">You have sucessfully subscribed to the basket.</div>
         <BtnWrapper >
-          <SuccessButton title="Manage subscriptions" to="/" />
+          <SuccessButton title="Manage Investments" to="/discover" />
         </BtnWrapper>
       </Wrapper>
       

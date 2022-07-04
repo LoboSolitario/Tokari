@@ -100,12 +100,20 @@ const getBaskets = asyncHandler(async (req, res) => {
 })
 
 
-// @desc get list of all the baskets of a user
+// @desc get list of all the created baskets of a user
 // @route GET /api/baskets/userBaskets
-// @access public
+// @access private
 const getUserBaskets = asyncHandler(async (req, res) => {
     const baskets = await Basket.find({ owner: req.user.id })
     res.status(200).json(baskets)
+})
+
+// @desc get list of all the subscribed baskets of a user
+// @route GET /api/baskets/userSubscribedBaskets
+// @access private
+const getUserSubscribedBaskets = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id).select('-password').populate('subscribedBaskets')
+    res.status(200).json(user.subscribedBaskets)
 })
 
 // @desc Create a new basket
@@ -274,43 +282,6 @@ const deleteBasket = asyncHandler(async (req, res) => {
 })
 
 
-// // @desc delete a specific basket
-// // @route GET /api/baskets/subscribeBasket/:id
-// // @access Private
-// const subscribeBasket = asyncHandler(async (req, res) => {
-//     const basketId = req.params.id;
-//     //Check if the passed :id is a valid mongodb _id
-//     if (!ObjectId.isValid(req.params.id)) {
-//         res.status(400);
-//         throw new Error("Incorrect basket id")
-//     }
-//     //find the basket to be subscribed using the basket id
-//     const basket = await Basket.findById(basketId);
-//     if (!basket) {
-//         res.status(400);
-//         throw new Error("Basket not found");
-//     }
-
-//     const exists = await User.findOne({ "subscribedBaskets._id": basketId });
-//     if (!exists) {
-//         //find the user who is trying to subscribe to the basket and add it to the subscribedBaskets list
-//         const user = await User.findByIdAndUpdate(req.user.id, { $push: { subscribedBaskets: basket } }, { new: true });
-//         //check if there is a user 
-//         if (!user) {
-//             res.status(401)
-//             throw new Error('User not found.');
-//         }
-//         res.status(200).json(user);
-//     }
-//     else {
-//         res.status(400);
-//         throw new Error('Basket already subscribed by user')
-//     }
-
-
-
-// })
-
 
 const payment = asyncHandler(async (req, res) => {
     const prices = await stripe.prices.list({
@@ -337,25 +308,6 @@ const payment = asyncHandler(async (req, res) => {
     
 })
 
-// const createPortalSession = asyncHandler(async (req, res) => {
-//     // For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
-//     // Typically this is stored alongside the authenticated user in your database.
-//     const { session_id } = req.body;
-//     const checkoutSession = await stripe.checkout.sessions.retrieve(session_id);
-
-//     // This is the url to which the customer will be redirected when they are done
-//     // managing their billing with the portal.
-//     const returnUrl = "http://localhost:3000/payment";
-
-//     const portalSession = await stripe.billingPortal.sessions.create({
-//         customer: checkoutSession.customer,
-//         return_url: returnUrl,
-//     });
-
-//     res.redirect(303, portalSession.url);
-// });
-
-
 module.exports = {
     seedCrypto,
     getSpecificBasket,
@@ -365,6 +317,7 @@ module.exports = {
     deleteBasket,
     rebalanceBasket,
     editBasket,
-    payment
+    payment,
+    getUserSubscribedBaskets
 
 }
