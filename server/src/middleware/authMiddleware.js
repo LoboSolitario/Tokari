@@ -46,17 +46,18 @@ const isLoggedIn = asyncHandler(async (req, res, next) => {
 
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
-
       // Get user from the token
       req.user = await User.findById(decoded.id).select('-password')
       // go to the next middleware in the route
-
       res.locals.authenticated = true
       next()
     } catch (error) {
       res.locals.authenticated = false
       next()
     }
+  } else {
+    res.locals.authenticated = false
+    next()
   }
 
   if (!token) {

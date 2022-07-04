@@ -6,19 +6,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
 const AllBasket = ({
-  id,
-  basketName,
-  details,
-  risk,
-  author,
-  volatility,
-  overview,
-  subscriptionFee
+  basket,
+  handleDetailBox
 }) => {
 
 
   const handleSubmit = async (event) => {
-    
+
     const stripePromise = loadStripe(
       'pk_test_51LG4BtLrYzCcT1VhaohAqZIhPa8mvakR4rd9z2dI7VN0iEOKAtP73PSw1pNRE0kF4VH9bSUNxkkqdDOuEXjrzJee00Gz2np472'
     );
@@ -28,7 +22,7 @@ const AllBasket = ({
     await axios({
       method: 'post',
       url: `http://localhost:4600/api/baskets/payment`,
-      data: JSON.stringify({"lookup_key": id}),
+      data: JSON.stringify({ "lookup_key": basket.id }),
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer: " + token
@@ -48,26 +42,26 @@ const AllBasket = ({
           alert(result.error.message);
         }
       })
-      .catch(err=>{
-        if(err.response.status == 401){
+      .catch(err => {
+        if (err.response.status == 401) {
           alert("Unauthorised Role Access")
         }
-        else{
-          alert("ERROR:",err.response.data)
+        else {
+          alert("ERROR:", err.response.data)
         }
-        
+
       })
   }
   return (
     <Wrapper className="whiteBg radius8 shadow basket">
       <div className="wrapper-header flexSpaceCenter">
         <h3 className="font20 extraBold">
-          {basketName}
+          {basket.basketName}
         </h3>
         <div style={{ width: "100px" }}>
           <form onSubmit={handleSubmit}>
             {/* Add a hidden field with the lookup_key of your Price */}
-            <input type="hidden" name="lookup_key" value={id} />
+            <input type="hidden" name="lookup_key" value={basket.id} />
             <button className="subscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
               Subscribe
             </button>
@@ -76,27 +70,26 @@ const AllBasket = ({
       </div>
 
       <p className="font13" style={{ padding: "30px 0" }}>
-        {overview}
+        {basket.overview}
 
       </p>
       <div className="flexSpaceNull">
-        <p className="font13 extraBold">{subscriptionFee}</p>
-        <p className="font13 greenColor extraBold">{subscriptionFee === 0 ? "Free Access" : ""}</p>
+        <p className="font13 extraBold">{basket.subscriptionFee}</p>
+        <p className="font13 greenColor extraBold">{basket.subscriptionFee === 0 ? "Free Access" : ""}</p>
       </div>
 
-      <p className="font13 extraBold">{subscriptionFee}</p>
+      <p className="font13 extraBold">{basket.subscriptionFee}</p>
 
       <div className="flexSpaceNull">
-        <p className={' tag  radius6 font11 extraBold ' + (risk == "High" ? "redBg" : risk == "Medium" ? "orangeBg" : "greenBg")}>Risk: {risk}</p>
-        <p className={' tag  radius6 font11 extraBold ' + (volatility == "High" ? "redBg" : volatility == "Medium" ? "orangeBg" : "greenBg")}>Volatility: {volatility}</p>
+        <p className={' tag  radius6 font11 extraBold ' + (basket.risk == "High" ? "redBg" : basket.risk == "Medium" ? "orangeBg" : "greenBg")}>Risk: {basket.risk}</p>
+        <p className={' tag  radius6 font11 extraBold ' + (basket.volatility == "High" ? "redBg" : basket.volatility == "Medium" ? "orangeBg" : "greenBg")}>Volatility: {basket.volatility}</p>
       </div>
+      <div style={{ width: "100px" }}>
+            <ViewButton title="View Basket"  action={() => handleDetailBox(basket.id)}/>
+          </div>
 
-      {/* <div className="row flexHorizontalCenter">
-              <div style={{ width: "150px" }}>
-                <ViewButton title="View Basket" action={() => alert("clicked")} />
-              </div>
-          </div> */}
-    </Wrapper>
+
+    </Wrapper >
 
   );
 }

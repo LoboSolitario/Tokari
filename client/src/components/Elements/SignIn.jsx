@@ -4,6 +4,7 @@ import FullButton from "../Buttons/FullButton";
 import { useRef, useState, useEffect } from "react";
 import {useNavigate, NavLink}  from "react-router-dom";
 import configOptions from '../../api/configOptions';
+import axios from 'axios';
 // handle Sign In here and save the auth token/user role
 
 export default function SignIn(){
@@ -11,14 +12,34 @@ export default function SignIn(){
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
     const baseUrl = process.env.REACT_APP_BASE_URL;  
   
     useEffect(() => {
       setErrMsg('');
     }, [pwd]);
-  
+
     let navigate = useNavigate();
+
+    async function hasUserCreated (token){
+        const options = {
+            withCredentials: true,
+            json: true 
+            };
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        };
+        configOptions("GET", headers, options);
+        const response = await axios.get(`${baseUrl}/api/users/userDetails`, { headers: { Authorization: "Bearer: " + token } });
+        console.log(response)
+        if(response.statusText === "OK"){
+            console.log(response.data.role)
+            localStorage.setItem("role", response.data.role);
+        }
+        window.location.reload();
+    }
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const options = {
@@ -38,13 +59,13 @@ export default function SignIn(){
           response.json().then(data => {
             localStorage.setItem("token", data.token);
             localStorage.setItem("auth", "true");
+            hasUserCreated(data.token);
           })
-          setSuccess(true);
+
           setPwd('');
           setEmail('');
+          
           options.body = JSON.stringify({});
-          // navigate("/"); 
-          window.location.reload();
         }
         else{
           setErrMsg('Sign in Failed: ' + response.statusText);

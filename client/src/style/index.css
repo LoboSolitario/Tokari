@@ -66,6 +66,12 @@
     margin: 0 auto;
     padding: 0px 30px;
   }
+  .container70 {
+    width: 70%;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0px 30px;
+  }
   @media only screen and (max-width: 859px) {
     .container {
       padding: 0 15px;
@@ -113,6 +119,17 @@
   .tag {
     padding: 5px 10px;
     margin: 10px 0;
+  }
+  .box {  
+    padding: 5px 0;
+    margin: 10px 0; 
+  }
+  .borderShow {
+    border: 1px solid #7620FF;
+  }
+  .borderBottom {
+    border-bottom: 1px solid #707070;
+    padding: 10px 0 0;
   }
   .shadow {
     box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
@@ -196,7 +213,18 @@
   .flexGrow1{
     flex-grow: 4;
   }
-
+  .flexWrapper70{
+    width: 70%
+  }
+  .flexWrapper60{
+    width: 60%
+  }
+  .flexWrapper25{
+    width: 25%
+  }
+  .flexWrapper20{
+    width: 20%
+  }
   /* FONT SIZES */
   .font11 {
     font-size: 0.688rem;
