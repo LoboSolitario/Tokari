@@ -12,17 +12,6 @@ export default function Payment() {
       <TopNavbar />
       <div className="lightBg">
         <Wrapper className="container flexSpaceCenter">
-          {/* <div className='container App'>
-             <h1>Payment</h1>
-            {showItem ? (
-              <StripeContainer />
-            ) : (
-              <>
-                <h3>$10.00</h3>
-                <button onClick={() => setShowItem(true)}>Subscribe to a basket</button>
-              </>
-            )}
-          </div> */}
           <div className="container">
             <StripeContainer />
           </div>
