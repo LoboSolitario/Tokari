@@ -83,7 +83,7 @@ console.log(basket);
                     
                     <Wrapper>
                       <p className='box semiBold'>CryptoCurrencies & Weights</p>
-                      <div className='flexSpaceNull' style={{ padding: "0 0 5px 0" }}>
+                      <div className='flexSpaceCenter' style={{ padding: "0 0 5px 0" }}>
                         <p className='flexWrapper60 font13 semiBold'>Cryptocurrency</p>
                         <p className='flexWrapper30 font13 semiBold textLeft'>Weights(%)</p>
                       </div>
