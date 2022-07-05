@@ -10,7 +10,7 @@ const SuccessDisplay = ({ sessionId }) => {
   return (
     <WrapperLogin className="whiteBg radius8 shadow container">
       <Wrapper className="container flexSpaceCenter flexColumn">
-        <div style={{ marginBottom: "20px" }} className="p">You have sucessfully subscribed to the basket.</div>
+        <div style={{ marginBottom: "20px" }} className="p">Congratuations!! You have sucessfully subscribed to the basket.</div>
         <BtnWrapper >
           <SuccessButton title="Manage Investments" to="/discover" />
         </BtnWrapper>

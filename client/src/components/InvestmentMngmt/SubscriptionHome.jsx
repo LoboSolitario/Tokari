@@ -6,6 +6,7 @@ import SubscribedBasketContext from "../contexts/SubscribedBasketContext";
 import SubscribedBasket from "./SubscribedBasket";
 import configOptions from '../../api/configOptions';
 import _ from 'lodash';
+import {useNavigate, NavLink}  from "react-router-dom";
 
 export default function SubscriptionHome() {
 
@@ -14,6 +15,8 @@ export default function SubscriptionHome() {
   const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
   const baseUrl = process.env.REACT_APP_BASE_URL;  
+  const navigate = useNavigate();
+
 
   useEffect( ()=>{
     fetchData();
@@ -69,12 +72,37 @@ export default function SubscriptionHome() {
     }  
   };
 
+  const handleDetailBox = async (id) => {
+
+    const headers = {
+      "content-type": "application/json",
+      "Authorization": "Bearer: " + token
+    };
+
+    const options = {
+      json: true 
+    };
+
+    configOptions("GET", headers, options);
+    const response = await fetch(`${baseUrl}/api/baskets/basket/${id}`, options);
+    if(response.ok){
+      response.json().then((data) => {
+        navigate(`/basket/${id}`, {state:data});
+      })
+    }
+    else{
+      console.log(response.statusText);
+    }  
+  };
+
+
+
   return (
     <React.Fragment>
-        <div className="flexList container" style={{minHeight: "70vh"}}>
+        <div className="flexList container" style={{minHeight: "72vh"}}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
-                    <SubscribedBasket key={basket.basketName} {...basket} handleRemoveBox={handleRemoveBox} />
+                    <SubscribedBasket basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
                 ))
              ) : (
                 <p>You have not yet subscribed to a basket</p>

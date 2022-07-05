@@ -60,7 +60,7 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
     }
 
     //find the basket to be viewed
-    const basket = await Basket.findById(basketId);
+    const basket = await Basket.findById(basketId).populate('owner');
     if (!basket) {
         res.status(400);
         throw new Error("Basket not found");
@@ -78,7 +78,7 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
             const user = await User.findById(req.user.id);
 
             // Check if there is a user and they have access to the basket
-            if (user && ((user.subscribedBaskets.some(el => el.basketId.toString() === basketId)) || (basket.owner.toString() === user.id))) {
+            if (user && ((user.subscribedBaskets.some(el => el._id.toString() === basketId)) || (basket.owner.toString() === user.id))) {
                 res.status(200).json(basket)
             } else {
                 basket.cryptoAlloc = null;
@@ -132,7 +132,7 @@ const createBasket = asyncHandler(async (req, res) => {
         throw new Error("User not found who is creating the basket");
     }
 
-
+    
 
     //create the new basket
     const newBasket = await new Basket({

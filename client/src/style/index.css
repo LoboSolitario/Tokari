@@ -481,3 +481,8 @@ input.nosubmit {
   border: 1px solid #7620ff;
   color:#7620ff;
 }
+
+.discoverPage{
+  margin-top:50px;
+  min-height:87vh;
+}

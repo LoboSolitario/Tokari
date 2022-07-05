@@ -20,7 +20,7 @@ console.log(basket);
   return (
     <>
       <TopNavbar />
-      <div className="container70 whiteBg shadow" style={{padding: '50px 0 0'}}>
+      <div className="container70 whiteBg shadow discoverPage" >
           <div style={{padding: '30px 0'}}>  
               <div className="container">
                 <div className="flexSpaceNull">
@@ -28,7 +28,7 @@ console.log(basket);
                     <div className="flexSpaceNull">
                       <div>
                         <h3 className="box font30 extraBold">{basket.basketName}</h3>
-                        <p className="box font11">Managed by {basket.owner}</p>
+                        <p className="box font11">Managed by <b> {basket.owner.name}</b></p>
                       </div>
                       <div className="box">
                         {basket.subscriptionFee==0 ? <FreeIcon /> : ""}

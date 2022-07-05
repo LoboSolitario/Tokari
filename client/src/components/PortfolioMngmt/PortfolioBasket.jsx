@@ -26,7 +26,7 @@ const PortfolioBasket = ({
         </div>
             
         <p className="font13" style={{ padding: "30px 0" }}>
-          {details}
+          {overview}
         </p>
         <div className="flexSpaceNull">
           <p className="font13 extraBold">{author}</p>

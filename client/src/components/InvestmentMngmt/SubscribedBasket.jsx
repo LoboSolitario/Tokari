@@ -1,45 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 import ViewButton from "../Buttons/viewButton";
-
-
-const SubscribedBasket = ({ 
-  id, 
-  basketName, 
-  details, 
-  risk, 
-  author, 
-  volatility,
-  overview,
-  subscriptionfFee,
-  handleRemoveBox
+import UnsubscribeButton from "../Buttons/UnsubscribeButton"
+import ViewBasketButton from "../Buttons/ViewBasketButton"
+const SubscribedBasket = ({
+  basket,
+  handleRemoveBox,
+  handleDetailBox
 }) => {
-    
-  return (
-      <Wrapper className="whiteBg radius8 shadow basket">
-        <div className="wrapper-header flexSpaceCenter">
-          <h3 className="font20 extraBold">{basketName}
-                </h3>
-                <div style={{ width: "100px" }}>
-                <ViewButton title="Delete"  action={() => handleRemoveBox(id)}/>
-              </div>
-        </div>
-            
-        <p className="font13" style={{ padding: "30px 0" }}>
-          {details}
-        </p>
-        <div className="flexSpaceNull">
-          <p className="font13 extraBold">{author}</p>
-          {/* <p className="font13 greenColor extraBold">{free?"Free Access": ""}</p> */}
-        </div>
-        
-        <div className="flexSpaceNull">
-          <p className={' tag  radius6 font11 extraBold '+ (risk==="High"? "redBg" : risk==="Medium"? "orangeBg":"greenBg")}>Risk: {risk}</p>
-          <p className={' tag  radius6 font11 extraBold '+ (volatility==="High"? "redBg" : volatility==="Medium"? "orangeBg":"greenBg")}>Volatility: {volatility}</p>
-        </div>
 
-      </Wrapper>
-    );
+  return (
+    <Wrapper className="whiteBg radius8 shadow basket">
+      <div className="wrapper-header flexSpaceCenter">
+        <h3 className="font20 extraBold">{basket.basketName}</h3>
+
+      </div>
+
+      <p className="font13" style={{ padding: "30px 0" }}>
+        {basket.overview}
+      </p>
+      <div className="flexSpaceNull">
+        <p className="font13 extraBold">{basket.author}</p>
+        {/* <p className="font13 greenColor extraBold">{free?"Free Access": ""}</p> */}
+      </div>
+
+      <div className="flexSpaceNull">
+        <p className={' tag  radius6 font11 extraBold ' + (basket.risk === "High" ? "redBg" : basket.risk === "Medium" ? "orangeBg" : "greenBg")}>Risk: {basket.risk}</p>
+        <p className={' tag  radius6 font11 extraBold ' + (basket.volatility === "High" ? "redBg" : basket.volatility === "Medium" ? "orangeBg" : "greenBg")}>Volatility: {basket.volatility}</p>
+      </div>
+      <div className=" flexCenter">
+        <div style={{ width: "100px" }}>
+          <ViewBasketButton title="View Basket" action={() => handleDetailBox(basket.id)} />
+        </div> <div style={{ width: "100px" }}>
+          <UnsubscribeButton title="Unsubscribe" action={() => handleRemoveBox(basket.id)} />
+        </div>
+      </div>
+
+
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`

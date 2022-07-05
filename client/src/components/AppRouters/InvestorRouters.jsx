@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import TopNavbar from '../Nav/TopNavbar';
-import PortfolioHeader from '../PortfolioMngmt/PortfolioHeader';
+import InvestmentHeader from '../InvestmentMngmt/InvestmentHeader';
 import Footer from '../../components/Sections/Footer';
 import SubscribedBasketContext from '../contexts/SubscribedBasketContext'
 import React,  { useState }  from 'react';
@@ -11,7 +11,7 @@ function InvestorRouters() {
   return (
     <div>
       <TopNavbar />
-      <PortfolioHeader />
+      <InvestmentHeader />
       <SubscribedBasketContext.Provider value={{ baskets, setBaskets }}>
         <Routes>
           <Route element={<SubscriptionHome />} path="/" />
