@@ -13,8 +13,7 @@ const PortfolioCreate = () => {
    
     const handleOnSubmit = async (basket) => {
         setBaskets([basket,...baskets]);
-        console.log(basket)
-
+ 
         const headers = {
           "content-type": "application/json",
           "Authorization": "Bearer: " + token
@@ -33,33 +32,16 @@ const PortfolioCreate = () => {
           }),
           json: true 
         };
-        
-        // note that optionsDebug is created only for debugging purposes
-        // const optionsDebug = {
-        //   body: JSON.stringify({
-        //         "basketName": "new" + Date.now(), 
-        //         "overview": "new123", 
-        //         "details": "new123",
-        //         "volatility": "new123", 
-        //         "risk": "new123",  
-        //         "rebalanceFee": 1,
-        //         "subscriptionFee": 5,
-        //         "cryptoAlloc": basket.cryptoAlloc
-        //   }),
-        //   json: true 
-        // };
-        // configOptions("POST", headers, optionsDebug); 
 
         configOptions("POST", headers, options);  
         const response = await fetch(`${baseUrl}/api/baskets/createBasket`, options);
-        console.log(response);
         if(response.ok){
           response.json().then(() => {
             navigate('/portfoliomain')
           })
         }
         else{
-          console.log(response.statusText);
+           console.log(response.statusText);
         }  
     }
 

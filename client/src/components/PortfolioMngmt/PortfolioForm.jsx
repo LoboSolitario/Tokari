@@ -15,24 +15,25 @@ const PortfolioForm = (props) => {
       subscriptionFee: props.basket ? props.basket.subscriptionFee : '',
       overview: props.basket ? props.basket.overview : '',
       frequency: props.basket ? props.basket.frequency : '',
-      details: props.basket ? props.basket.details : '' 
+      details: props.basket ? props.basket.details : '' ,
+      cryptoAlloc: props.basket ? props.basket.cryptoAlloc : []
     };
   });
 
   const [crypto, setCrypto] = useState(() => {
     return {   
-      Bitcoin: props.crypto ? props.crypto.Bitcoin : '', 
-      Ethereum: props.crypto ? props.crypto.Ethereum : '', 
-      Litecoin: props.crypto ? props.crypto.Litecoin : '', 
-      Tron: props.crypto ? props.crypto.Tron : '', 
-      XRP: props.crypto ? props.crypto.XRP : '', 
-      Binancecoin: props.crypto ? props.crypto.Binancecoin : '', 
+      Bitcoin: props.basket ? props.basket.cryptoAlloc[0]['weight']: '', 
+      Ethereum: props.basket ? props.basket.cryptoAlloc[1]['weight']: '', 
+      Litecoin: props.basket ? props.basket.cryptoAlloc[2]['weight']: '', 
+      Tron: props.basket ? props.basket.cryptoAlloc[3]['weight'] : '', 
+      XRP: props.basket ? props.basket.cryptoAlloc[4]['weight'] : '', 
+      Binancecoin: props.basket ? props.basket.cryptoAlloc[5]['weight'] : '', 
     };
   });
 
   const [errorMsg, setErrorMsg] = useState('');
   const [total, setTotal] = useState(('0'));
-  const { overview, basketName, risk, volatility, subscriptionFee, details} = basket;
+  const { overview, basketName, risk, volatility, subscriptionFee, details, cryptoAlloc} = basket;
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
@@ -45,16 +46,23 @@ const PortfolioForm = (props) => {
     });
 
     if (allFieldsFilled && total === 100) {
-
-     let cryptoAlloc = [];
-
+     
+    let cryptoAllocTemp =[];
+    
+    if(!cryptoAlloc){
      Object.keys(crypto).map(function(key){
-        console.log("cryptoSymbol: ", key, "weight:", crypto[key]);
         cryptoAlloc.push({"cryptoSymbol": key, "weight": crypto[key]})
         return key
      });
-     
-     const basket = {
+    }else{
+      Object.keys(crypto).map(function(key){
+        cryptoAllocTemp.push({"cryptoSymbol": key, "weight": crypto[key]})
+        return key
+     });
+      Object.assign(cryptoAlloc, cryptoAllocTemp);
+    }
+
+    const basket = {
         overview,
         basketName,
         risk,
@@ -95,6 +103,7 @@ const PortfolioForm = (props) => {
   };
 
   useEffect(()=>{
+    // console.log("crypto", props.basket.cryptoAlloc[0]['weight'])
     let errorMsg = '';
     let tempTotal = 0
     Object.keys(crypto).map((item, key) => {
@@ -184,6 +193,7 @@ const PortfolioForm = (props) => {
                       label={item}
                       name={type.toLowerCase()}
                       value={item}
+                      defaultChecked={(type === "Risk" ? item === risk : item === volatility)}
                       type={"radio"}
                       id={`inline-${item}-${type}`}
                     />
@@ -214,6 +224,7 @@ const PortfolioForm = (props) => {
                     type="number"
                     name={item}
                     value={crypto[key]}
+                    defaultValue={crypto[item] || ""}
                     min="0"
                     max="100"
                     placeholder="Enter the weight"
