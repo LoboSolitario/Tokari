@@ -12,6 +12,8 @@
   "author": "Shouvik Ghosh",
   "license": "MIT",
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.9.0",
+    "@stripe/stripe-js": "^1.32.0",
     "async": "^3.2.4",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
@@ -24,7 +26,8 @@
     "mongoose": "^6.3.5",
     "mongoose-unique-validator": "^3.1.0",
     "nodemon": "^2.0.16",
-    "password-generator": "^2.3.2"
+    "password-generator": "^2.3.2",
+    "stripe": "^9.10.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

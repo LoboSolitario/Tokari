@@ -55,10 +55,8 @@ export default function SignIn(){
         configOptions("POST", headers, options);  
 
         const response = await fetch(`${baseUrl}/api/users/login`, options);
-        console.log(response);
         if(response.ok){
           response.json().then(data => {
-            console.log("data: ", data.token);
             localStorage.setItem("token", data.token);
             localStorage.setItem("auth", "true");
             hasUserCreated(data.token);

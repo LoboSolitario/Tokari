@@ -1,15 +1,20 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useEffect } from "react";
+import {useNavigate, NavLink}  from "react-router-dom";
 import styled from "styled-components";
 import DiscoverContext from "../contexts/DiscoverContext";
 import AllBasket from "./AllBasket";
+import configOptions from '../../api/configOptions';
 import _ from 'lodash';
 
 export default function DiscoverBasket() {
 
   const { baskets, setBaskets, allBaskets, setAllBaskets } = useContext(DiscoverContext);
   const baseUrl = process.env.REACT_APP_BASE_URL;
+  const auth =  localStorage.getItem("auth")
+  const token = localStorage.getItem("token")
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -20,15 +25,16 @@ export default function DiscoverBasket() {
         let temp = [];
         response.data.map(item => {
           let obj = {
-            "key": item.id,
-            "id": item.id,
+            "key": item._id,
+            "id": item._id,
             "author": item.author,
             "basketName": item.basketName,
             "risk": item.risk,
             "volatility": item.volatility,
             "subscriptionFee": item.subscriptionFee,
             "overview": item.overview,
-            "details": item.details
+            "details": item.details,
+            "cryptoNumber" : item.cryptoNumber
           }
           temp.push(obj);
         })
@@ -38,6 +44,30 @@ export default function DiscoverBasket() {
     }
   }, []);
 
+  const handleDetailBox = async (id) => {
+
+    const headers = {
+      "content-type": "application/json",
+      "Authorization": "Bearer: " + token
+    };
+
+    const options = {
+      json: true 
+    };
+
+    configOptions("GET", headers, options);
+    const response = await fetch(`${baseUrl}/api/baskets/basket/${id}`, options);
+    if(response.ok){
+      response.json().then((data) => {
+        navigate(`/basket/${id}`, {state:data});
+      })
+    }
+    else{
+      console.log(response.statusText);
+    }  
+  };
+
+
   return (
     <React.Fragment>
 
@@ -45,7 +75,7 @@ export default function DiscoverBasket() {
 
         {!_.isEmpty(baskets) ? (
           baskets.map((basket) => (
-            <AllBasket {...basket} />
+            <AllBasket basket={basket} handleDetailBox={handleDetailBox}/>
           ))
         ) : (
           <p>No matching results.</p>

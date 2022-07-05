@@ -13,7 +13,7 @@ const BasketBox = ({
   subscriptionFee}) => {
     
   return (
-      <Wrapper className="whiteBg radius8 shadow basket">
+      <Wrapper className="whiteBg radius8 shadow h-10">
         <div className="flexSpaceNull">
           <h3 className="font20 extraBold">{basketName}</h3>
           {subscriptionFee==0?<FreeIcon />: ""}

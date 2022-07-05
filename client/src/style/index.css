@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
  html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -52,13 +54,20 @@
   body {
     background: #fff;
     color: #0B093B;
-    font-family: 'Khula', sans-serif;
+    font-family: 'Raleway';
+
     overflow-x: hidden;
     font-size: 16px;
     font-weight: 400;
   }
   .container {
     width: 100%;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0px 30px;
+  }
+  .container70 {
+    width: 70%;
     max-width: 1220px;
     margin: 0 auto;
     padding: 0px 30px;
@@ -110,6 +119,17 @@
   .tag {
     padding: 5px 10px;
     margin: 10px 0;
+  }
+  .box {  
+    padding: 5px 0;
+    margin: 10px 0; 
+  }
+  .borderShow {
+    border: 1px solid #7620FF;
+  }
+  .borderBottom {
+    border-bottom: 1px solid #707070;
+    padding: 10px 0 0;
   }
   .shadow {
     box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
@@ -197,7 +217,18 @@
   .flexGrow1{
     flex-grow: 4;
   }
-
+  .flexWrapper70{
+    width: 70%
+  }
+  .flexWrapper60{
+    width: 60%
+  }
+  .flexWrapper25{
+    width: 25%
+  }
+  .flexWrapper20{
+    width: 20%
+  }
   /* FONT SIZES */
   .font11 {
     font-size: 0.688rem;
@@ -379,25 +410,8 @@ input[type="search"]::placeholder {
   color: rgb(133, 126, 126);
 }
 
-button[type="submit"] {
-  text-indent: -999px;
-  overflow: hidden;
-  width: 40px;
-  padding: 0;
-  margin: 0;
-  border: 1px solid transparent;
-  border-radius: inherit;
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
-  /* background-image: url('http://i47.tinypic.com/r02vbq.png'); */
-  cursor: pointer;
-  opacity: 0.7;
-}
 
-button[type="submit"]:hover {
-  opacity: 1;
-}
 
-button[type="submit"]:focus,
 input[type="search"]:focus {
   box-shadow: 0 0 3px 0 #1183d6;
   border-color: #1183d6;
@@ -422,4 +436,63 @@ input.nosubmit {
   border-color: rgb(94, 92, 92);
   border-radius: 0.6rem ;
   margin:5px;
+}
+
+.tagStyle:hover{
+  background-color: black !important;
+}
+
+
+
+/* stripe CSS */
+
+.FormGroup {
+	margin: 0 15px 20px;
+	padding: 0;
+	border-style: none;
+	background-color: #7795f8;
+	will-change: opacity, transform;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #829fff;
+	border-radius: 4px;
+}
+
+.FormRow {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	margin-left: 15px;
+	border-top: 1px solid #819efc;
+}
+
+.StripeElement--webkit-autofill {
+	background: transparent !important;
+}
+
+.StripeElement {
+	width: 100%;
+	padding: 11px 15px 11px 0;
+}
+
+.subscribeButton{
+  border: 1px solid #7620ff;
+  background-color:  transparent;
+  width: 100%;
+  padding: 8px;
+  margin-top:10px;
+  outline: none;
+  font-size: 12px;
+  color: #7620ff;
+  
+}
+
+.subscribeButton:hover {
+  background-color: #580cd2;
+  border: 1px solid #7620ff;
+  color:#7620ff;
+}
+
+.discoverPage{
+  margin-top:50px;
+  min-height:87vh;
 }
