@@ -41,7 +41,7 @@ const PortfolioForm = (props) => {
 
     const allFieldsFilled = values.every((field) => {
       const value = `${field}`.trim();
-      return value !== '' && value !== '0';
+      return value !== '';
     });
 
     if (allFieldsFilled && total === 100) {
@@ -76,9 +76,7 @@ const PortfolioForm = (props) => {
   };
 
   const handleInputChange = (event) => {
-    event.preventDefault()
     let { name, value } = event.target;
-    
     if(name === "subscriptionFee" && value < 0){
       return value = 0     
     }
@@ -97,16 +95,20 @@ const PortfolioForm = (props) => {
   };
 
   useEffect(()=>{
+    let errorMsg = '';
     let tempTotal = 0
     Object.keys(crypto).map((item, key) => {
       tempTotal += Number(crypto[item]);
       return key
     });
 
-    if(tempTotal <= 100 && tempTotal >= 0){
+    if( tempTotal <= 100 &&tempTotal >= 0){
+      setErrorMsg('');
       setTotal(tempTotal);
     }else{
-      setTotal(0)
+      errorMsg = "Please note that the total weight must be exactly 100 percent ⚠️"
+      setTotal(tempTotal);
+      setErrorMsg(errorMsg);
     }
   },[crypto]);
 
@@ -183,7 +185,7 @@ const PortfolioForm = (props) => {
                       name={type.toLowerCase()}
                       value={item}
                       type={"radio"}
-                      id={`inline-${item}-1`}
+                      id={`inline-${item}-${type}`}
                     />
                   ))}
                 </div>
@@ -214,9 +216,7 @@ const PortfolioForm = (props) => {
                     value={crypto[key]}
                     min="0"
                     max="100"
-                    defaultValue=""
                     placeholder="Enter the weight"
-                    oninput="validity.valid||(value='')"
                     onChange={(event) =>
                       event.target.value < 0
                           ? (event.target.value = "")
