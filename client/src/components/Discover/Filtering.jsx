@@ -37,7 +37,7 @@ export default function Filtering() {
 
         setBaskets(allBaskets.filter(basket => basket.basketName.includes(searchKeyword)));
 
-        console.log(allBaskets);
+        // console.log(allBaskets);
     }
 
     // function handleVolatility(e) {

@@ -126,6 +126,10 @@
     font-size: 12px;
     width: 70%;
   }
+  /* Margin Right 28px */
+  .marginRight{
+    margin-right: 28px;
+  }
   /* FLEXBOX */
   .flex {
     display: flex;
@@ -341,6 +345,12 @@
   }
   .redBg {
     background-color:rgba(238, 20, 20, 0.662);
+  }
+  .redColor{
+    color:red
+  }
+  .greenColor{
+    color:green
   }
 .searchBasket{
   padding-right:300px;
