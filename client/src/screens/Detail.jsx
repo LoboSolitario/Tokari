@@ -16,7 +16,7 @@ import FullButton from '../components/Buttons/FullButton';
 function Detail() {
 const location = useLocation();
 const basket = location.state;
-console.log(basket);
+
   return (
     <>
       <TopNavbar />

@@ -21,7 +21,6 @@ export default function DiscoverBasket() {
     async function fetchData() {
       const response = await axios.get(`${baseUrl}/api/baskets`);
       if (response.statusText === "OK") {
-        // console.log(response.data);
         let temp = [];
         response.data.map(item => {
           let obj = {
