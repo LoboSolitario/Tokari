@@ -9,14 +9,59 @@ import Footer from '../components/Sections/Footer';
 import Filtering from '../components/Discover/Filtering';
 import FreeIcon from "../assets/svg/Services/FreeIcon";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faLock} from '@fortawesome/free-solid-svg-icons';
 import FullButton from '../components/Buttons/FullButton';
+import { loadStripe } from "@stripe/stripe-js";
+
+import axios from "axios";
 
 // Screens
 function Detail() {
 const location = useLocation();
 const basket = location.state;
 console.log(basket);
+const handleSubmit = async (event) => {
+
+  const stripePromise = loadStripe(
+    'pk_test_51LG4BtLrYzCcT1VhaohAqZIhPa8mvakR4rd9z2dI7VN0iEOKAtP73PSw1pNRE0kF4VH9bSUNxkkqdDOuEXjrzJee00Gz2np472'
+  );
+  const stripe = await stripePromise;
+  const token = localStorage.getItem("token")
+  event.preventDefault();
+  await axios({
+    method: 'post',
+    url: `http://localhost:4600/api/baskets/payment`,
+    data: JSON.stringify({ "lookup_key": basket._id }),
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer: " + token
+    }
+  })
+    .then(function (response) {
+      console.log(response.data);
+      return response.data;
+    })
+    .then(function (sessionId) {
+      return stripe.redirectToCheckout({ sessionId: sessionId });
+    })
+    .then(function (result) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, you should display the localized error message to your
+      // customer using `error.message`.
+      if (result.error) {
+        alert(result.error.message);
+      }
+    })
+    .catch(err => {
+      if (err.response.status === 401) {
+        alert("Unauthorised Role Access")
+      }
+      else {
+        alert("ERROR:", err.response.data)
+      }
+
+    })
+}
   return (
     <>
       <TopNavbar />
@@ -60,28 +105,28 @@ console.log(basket);
                         <p className='font13'>{basket.details}</p>
                       </Wrapper>
                     </div>
-                    <div>
+                    <div className='borderBottom'>
+                      <Wrapper style={{ padding: "0 0 20px 0px"}}>
                       <p className='box semiBold'>At a Glance</p>
-                      <div className='borderBottom'>
-                      <div className='flexSpaceCenter' style={{ padding: "0 0 20px 0px"}}>
+                      <div className='flexSpaceCenter' >
                         <div className='flexWrapper60'>                          
-                          <p className='font13'>Cryptocurrencies</p>
-                          <p className='font13'>{basket.cryptoNumber}</p>                        
-                          <p className='font13'>Last rebalance</p>
-                          <p className='font13'>4</p>                       
+                          <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Cryptocurrencies</p>
+                          <p className='font13' style={{ padding: "0 0 7px 0px"}}>{basket.cryptoNumber}</p>                        
+                          <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Last rebalance</p>
+                          <p className='font13'>Jun.20, 2022</p>                       
                         </div>                     
                         <div className='flexWrapper30'>
-                          <p className='font13'>Rebalance frequency</p>
-                          <p className='font13'>4</p>
-                          <p className='font13'>Next rebalance</p>
-                          <p className='font13'>4</p>
+                          <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Rebalance frequency</p>
+                          <p className='font13' style={{ padding: "0 0 7px 0px"}}>three month</p>
+                          <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Next rebalance</p>
+                          <p className='font13'>Sep.20, 2022</p>
                         </div>
                       </div>
-                      </div>                     
+                      </Wrapper>                     
                     </div>
                     
                     
-                    <Wrapper>
+                    {/* <Wrapper>
                       <p className='box semiBold'>CryptoCurrencies & Weights</p>
                       <div className='flexSpaceCenter' style={{ padding: "0 0 5px 0" }}>
                         <p className='flexWrapper60 font13 semiBold'>Cryptocurrency</p>
@@ -92,12 +137,59 @@ console.log(basket);
                           <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>
                           <p className='flexWrapper30 font13 flexCenter'>{allocation.weight}</p>                        
                         </div>)}
+                    </Wrapper> */}
+
+                    
+                    <Wrapper style={{ padding: "1px 0 0 0"}}>
+                      <p className='box semiBold'>CryptoCurrencies & Weights</p>
+                      {basket.cryptoAlloc ? (
+                      <div className='flexSpaceCenter' style={{ padding: "0 0 20px 0px"}}>
+                        <div className='flexWrapper60'>                          
+                          <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
+                          {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation =>                           
+                              <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>)}
+                        </div>                     
+                        <div className='flexWrapper30'>
+                          <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Weights(%)</p>
+                          {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation =>                           
+                              <p className='flexWrapper60 font13'>{allocation.weight}</p>)}
+                        </div>
+                      </div>            
+                    ) : (
+                      <Wrapper className='container whiteBg shadow flexCenter' style={{height:'200px'}}>
+                        <div  style={{width: '200px'}}>
+                          <div className='flexCenter' style={{ padding: "5px 0px"}}>
+                            <FontAwesomeIcon icon={faLock} className="font30 purpleColor"/>
+                          </div>
+                          <p className='flexCenter font13' style={{ padding: "5px 0px"}}>
+                            Subcribe to see cryptocurrencies 
+                          </p>
+                          <div style={{ padding: "5px 0px"}} className="flexCenter">
+                            <form onSubmit={handleSubmit}>
+                              {/* Add a hidden field with the lookup_key of your Price */}
+                              <input type="hidden" name="lookup_key" value={basket._id} />
+                              <button className="smallsubscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
+                                {basket.subscriptionFee==0 ? "Invest now" : "Subscribe now"}
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </Wrapper>
+                    )}
                     </Wrapper>
                   </div>
-                  <div className="flexWrapper20">
-                  <FullButton title={basket.subscriptionFee==0 ? "Invest now" : "Subscribe now"}/>
+                  <div className="flexWrapper25" >
+                    <div style={{ padding: "25px 0 0" }}>
+                      <form onSubmit={handleSubmit}>
+                        {/* Add a hidden field with the lookup_key of your Price */}
+                        <input type="hidden" name="lookup_key" value={basket._id} />
+                        <button className="subscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
+                          {basket.subscriptionFee==0 ? "Invest now" : "Subscribe now"}
+                        </button>
+                      </form>
+                    </div>
                     <div className='box textCenter'>
-                      <p>Subscription fee {basket.subscriptionFee} €</p> 
+                      <p className='font13'>Subscription fee {basket.subscriptionFee} €</p> 
                     </div>                   
                     
                   </div>

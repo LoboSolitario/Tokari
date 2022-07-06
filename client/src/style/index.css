@@ -223,6 +223,9 @@
   .flexWrapper60{
     width: 60%
   }
+  .flexWrapper30{
+    width: 30%
+  }
   .flexWrapper25{
     width: 25%
   }
@@ -476,20 +479,36 @@ input.nosubmit {
 
 .subscribeButton{
   border: 1px solid #7620ff;
-  background-color:  transparent;
+  background-color:  #7620ff;
   width: 100%;
-  padding: 8px;
-  margin-top:10px;
+  padding: 10px;
   outline: none;
-  font-size: 12px;
-  color: #7620ff;
+  font-size: 15px;
+  color: #fff;
   
 }
 
 .subscribeButton:hover {
   background-color: #580cd2;
   border: 1px solid #7620ff;
-  color:#7620ff;
+  color:#fff;
+}
+
+.smallsubscribeButton{
+  border: 1px solid #7620ff;
+  background-color:  #7620ff;
+  width: 100px;
+  padding: 5px;
+  outline: none;
+  font-size: 12px;
+  color: #fff;
+  
+}
+
+.smallsubscribeButton:hover {
+  background-color: #580cd2;
+  border: 1px solid #7620ff;
+  color:#fff;
 }
 
 .discoverPage{

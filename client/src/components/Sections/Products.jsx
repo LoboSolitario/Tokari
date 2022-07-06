@@ -3,9 +3,10 @@ import styled from "styled-components";
 // Components
 import BasketBox from "../Elements/BasketBox";
 import FullButton from "../Buttons/FullButton";
-
+import {useNavigate}  from "react-router-dom";
 
 export default function Products() {
+  let navigate = useNavigate();
   return (
     <Wrapper id="products">
       <div className="lightBg" style={{padding: '50px 0 0'}}>
@@ -85,7 +86,7 @@ export default function Products() {
           </div>
           <div className="row flexCenter">
             <div style={{ margin: "50px 0", width: "200px" }}>
-              <FullButton title="Discover" action={() => alert("clicked")} />
+              <FullButton title="Discover" action={() => navigate("/discover")} />
             </div>
           </div>
         </div>
