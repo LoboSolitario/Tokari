@@ -63,6 +63,12 @@
     margin: 0 auto;
     padding: 0px 30px;
   }
+  .container80 {
+    width: 80%;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0px 30px;
+  }
   @media only screen and (max-width: 859px) {
     .container {
       padding: 0 15px;
@@ -182,6 +188,12 @@
   }
   .flexGrow4{
     flex-grow: 4;
+  }
+  .flexPro1{
+    flex: 1 
+  }
+  .flexPro4{
+    flex: 4 
   }
 
   /* FONT SIZES */
@@ -333,14 +345,14 @@
     background-color:rgba(238, 20, 20, 0.662);
   }
 .searchBasket{
-  padding-right:300px;
+  /* padding-right:300px; */
   min-height: 70vh;
-  margin-left: 0;
+  /* margin-left: 0; */
 }
 .searchBar{
-  margin-right: 0;
+  /* margin-right: 0; */
   margin-top: 20px;
-  margin-left:300px;
+  /* margin-left:300px; */
 }
 
 

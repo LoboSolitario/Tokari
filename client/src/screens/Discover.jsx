@@ -16,7 +16,7 @@ function Discover() {
       <TopNavbar />
       <div className="lightBg">
         <DiscoverHeader />
-        <div className="flex ">
+        <div className="flex flexSpaceNull container80">
           <DiscoverContext.Provider value={{ baskets, setBaskets, allBaskets, setAllBaskets }}>
               <Filtering />
               <Routes>
