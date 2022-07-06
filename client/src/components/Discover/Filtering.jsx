@@ -27,22 +27,22 @@ export default function Filtering() {
 
         let filteredBaskets = [...allBaskets];
 
-        if (activeVolatility === 1) {
+        if (activeSubscriptionType === 1) {
             // Nothing to do
-        } else if (activeVolatility === 2) {
-            filteredBaskets = filteredBaskets.filter(basket => basket.volatility === "Low")
-        } else if (activeVolatility === 3) {
-            filteredBaskets = filteredBaskets.filter(basket => basket.volatility === "Medium")
-        } else if (activeVolatility === 4) {
-            filteredBaskets = filteredBaskets.filter(basket => basket.volatility === "High")
+        } else if (activeSubscriptionType === 2) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.subscriptionFee <= 0)
+        } else if (activeSubscriptionType === 3) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.subscriptionFee > 0)
         }
 
-        if (activeSubscriptionType === 5) {
+        if (activeVolatility === 4) {
             // Nothing to do
-        } else if (activeSubscriptionType === 6) {
-            filteredBaskets = filteredBaskets.filter(basket => basket.subscriptionFee <= 0)
-        } else if (activeSubscriptionType === 7) {
-            filteredBaskets = filteredBaskets.filter(basket => basket.subscriptionFee > 0)
+        } else if (activeVolatility === 5) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.volatility === "Low")
+        } else if (activeVolatility === 6) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.volatility === "Medium")
+        } else if (activeVolatility === 7) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.volatility === "High")
         }
 
         if (activeRiskType === 8) {
@@ -56,7 +56,7 @@ export default function Filtering() {
         }
 
         if (submittedSearchKeyword.length != 0) {
-            filteredBaskets = filteredBaskets.filter(basket => basket.basketName.includes(submittedSearchKeyword))
+            filteredBaskets = filteredBaskets.filter(basket => basket.basketName.toLowerCase().includes(submittedSearchKeyword.toLowerCase()))
         }
         setBaskets(filteredBaskets);
       }, [activeVolatility, activeSubscriptionType, activeRiskType, submittedSearchKeyword]);
@@ -79,52 +79,52 @@ export default function Filtering() {
                         <ColoredLine color="grey"></ColoredLine>
 
                         <div style={{whiteSpace: "nowrap"}}>
-                            <label style={{margin: "10px 0 0 0"}} className="flexLeft semiBold">Volatility</label>
+                            <label style={{margin: "20px 0 0 0"}} className="flexLeft semiBold">Subscription Type</label>
                             <div>
-                                <ToggleButtonGroup type="radio" name="Volatility"  defaultValue={1} onChange={(e) => setActiveVolatility(e)} className="flexSpaceCenter">
-                                    <ToggleButton id="valatility-all" value={1} className="tagStyle flexCenter font13">
-                                        Show All
-                                    </ToggleButton>
-                                    <ToggleButton id="valatility-low" value={2} className="tagStyle flexCenter font13">
-                                        Low
-                                    </ToggleButton>
-                                    <ToggleButton id="valatility-moderate" value={3} className="tagStyle flexCenter font13">
-                                        Medium
-                                    </ToggleButton>
-                                    <ToggleButton id="valatility-high" value={4} className="tagStyle flexCenter font13">
-                                        High
-                                    </ToggleButton>
+                                <ToggleButtonGroup type="radio" name="SubscriptionType" defaultValue={1} onChange={(e) => setActiveSubscriptionType(e)} className="flexSpaceCenter">
+                                        <ToggleButton id="subscription-type-show-all" value={1}  className="tagStyle flexCenter font13 shadow">
+                                            Show All
+                                        </ToggleButton>
+                                        <ToggleButton id="subscription-type-free-access" value={2}  className="tagStyle flexCenter font13 shadow">
+                                            Free Access
+                                        </ToggleButton>
+                                        <ToggleButton id="subscription-type-fee-based" value={3}  className="tagStyle flexCenter font13 shadow">
+                                            Fee Based
+                                        </ToggleButton>
                                 </ToggleButtonGroup>
                             </div>
 
-                            <label style={{margin: "20px 0 0 0"}} className="flexLeft semiBold">Subscription Type</label>
+                            <label style={{margin: "10px 0 0 0"}} className="flexLeft semiBold">Volatility</label>
                             <div>
-                                <ToggleButtonGroup type="radio" name="SubscriptionType" defaultValue={5} onChange={(e) => setActiveSubscriptionType(e)} className="flexSpaceCenter">
-                                        <ToggleButton id="subscription-type-show-all" value={5}  className="tagStyle flexCenter font13">
-                                            Show All
-                                        </ToggleButton>
-                                        <ToggleButton id="subscription-type-free-access" value={6}  className="tagStyle flexCenter font13">
-                                            Free Access
-                                        </ToggleButton>
-                                        <ToggleButton id="subscription-type-fee-based" value={7}  className="tagStyle flexCenter font13">
-                                            Fee Based
-                                        </ToggleButton>
+                                <ToggleButtonGroup type="radio" name="Volatility"  defaultValue={4} onChange={(e) => setActiveVolatility(e)} className="flexSpaceCenter">
+                                    <ToggleButton id="valatility-all" value={4} className="tagStyle flexCenter font13 shadow">
+                                        Show All
+                                    </ToggleButton>
+                                    <ToggleButton id="valatility-low" value={5} className="tagStyle flexCenter font13 shadow">
+                                        Low
+                                    </ToggleButton>
+                                    <ToggleButton id="valatility-moderate" value={6} className="tagStyle flexCenter font13 shadow">
+                                        Medium
+                                    </ToggleButton>
+                                    <ToggleButton id="valatility-high" value={7} className="tagStyle flexCenter font13 shadow">
+                                        High
+                                    </ToggleButton>
                                 </ToggleButtonGroup>
                             </div>
 
                             <label style={{margin: "20px 0 0 0"}} className="flexLeft semiBold">Risk Type</label>
                             <div>
                                 <ToggleButtonGroup type="radio" name="RiskType" defaultValue={8} onChange={(e) => setActiveRiskType(e)} className="flexSpaceCenter">
-                                    <ToggleButton id="risk-type-all" value={8} className="tagStyle flexCenter font13">
+                                    <ToggleButton id="risk-type-all" value={8} className="tagStyle flexCenter font13 shadow">
                                         Show All
                                     </ToggleButton>
-                                    <ToggleButton id="risk-type-low" value={9} className="tagStyle flexCenter font13">
+                                    <ToggleButton id="risk-type-low" value={9} className="tagStyle flexCenter font13 shadow">
                                         Low
                                     </ToggleButton>
-                                    <ToggleButton id="risk-type-moderate" value={10} className="tagStyle flexCenter font13">
+                                    <ToggleButton id="risk-type-moderate" value={10} className="tagStyle flexCenter font13 shadow">
                                         Medium 
                                     </ToggleButton>
-                                    <ToggleButton id="risk-type-high" value={11} className="tagStyle flexCenter font13">
+                                    <ToggleButton id="risk-type-high" value={11} className="tagStyle flexCenter font13 shadow">
                                         High
                                     </ToggleButton>
                                 </ToggleButtonGroup>
