@@ -43,7 +43,7 @@ const AllBasket = ({
         }
       })
       .catch(err => {
-        if (err.response.status == 401) {
+        if (err.response.status === 401) {
           alert("Unauthorised Role Access")
         }
         else {
@@ -58,6 +58,7 @@ const AllBasket = ({
         <h3 className="font20 extraBold">
           {basket.basketName}
         </h3>
+        <p className="font13 greenColor extraBold">{basket.subscriptionFee === 0 ? "Free Access" : ""}</p>
         <div style={{ width: "100px" }}>
           <form onSubmit={handleSubmit}>
             {/* Add a hidden field with the lookup_key of your Price */}
@@ -69,27 +70,24 @@ const AllBasket = ({
         </div>
       </div>
 
-      <p className="font13" style={{ padding: "30px 0" }}>
+      <p className="font13" style={{ padding: "5px 0" }}>
         {basket.overview}
 
       </p>
-      <div className="flexSpaceNull">
-        <p className="font13 extraBold">{basket.subscriptionFee}</p>
-        <p className="font13 greenColor extraBold">{basket.subscriptionFee === 0 ? "Free Access" : ""}</p>
-      </div>
+      <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by {basket.owner}</p>
+      <p className="font11">Number of cryptocurrencies:  {basket.cryptoNumber}</p>
 
-      <p className="font13 extraBold">{basket.subscriptionFee}</p>
 
       <div className="flexSpaceNull">
-        <p className={' tag  radius6 font11 extraBold ' + (basket.risk == "High" ? "redBg" : basket.risk == "Medium" ? "orangeBg" : "greenBg")}>Risk: {basket.risk}</p>
-        <p className={' tag  radius6 font11 extraBold ' + (basket.volatility == "High" ? "redBg" : basket.volatility == "Medium" ? "orangeBg" : "greenBg")}>Volatility: {basket.volatility}</p>
+        <p className={' tag  radius6 font11 extraBold ' + (basket.risk === "High" ? "redBg" : basket.risk === "Medium" ? "orangeBg" : "greenBg")}>Risk: {basket.risk}</p>
+        <p className={' tag  radius6 font11 extraBold ' + (basket.volatility === "High" ? "redBg" : basket.volatility === "Medium" ? "orangeBg" : "greenBg")}>Volatility: {basket.volatility}</p>
       </div>
       <div style={{ width: "100px" }}>
             <ViewButton title="View Basket"  action={() => handleDetailBox(basket.id)}/>
-          </div>
+      </div>
 
 
-    </Wrapper >
+    </Wrapper>
 
   );
 }

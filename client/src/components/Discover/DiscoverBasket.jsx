@@ -27,7 +27,8 @@ export default function DiscoverBasket() {
           let obj = {
             "key": item._id,
             "id": item._id,
-            "author": item.author,
+            // "author": item.author,
+            "owner": item.owner,
             "basketName": item.basketName,
             "risk": item.risk,
             "volatility": item.volatility,
