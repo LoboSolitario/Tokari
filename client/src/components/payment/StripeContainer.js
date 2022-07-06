@@ -11,8 +11,8 @@ const SuccessDisplay = ({ sessionId }) => {
     <WrapperLogin className="whiteBg radius8 shadow container">
       <Wrapper className="container flexSpaceCenter flexColumn">
         <div style={{ marginBottom: "20px" }} className="p">Congratuations!! You have sucessfully subscribed to the basket.</div>
-        <BtnWrapper >
-          <SuccessButton title="Manage Investments" to="/discover" />
+        <BtnWrapper onClick={ ()=>{navigate("/investormain");}}>
+          <SuccessButton title="Manage Investments" to="/investormain" />
         </BtnWrapper>
       </Wrapper>
       
