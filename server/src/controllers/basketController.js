@@ -60,14 +60,17 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
     }
 
     //find the basket to be viewed
-    const basket = await Basket.findById(basketId).populate('owner');
+    const basket = await Basket.findById(basketId).populate({
+        path: 'owner',
+        select: { 'name': 1 },
+    });
     if (!basket) {
         res.status(400);
         throw new Error("Basket not found");
     }
 
     console.log(basket);
-    
+
     // If the basket is free, send the basket with cryptoAlloc data
     if (basket.subscriptionFee == 0) {
         res.status(200).json(basket);
@@ -132,7 +135,7 @@ const createBasket = asyncHandler(async (req, res) => {
         throw new Error("User not found who is creating the basket");
     }
 
-    
+
 
     //create the new basket
     const newBasket = await new Basket({
@@ -245,7 +248,7 @@ const rebalanceBasket = asyncHandler(async (req, res) => {
     }
 
     const cryptoAlloc = JSON.parse(req.body.cryptoAlloc)
-    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, {cryptoAlloc: cryptoAlloc, cryptoNumber: req.body.cryptoNumber}, { new: true });
+    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, { cryptoAlloc: cryptoAlloc, cryptoNumber: req.body.cryptoNumber }, { new: true });
     res.status(200).json(updatedBasket);
 })
 
@@ -298,14 +301,14 @@ const payment = asyncHandler(async (req, res) => {
 
             },
         ],
-        metadata: {basket_id: req.body.lookup_key},
+        metadata: { basket_id: req.body.lookup_key },
         client_reference_id: req.user.id,
         mode: 'subscription',
         success_url: `http://localhost:3000/payment/?success=true&session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `http://localhost:3000/payment/?canceled=true`,
     });
     res.status(200).json(session.id);
-    
+
 })
 
 module.exports = {
