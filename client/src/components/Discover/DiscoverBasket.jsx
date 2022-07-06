@@ -41,7 +41,7 @@ export default function DiscoverBasket() {
   return (
     <React.Fragment>
 
-      <div className="flexList container searchBasket">
+      <div className="flexList container searchBasket flexGrow4">
 
         {!_.isEmpty(baskets) ? (
           baskets.map((basket) => (

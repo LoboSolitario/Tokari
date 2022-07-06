@@ -177,7 +177,10 @@
   .flexGrow1{
     flex-grow: 1;
   }
-  .flexGrow1{
+  .flexGrow2{
+    flex-grow: 2;
+  }
+  .flexGrow4{
     flex-grow: 4;
   }
 
