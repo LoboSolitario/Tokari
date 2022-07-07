@@ -27,7 +27,7 @@
     "mongoose-unique-validator": "^3.1.0",
     "nodemon": "^2.0.16",
     "password-generator": "^2.3.2",
-    "stripe": "^9.10.0"
+    "stripe": "^9.11.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
