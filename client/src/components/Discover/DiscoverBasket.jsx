@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useEffect } from "react";
-import {useNavigate, NavLink}  from "react-router-dom";
+import {useNavigate}  from "react-router-dom";
 import styled from "styled-components";
 import DiscoverContext from "../contexts/DiscoverContext";
 import AllBasket from "./AllBasket";
@@ -21,13 +21,11 @@ export default function DiscoverBasket() {
     async function fetchData() {
       const response = await axios.get(`${baseUrl}/api/baskets`);
       if (response.statusText === "OK") {
-        // console.log(response.data);
         let temp = [];
         response.data.map(item => {
           let obj = {
             "key": item._id,
             "id": item._id,
-            // "author": item.author,
             "owner": item.owner,
             "basketName": item.basketName,
             "risk": item.risk,

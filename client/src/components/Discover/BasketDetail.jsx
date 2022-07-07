@@ -66,7 +66,7 @@ const handleSubmit = async (event) => {
                         <p className="box font11">Managed by <b> {basket.owner.name}</b></p>
                       </div>
                       <div className="box">
-                        {basket.subscriptionFee==0 ? <FreeIcon /> : ""}
+                        {basket.subscriptionFee===0 ? <FreeIcon /> : ""}
                       </div>  
                       
                     </div>
@@ -75,8 +75,8 @@ const handleSubmit = async (event) => {
                     </p>
                   </div>
                   <div className="flexSpaceNull flexCenter flexWrapper25">
-                    <p className={' tag  radius6 font11 extraBold '+ (basket.risk=="High"? "redBg" : basket.risk=="Medium"? "orangeBg":"greenBg")}>Risk: {basket.risk}</p>
-                    <p className={' tag  radius6 font11 extraBold '+ (basket.volatility=="High"? "redBg" : basket.volatility=="Medium"? "orangeBg":"greenBg")}>Volatility: {basket.volatility}</p>
+                    <p className={' tag  radius6 font11 extraBold '+ (basket.risk==="High"? "redBg" : basket.risk==="Medium"? "orangeBg":"greenBg")}>Risk: {basket.risk}</p>
+                    <p className={' tag  radius6 font11 extraBold '+ (basket.volatility==="High"? "redBg" : basket.volatility==="Medium"? "orangeBg":"greenBg")}>Volatility: {basket.volatility}</p>
                   </div>
                 </div>
                 <div className="flexSpaceNull">
@@ -95,7 +95,7 @@ const handleSubmit = async (event) => {
                         <p className='font13'>{basket.details}</p>
                       </Wrapper>
                     </div>
-                    
+
                     <div className='borderBottom'>
                       <Wrapper style={{ padding: "0 0 20px 0px"}}>
                       <p className='box semiBold'>At a Glance</p>
@@ -145,7 +145,7 @@ const handleSubmit = async (event) => {
                               {/* Add a hidden field with the lookup_key of your Price */}
                               <input type="hidden" name="lookup_key" value={basket._id} />
                               <button className="smallsubscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
-                                {basket.subscriptionFee==0 ? "Invest now" : "Subscribe now"}
+                                {basket.subscriptionFee===0 ? "Invest now" : "Subscribe now"}
                               </button>
                             </form>
                           </div>
@@ -160,7 +160,7 @@ const handleSubmit = async (event) => {
                         {/* Add a hidden field with the lookup_key of your Price */}
                         <input type="hidden" name="lookup_key" value={basket._id} />
                         <button className="subscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
-                          {basket.subscriptionFee==0 ? "Invest now" : "Subscribe now"}
+                          {basket.subscriptionFee===0 ? "Invest now" : "Subscribe now"}
                         </button>
                       </form>
                     </div>

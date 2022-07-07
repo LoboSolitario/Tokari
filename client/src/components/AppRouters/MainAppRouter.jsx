@@ -11,7 +11,6 @@ import PortfolioRouters from "./PortfolioRouters";
 import Discover from "../../screens/Discover";
 import Payment from "../../screens/Payment"
 import Detail from "../../screens/Detail";
-import BasketDetail from "../Discover/BasketDetail";
 
 export default function MainAppRouter() {
     return (

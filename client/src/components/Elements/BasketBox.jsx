@@ -1,6 +1,4 @@
 import React from "react";
-import styled from "styled-components";
-import FullButton from "../Buttons/FullButton";
 import ViewButton from "../Buttons/viewButton";
 import FreeIcon from "../../assets/svg/Services/FreeIcon";
 
@@ -17,7 +15,7 @@ const BasketBox = ({
         <div className="flexHead">
           <div className="flexSpaceNull">
             <h3 className="font20 extraBold">{basketName}</h3>
-            {subscriptionFee==0?<FreeIcon />: ""}
+            {subscriptionFee===0?<FreeIcon />: ""}
           </div>
         </div>
         <div className="flexOverview font13">
@@ -45,13 +43,5 @@ const BasketBox = ({
 
     );
 }
-
-const Wrapper = styled.div`
-  width: 350px;
-  height: 300px;
-  text-align: left;
-  padding: 20px 30px;
-  margin-top: 30px;
-`;
 
 export default BasketBox;
