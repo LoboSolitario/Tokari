@@ -15,7 +15,7 @@ export default function PortfolioHeader() {
          style={{
             display: "in-block",
             marginTop: "100px", 
-            marginBottom: "50px"}}
+            marginBottom: "0px"}}
             >
       <div className="semiBold font30 pointer">
               Porfolio Management

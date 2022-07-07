@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SuccessButton from "../Buttons/SuccessButton";
 import FullButton from "../Buttons/FullButton"
-import {useNavigate, NavLink}  from "react-router-dom";
+import {useNavigate}  from "react-router-dom";
 
 
 const SuccessDisplay = ({ sessionId }) => {
@@ -11,8 +11,8 @@ const SuccessDisplay = ({ sessionId }) => {
     <WrapperLogin className="whiteBg radius8 shadow container">
       <Wrapper className="container flexSpaceCenter flexColumn">
         <div style={{ marginBottom: "20px" }} className="p">Congratuations!! You have sucessfully subscribed to the basket.</div>
-        <BtnWrapper >
-          <SuccessButton title="Manage Investments" to="/discover" />
+        <BtnWrapper onClick={ ()=>{navigate("/investormain");}}>
+          <SuccessButton title="Manage Investments" to="/investormain" />
         </BtnWrapper>
       </Wrapper>
       

@@ -21,7 +21,6 @@ export default function PortfolioHome() {
       
         const response = await axios.get(`${baseUrl}/api/baskets/userBaskets`, { headers: { Authorization: "Bearer: " + token } });
         if(response.statusText === "OK"){
-            // console.log(response.data);
             let temp = [];
             response.data.map(item =>{
                 let obj = {
@@ -37,8 +36,6 @@ export default function PortfolioHome() {
                 temp.push(obj);             
             })
               setBaskets(temp);
-              // console.log("temp: ", temp);
-              // console.log("baskets: ", baskets);
          }
     }
   }, []);
@@ -57,10 +54,8 @@ export default function PortfolioHome() {
     configOptions("DELETE", headers, options);
 
     const response = await fetch(`${baseUrl}/api/baskets/deleteBasket/${id}`, options);
-    console.log(response);
     if(response.ok){
       response.json().then(() => {
-        // console.log(response.statusText);
         setBaskets(baskets.filter((basket) => basket.id !== id));
       })
     }

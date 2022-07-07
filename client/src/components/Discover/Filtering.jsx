@@ -36,34 +36,11 @@ export default function Filtering() {
         
 
         setBaskets(allBaskets.filter(basket => basket.basketName.includes(searchKeyword)));
-
-        // console.log(allBaskets);
+       
     }
 
-    // function handleVolatility(e) {
-    //     setActiveVolatility(e);
-    //     if (e === 1) {
-    //         setActiveVolatility
-    //         setBaskets(allBaskets.filter(basket => {return basket.basketName.includes(searchKeyword) && basket.volatility === "low" }));
-    //     } else if (e === 2) {
-    //         setBaskets(allBaskets.filter(basket => {return basket.basketName.includes(searchKeyword) && basket.volatility === "moderate"}));
-    //     } else if (e === 3) {
-    //         setBaskets(allBaskets.filter(basket => {return basket.basketName.includes(searchKeyword) && basket.volatility === "high"}));
-    //     }
-    // }
-
-    // function handleSubscriptionType(e) {
-    //     console.log(e)
-    // }
-
-    // function handleRiskType(e) {
-    //     console.log(e);
-    // }
-
     useEffect(()=>{
-        // console.log(activeVolatility);
-        // console.log(activeSubscriptionType);
-        // console.log(activeRiskType);
+
       });
     
       return (
@@ -71,7 +48,6 @@ export default function Filtering() {
 
             <Wrapper className="container searchBar">
                 <form onSubmit={handleSubmit}> 
-                {/* <form>  */}
 
                     <div className="mb-3">
                         <input

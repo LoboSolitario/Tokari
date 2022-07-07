@@ -17,22 +17,14 @@ function Discover() {
       <div className="lightBg">
         <DiscoverHeader />
         <div className="flex ">
-        <DiscoverContext.Provider value={{ baskets, setBaskets, allBaskets, setAllBaskets }}>
-         
-            {/* <div className="flexGow1"> */}
-              <Filtering />
-            {/* </div>
-            <div className="flexGrow2"> */}
-              <Routes>
-                <Route element={<DiscoverBasket />} path="/" />
-              </Routes>
-            {/* </div> */}
-            
-         
+        <DiscoverContext.Provider value={{ baskets, setBaskets, allBaskets, setAllBaskets }}>  
+          <Filtering />           
+          <Routes>
+            <Route element={<DiscoverBasket />} path="/" />
+          </Routes>                    
         </DiscoverContext.Provider>
         </div>
       </div>
-
       <Footer />
     </>
 

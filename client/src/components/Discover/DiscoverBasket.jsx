@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useEffect } from "react";
-import {useNavigate, NavLink}  from "react-router-dom";
+import {useNavigate}  from "react-router-dom";
 import styled from "styled-components";
 import DiscoverContext from "../contexts/DiscoverContext";
 import AllBasket from "./AllBasket";
@@ -26,7 +26,7 @@ export default function DiscoverBasket() {
           let obj = {
             "key": item._id,
             "id": item._id,
-            "author": item.author,
+            "owner": item.owner,
             "basketName": item.basketName,
             "risk": item.risk,
             "volatility": item.volatility,

@@ -13,7 +13,6 @@ const PortfolioCreate = () => {
    
     const handleOnSubmit = async (basket) => {
         setBaskets([basket,...baskets]);
-        console.log(basket)
 
         const headers = {
           "content-type": "application/json",
@@ -54,7 +53,6 @@ const PortfolioCreate = () => {
 
         configOptions("POST", headers, options);  
         const response = await fetch(`${baseUrl}/api/baskets/createBasket`, options);
-        console.log(response);
         if(response.ok){
           response.json().then(() => {
             navigate('/portfoliomain')

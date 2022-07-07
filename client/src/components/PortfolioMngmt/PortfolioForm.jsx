@@ -49,7 +49,6 @@ const PortfolioForm = (props) => {
      let cryptoAlloc = [];
 
      Object.keys(crypto).map(function(key){
-        console.log("cryptoSymbol: ", key, "weight:", crypto[key]);
         cryptoAlloc.push({"cryptoSymbol": key, "weight": crypto[key]})
         return key
      });
