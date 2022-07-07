@@ -68,6 +68,9 @@
   }
   .container70 {
     width: 70%;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0px 30px;
   }
   
   .container80 {
