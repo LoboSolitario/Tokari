@@ -15,7 +15,7 @@ const BasketBox = ({
         <div className="flexHead">
           <div className="flexSpaceNull">
             <h3 className="font20 extraBold">{basketName}</h3>
-            {subscriptionFee===0?<FreeIcon />: ""}
+            {subscriptionFee==="0"?<FreeIcon />: ""}
           </div>
         </div>
         <div className="flexOverview font13">
