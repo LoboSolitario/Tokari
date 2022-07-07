@@ -232,6 +232,33 @@
   .flexWrapper20{
     width: 20%
   }
+  .flexBasket {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 300px;
+    text-align: left;
+    padding: 20px 30px;
+    margin-top: 30px;
+   }
+  .flexHead {
+    width: 100%;
+    height: 70px;
+  }
+  .flexOverview {
+    flex: 4;
+    width: 100%;
+    overflow: hidden;
+  }
+  .flexRisk {
+    flex: 3;
+    width: 100%;
+  }
+  .flexButton {
+    height: 50px;
+    width: 100%;
+  }
+  
   /* FONT SIZES */
   .font11 {
     font-size: 0.688rem;

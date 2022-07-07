@@ -65,7 +65,7 @@ export default function Products() {
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
                 basketName="Basket 4"
-                overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
+                overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 risk="Medium"
                 volatility="High"
                 owner="Albert Einstein"
@@ -79,7 +79,7 @@ export default function Products() {
                 overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 risk="High"
                 volatility="Medium"
-                author="Alan Turing"
+                owner="Alan Turing"
                 //action={() => alert("clicked")}
               />
             </div>
