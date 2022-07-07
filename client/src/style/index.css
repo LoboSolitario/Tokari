@@ -68,6 +68,10 @@
   }
   .container70 {
     width: 70%;
+  }
+  
+  .container80 {
+    width: 80%;
     max-width: 1220px;
     margin: 0 auto;
     padding: 0px 30px;
@@ -214,7 +218,10 @@
   .flexGrow1{
     flex-grow: 1;
   }
-  .flexGrow1{
+  .flexGrow2{
+    flex-grow: 2;
+  }
+  .flexGrow4{
     flex-grow: 4;
   }
   .flexWrapper70{
@@ -259,6 +266,13 @@
     width: 100%;
   }
   
+  .flexPro1{
+    flex: 1 
+  }
+  .flexPro4{
+    flex: 4 
+  }
+
   /* FONT SIZES */
   .font11 {
     font-size: 0.688rem;
@@ -414,14 +428,14 @@
     color:green
   }
 .searchBasket{
-  padding-right:300px;
+  /* padding-right:300px; */
   min-height: 70vh;
-  margin-left: 0;
+  /* margin-left: 0; */
 }
 .searchBar{
-  margin-right: 0;
+  /* margin-right: 0; */
   margin-top: 20px;
-  margin-left:300px;
+  /* margin-left:300px; */
 }
 
 
@@ -461,7 +475,7 @@ input.nosubmit {
 }
 
 .tagStyle{
-  background: transparent;
+  background: white;
   color: rgb(53, 51, 51);
   border-color: rgb(94, 92, 92);
   border-radius: 0.6rem ;
@@ -541,4 +555,8 @@ input.nosubmit {
 .discoverPage{
   margin-top:50px;
   min-height:87vh;
+}
+
+.btn-check:checked+.btn-primary {
+  background-color: #7620FF;
 }
