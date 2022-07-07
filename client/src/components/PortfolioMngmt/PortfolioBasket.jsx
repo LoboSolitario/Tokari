@@ -6,6 +6,7 @@ import ViewButton from "../Buttons/viewButton";
 
 const PortfolioBasket = ({ 
   id, 
+  overview,
   basketName, 
   details, 
   risk, 
