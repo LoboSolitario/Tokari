@@ -36,10 +36,8 @@ const SignUp = () => {
     configOptions("GET", headers, options);
     
     const response = await axios.get(`${baseUrl}/api/users/userDetails`, { headers: { Authorization: "Bearer: " + token } });
-    console.log(response)
     
     if(response.statusText === "OK"){
-        console.log(response.data.role)
         localStorage.setItem("role", response.data.role);
     }
     window.location.reload();
@@ -73,10 +71,9 @@ const SignUp = () => {
           configOptions("POST", headers, options);
           
           const response = await fetch(`${baseUrl}/api/users/register`, options);
-          console.log(response);
+
           if(response.ok){
             response.json().then(data => {
-              console.log("data: ", data.token);
               localStorage.setItem("token", data.token);
               localStorage.setItem("auth", "true");
               hasUserCreated(data.token);

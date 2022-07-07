@@ -31,9 +31,8 @@ export default function SignIn(){
         };
         configOptions("GET", headers, options);
         const response = await axios.get(`${baseUrl}/api/users/userDetails`, { headers: { Authorization: "Bearer: " + token } });
-        console.log(response)
+
         if(response.statusText === "OK"){
-            console.log(response.data.role)
             localStorage.setItem("role", response.data.role);
         }
         window.location.reload();

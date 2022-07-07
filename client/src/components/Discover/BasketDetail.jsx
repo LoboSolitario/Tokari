@@ -11,7 +11,6 @@ import axios from "axios";
 function BasketDetail() {
 const location = useLocation();
 const basket = location.state;
-console.log(basket);
 const handleSubmit = async (event) => {
 
   const stripePromise = loadStripe(
@@ -30,7 +29,6 @@ const handleSubmit = async (event) => {
     }
   })
     .then(function (response) {
-      console.log(response.data);
       return response.data;
     })
     .then(function (sessionId) {
