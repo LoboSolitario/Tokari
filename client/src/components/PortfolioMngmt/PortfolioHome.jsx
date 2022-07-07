@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, {useContext} from "react";
 import { useEffect } from "react";
-import styled from "styled-components";
 import BasketContext from "../contexts/BasketContext";
 import PortfolioBasket from "./PortfolioBasket";
 import configOptions from '../../api/configOptions';
@@ -31,9 +30,11 @@ export default function PortfolioHome() {
                     "volatility": item.volatility,
                     "subscriptionFee": item.subscriptionFee,
                     "overview": item.overview,
-                    "details": item.details
+                    "details": item.details,
+                    "cryptoAlloc": item.cryptoAlloc
                 }
-                temp.push(obj);             
+                temp.push(obj);  
+                return obj           
             })
               setBaskets(temp);
          }

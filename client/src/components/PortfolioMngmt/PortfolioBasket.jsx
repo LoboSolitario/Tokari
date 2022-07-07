@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router';
 import styled from "styled-components";
 import ViewButton from "../Buttons/viewButton";
 
@@ -10,19 +11,19 @@ const PortfolioBasket = ({
   risk, 
   author, 
   volatility,
-  overview,
-  subscriptionfFee,
   handleRemoveBox
 }) => {
-    
+
+  let navigate = useNavigate();
+  
   return (
       <Wrapper className="whiteBg radius8 shadow basket">
         <div className="wrapper-header flexSpaceCenter">
           <h3 className="font20 extraBold">{basketName}
-                </h3>
-                <div style={{ width: "100px" }}>
-                <ViewButton title="Delete"  action={() => handleRemoveBox(id)}/>
-              </div>
+          </h3>
+          <div style={{ width: "40px" }}>
+            <ViewButton title="x"  action={() => handleRemoveBox(id)}/>
+          </div>
         </div>
             
         <p className="font13" style={{ padding: "30px 0" }}>
@@ -30,7 +31,6 @@ const PortfolioBasket = ({
         </p>
         <div className="flexSpaceNull">
           <p className="font13 extraBold">{author}</p>
-          {/* <p className="font13 greenColor extraBold">{free?"Free Access": ""}</p> */}
         </div>
         
         <div className="flexSpaceNull">
@@ -40,10 +40,7 @@ const PortfolioBasket = ({
 
         <div className="row flexHorizontalCenter">
             <div style={{ width: "100px" }}>
-              <ViewButton title="Rebalance" action={() => alert("clicked")} />
-            </div>
-            <div style={{ width: "100px" }}>
-              <ViewButton title="Edit" action={() => alert("clicked")} />
+              <ViewButton title="Edit" action={() => navigate(`editBasket/${id}`)}/>
             </div>
         </div>
       </Wrapper>
