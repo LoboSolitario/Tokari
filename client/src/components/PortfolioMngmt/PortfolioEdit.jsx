@@ -40,15 +40,14 @@ export default function PortfolioEdit  ({ history }){
 
         if(response.ok){
           response.json().then((data) => {
-            return data
+            navigate('/portfoliomain');
+            return data;
           })
         }
         else{
            console.log(response.statusText);
         }  
-        navigate("/");
     }
-
     return (
     <div>
         <PortfolioForm basket={basketToEdit} handleOnSubmit={handleOnSubmit}/>

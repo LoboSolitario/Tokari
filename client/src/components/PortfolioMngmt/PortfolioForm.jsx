@@ -21,14 +21,25 @@ const PortfolioForm = (props) => {
   });
 
   const [crypto, setCrypto] = useState(() => {
-    return {   
-      Bitcoin: props.basket ? props.basket.cryptoAlloc[0]['weight']: '', 
-      Ethereum: props.basket ? props.basket.cryptoAlloc[1]['weight']: '', 
-      Litecoin: props.basket ? props.basket.cryptoAlloc[2]['weight']: '', 
-      Tron: props.basket ? props.basket.cryptoAlloc[3]['weight'] : '', 
-      XRP: props.basket ? props.basket.cryptoAlloc[4]['weight'] : '', 
-      Binancecoin: props.basket ? props.basket.cryptoAlloc[5]['weight'] : '', 
-    };
+    if(props.basket){
+      return {   
+        Bitcoin: props.basket.cryptoAlloc[0] ? props.basket.cryptoAlloc[0]['weight']: '', 
+        Ethereum: props.basket.cryptoAlloc[1] ? props.basket.cryptoAlloc[1]['weight']: '', 
+        Litecoin: props.basket.cryptoAlloc[2] ? props.basket.cryptoAlloc[2]['weight']: '', 
+        Tron: props.basket.cryptoAlloc[3] ? props.basket.cryptoAlloc[3]['weight'] : '', 
+        XRP: props.basket.cryptoAlloc[4] ? props.basket.cryptoAlloc[4]['weight'] : '', 
+        Binancecoin: props.basket.cryptoAlloc[5] ? props.basket.cryptoAlloc[5]['weight'] : '', 
+      };
+    }else{
+      return {   
+        Bitcoin: '', 
+        Ethereum: '', 
+        Litecoin: '', 
+        Tron: '', 
+        XRP: '', 
+        Binancecoin: ''
+      };
+    }
   });
 
   const [errorMsg, setErrorMsg] = useState('');
