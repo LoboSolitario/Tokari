@@ -53,7 +53,7 @@ export default function TopNavbar() {
           </NavLink>):
           localStorage.getItem("role") === "investor"?
           (<NavLink
-           to="/investormain"
+           to="/investormain/subscriptions"
            className={({ isActive }) => (isActive ? "active" : "link")}
          >
            <li className="semiBold font15 pointer pointer" style={{ padding: "10px 15px" }}>
