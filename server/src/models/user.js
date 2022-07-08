@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     createdBaskets: [{ basketId: { type: mongoose.Schema.Types.ObjectId, ref: 'Basket' } }],
-    subscribedBaskets: [{ basketId: { type: mongoose.Schema.Types.ObjectId, ref: 'Basket' } }]//to be implemented after adding user roles.
+    subscribedBaskets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Basket' }]
 }, { timestamps: true });
 
 

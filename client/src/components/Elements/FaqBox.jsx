@@ -3,18 +3,18 @@ import styled from "styled-components";
 // Assets
 import QuoteIcon from "../../assets/svg/Quotes";
 
-export default function faqBox({ text, author }) {
+export default function faqBox({ answer, question }) {
   return (
     <Wrapper className="darkBg radius8 flexNullCenter flexColumn">
       <QuoteWrapper>
         <QuoteIcon />
       </QuoteWrapper>
-      <p className="orangeColor font13" style={{alignSelf: 'flex-start'}}>
-        <em>{author}</em>
+      <p className="orangeColor font15 semiBold" style={{alignSelf: 'flex-start'}}>
+        {question}
       </p>
       <br />
       <p className="whiteColor font13" style={{ paddingBottom: "30px" }}>
-        {text}
+        {answer}
       </p>
     </Wrapper>
   );

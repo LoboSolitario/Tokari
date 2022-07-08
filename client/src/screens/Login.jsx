@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import SignIn from "../components/Elements/SignIn";
-import SignUp from "../components/Elements/SignUp";
 import TopNavbar from "../components/Nav/TopNavbar";
 import Footer from "../components/Sections/Footer"
-
 
 export default function Login() {
   return (
     <>
       <TopNavbar />
-      <Wrapper className="container flexSpaceCenter">  
-          <SignIn/>
-          <SignUp/>
-      </Wrapper>
+        <div className="lightBg">
+          <Wrapper className="container flexSpaceCenter">
+            <SignIn />
+          </Wrapper>
+        </div>
       <Footer/>
     </>
   )

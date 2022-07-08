@@ -33,23 +33,23 @@ export default function faqSlider() {
       <Slider {...settings}>
         <LogoWrapper className="flexCenter">
           <FaqBox
-            text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+            answer="Lorerwem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
             labore et dolore magna aliquyam erat, sed diam voluptua."
-            author="What is a basket?"
+            question="What is a basket?"
           />
         </LogoWrapper>
         <LogoWrapper className="flexCenter">
           <FaqBox
-            text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+            answer="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
             labore et dolore magna aliquyam erat, sed diam voluptua."
-            author="How does a subscription work?"
+            question="How does a subscription work?"
           />
         </LogoWrapper>
         <LogoWrapper className="flexCenter">
           <FaqBox
-            text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+            answer="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
             labore et dolore magna aliquyam erat, sed diam voluptua."
-            author="Who are fund managers?"
+            question="Who are fund managers?"
           />
         </LogoWrapper>
       </Slider>

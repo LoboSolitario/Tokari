@@ -1,51 +1,47 @@
 import React from "react";
-import styled from "styled-components";
-import FullButton from "../Buttons/FullButton";
-export default function BasketBox({ tag, title, text, action, author, Volatility}) {
-  return (
-    // <WrapperBtn className="animate pointer" onClick={action ? () => action() : null}>
-      <Wrapper className="whiteBg radius8 shadow">
-        <h3 className="font20 extraBold">{title}</h3>
-        <p className="font13" style={{ padding: "30px 0" }}>
-          {text}
-        </p>
+import ViewButton from "../Buttons/viewButton";
+import FreeIcon from "../../assets/svg/Services/FreeIcon";
 
-        <WrapperItemInfo className="flex flexRow flexSpaceNull">
-          <p className="tag coralBg radius6 font13 extraBold">{tag}</p>
-          <p className="tag coralBg radius6 font13 extraBold">{Volatility}</p>
-        </WrapperItemInfo>
-        <br />
-        <p className="font13 extraBold">{author}</p>
-        
-        <div className="row flexRight">
-            <div style={{ width: "100px" }}>
-              <FullButton title="Details" action={() => alert("clicked")} />
-            </div>
+const BasketBox = ({ 
+  risk, 
+  basketName, 
+  overview, 
+  owner, 
+  volatility,
+  subscriptionFee}) => {
+    
+  return (
+      <div className="whiteBg radius8 shadow h-10 flexBasket">
+        <div className="flexHead">
+          <div className="flexSpaceNull">
+            <h3 className="font20 extraBold">{basketName}</h3>
+            {subscriptionFee==="0"?<FreeIcon />: ""}
+          </div>
         </div>
-      </Wrapper>
+        <div className="flexOverview font13">
+          <p>{overview}</p>
+        </div>
+        
+        <div className="flexRisk">
+          <div className="flexSpaceNull">
+            <p className="font13 extraBold">{owner}</p>
+          </div>
+          
+          <div className="flexSpaceNull" style={{padding: "12px 0 0"}}>
+            <p className={' tag  radius6 font11 extraBold '+ (risk==="High"? "redBg" : risk==="Medium"? "orangeBg":"greenBg")}>Risk: {risk}</p>
+            <p className={' tag  radius6 font11 extraBold '+ (volatility==="High"? "redBg" : volatility==="Medium"? "orangeBg":"greenBg")}>Volatility: {volatility}</p>
+          </div>
+        </div>
+        <div className="flexButton">
+          <div className="row flexHorizontalCenter">
+              <div style={{ width: "150px" }}>
+                <ViewButton title="View Basket" action={() => alert("clicked")} />
+              </div>
+          </div>
+        </div>
+      </div>
 
     );
 }
 
-const Wrapper = styled.div`
-  width: 100%;
-  text-align: left;
-  padding: 20px 30px;
-  margin-top: 30px;
-`;
-const WrapperBtn = styled.button`
-  border: 0px;
-  outline: none;
-  background-color: transparent;
-  :hover {
-    opacity: 0.5;
-  }
-`;
-
-const WrapperItemInfo = styled.button`
-  border: none;
-  outline: none;
-  display: flex;
-  background-color: transparent;
-  width: 100%;
-`;
+export default BasketBox;

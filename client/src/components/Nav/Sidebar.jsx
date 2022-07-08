@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {NavLink} from 'react-router-dom';
-// import { Link } from "react-scroll";
+import { Link } from "react-router-dom";
 // Assets
 import CloseIcon from "../../assets/svg/CloseIcon";
 import LogoIcon from "../../assets/svg/Logo";
@@ -23,50 +22,70 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
 
       <UlStyle className="flexNullCenter flexColumn">
         <li className="semiBold font15 pointer">
-          <NavLink
+          <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
-            activeClass="active"
+            activeclass="active"
             className="whiteColor"
             style={{ padding: "10px 15px" }}
             to="/"
-            spy={true}
-            smooth={true}
             offset={-60}
           >
             Home
-          </NavLink>
+          </Link>
         </li>
         <li className="semiBold font15 pointer">
-          <NavLink
-            onClick={() => toggleSidebar(!sidebarOpen)}
-            activeClass="active"
-            className="whiteColor"
-            style={{ padding: "10px 15px" }}
-            to="/login"
-            spy={true}
-            smooth={true}
-            offset={-60}
-          >
-            Login
-          </NavLink>
+          {localStorage.getItem("token")?(
+            <Link onClick={()=>{
+              localStorage.clear();
+            }}
+              to="/login"
+              activeclass="active"
+              className="whiteColor"
+              style={{ padding: "10px 15px" }}
+              offset={-60}
+              >
+                Logout
+            </Link>
+          ):( 
+            <Link
+              onClick={() => toggleSidebar(!sidebarOpen)}
+              activeclass="active"
+              className="whiteColor"
+              style={{ padding: "10px 15px" }}
+              to="/login"
+              offset={-60}
+            >
+              Login
+            </Link>
+          )}
         </li>
 
         <li className="semiBold font15 pointer">
-          <NavLink
+          <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
-            activeClass="active"
-            className="whiteColor"
+            activeclass="active"
+            className="semiBold font15 pointer radius8 lightBg"
             style={{ padding: "10px 15px" }}
             to="/discover"
-            spy={true}
-            smooth={true}
             offset={-60}
           >
             Discover
-          </NavLink>
+          </Link>
         </li>
-
+  
       </UlStyle>
+      {/* <UlStyle className="flexSpaceCenter">
+        <li className="semiBold font15 pointer">
+          <a href="/" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
+            Log in
+          </a>
+        </li>
+        <li className="semiBold font15 pointer flexCenter">
+          <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
+            Get Started
+          </a>
+        </li>
+      </UlStyle> */}
     </Wrapper>
   );
 }
