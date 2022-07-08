@@ -2,15 +2,14 @@ import React from "react";
 import { useNavigate } from 'react-router';
 import styled from "styled-components";
 import ViewButton from "../Buttons/viewButton";
-
+import UnsubscribeButton from "../Buttons/UnsubscribeButton"
+import MoreButton from "../Buttons/MoreButton" 
 
 const PortfolioBasket = ({ 
   id, 
   overview,
   basketName, 
-  details, 
   risk, 
-  author, 
   volatility,
   handleRemoveBox
 }) => {
@@ -20,28 +19,27 @@ const PortfolioBasket = ({
   return (
       <Wrapper className="whiteBg radius8 shadow basket">
         <div className="wrapper-header flexSpaceCenter">
-          <h3 className="font20 extraBold">{basketName}
+          <h3 className="font18 extraBold">{basketName}
           </h3>
-          <div style={{ width: "40px" }}>
-            <ViewButton title="x"  action={() => handleRemoveBox(id)}/>
-          </div>
         </div>
-            
-        <p className="font13" style={{ padding: "30px 0" }}>
-          {overview}
+        <p className="font12" style={{ height: "100px", padding: "20px 0" }}>
+          {overview.length > 120 ?
+              `${overview.substring(0, 120)}...` : overview
+          }
         </p>
-        <div className="flexSpaceNull">
-          <p className="font13 extraBold">{author}</p>
-        </div>
-        
         <div className="flexSpaceNull">
           <p className={' tag  radius6 font11 extraBold '+ (risk==="High"? "redBg" : risk==="Medium"? "orangeBg":"greenBg")}>Risk: {risk}</p>
           <p className={' tag  radius6 font11 extraBold '+ (volatility==="High"? "redBg" : volatility==="Medium"? "orangeBg":"greenBg")}>Volatility: {volatility}</p>
         </div>
-
-        <div className="row flexHorizontalCenter">
-            <div style={{ width: "100px" }}>
+        <div className="row flexCenter flexSpaceNull">
+            <div style={{ width: "100px", marginBottom: "10px"}}>
+              <MoreButton title="View" action={() => alert("click")}/>
+            </div>
+            <div style={{ width: "100px", marginBottom: "10px"}}>
               <ViewButton title="Edit" action={() => navigate(`editBasket/${id}`)}/>
+            </div>
+            <div style={{ width: "100px"}}>
+              <UnsubscribeButton title="Delete"  action={() => handleRemoveBox(id)}/>
             </div>
         </div>
       </Wrapper>
