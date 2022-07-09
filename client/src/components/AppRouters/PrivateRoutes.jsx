@@ -1,8 +1,5 @@
 import React from 'react';
 import { Outlet,  Navigate, useLocation} from 'react-router-dom';
-import configOptions from '../../api/configOptions';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 
 const PrivateRoutes = (props) => {
 
