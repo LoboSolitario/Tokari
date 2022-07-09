@@ -57,7 +57,7 @@ export default function SubscriptionHome() {
 
     configOptions("DELETE", headers, options);
 
-    const response = await fetch(`${baseUrl}/api/baskets/deleteBasket/${id}`, options);
+    const response = await fetch(`${baseUrl}/api/baskets/unsubscribeBasket/${id}`, options);
     if(response.ok){
       response.json().then(() => {
         setBaskets(baskets.filter((basket) => basket.id !== id));
