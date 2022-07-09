@@ -11,7 +11,8 @@ const PortfolioBasket = ({
   basketName, 
   risk, 
   volatility,
-  handleRemoveBox
+  handleRemoveBox,
+  handleDetailBox
 }) => {
 
   let navigate = useNavigate();
@@ -22,7 +23,7 @@ const PortfolioBasket = ({
           <h3 className="font18 extraBold">{basketName}
           </h3>
         </div>
-        <p className="font12" style={{ height: "100px", padding: "20px 0" }}>
+        <p className="font12" style={{ height: "120px", padding: "25px 0" }}>
           {overview.length > 120 ?
               `${overview.substring(0, 120)}...` : overview
           }
@@ -33,7 +34,7 @@ const PortfolioBasket = ({
         </div>
         <div className="row flexCenter flexSpaceNull">
             <div style={{ width: "100px", marginBottom: "10px"}}>
-              <MoreButton title="View" action={() => alert("click")}/>
+              <MoreButton title="View" action={() => handleDetailBox(id)}/>
             </div>
             <div style={{ width: "100px", marginBottom: "10px"}}>
               <ViewButton title="Edit" action={() => navigate(`editBasket/${id}`)}/>

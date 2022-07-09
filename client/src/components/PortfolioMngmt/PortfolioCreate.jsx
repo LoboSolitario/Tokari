@@ -30,7 +30,7 @@ const PortfolioCreate = () => {
                 "risk": basket.risk,  
                 "rebalanceFee": "12312",
                 "subscriptionFee": basket.subscriptionFee,
-                "cryptoAlloc": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0),
+                "cryptoAlloc":  basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0),
                 "cryptoNumber": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0).length
           }),
           json: true 
@@ -42,7 +42,7 @@ const PortfolioCreate = () => {
           response.json().then(() => {
             errorMsgTemp = "";
             setErrorMsg(errorMsgTemp);
-            navigate('/portfoliomain')
+            navigate('/portfoliomain');
           })
         }
         else{

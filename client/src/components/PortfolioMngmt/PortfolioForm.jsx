@@ -114,7 +114,6 @@ const PortfolioForm = (props) => {
   };
 
   useEffect(()=>{
-    // console.log("crypto", props.basket.cryptoAlloc[0]['weight'])
     let errorMsg = '';
     let tempTotal = 0
     Object.keys(crypto).map((item, key) => {
