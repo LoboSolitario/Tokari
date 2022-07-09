@@ -216,6 +216,27 @@ const editBasket = asyncHandler(async (req, res) => {
     res.status(200).json(updatedBasket);
 })
 
+const unsubscribeBasket = asyncHandler(async (req, res)=>{
+     //Check if the passed :id is a valid mongodb _id
+     if (!ObjectId.isValid(req.params.id)) {
+        res.status(401);
+        throw new Error("Incorrect basket id")
+    }
+    //find the user who is trying to rebalance the basket
+    const user = await User.findById(req.user.id).populate('subscribedBaskets');
+    //check if there is a user 
+    if (!user) {
+        res.status(401)
+        throw new Error('User not found.');
+    }
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+        $pullAll:{
+            subscribedBaskets:[{_id: req.params.id}]
+        }
+    }, { new: true })
+    res.status(200).json(updatedUser)
+
+})
 
 // @desc Rebalance Basket
 // @route GET /api/baskets/rebalanceBasket/:id
@@ -319,6 +340,7 @@ module.exports = {
     rebalanceBasket,
     editBasket,
     payment,
+    unsubscribeBasket,
     getUserSubscribedBaskets
 
 }
