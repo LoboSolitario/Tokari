@@ -356,7 +356,6 @@ const investBasket = asyncHandler(async (req, res) => {
     const investment_amount = req.body.amount;
     // find the basket
     const basket = await Basket.findById(req.params.id);
-    // console.log("basket:", basket.cryptoAlloc)
     const headers = {
         'X-MBX-APIKEY': binance_api_key
     }
@@ -404,6 +403,7 @@ const investBasket = asyncHandler(async (req, res) => {
         
         let transaction_data = {
             'basketName': basket.basketName,
+            'investmentAmount': investment_amount, 
             'cryptoAlloc': []
         }
         transaction_response.forEach((transaction) => {
