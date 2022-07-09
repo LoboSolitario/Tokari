@@ -129,12 +129,22 @@ const getUserSubscribedBaskets = asyncHandler(async (req, res) => {
     res.status(200).json(user.subscribedBaskets)
 })
 
-// @desc get list of all the subscribed baskets of a user
-// @route GET /api/baskets/userSubscribedBaskets
+// @desc get list of all the invested baskets of a user
+// @route GET /api/baskets/userInvestedBaskets
 // @access private
 const getUserInvestedBaskets = asyncHandler(async (req, res) => {
+    
     const user = await User.findById(req.user.id).select('-password').populate('investedBaskets')
     res.status(200).json(user.investedBaskets)
+})
+
+
+// @desc get list of all the transactions of a user
+// @route GET /api/baskets/userTransactions
+// @access private
+const getUserTransactions = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id).select('-password')
+    res.status(200).json(user.transactionLists)
 })
 
 // @desc Create a new basket
@@ -411,8 +421,8 @@ const investBasket = asyncHandler(async (req, res) => {
         const user = await User.findByIdAndUpdate(req.user.id, { $push: { investedBaskets: basket, transactionLists:transaction_data } }, { new: true })
         console.log(user)
         res.status(200).json(data)
-    }
-    ).catch(errors => {
+    }).catch(errors => {
+        console.log("###########################################3")
         res.status(400).json(errors)
         // react on errors.
     })
@@ -431,6 +441,8 @@ module.exports = {
     payment,
     getUserSubscribedBaskets,
     getUserInvestedBaskets,
-    investBasket
+    investBasket,
+    getUserTransactions
+    
 
 }
