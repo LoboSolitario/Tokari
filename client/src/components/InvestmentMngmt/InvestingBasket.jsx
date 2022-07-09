@@ -2,15 +2,55 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import FreeIcon from "../../assets/svg/Services/FreeIcon";
 import FullButton from "../Buttons/FullButton";
+import configOptions from '../../api/configOptions';
+import {useNavigate}  from "react-router-dom";
 import { Form } from 'react-bootstrap';
 
 // Screens
 function BasketDetail(props) {
-    const [investAmount, setInvestAmount] = useState(0);
+    const [amount, setAmount] = useState(0);
     const basket = props.basket;
     function handleClick(event) {
         console.log("helloo");
-        console.log(investAmount);
+        console.log(amount);
+    }
+    let navigate = useNavigate();
+    const baseUrl = process.env.REACT_APP_BASE_URL;  
+    const token = localStorage.getItem("token");
+   
+    const handleOnSubmit = async (e) => {
+        e.preventDefault();
+        const headers = {
+          "content-type": "application/json",
+          "Authorization": "Bearer: " + token
+        };
+        
+        const options = {
+          body: JSON.stringify({
+                // "basketName": basket.basketName,
+                // "overview": basket.overview, 
+                // "details": basket.details,
+                // "volatility": basket.volatility, 
+                // "risk": basket.risk,  
+                // "rebalanceFee": "12312",
+                // "subscriptionFee": basket.subscriptionFee,
+                // "cryptoAlloc": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0),
+                // "cryptoNumber": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0).length,
+                "amount": basket.amount
+          }),
+          json: true 
+        };
+
+        configOptions("POST", headers, options);  
+        const response = await fetch(`${baseUrl}/api/baskets/invest/${basket._id}`, options);
+        if(response.ok){
+          response.json().then(() => {
+            navigate('/investormain')
+          })
+        }
+        else{
+           console.log(response.statusText);
+        }  
     }
 
   return (
@@ -18,25 +58,25 @@ function BasketDetail(props) {
         <div style={{padding: '30px 0'}}>  
             <div className="container">
                 <div className="flexSpaceNull">
-                    <div className='flexWrapper60'>
+                    <div>
                         <div className="flexSpaceNull">
                             <div>
                                 <h3 className="box font30 extraBold">Investing in <em>{basket.basketName}</em></h3>
                                 <p className="box font11">Managed by <b> {basket.owner.name}</b></p>
-                                <h4>Confirm Investment Amount</h4>
+                                <h4 style={{padding: '0 0 20px 0'}}>Confirm Investment Amount</h4>
 
-                                <div className="flexRow flexNullCenter">
-                                    <Form className='font13'>
+                                <div className="flexRow">
+                                    <Form className='font13' style={{padding: '0 30px'}}>
                                         <Form.Group controlId="investAmount" style={{marginBottom: "10px"}}>
                                             <Form.Label>Investment Amount</Form.Label>
                                             <Form.Control
                                             className="input-control form-control-sm font11"
                                             type="number"
-                                            name="investAmount"
-                                            value={investAmount}
+                                            name="amount"
+                                            value={amount}
                                             placeholder="Enter the Investment Amount"
-                                            onChange={(e) => setInvestAmount(e.target.value)}
-                                            onClick={handleClick}
+                                            onChange={(e) => setAmount(e.target.value)}
+                                            onClick={handleOnSubmit}
                                             />
                                         </Form.Group>
                                     </Form>
