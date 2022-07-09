@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import FreeIcon from "../../assets/svg/Services/FreeIcon";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faLock} from '@fortawesome/free-solid-svg-icons';
@@ -10,47 +10,52 @@ import axios from "axios";
 // Screens
 function BasketDetail() {
 const location = useLocation();
+const navigate = useNavigate();
 const basket = location.state;
 const handleSubmit = async (event) => {
 
-  const stripePromise = loadStripe(
-    'pk_test_51LG4BtLrYzCcT1VhaohAqZIhPa8mvakR4rd9z2dI7VN0iEOKAtP73PSw1pNRE0kF4VH9bSUNxkkqdDOuEXjrzJee00Gz2np472'
-  );
-  const stripe = await stripePromise;
-  const token = localStorage.getItem("token")
-  event.preventDefault();
-  await axios({
-    method: 'post',
-    url: `http://localhost:4600/api/baskets/payment`,
-    data: JSON.stringify({ "lookup_key": basket._id }),
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer: " + token
-    }
-  })
-    .then(function (response) {
-      return response.data;
-    })
-    .then(function (sessionId) {
-      return stripe.redirectToCheckout({ sessionId: sessionId });
-    })
-    .then(function (result) {
-      // If `redirectToCheckout` fails due to a browser or network
-      // error, you should display the localized error message to your
-      // customer using `error.message`.
-      if (result.error) {
-        alert(result.error.message);
+  if (basket.subscriptionFee === 0) {
+    navigate(`/basket/invest/${basket._id}`, {state:basket});
+  } else {
+    const stripePromise = loadStripe(
+      'pk_test_51LG4BtLrYzCcT1VhaohAqZIhPa8mvakR4rd9z2dI7VN0iEOKAtP73PSw1pNRE0kF4VH9bSUNxkkqdDOuEXjrzJee00Gz2np472'
+    );
+    const stripe = await stripePromise;
+    const token = localStorage.getItem("token")
+    event.preventDefault();
+    await axios({
+      method: 'post',
+      url: `http://localhost:4600/api/baskets/payment`,
+      data: JSON.stringify({ "lookup_key": basket._id }),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer: " + token
       }
     })
-    .catch(err => {
-      if (err.response.status === 401) {
-        alert("Unauthorised Role Access")
-      }
-      else {
-        alert("ERROR:", err.response.data)
-      }
-
-    })
+      .then(function (response) {
+        return response.data;
+      })
+      .then(function (sessionId) {
+        return stripe.redirectToCheckout({ sessionId: sessionId });
+      })
+      .then(function (result) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, you should display the localized error message to your
+        // customer using `error.message`.
+        if (result.error) {
+          alert(result.error.message);
+        }
+      })
+      .catch(err => {
+        if (err.response.status === 401) {
+          alert("Unauthorised Role Access")
+        }
+        else {
+          alert("ERROR:", err.response.data)
+        }
+  
+      })
+  }
 }
   return (
       <div className="container70 whiteBg shadow discoverPage" >
