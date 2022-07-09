@@ -14,6 +14,7 @@ function BasketDetail(props) {
         console.log("helloo");
         console.log(amount);
     }
+    //also need do things like DiscoverBasket.jsx
     let navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_BASE_URL;  
     const token = localStorage.getItem("token");
@@ -44,8 +45,8 @@ function BasketDetail(props) {
         configOptions("POST", headers, options);  
         const response = await fetch(`${baseUrl}/api/baskets/invest/${basket._id}`, options);
         if(response.ok){
-          response.json().then(() => {
-            navigate('/investormain')
+          response.json().then((data) => {
+            navigate('/investsuccessfully');
           })
         }
         else{

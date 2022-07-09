@@ -31,6 +31,15 @@ export default function InvestorNavbar() {
               </li>
             </NavLink>
 
+            <NavLink
+              to="/investormain/transactions"
+              className={({ isActive }) => (isActive ? "active" : "link")}
+            >
+              <li className="semiBold font15 pointer" style={{ padding: "10px 15px" }}>
+                Transactions
+              </li>
+            </NavLink>
+
 
           </UlWrapperRight>
         </NavInner>

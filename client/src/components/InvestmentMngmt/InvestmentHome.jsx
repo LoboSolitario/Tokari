@@ -1,16 +1,15 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useEffect } from "react";
-import styled from "styled-components";
-import SubscribedBasketContext from "../contexts/SubscribedBasketContext";
-import SubscribedBasket from "./SubscribedBasket";
+import InvestmentBasketContext from "../contexts/InvestmentBasketContext";
+import InvestmentBasket from "./InvestmentBasket";
 import configOptions from '../../api/configOptions';
 import _ from 'lodash';
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function InvestmentHome() {
 
-  const { baskets, setBaskets } = useContext(SubscribedBasketContext);
+  const { baskets, setBaskets } = useContext(InvestmentBasketContext);
 
   const auth = localStorage.getItem("auth")
   const token = localStorage.getItem("token")
@@ -95,7 +94,7 @@ export default function InvestmentHome() {
 
   return (
     <React.Fragment>
-      <div className="flexColumn container" style={{ minHeight: "72vh" }}>
+      {/* <div className="flexColumn container" style={{ minHeight: "72vh" }}>
         <div className="font25">
           It sure is quiet here
         </div>
@@ -104,6 +103,16 @@ export default function InvestmentHome() {
         </div>
 
 
+      </div> */}
+
+      <div className="flexList container" style={{minHeight: "72vh"}}>
+        {!_.isEmpty(baskets) ? (
+          baskets.map((basket)=>(
+              <InvestmentBasket basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
+          ))
+        ) : (
+          <p>You have not yet subscribed to a basket</p>
+        )}
       </div>
     </React.Fragment>
   )

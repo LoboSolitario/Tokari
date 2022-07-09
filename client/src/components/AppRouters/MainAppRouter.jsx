@@ -12,7 +12,7 @@ import Discover from "../../screens/Discover";
 import Payment from "../../screens/Payment"
 import Detail from "../../screens/Detail";
 import Investing from "../../screens/Investing";
-
+import AfterI from "../../screens/AfterI";
 export default function MainAppRouter() {
     return (
       <>
@@ -32,6 +32,7 @@ export default function MainAppRouter() {
 
           <Route element={<Detail/>} path="/basket/:id"/>
           <Route element={<Investing/>} path="/basket/invest/:id" />
+          <Route element={<AfterI/>} path="/investsuccessfully"/>
           {/* <Route exact path="/:id" component={Detail}/> */}
         </Routes>
       </Router>
