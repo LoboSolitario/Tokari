@@ -67,7 +67,7 @@ function BasketDetail(props) {
 
                                 <div className="flexRow">
                                     <Form className='font13' style={{padding: '0 30px'}}>
-                                        <Form.Group controlId="investAmount" style={{marginBottom: "10px"}}>
+                                        <Form.Group controlId="amount" style={{marginBottom: "10px"}}>
                                             <Form.Label>Investment Amount</Form.Label>
                                             <Form.Control
                                             className="input-control form-control-sm font11"
@@ -76,11 +76,11 @@ function BasketDetail(props) {
                                             value={amount}
                                             placeholder="Enter the Investment Amount"
                                             onChange={(e) => setAmount(e.target.value)}
-                                            onClick={handleOnSubmit}
+                                            
                                             />
                                         </Form.Group>
                                     </Form>
-                                    <div className='font14'>
+                                    <div className='font14' onClick={handleOnSubmit}>
                                         <FullButton title="Invest"/>
                                     </div>
                                 </div>
