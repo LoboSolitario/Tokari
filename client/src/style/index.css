@@ -168,6 +168,17 @@
   .flex {
     display: flex;
   }
+  .flexCol{
+    flex:1
+  }
+  .flexColBig{
+    flex:2
+  }
+  .flexRowGap{
+    display: flex;
+    row-gap: 30px;
+    justify-content: space-between
+  }
   .flexSpaceCenter {
     display: flex;
     justify-content: space-between;
@@ -569,4 +580,12 @@ input.nosubmit {
 
 .btn-check:checked+.btn-primary {
   background-color: #7620FF;
+}
+
+.metricsBox{
+  padding:32px
+}
+
+.borderRad{
+  border-radius: 0.6rem ;
 }
