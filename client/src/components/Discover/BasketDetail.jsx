@@ -53,7 +53,7 @@ const handleSubmit = async (event) => {
     })
 }
   return (
-      <div className="container70 whiteBg shadow discoverPage" >
+      <div key={basket.id} className="container70 whiteBg shadow discoverPage" >
           <div style={{padding: '30px 0'}}>  
               <div className="container">
                 <div className="flexSpaceNull">
