@@ -19,7 +19,7 @@ const AllBasket = ({
         {basket.overview}
 
       </p>
-      <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by {basket.owner}</p>
+      <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by {basket.owner.name}</p>
       <p className="font11">Number of cryptocurrencies:  {basket.cryptoNumber}</p>
 
 
