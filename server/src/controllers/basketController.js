@@ -108,7 +108,7 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
 // @route GET /api/baskets/
 // @access public
 const getBaskets = asyncHandler(async (req, res) => {
-    const baskets = await Basket.find({})
+    const baskets = await Basket.find({}).populate('owner')
     res.status(200).json(baskets)
 })
 
@@ -346,21 +346,21 @@ const investBasket = asyncHandler(async (req, res) => {
     basket.cryptoAlloc.forEach((crypto) => {
         let order_crypto = cryptoMap.get(crypto.cryptoSymbol.toLowerCase())
         const ts = Date.now();
-        let quantity = (crypto.weight/100) * investment_amount / order_crypto[1];
-        if(order_crypto[0] === 'TRXUSDT'){
+        let quantity = (crypto.weight / 100) * investment_amount / order_crypto[1];
+        if (order_crypto[0] === 'TRXUSDT') {
             quantity = quantity.toFixed(0)
         }
-        else if(order_crypto[0] === 'XRPUSDT'){
+        else if (order_crypto[0] === 'XRPUSDT') {
             quantity = quantity.toFixed(1)
         }
-        else if(order_crypto[0] === 'BTCUSDT'){
+        else if (order_crypto[0] === 'BTCUSDT') {
             quantity = quantity.toFixed(5)
         }
-        else{
+        else {
             quantity = quantity.toFixed(2)
         }
-        console.log(order_crypto[0],quantity)
-        const val = "symbol=" + order_crypto[0] + "&side=BUY&type=MARKET&quantity="+quantity+"&timestamp=" + ts;
+        console.log(order_crypto[0], quantity)
+        const val = "symbol=" + order_crypto[0] + "&side=BUY&type=MARKET&quantity=" + quantity + "&timestamp=" + ts;
         const signature = hmacSHA256(val, binance_api_secret).toString();
         const post_url = "https://testnet.binance.vision/api/v3/order?" + val + "&signature=" + signature;
         const requestPromise = axios({
@@ -375,16 +375,37 @@ const investBasket = asyncHandler(async (req, res) => {
     });
 
     axios.all(list_post).then(axios.spread((...responses) => {
-        data = []
+        transaction_response = []
         responses.forEach((response) => {
-            data.push(response.data)
+            transaction_response.push(response.data)
         })
 
-        res.status(200).json(data)
+        return transaction_response
         // use/access the results 
-    })).catch(errors => {
-        console.log(errors)
-        res.status(400);
+    })).then(async (transaction_response) => {
+        
+        let transaction_data = {
+            'basketName': basket.basketName,
+            'cryptoAlloc': []
+        }
+        transaction_response.forEach((transaction) => {
+            let a = {
+                'cryptoCurrency': transaction.symbol,
+                'orderQty': transaction.fills[0].qty,
+                'price': transaction.fills[0].price,
+                'orderId': transaction.orderId
+            }
+            console.log(a)
+            transaction_data['cryptoAlloc'].push(a)
+            
+        })
+        console.log(transaction_data)
+        const user = await User.findByIdAndUpdate(req.user.id, { $push: { investedBaskets: basket, transactionLists:transaction_data } }, { new: true })
+        console.log(user)
+        res.status(200).json(data)
+    }
+    ).catch(errors => {
+        res.status(400).json(errors)
         // react on errors.
     })
 
