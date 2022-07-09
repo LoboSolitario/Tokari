@@ -41,7 +41,9 @@ export default function TransactionHome() {
       <div className="flexList container" style={{ minHeight: "72vh" }}>
         {!_.isEmpty(transactions) ? (
           transactions.map((transaction) => (
-            <TransactionBasket transaction={transaction}/>
+            <div className="container70">
+              <TransactionBasket transaction={transaction}/>
+            </div>
           ))
         ) : (
           <p>No transaction yet.</p>

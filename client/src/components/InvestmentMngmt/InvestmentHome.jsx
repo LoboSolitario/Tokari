@@ -21,7 +21,7 @@ export default function InvestmentHome() {
     fetchData();
     async function fetchData() {
 
-      const response = await axios.get(`${baseUrl}/api/baskets/userSubscribedBaskets`, { headers: { Authorization: "Bearer: " + token } });
+      const response = await axios.get(`${baseUrl}/api/baskets/userInvestedBaskets`, { headers: { Authorization: "Bearer: " + token } });
       if (response.statusText === "OK") {
         let temp = [];
         response.data.map(item => {
