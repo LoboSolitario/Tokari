@@ -19,7 +19,7 @@ export default function TransactionHome() {
   useEffect(() => {
     fetchData();
     async function fetchData() {
-      const response = await axios.get(`${baseUrl}/api/baskets`);
+      const response = await axios.get(`${baseUrl}/api/baskets/userTransactions`, { headers: { Authorization: "Bearer: " + token } });
       if (response.statusText === "OK") {
         let temp = [];
         response.data.map(item => {

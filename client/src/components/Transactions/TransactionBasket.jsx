@@ -18,6 +18,7 @@ const TransactionBasket = ({
                 <p className='flexWrapper30 font13'>{allocation.cryptoCurrency}</p>                                                       
                 <p className='flexWrapper60 font13'>{allocation.orderQty}</p>                                              
                 <p className='flexWrapper30 font13'>{allocation.price}</p>
+                <p className='flexWrapper30 font13'>{(allocation.price * allocation.orderQty).toFixed(3)}</p>
             </div>)}
           </div>
         </div>
