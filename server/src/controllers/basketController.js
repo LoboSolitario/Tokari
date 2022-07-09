@@ -6,8 +6,17 @@ var ObjectId = require('mongoose').Types.ObjectId;
 const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 const axios = require('axios');
 var hmacSHA256 = require("crypto-js/hmac-sha256");
+const { response } = require('express');
 const binance_api_key = process.env.BINANCE_API_KEY;
 const binance_api_secret = process.env.BINANCE_API_SECRET;
+
+const cryptoMap = new Map();
+cryptoMap.set('bitcoin', ['BTCUSDT', 21638])
+cryptoMap.set('ethereum', ['ETHUSDT', 1218.76])
+cryptoMap.set('litecoin', ['LTCUSDT', 52.26])
+cryptoMap.set('tron', ['TRXUSDT', 0.0706])
+cryptoMap.set('xrp', ['XRPUSDT', 0.344])
+cryptoMap.set('binancecoin', ['BNBUSDT', 243])
 
 // @desc seed for crypto data
 // @route GET /api/baskets/cryptoseed
@@ -99,7 +108,7 @@ const getSpecificBasket = asyncHandler(async (req, res) => {
 // @route GET /api/baskets/
 // @access public
 const getBaskets = asyncHandler(async (req, res) => {
-    const baskets = await Basket.find({})
+    const baskets = await Basket.find({}).populate('owner')
     res.status(200).json(baskets)
 })
 
@@ -118,6 +127,14 @@ const getUserBaskets = asyncHandler(async (req, res) => {
 const getUserSubscribedBaskets = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user.id).select('-password').populate('subscribedBaskets')
     res.status(200).json(user.subscribedBaskets)
+})
+
+// @desc get list of all the subscribed baskets of a user
+// @route GET /api/baskets/userSubscribedBaskets
+// @access private
+const getUserInvestedBaskets = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id).select('-password').populate('investedBaskets')
+    res.status(200).json(user.investedBaskets)
 })
 
 // @desc Create a new basket
@@ -326,75 +343,79 @@ const investBasket = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Incorrect basket id")
     }
-
+    const investment_amount = req.body.amount;
     // find the basket
     const basket = await Basket.findById(req.params.id);
-    console.log("basket:",basket)
-
+    // console.log("basket:", basket.cryptoAlloc)
     const headers = {
         'X-MBX-APIKEY': binance_api_key
     }
-    const ts1 = Date.now();
-    const val1 = "symbol=BNBUSDT&side=SELL&type=MARKET&quantity=0.1&timestamp=" + ts1;
-    const signature1 = hmacSHA256(val1, binance_api_secret).toString();
-    const post_url1 = "https://testnet.binance.vision/api/v3/order/test?" + val1 + "&signature=" + signature1;
-    console.log(post_url1)
-    const ts2 = Date.now();
-    const val2 = "symbol=BNBUSDT&side=SELL&type=MARKET&quantity=0.11&timestamp=" + ts2;
-    const signature2 = hmacSHA256(val2, binance_api_secret).toString();
-    const post_url2 = "https://testnet.binance.vision/api/v3/order/test?" + val2 + "&signature=" + signature2;
-    console.log(post_url2)
-
-    const requestOne =  axios({
-        method: 'post',
-        url: post_url1,
-        headers: {
-            'Content-Type': 'application/json',
-            'X-MBX-APIKEY': binance_api_key
+    let list_post = [];
+    basket.cryptoAlloc.forEach((crypto) => {
+        let order_crypto = cryptoMap.get(crypto.cryptoSymbol.toLowerCase())
+        const ts = Date.now();
+        let quantity = (crypto.weight / 100) * investment_amount / order_crypto[1];
+        if (order_crypto[0] === 'TRXUSDT') {
+            quantity = quantity.toFixed(0)
         }
-    })
-
-    const requestTwo = axios({
-        method: 'post',
-        url: post_url2,
-        headers: {
-            'Content-Type': 'application/json',
-            'X-MBX-APIKEY': binance_api_key
+        else if (order_crypto[0] === 'XRPUSDT') {
+            quantity = quantity.toFixed(1)
         }
-    })
+        else if (order_crypto[0] === 'BTCUSDT') {
+            quantity = quantity.toFixed(5)
+        }
+        else {
+            quantity = quantity.toFixed(2)
+        }
+        console.log(order_crypto[0], quantity)
+        const val = "symbol=" + order_crypto[0] + "&side=BUY&type=MARKET&quantity=" + quantity + "&timestamp=" + ts;
+        const signature = hmacSHA256(val, binance_api_secret).toString();
+        const post_url = "https://testnet.binance.vision/api/v3/order?" + val + "&signature=" + signature;
+        const requestPromise = axios({
+            method: 'post',
+            url: post_url,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-MBX-APIKEY': binance_api_key
+            }
+        })
+        list_post.push(requestPromise);
+    });
 
+    axios.all(list_post).then(axios.spread((...responses) => {
+        transaction_response = []
+        responses.forEach((response) => {
+            transaction_response.push(response.data)
+        })
 
-
-    axios.all([requestOne, requestTwo]).then(axios.spread((...responses) => {
-        const responseOne = responses[0]
-        const responseTwo = responses[1]
-        console.log(responseOne.data,responseTwo.data)
-        res.status(200).json("placed three orders")
+        return transaction_response
         // use/access the results 
-      })).catch(errors => {
-        console.log("Error:", errors)
-        res.status(400);
-        throw new Error("error")
+    })).then(async (transaction_response) => {
+        
+        let transaction_data = {
+            'basketName': basket.basketName,
+            'cryptoAlloc': []
+        }
+        transaction_response.forEach((transaction) => {
+            let a = {
+                'cryptoCurrency': transaction.symbol,
+                'orderQty': transaction.fills[0].qty,
+                'price': transaction.fills[0].price,
+                'orderId': transaction.orderId
+            }
+            console.log(a)
+            transaction_data['cryptoAlloc'].push(a)
+            
+        })
+        console.log(transaction_data)
+        const user = await User.findByIdAndUpdate(req.user.id, { $push: { investedBaskets: basket, transactionLists:transaction_data } }, { new: true })
+        console.log(user)
+        res.status(200).json(data)
+    }
+    ).catch(errors => {
+        res.status(400).json(errors)
         // react on errors.
-      })
-
-    // await axios({
-    //     method: 'post',
-    //     url: post_url,
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'X-MBX-APIKEY': binance_api_key
-    //     }
-    // })
-    //     .then(function (response) {
-    //         res.status(200).json(response.data)
-    //     })
-    //     .catch(err => {
-    //         res.status(400).json(err)
-    //     })
-
-
-
+    })
 
 })
 
@@ -409,6 +430,7 @@ module.exports = {
     editBasket,
     payment,
     getUserSubscribedBaskets,
+    getUserInvestedBaskets,
     investBasket
 
 }
