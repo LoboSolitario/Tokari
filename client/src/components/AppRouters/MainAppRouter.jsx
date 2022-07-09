@@ -11,6 +11,7 @@ import PortfolioRouters from "./PortfolioRouters";
 import Discover from "../../screens/Discover";
 import Payment from "../../screens/Payment"
 import Detail from "../../screens/Detail";
+import Investing from "../../screens/Investing";
 
 export default function MainAppRouter() {
     return (
@@ -30,6 +31,7 @@ export default function MainAppRouter() {
           <Route element={<Payment/>} path="/payment"/>
 
           <Route element={<Detail/>} path="/basket/:id"/>
+          <Route element={<Investing/>} path="/basket/invest/:id" />
           {/* <Route exact path="/:id" component={Detail}/> */}
         </Routes>
       </Router>
