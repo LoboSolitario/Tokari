@@ -143,6 +143,13 @@
     -webkit-box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
     -moz-box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
   }
+  .tableStripe:nth-child(even){
+    background:rgba(237, 232, 237, 0.5)
+    }
+  .tableStripe:nth-child(odd){
+  background:rgba(169, 167, 169, 0.5)
+  }
+  
   .link-active {
     color: black;
     background: orange;

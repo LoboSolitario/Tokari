@@ -117,18 +117,17 @@ const handleSubmit = async (event) => {
                     <Wrapper style={{ padding: "1px 0 0 0"}}>
                       <p className='box semiBold'>CryptoCurrencies & Weights</p>
                       {basket.cryptoAlloc ? (
-                      <div className='flexSpaceCenter' style={{ padding: "0 0 20px 0px"}}>
-                        <div className='flexWrapper60'>                          
-                          <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
-                          {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation =>                           
-                              <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>)}
-                        </div>                     
-                        <div className='flexWrapper30'>
-                          <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Weights(%)</p>
-                          {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation =>                           
-                              <p className='flexWrapper60 font13'>{allocation.weight}</p>)}
+                      <>  
+                        <div className='flexSpaceCenter'>                 
+                            <p className='font13 semiBold flexWrapper60' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
+                            <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Weights(%)</p>
                         </div>
-                      </div>            
+                        {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation => 
+                        <div className='flexSpaceCenter tableStripe'>                                                        
+                            <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>                                              
+                            <p className='flexWrapper30 font13'>{allocation.weight}</p>
+                        </div>)}  
+                      </>            
                     ) : (
                       <Wrapper className='container whiteBg shadow flexCenter' style={{height:'200px'}}>
                         <div  style={{width: '200px'}}>
@@ -143,7 +142,7 @@ const handleSubmit = async (event) => {
                               {/* Add a hidden field with the lookup_key of your Price */}
                               <input type="hidden" name="lookup_key" value={basket._id} />
                               <button className="smallsubscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
-                                {basket.subscriptionFee===0 ? "Invest now" : "Subscribe now"}
+                                Subscribe now
                               </button>
                             </form>
                           </div>
@@ -153,7 +152,10 @@ const handleSubmit = async (event) => {
                     </Wrapper>
                   </div>
                   <div className="flexWrapper25" >
-                    <div style={{ padding: "25px 0 0" }}>
+                    <div className='box textCenter' style={{ padding: "12px 0 0" }}>
+                      <p className='font13'>Subscription fee {basket.subscriptionFee} $</p> 
+                    </div>  
+                    <div>
                       <form onSubmit={handleSubmit}>
                         {/* Add a hidden field with the lookup_key of your Price */}
                         <input type="hidden" name="lookup_key" value={basket._id} />
@@ -161,11 +163,7 @@ const handleSubmit = async (event) => {
                           {basket.subscriptionFee===0 ? "Invest now" : "Subscribe now"}
                         </button>
                       </form>
-                    </div>
-                    <div className='box textCenter'>
-                      <p className='font13'>Subscription fee {basket.subscriptionFee} €</p> 
-                    </div>                   
-                    
+                    </div>                                    
                   </div>
                 </div>       
             </div>
