@@ -6,8 +6,17 @@ var ObjectId = require('mongoose').Types.ObjectId;
 const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 const axios = require('axios');
 var hmacSHA256 = require("crypto-js/hmac-sha256");
+const { response } = require('express');
 const binance_api_key = process.env.BINANCE_API_KEY;
 const binance_api_secret = process.env.BINANCE_API_SECRET;
+
+const cryptoMap = new Map();
+cryptoMap.set('bitcoin', ['BTCUSDT', 21638])
+cryptoMap.set('ethereum', ['ETHUSDT', 1218.76])
+cryptoMap.set('litecoin', ['LTCUSDT', 52.26])
+cryptoMap.set('tron', ['TRXUSDT', 0.0706])
+cryptoMap.set('xrp', ['XRPUSDT', 0.344])
+cryptoMap.set('binancecoin', ['BNBUSDT', 243])
 
 // @desc seed for crypto data
 // @route GET /api/baskets/cryptoseed
@@ -326,75 +335,58 @@ const investBasket = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Incorrect basket id")
     }
-
+    const investment_amount = req.body.amount;
     // find the basket
     const basket = await Basket.findById(req.params.id);
-    console.log("basket:",basket)
-
+    // console.log("basket:", basket.cryptoAlloc)
     const headers = {
         'X-MBX-APIKEY': binance_api_key
     }
-    const ts1 = Date.now();
-    const val1 = "symbol=BNBUSDT&side=SELL&type=MARKET&quantity=0.1&timestamp=" + ts1;
-    const signature1 = hmacSHA256(val1, binance_api_secret).toString();
-    const post_url1 = "https://testnet.binance.vision/api/v3/order/test?" + val1 + "&signature=" + signature1;
-    console.log(post_url1)
-    const ts2 = Date.now();
-    const val2 = "symbol=BNBUSDT&side=SELL&type=MARKET&quantity=0.11&timestamp=" + ts2;
-    const signature2 = hmacSHA256(val2, binance_api_secret).toString();
-    const post_url2 = "https://testnet.binance.vision/api/v3/order/test?" + val2 + "&signature=" + signature2;
-    console.log(post_url2)
-
-    const requestOne =  axios({
-        method: 'post',
-        url: post_url1,
-        headers: {
-            'Content-Type': 'application/json',
-            'X-MBX-APIKEY': binance_api_key
+    let list_post = [];
+    basket.cryptoAlloc.forEach((crypto) => {
+        let order_crypto = cryptoMap.get(crypto.cryptoSymbol.toLowerCase())
+        const ts = Date.now();
+        let quantity = (crypto.weight/100) * investment_amount / order_crypto[1];
+        if(order_crypto[0] === 'TRXUSDT'){
+            quantity = quantity.toFixed(0)
         }
-    })
-
-    const requestTwo = axios({
-        method: 'post',
-        url: post_url2,
-        headers: {
-            'Content-Type': 'application/json',
-            'X-MBX-APIKEY': binance_api_key
+        else if(order_crypto[0] === 'XRPUSDT'){
+            quantity = quantity.toFixed(1)
         }
-    })
+        else if(order_crypto[0] === 'BTCUSDT'){
+            quantity = quantity.toFixed(5)
+        }
+        else{
+            quantity = quantity.toFixed(2)
+        }
+        console.log(order_crypto[0],quantity)
+        const val = "symbol=" + order_crypto[0] + "&side=BUY&type=MARKET&quantity="+quantity+"&timestamp=" + ts;
+        const signature = hmacSHA256(val, binance_api_secret).toString();
+        const post_url = "https://testnet.binance.vision/api/v3/order?" + val + "&signature=" + signature;
+        const requestPromise = axios({
+            method: 'post',
+            url: post_url,
+            headers: {
+                'Content-Type': 'application/json',
+                'X-MBX-APIKEY': binance_api_key
+            }
+        })
+        list_post.push(requestPromise);
+    });
 
+    axios.all(list_post).then(axios.spread((...responses) => {
+        data = []
+        responses.forEach((response) => {
+            data.push(response.data)
+        })
 
-
-    axios.all([requestOne, requestTwo]).then(axios.spread((...responses) => {
-        const responseOne = responses[0]
-        const responseTwo = responses[1]
-        console.log(responseOne.data,responseTwo.data)
-        res.status(200).json("placed three orders")
+        res.status(200).json(data)
         // use/access the results 
-      })).catch(errors => {
-        console.log("Error:", errors)
+    })).catch(errors => {
+        console.log(errors)
         res.status(400);
-        throw new Error("error")
         // react on errors.
-      })
-
-    // await axios({
-    //     method: 'post',
-    //     url: post_url,
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'X-MBX-APIKEY': binance_api_key
-    //     }
-    // })
-    //     .then(function (response) {
-    //         res.status(200).json(response.data)
-    //     })
-    //     .catch(err => {
-    //         res.status(400).json(err)
-    //     })
-
-
-
+    })
 
 })
 
