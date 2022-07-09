@@ -14,7 +14,7 @@ const navigate = useNavigate();
 const basket = location.state;
 const handleSubmit = async (event) => {
 
-  if (basket.subscriptionFee === 0) {
+  if (basket.subscriptionFee === 0 || basket.cryptoAlloc) {
     navigate(`/basket/invest/${basket._id}`, {state:basket});
   } else {
     const stripePromise = loadStripe(
@@ -158,14 +158,14 @@ const handleSubmit = async (event) => {
                   </div>
                   <div className="flexWrapper25" >
                     <div className='box textCenter' style={{ padding: "12px 0 0" }}>
-                      <p className='font13'>Subscription fee {basket.subscriptionFee} $</p> 
+                      <p className='font13'>{(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "" : `Subscription fee ${basket.subscriptionFee} $`}</p> 
                     </div>  
                     <div>
                       <form onSubmit={handleSubmit}>
                         {/* Add a hidden field with the lookup_key of your Price */}
                         <input type="hidden" name="lookup_key" value={basket._id} />
                         <button className="subscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
-                          {basket.subscriptionFee===0 ? "Invest now" : "Subscribe now"}
+                          {(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "Invest now" : "Subscribe now"}
                         </button>
                       </form>
                     </div>                                    
