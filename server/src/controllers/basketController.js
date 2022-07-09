@@ -129,6 +129,14 @@ const getUserSubscribedBaskets = asyncHandler(async (req, res) => {
     res.status(200).json(user.subscribedBaskets)
 })
 
+// @desc get list of all the subscribed baskets of a user
+// @route GET /api/baskets/userSubscribedBaskets
+// @access private
+const getUserInvestedBaskets = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id).select('-password').populate('investedBaskets')
+    res.status(200).json(user.investedBaskets)
+})
+
 // @desc Create a new basket
 // @route POST /api/baskets/createBasket
 // @access public
@@ -422,6 +430,7 @@ module.exports = {
     editBasket,
     payment,
     getUserSubscribedBaskets,
+    getUserInvestedBaskets,
     investBasket
 
 }
