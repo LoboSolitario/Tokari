@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema({
     investedBaskets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Basket' }],
     transactionLists: [{
         basketName: String,
+        investmentAmount: Number,
         cryptoAlloc: [{
             cryptoCurrency: String,
             orderQty: Number,
