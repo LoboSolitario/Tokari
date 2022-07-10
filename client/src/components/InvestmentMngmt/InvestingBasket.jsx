@@ -10,10 +10,10 @@ import { Form } from 'react-bootstrap';
 function BasketDetail(props) {
     const [amount, setAmount] = useState(0);
     const basket = props.basket;
-    function handleClick(event) {
-        console.log("helloo");
-        console.log(amount);
-    }
+    // function handleClick(event) {
+    //     console.log("helloo");
+    //     console.log(amount);
+    // }
     //also need do things like DiscoverBasket.jsx
     let navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_BASE_URL;  

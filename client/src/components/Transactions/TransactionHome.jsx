@@ -1,11 +1,8 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useEffect } from "react";
-import {useNavigate}  from "react-router-dom";
-import styled from "styled-components";
 import TransactionContext from "../contexts/TransactionContext";
 import TransactionBasket from "./TransactionBasket";
-import configOptions from '../../api/configOptions';
 import _ from 'lodash';
 
 export default function TransactionHome() {
@@ -14,7 +11,6 @@ export default function TransactionHome() {
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -25,13 +21,12 @@ export default function TransactionHome() {
         response.data.map(item => {
           let obj = {
             "basketName": item.basketName, 
+            "investmentAmount": item.investmentAmount,
             "cryptoAlloc": item.cryptoAlloc
           }
           temp.push(obj);
         })
-        console.log(temp);
         setTransactions(temp);
-        console.log(transactions);
       }
     }
   }, []);

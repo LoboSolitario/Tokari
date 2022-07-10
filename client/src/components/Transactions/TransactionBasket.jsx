@@ -10,6 +10,7 @@ const TransactionBasket = ({
           <h3 className="font15 extraBold">
             {transaction.basketName}
           </h3>
+          <p className='flexWrapper30 font13'>{transaction.investmentAmount}</p>
         </div>
         <div>
           <div className="container">
