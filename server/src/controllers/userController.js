@@ -2,7 +2,11 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler')
+var hmacSHA256 = require("crypto-js/hmac-sha256");
+const axios = require('axios');
 
+const binance_api_key = process.env.BINANCE_API_KEY;
+const binance_api_secret = process.env.BINANCE_API_SECRET;
 
 // @desc get list of all users
 // @route GET /api/users
@@ -96,6 +100,45 @@ const deleteUser = (req, res) => {
         .catch(err => res.json(500, err));
 }
 
+// @desc get user statistics for investment dashboard
+// @route GET /api/users/userStats
+// @access Private
+const getInvestorStats = asyncHandler(async (req, res) => {
+    let subscriptionCount, totalInvestmentAmount, currentBinanceBalance;
+    const user = req.user;
+    totalInvestmentAmount = 0;
+    subscriptionCount = user.subscribedBaskets ? user.subscribedBaskets.length : 0;
+    user.transactionLists.forEach(transaction => {
+        console.log(transaction)
+        if (transaction.investmentAmount) {
+            totalInvestmentAmount += transaction.investmentAmount;
+        }
+    });
+    const val = "timestamp=" + Date.now();
+    const signature = hmacSHA256(val, binance_api_secret).toString();
+    const post_url = "https://testnet.binance.vision/api/v3/account?" + val + "&signature=" + signature;
+    const response = await axios({
+        method: 'GET',
+        url: post_url,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-MBX-APIKEY': binance_api_key
+        }
+    })
+
+    console.log(response.data.balances)
+    response.data.balances.forEach((balance) => {
+        if(balance["asset"] === "USDT"){
+            currentBinanceBalance = balance["free"]
+        }
+    })
+    res.status(200).json({
+        'subscriptionCount': subscriptionCount,
+        'totalInvestmentAmount': totalInvestmentAmount,
+        'currentBinanceBalance' : currentBinanceBalance
+    })
+})
+
 // @desc update user details
 // @route PATCH /api/users/updateUser/:id
 // @access Private
@@ -122,5 +165,6 @@ module.exports = {
     loginUser,
     getUser,
     deleteUser,
-    updateUser
+    updateUser,
+    getInvestorStats
 }
