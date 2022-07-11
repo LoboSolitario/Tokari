@@ -26,7 +26,7 @@ export default function TransactionHome() {
           }
           temp.push(obj);
         })
-        setTransactions(temp);
+        setTransactions(temp.reverse());
       }
     }
   }, []);
