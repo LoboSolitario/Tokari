@@ -96,6 +96,13 @@ const deleteUser = (req, res) => {
         .catch(err => res.json(500, err));
 }
 
+// @desc get user statistics for investment dashboard
+// @route GET /api/users/userStats
+// @access Private
+const getUserStats = asyncHandler(async (req, res) => {
+    res.status(200).json(req.user)
+})
+
 // @desc update user details
 // @route PATCH /api/users/updateUser/:id
 // @access Private
@@ -122,5 +129,6 @@ module.exports = {
     loginUser,
     getUser,
     deleteUser,
-    updateUser
+    updateUser,
+    getUserStats
 }

@@ -133,7 +133,7 @@ const getUserSubscribedBaskets = asyncHandler(async (req, res) => {
 // @route GET /api/baskets/userInvestedBaskets
 // @access private
 const getUserInvestedBaskets = asyncHandler(async (req, res) => {
-    
+
     const user = await User.findById(req.user.id).select('-password').populate('investedBaskets')
     res.status(200).json(user.investedBaskets)
 })
@@ -353,7 +353,8 @@ const investBasket = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Incorrect basket id")
     }
-    const investment_amount = req.body.amount;
+    const investment_amount = Number(req.body.amount);
+
     // find the basket
     const basket = await Basket.findById(req.params.id);
     const headers = {
@@ -376,7 +377,6 @@ const investBasket = asyncHandler(async (req, res) => {
         else {
             quantity = quantity.toFixed(2)
         }
-        console.log(order_crypto[0], quantity)
         const val = "symbol=" + order_crypto[0] + "&side=BUY&type=MARKET&quantity=" + quantity + "&timestamp=" + ts;
         const signature = hmacSHA256(val, binance_api_secret).toString();
         const post_url = "https://testnet.binance.vision/api/v3/order?" + val + "&signature=" + signature;
@@ -400,10 +400,10 @@ const investBasket = asyncHandler(async (req, res) => {
         return transaction_response
         // use/access the results 
     })).then(async (transaction_response) => {
-        
+
         let transaction_data = {
             'basketName': basket.basketName,
-            'investmentAmount': investment_amount, 
+            'investmentAmount': investment_amount,
             'cryptoAlloc': []
         }
         transaction_response.forEach((transaction) => {
@@ -413,16 +413,12 @@ const investBasket = asyncHandler(async (req, res) => {
                 'price': transaction.fills[0].price,
                 'orderId': transaction.orderId
             }
-            console.log(a)
             transaction_data['cryptoAlloc'].push(a)
-            
+
         })
-        console.log(transaction_data)
-        const user = await User.findByIdAndUpdate(req.user.id, { $push: { investedBaskets: basket, transactionLists:transaction_data } }, { new: true })
-        console.log(user)
-        res.status(200).json(data)
+        const user = await User.findByIdAndUpdate(req.user.id, { $push: { investedBaskets: basket, transactionLists: transaction_data } }, { new: true })
+        res.status(200).json("Investment successfull")
     }).catch(errors => {
-        console.log("###########################################3")
         res.status(400).json(errors)
         // react on errors.
     })
@@ -443,6 +439,6 @@ module.exports = {
     getUserInvestedBaskets,
     investBasket,
     getUserTransactions
-    
+
 
 }
