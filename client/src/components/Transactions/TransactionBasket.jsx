@@ -16,6 +16,7 @@ const TransactionBasket = ({
           <div className="container">
           {(transaction.cryptoAlloc) && transaction.cryptoAlloc.map(allocation => 
             <div className='flexSpaceCenter tableStripe'> 
+                <p className='flexWrapper30 font13'>{allocation.orderId}</p>
                 <p className='flexWrapper30 font13'>{allocation.cryptoCurrency}</p>                                                       
                 <p className='flexWrapper60 font13'>{allocation.orderQty}</p>                                              
                 <p className='flexWrapper30 font13'>{allocation.price}</p>

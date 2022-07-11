@@ -1,12 +1,28 @@
-import React from 'react'
+import React,  {useState} from 'react'
 import { useNavigate } from 'react-router';
-
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function InvestmentHeader() {
-  let navigate = useNavigate();
-  const handleOnClick = () => {
-    navigate('createBasket')
-  }
+  const [subscriptionCount, setsubscriptionCount] = useState([])
+  const [totalInvestmentAmount, settotalInvestmentAmount] = useState([])
+  const [currentBinanceBalance, setcurrentBinanceBalance] = useState([])
+  const token = localStorage.getItem("token")
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchData();
+    async function fetchData() {
+
+      const response = await axios.get(`${baseUrl}/api/users/investorStats`, { headers: { Authorization: "Bearer: " + token } });
+      if (response.statusText === "OK") {
+        setsubscriptionCount(response.data.subscriptionCount)
+        settotalInvestmentAmount(response.data.totalInvestmentAmount)
+        setcurrentBinanceBalance(Number(response.data.currentBinanceBalance).toFixed(2))
+      }
+    }
+  }, []);
 
   return (
     <div className="container"
@@ -24,10 +40,10 @@ export default function InvestmentHeader() {
             Current Investments
           </div>
           <div className="greyColor flexCol">
-            Current Subscriptions
+            Total Subscriptions
           </div>
           <div className="greyColor flexCol">
-            Returns
+            Binance USD Balance
           </div>
 
         </div>
@@ -36,13 +52,13 @@ export default function InvestmentHeader() {
             Invest in baskets to see overview here
           </div>
           <div className=" flexCol">
-            _
+            ${totalInvestmentAmount}
           </div>
-          <div className="greyColor flexCol">
-            _
+          <div className=" flexCol">
+            {subscriptionCount}
           </div>
-          <div className="greyColor flexCol">
-            _
+          <div className=" flexCol">
+            ${currentBinanceBalance}
           </div>
 
         </div>
