@@ -416,7 +416,12 @@ const investBasket = asyncHandler(async (req, res) => {
             transaction_data['cryptoAlloc'].push(a)
 
         })
-        const user = await User.findByIdAndUpdate(req.user.id, { $push: { investedBaskets: basket, transactionLists: transaction_data } }, { new: true })
+        var conditions = {
+            _id: req.user.id,
+            'investedBaskets.': { $ne: basket }
+        };
+
+        const user = await User.findByIdAndUpdate(conditions, { $push: {transactionLists: transaction_data }, $addToSet: { investedBaskets: basket } }, { new: true })
         res.status(200).json("Investment successfull")
     }).catch(errors => {
         res.status(400).json(errors)
