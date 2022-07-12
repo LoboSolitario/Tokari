@@ -20,7 +20,6 @@ function BasketDetail(props) {
             "content-type": "application/json",
             "Authorization": "Bearer: " + token
         };
-        console.log(amount)
         const options = {
             body: JSON.stringify({
                 "amount": amount

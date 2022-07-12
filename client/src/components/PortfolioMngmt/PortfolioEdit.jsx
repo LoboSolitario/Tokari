@@ -35,7 +35,6 @@ export default function PortfolioEdit  ({ history }){
         }),
         json: true 
         };
-        console.log('basketAlloc: ', basket.cryptoAlloc)
         configOptions("PUT", headers, options);  
         const response = await fetch(`${baseUrl}/api/baskets/editBasket/${id}`, options);
 

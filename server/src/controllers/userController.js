@@ -109,7 +109,6 @@ const getInvestorStats = asyncHandler(async (req, res) => {
     totalInvestmentAmount = 0;
     subscriptionCount = user.subscribedBaskets ? user.subscribedBaskets.length : 0;
     user.transactionLists.forEach(transaction => {
-        console.log(transaction)
         if (transaction.investmentAmount) {
             totalInvestmentAmount += transaction.investmentAmount;
         }
@@ -126,7 +125,6 @@ const getInvestorStats = asyncHandler(async (req, res) => {
         }
     })
 
-    console.log(response.data.balances)
     response.data.balances.forEach((balance) => {
         if(balance["asset"] === "USDT"){
             currentBinanceBalance = balance["free"]
