@@ -12,7 +12,7 @@ const SuccessDisplay = () => {
       <Wrapper className="container flexSpaceCenter flexColumn">
         <div style={{ marginBottom: "20px" }} className="p">Congratuations!! You have sucessfully invested to the basket.</div>
         <BtnWrapper onClick={ ()=>{navigate("/investormain/transactions");}}>
-          <SuccessButton title="Manage Investments" to="/investormain/transactions" />
+          <SuccessButton title="Transactions" to="/investormain/transactions" />
         </BtnWrapper>
       </Wrapper>
       
@@ -26,7 +26,7 @@ const FailureDisplay = () => {
   return (
     <WrapperLogin className="whiteBg radius8 shadow container">
       <Wrapper className="container flexSpaceCenter flexColumn">
-        <div style={{ marginBottom: "20px" }} className="p">Subscription unsuccessful. Checkout the baskets we offer.</div>
+        <div style={{ marginBottom: "20px" }} className="p">Investment unsuccessful. Checkout the baskets we offer.</div>
         <BtnWrapper onClick={ ()=>{navigate("/discover");}} >
           <FullButton title="Discover More" to="/discover" />
         </BtnWrapper>
