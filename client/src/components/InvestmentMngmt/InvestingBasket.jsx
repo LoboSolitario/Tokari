@@ -41,20 +41,22 @@ function BasketDetail(props) {
     }
 
     return (
-        <div className="container70 whiteBg shadow discoverPage" >
-            <div style={{ padding: '30px 0' }}>
+        <Wrapper className="flexWrapper100">
+        <div className="container50 whiteBg shadow discoverPage">
+            <div style={{ padding: '50px 0' }}>
                 <div className="container">
                     <div className="flexSpaceNull">
                         <div>
-                            <div className="flexSpaceNull">
+                            <div>
                                 <div>
-                                    <h3 className="box font30 extraBold">Investing in <em>{basket.basketName}</em></h3>
-                                    <p className="box font11">Managed by <b> {basket.owner.name}</b></p>
+                                    <h3 className="box font30 semiBold">Investing in '{basket.basketName}'</h3>
                                     <h4 style={{ padding: '0 0 20px 0' }}>Confirm Investment Amount</h4>
+                                </div>
+                                <div className="flex" style={{height: '30vh'}}>
 
-                                    <div className="flexRow">
+                                    <div className="flexRow flexSpaceCenter">
                                         <Form className='font13' style={{ padding: '0 30px' }}>
-                                            <Form.Group controlId="amount" style={{ marginBottom: "10px" }}>
+                                            <Form.Group controlId="amount">
                                                 <Form.Label>Investment Amount</Form.Label>
                                                 <Form.Control
                                                     className="input-control form-control-sm font11"
@@ -67,8 +69,8 @@ function BasketDetail(props) {
                                                 />
                                             </Form.Group>
                                         </Form>
-                                        <div className='font14' onClick={handleOnSubmit}>
-                                            <FullButton title="Invest" />
+                                        <div className='font14 extraBold' style={{ width: "200px"}} onClick={handleOnSubmit}>
+                                            <FullButton title="Invest"/>
                                         </div>
                                     </div>
 
@@ -80,28 +82,25 @@ function BasketDetail(props) {
                         </div>
                     </div>
                     <div className="flexSpaceNull">
-                        <div className="flexWrapper70">
+                        <div className="flexWrapper100">
                             <Wrapper style={{ padding: "1px 0 0 0" }}>
                                 <p className='box semiBold'>CryptoCurrencies & Weights</p>
-
-                                <div className='flexSpaceCenter' style={{ padding: "0 0 20px 0px" }}>
-                                    <div className='flexWrapper60'>
-                                        <p className='font13 semiBold' style={{ padding: "0 0 5px 0px" }}>Cryptocurrency</p>
-                                        {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation =>
-                                            <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>)}
+                                    <div className='flexSpaceCenter'>                 
+                                        <p className='font13 semiBold flexWrapper60' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
+                                        <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Weights(%)</p>
                                     </div>
-                                    <div className='flexWrapper30'>
-                                        <p className='font13 semiBold' style={{ padding: "0 0 5px 0px" }}>Weights(%)</p>
-                                        {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation =>
-                                            <p className='flexWrapper60 font13'>{allocation.weight}</p>)}
-                                    </div>
-                                </div>
+                                    {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation => 
+                                    <div className='flexSpaceCenter tableStripe'>                                                        
+                                        <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>                                              
+                                        <p className='flexWrapper30 font13'>{allocation.weight}</p>
+                                    </div>)}  
                             </Wrapper>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </Wrapper>
 
     );
 }

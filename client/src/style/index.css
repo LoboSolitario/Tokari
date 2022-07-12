@@ -72,6 +72,13 @@
     margin: 0 auto;
     padding: 0px 30px;
   }
+
+  .container50 {
+    width: 50%;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0px 30px;
+  }
   
   .container80 {
     width: 80%;
@@ -244,6 +251,9 @@
   }
   .flexGrow4{
     flex-grow: 4;
+  }
+  .flexWrapper100{
+    width: 100%
   }
   .flexWrapper70{
     width: 70%
