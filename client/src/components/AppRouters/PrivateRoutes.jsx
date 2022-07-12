@@ -1,16 +1,18 @@
 import React from 'react';
 import { Outlet,  Navigate, useLocation} from 'react-router-dom';
 
-const PrivateRoutes = () => {
-    
-    const auth =  localStorage.getItem("auth")
+const PrivateRoutes = (props) => {
+
+    const auth  = localStorage.getItem("auth"); 
+    const assignedRole =  localStorage.getItem("role");
     const location = useLocation();
+    const userRole = props["role"];
 
     return(
         <>
-            {auth 
+            {(userRole === assignedRole && auth === "true")
                 ? <Outlet/>
-                :<Navigate to="/login" state={{from : location}} replace/> 
+                :<Navigate to="/" state={{from : location}} replace/> 
             }
         </>
     );

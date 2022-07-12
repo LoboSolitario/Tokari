@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PortfolioForm from './PortfolioForm';
 import { useNavigate, useParams } from 'react-router-dom';
 import BasketContext from '../contexts/BasketContext';
@@ -8,19 +8,19 @@ export default function PortfolioEdit  ({ history }){
     const { baskets, setBaskets } = useContext(BasketContext);
     const { id } = useParams();
     const basketToEdit = baskets.find((basket) => basket.id === id)
- 
+    const [errorMsg, setErrorMsg] = useState('');
+
     const baseUrl = process.env.REACT_APP_BASE_URL;  
     const token = localStorage.getItem("token");
     let navigate = useNavigate();
-
+   
     const handleOnSubmit = async (basket) => {
+        let errorMsgTemp;
         const headers = {
             "content-type": "application/json",
             "Authorization": "Bearer: " + token
             };
             
-        console.log("basket: ", basket, "id: ", id)
-
         const options = {
         body: JSON.stringify({
                 "basketName": basket.basketName,
@@ -30,7 +30,8 @@ export default function PortfolioEdit  ({ history }){
                 "risk": basket.risk,  
                 "rebalanceFee": "12312",
                 "subscriptionFee": basket.subscriptionFee,
-                "cryptoAlloc": basket.cryptoAlloc
+                "cryptoAlloc": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0),
+                "cryptoNumber": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0).length
         }),
         json: true 
         };
@@ -40,18 +41,24 @@ export default function PortfolioEdit  ({ history }){
 
         if(response.ok){
           response.json().then((data) => {
-            return data
+            errorMsgTemp = "";
+            setErrorMsg(errorMsgTemp);
+            navigate('/portfoliomain');
+            return data;
           })
         }
         else{
-           console.log(response.statusText);
+          response.json().then((data)=>{
+            console.log("bad request: ", data.message);
+            errorMsgTemp = "Your basket name is already taken. Please rename your basket⚠️"
+            setErrorMsg(errorMsgTemp);
+          })
         }  
-        navigate("/");
     }
-
     return (
     <div>
         <PortfolioForm basket={basketToEdit} handleOnSubmit={handleOnSubmit}/>
+        {errorMsg && <p style={{marginTop: "20px", marginBottom: "20px"}} className="errorMsg flexCenter">{errorMsg}</p>}
     </div>
   )
 }

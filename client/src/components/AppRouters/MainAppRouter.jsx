@@ -19,8 +19,11 @@ export default function MainAppRouter() {
       <Router>
         <Routes>
       
-          <Route element={<PrivateRoutes/>} >
+          <Route element={<PrivateRoutes role="manager"/>} >
             <Route path="/portfoliomain/*" element={ <PortfolioRouters/>} />
+          </Route>
+          
+          <Route element={<PrivateRoutes role="investor"/>} >
             <Route path="/investormain/*"  element={<InvestorRouters/>}/>
           </Route>
 

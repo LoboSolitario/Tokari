@@ -74,7 +74,7 @@ export default function DiscoverBasket() {
 
         {!_.isEmpty(baskets) ? (
           baskets.map((basket) => (
-            <AllBasket basket={basket} handleDetailBox={handleDetailBox}/>
+            <AllBasket basket={basket} key={basket.id} handleDetailBox={handleDetailBox}/>
           ))
         ) : (
           <p>No matching results.</p>

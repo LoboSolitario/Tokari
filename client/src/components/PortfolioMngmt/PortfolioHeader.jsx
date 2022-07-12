@@ -11,18 +11,18 @@ export default function PortfolioHeader() {
   }
 
   return (
-    <div className="container" 
+      <div className="container" 
          style={{
             display: "in-block",
             marginTop: "100px", 
             marginBottom: "0px"}}
             >
-      <div className="semiBold font30 pointer">
+      <div className="semiBold font25 pointer">
               Porfolio Management
               <button style={{border: "none", background: "none"}} onClick={()=>{
                 handleOnClick()
                 }}>
-                    <FontAwesomeIcon className="font30 purpleColor" icon={faPlusCircle}/>
+                    <FontAwesomeIcon className="font25 purpleColor" icon={faPlusCircle}/>
               </button>
       </div>
     </div>
