@@ -10,7 +10,7 @@ const TransactionBasket = ({
           <h3 className="font18 extraBold">
             {transaction.basketName}
           </h3>
-          <p className='flexWrapper30 font13' style={{color: "#7620FF"}}>Investment Amount: ${transaction.investmentAmount}</p>
+          <p className='flexWrapper30 semiBold font13' style={{color: "#00000"}}>  Investment Amount: ${transaction.investmentAmount}</p>
         </div>
         <div>
           <div className="container" style={{padding: "25px 0"}}>
@@ -18,8 +18,8 @@ const TransactionBasket = ({
               <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order ID</p>
               <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
               <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order Quantity</p>
-              <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Price</p>
-              <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Total</p>
+              <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Fullfillment Price</p>
+              <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Total Holding</p>
             </div>
             <p></p>     {/* Arranging color orders */}
             {(transaction.cryptoAlloc) && transaction.cryptoAlloc.map(allocation => 
@@ -27,8 +27,8 @@ const TransactionBasket = ({
                 <p className='flexWrapper30 font13'>{allocation.orderId}</p>
                 <p className='flexWrapper30 font13'>{allocation.cryptoCurrency}</p>                                                       
                 <p className='flexWrapper30 font13'>{allocation.orderQty}</p>                                              
-                <p className='flexWrapper30 font13'>{allocation.price}</p>
-                <p className='flexWrapper30 font13'>{(allocation.price * allocation.orderQty).toFixed(3)}</p>
+                <p className='flexWrapper30 font13'>${allocation.price.toFixed(3)}</p>
+                <p className='flexWrapper30 font13'>${(allocation.price * allocation.orderQty).toFixed(3)}</p>
               </div>)}
           </div>
         </div>
