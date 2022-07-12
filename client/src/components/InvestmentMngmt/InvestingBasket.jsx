@@ -45,16 +45,14 @@ function BasketDetail(props) {
         <div className="container50 whiteBg shadow discoverPage">
             <div style={{ padding: '50px 0' }}>
                 <div className="container">
-                    <div className="flexSpaceNull">
-                        <div>
-                            <div>
+                    <div>
                                 <div>
                                     <h3 className="box font30 semiBold">Investing in '{basket.basketName}'</h3>
                                     <h4 style={{ padding: '0 0 20px 0' }}>Confirm Investment Amount</h4>
                                 </div>
-                                <div className="flex" style={{height: '30vh'}}>
+                                <div className="flexCenter" style={{height: '10vh'}}>
 
-                                    <div className="flexRow flexSpaceCenter">
+                                    <div className="flexRow" >
                                         <Form className='font13' style={{ padding: '0 30px' }}>
                                             <Form.Group controlId="amount">
                                                 <Form.Label>Investment Amount</Form.Label>
@@ -75,11 +73,6 @@ function BasketDetail(props) {
                                     </div>
 
                                 </div>
-                                <div className="box">
-                                    {basket.subscriptionFee === 0 ? <FreeIcon /> : ""}
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div className="flexSpaceNull">
                         <div className="flexWrapper100">
@@ -107,6 +100,5 @@ function BasketDetail(props) {
 const Wrapper = styled.div`
 width: 100%;
 text-align: left;
-margin-top: 30px;
 `;
 export default BasketDetail
