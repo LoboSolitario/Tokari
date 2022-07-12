@@ -122,17 +122,20 @@ const handleSubmit = async (event) => {
                     <Wrapper style={{ padding: "1px 0 0 0"}}>
                       <p className='box semiBold'>CryptoCurrencies & Weights</p>
                       {basket.cryptoAlloc ? (
-                      <>  
-                        <div className='flexSpaceCenter'>                 
+                      <>
+                      <div className="container" style={{padding: "0 0 25px 0"}}>
+                        <div className='flexSpaceCenter' style={{ padding: "10px 0"}}>                 
                             <p className='font13 semiBold flexWrapper60' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
                             <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Weights(%)</p>
                         </div>
+                        <p></p>     {/* Arranging color orders */}
                         {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation => 
-                        <div className='flexSpaceCenter tableStripe'>                                                        
+                        <div className='flexSpaceCenter tableStripe' style={{ padding: "5px"}}>                                                        
                             <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>                                              
                             <p className='flexWrapper30 font13'>{allocation.weight}</p>
-                        </div>)}  
-                      </>            
+                        </div>)} 
+                        </div> 
+                      </> 
                     ) : (
                       <Wrapper className='container whiteBg shadow flexCenter' style={{height:'200px'}}>
                         <div  style={{width: '200px'}}>
