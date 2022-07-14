@@ -176,7 +176,7 @@ const createBasket = asyncHandler(async (req, res) => {
         risk: req.body.risk,
         isFreeBasket: req.body.isFreeBasket,
         rebalanceFreq: req.body.rebalanceFreq,
-        subscriptionFee: req.body.subscriptionFee,
+        subscriptionFee: (req.body.isFreeBasket ? 0 : req.body.subscriptionFee),
         cryptoNumber: req.body.cryptoNumber,
         cryptoAlloc: req.body.cryptoAlloc
     });
@@ -243,6 +243,13 @@ const editBasket = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("Unauthorised rebalance.")
     }
+    if (req.body.isFreeBasket && req.body.subscriptionFee != 0) {
+        req.body.subscriptionFee = 0;
+    }
+    if (!req.body.isFreeBasket && req.body.subscriptionFee === 0) {
+        req.body.isFreeBasket = true;
+    }
+    req.body.isFreeBasket
     const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.status(200).json(updatedBasket);
 })
