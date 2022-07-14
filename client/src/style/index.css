@@ -566,6 +566,14 @@ input.nosubmit {
   color:#fff;
 }
 
+.deleteButton:hover {
+  font-size: 120%;
+}
+
+.editButton:hover {
+  font-size: 120%;
+}
+
 .smallsubscribeButton{
   border: 1px solid #7620ff;
   background-color:  #7620ff;

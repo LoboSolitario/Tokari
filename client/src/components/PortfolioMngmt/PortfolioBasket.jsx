@@ -4,6 +4,8 @@ import styled from "styled-components";
 import ViewButton from "../Buttons/viewButton";
 import UnsubscribeButton from "../Buttons/UnsubscribeButton"
 import MoreButton from "../Buttons/MoreButton" 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 
 const PortfolioBasket = ({ 
   id, 
@@ -19,9 +21,24 @@ const PortfolioBasket = ({
   
   return (
       <Wrapper className="whiteBg radius8 shadow basket">
-        <div className="wrapper-header flexSpaceCenter">
-          <h3 className="font18 extraBold">{basketName}
+        <div className="wrapper-header flexRow flexSpaceCenter">
+          
+          <h3 className="font15 extraBold flexStart">
+          {basketName.length > 23 ?
+              `${basketName.substring(0, 23)}...` : basketName
+          }
           </h3>
+
+          <div className="flexEnd">
+            <div onClick={() => navigate(`editBasket/${id}`)}>
+              <FontAwesomeIcon className="font14 purpleColor pointer editButton" icon={faPenToSquare}/>
+            </div>
+
+            <div onClick={() => handleRemoveBox(id)}>
+              <FontAwesomeIcon className="font14 purpleColor pointer deleteButton" 
+                style={{ padding: "0 0 0 10px" }} icon={faTrash}/>
+            </div>
+          </div>
         </div>
         <p className="font12" style={{ height: "120px", padding: "25px 0" }}>
           {overview.length > 120 ?
@@ -35,12 +52,6 @@ const PortfolioBasket = ({
         <div className="row flexCenter flexSpaceNull">
             <div style={{ width: "100px", marginBottom: "10px"}}>
               <MoreButton title="View" action={() => handleDetailBox(id)}/>
-            </div>
-            <div style={{ width: "100px", marginBottom: "10px"}}>
-              <ViewButton title="Edit" action={() => navigate(`editBasket/${id}`)}/>
-            </div>
-            <div style={{ width: "100px"}}>
-              <UnsubscribeButton title="Delete"  action={() => handleRemoveBox(id)}/>
             </div>
         </div>
       </Wrapper>
