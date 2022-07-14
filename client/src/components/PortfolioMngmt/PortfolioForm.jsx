@@ -1,6 +1,7 @@
+import { toBeEmpty } from '@testing-library/jest-dom/dist/matchers';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Form, Table } from 'react-bootstrap';
+import { Form, Table, ToggleButtonGroup, ToggleButton} from 'react-bootstrap';
 import { MenuItem } from 'react-pro-sidebar';
 import FullButton from "../Buttons/FullButton";
 
@@ -44,6 +45,7 @@ const PortfolioForm = (props) => {
 
   const [errorMsg, setErrorMsg] = useState('');
   const [total, setTotal] = useState(('0'));
+  const [isFreeBasket, setBasketCost] = useState('');
   const { overview, basketName, risk, volatility, subscriptionFee, details, cryptoAlloc} = basket;
 
   const handleOnSubmit = (event) => {
@@ -113,6 +115,10 @@ const PortfolioForm = (props) => {
       }));
   };
 
+  const handleBasketPriceFlag = (event) => {  
+    setBasketCost(value => !value);
+  };
+
   useEffect(()=>{
     let errorMsg = '';
     let tempTotal = 0
@@ -163,7 +169,16 @@ const PortfolioForm = (props) => {
             />
         </Form.Group>
 
-        <Form.Group controlId="subscriptionFee" style={{marginBottom: "10px"}}>
+        <Form.Group>
+          <div class="form-check">
+                <label class="form-check-label font12" for="flexCheckDefault">
+                  <input name="isFreeBasket" class="form-check-input" type="checkbox" value={isFreeBasket} id="flexCheckDefault" onClick={handleBasketPriceFlag}/>
+                  Free Basket
+                </label>
+          </div>
+        </Form.Group>
+  
+        <Form.Group className="flexColumn" controlId="subscriptionFee" style={{display: (!isFreeBasket ? 'block' : 'none'), marginBottom: "10px"}}>
             <Form.Label>Subscription Fee</Form.Label>
             <Form.Control
               className="input-control form-control-sm font11"

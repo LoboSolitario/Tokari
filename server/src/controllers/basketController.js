@@ -174,6 +174,7 @@ const createBasket = asyncHandler(async (req, res) => {
         status: req.body.status,
         volatility: req.body.volatility,
         risk: req.body.risk,
+        isFreeBasket: req.body.isFreeBasket,
         rebalanceFreq: req.body.rebalanceFreq,
         subscriptionFee: req.body.subscriptionFee,
         cryptoNumber: req.body.cryptoNumber,

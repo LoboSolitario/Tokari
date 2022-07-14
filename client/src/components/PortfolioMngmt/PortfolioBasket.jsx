@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router';
 import styled from "styled-components";
-import ViewButton from "../Buttons/viewButton";
-import UnsubscribeButton from "../Buttons/UnsubscribeButton"
 import MoreButton from "../Buttons/MoreButton" 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +21,7 @@ const PortfolioBasket = ({
       <Wrapper className="whiteBg radius8 shadow basket">
         <div className="wrapper-header flexRow flexSpaceCenter">
           
-          <h3 className="font15 extraBold flexStart">
+          <h3 className="font15 extraBold flexStart pointer">
           {basketName.length > 23 ?
               `${basketName.substring(0, 23)}...` : basketName
           }

@@ -567,11 +567,31 @@ input.nosubmit {
 }
 
 .deleteButton:hover {
-  font-size: 120%;
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  opacity:0.8;
 }
 
 .editButton:hover {
-  font-size: 120%;
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  opacity:0.8;
+}
+
+.plusButton:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  opacity:0.8;
+}
+
+.basketHover:hover{
+  transition-timing-function: ease-in-out;
+  -webkit-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  transform: scale(1.01);
 }
 
 .smallsubscribeButton{
