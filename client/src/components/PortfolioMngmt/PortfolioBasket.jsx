@@ -1,49 +1,55 @@
 import React from "react";
+import { useNavigate } from 'react-router';
 import styled from "styled-components";
-import ViewButton from "../Buttons/viewButton";
-
+import MoreButton from "../Buttons/MoreButton" 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 
 const PortfolioBasket = ({ 
   id, 
-  basketName, 
-  details, 
-  risk, 
-  author, 
-  volatility,
   overview,
-  subscriptionfFee,
-  handleRemoveBox
+  basketName, 
+  risk, 
+  volatility,
+  handleRemoveBox,
+  handleDetailBox
 }) => {
-    
+
+  let navigate = useNavigate();
+  
   return (
       <Wrapper className="whiteBg radius8 shadow basket">
-        <div className="wrapper-header flexSpaceCenter">
-          <h3 className="font20 extraBold">{basketName}
-                </h3>
-                <div style={{ width: "100px" }}>
-                <ViewButton title="Delete"  action={() => handleRemoveBox(id)}/>
-              </div>
+        <div className="wrapper-header flexRow flexSpaceCenter">
+          
+          <h3 className="font15 extraBold flexStart pointer">
+          {basketName.length > 23 ?
+              `${basketName.substring(0, 23)}...` : basketName
+          }
+          </h3>
+
+          <div className="flexEnd">
+            <div onClick={() => navigate(`editBasket/${id}`)}>
+              <FontAwesomeIcon className="font14 purpleColor pointer editButton" icon={faPenToSquare}/>
+            </div>
+
+            <div onClick={() => handleRemoveBox(id)}>
+              <FontAwesomeIcon className="font14 purpleColor pointer deleteButton" 
+                style={{ padding: "0 0 0 10px" }} icon={faTrash}/>
+            </div>
+          </div>
         </div>
-            
-        <p className="font13" style={{ padding: "30px 0" }}>
-          {details}
+        <p className="font12" style={{ height: "120px", padding: "25px 0" }}>
+          {overview.length > 120 ?
+              `${overview.substring(0, 120)}...` : overview
+          }
         </p>
-        <div className="flexSpaceNull">
-          <p className="font13 extraBold">{author}</p>
-          {/* <p className="font13 greenColor extraBold">{free?"Free Access": ""}</p> */}
-        </div>
-        
         <div className="flexSpaceNull">
           <p className={' tag  radius6 font11 extraBold '+ (risk==="High"? "redBg" : risk==="Medium"? "orangeBg":"greenBg")}>Risk: {risk}</p>
           <p className={' tag  radius6 font11 extraBold '+ (volatility==="High"? "redBg" : volatility==="Medium"? "orangeBg":"greenBg")}>Volatility: {volatility}</p>
         </div>
-
-        <div className="row flexHorizontalCenter">
-            <div style={{ width: "100px" }}>
-              <ViewButton title="Rebalance" action={() => alert("clicked")} />
-            </div>
-            <div style={{ width: "100px" }}>
-              <ViewButton title="Edit" action={() => alert("clicked")} />
+        <div className="row flexCenter flexSpaceNull">
+            <div style={{ width: "100px", marginBottom: "10px"}}>
+              <MoreButton title="View" action={() => handleDetailBox(id)}/>
             </div>
         </div>
       </Wrapper>

@@ -1,11 +1,6 @@
-import axios from "axios";
 import React, {useContext} from 'react';
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Form from 'react-bootstrap/Form'
-import {useNavigate, NavLink}  from "react-router-dom";
-import FullButton from "../Buttons/FullButton";
-import ViewButton from '../Buttons/viewButton'
 import DiscoverContext from '../contexts/DiscoverContext';
 import {ToggleButtonGroup, ToggleButton} from "react-bootstrap"
 
@@ -15,130 +10,130 @@ import "react-pro-sidebar/dist/css/styles.css";
 export default function Filtering() {
     
     const [searchKeyword, setSearchKeyword] = useState('');
-    // const {searchTag, setSearchTag} = useState(false);
+    const [submittedSearchKeyword, setSubmittedSearchKeyword] = useState('');
     const { baskets, setBaskets, allBaskets, setAllBaskets } = useContext(DiscoverContext);
     const [activeVolatility, setActiveVolatility] = useState(0);
     const [activeSubscriptionType, setActiveSubscriptionType] = useState(4);
     const [activeRiskType, setActiveRiskType] = useState(0);
-    const baseUrl = process.env.REACT_APP_BASE_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setSubmittedSearchKeyword(searchKeyword)
     }
-
-    
-
-    function handleSearch() {
-        if (searchKeyword.length === 0){
-            return;
-        }
-
-        
-
-        setBaskets(allBaskets.filter(basket => basket.basketName.includes(searchKeyword)));
-
-        console.log(allBaskets);
-    }
-
-    // function handleVolatility(e) {
-    //     setActiveVolatility(e);
-    //     if (e === 1) {
-    //         setActiveVolatility
-    //         setBaskets(allBaskets.filter(basket => {return basket.basketName.includes(searchKeyword) && basket.volatility === "low" }));
-    //     } else if (e === 2) {
-    //         setBaskets(allBaskets.filter(basket => {return basket.basketName.includes(searchKeyword) && basket.volatility === "moderate"}));
-    //     } else if (e === 3) {
-    //         setBaskets(allBaskets.filter(basket => {return basket.basketName.includes(searchKeyword) && basket.volatility === "high"}));
-    //     }
-    // }
-
-    // function handleSubscriptionType(e) {
-    //     console.log(e)
-    // }
-
-    // function handleRiskType(e) {
-    //     console.log(e);
-    // }
 
     useEffect(()=>{
-        console.log(activeVolatility);
-        console.log(activeSubscriptionType);
-        console.log(activeRiskType);
-        console.log(searchKeyword);
-      });
+
+
+        let filteredBaskets = [...allBaskets];
+
+        if (activeSubscriptionType === 1) {
+            // Nothing to do
+        } else if (activeSubscriptionType === 2) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.subscriptionFee <= 0)
+        } else if (activeSubscriptionType === 3) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.subscriptionFee > 0)
+        }
+
+        if (activeVolatility === 4) {
+            // Nothing to do
+        } else if (activeVolatility === 5) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.volatility === "Low")
+        } else if (activeVolatility === 6) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.volatility === "Medium")
+        } else if (activeVolatility === 7) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.volatility === "High")
+        }
+
+        if (activeRiskType === 8) {
+            // Nothing to do
+        } else if (activeRiskType === 9) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.risk === "Low")
+        } else if (activeRiskType === 10) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.risk === "Medium")
+        } else if (activeRiskType === 11) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.risk === "High")
+        }
+
+        if (submittedSearchKeyword.length != 0) {
+            filteredBaskets = filteredBaskets.filter(basket => basket.basketName.toLowerCase().includes(submittedSearchKeyword.toLowerCase()))
+        }
+        setBaskets(filteredBaskets);
+      }, [activeVolatility, activeSubscriptionType, activeRiskType, submittedSearchKeyword]);
     
       return (
-        <>
+        <React.Fragment>
+            <div className="container flexPro1">
+                <Wrapper className="searchBar">
+                    <form onSubmit={handleSubmit}> 
+                        <div className="mb-3">
+                            <input
+                                type="search"
+                                className="form-control font13 nosubmit"
+                                onChange={(e) => setSearchKeyword(e.target.value)}
+                                placeholder="Try &quot;Top Market Cap&quot; or &quot;Ecosystem&quot;"
+                                value={searchKeyword}
+                            />
+                        </div>
 
-            <Wrapper className="container searchBar">
-                <form onSubmit={handleSubmit}> 
-                {/* <form>  */}
+                        <ColoredLine color="grey"></ColoredLine>
 
-                    <div className="mb-3">
-                        <input
-                            type="search"
-                            className="form-control font13 nosubmit"
-                            onChange={(e) => setSearchKeyword(e.target.value)}
-                            placeholder="Try &quot;All weather&quot; or &quot;Momentum&quot;"
-                            required
-                            value={searchKeyword}
-                            onClick={handleSearch}
-                            onKeyPress={(e) => {if (e.key == "Enter") handleSearch()}}
-                        />
+                        <div style={{whiteSpace: "nowrap"}}>
+                            <label style={{margin: "20px 0 0 0"}} className="flexLeft semiBold">Subscription Type</label>
+                            <div>
+                                <ToggleButtonGroup type="radio" name="SubscriptionType" defaultValue={1} onChange={(e) => setActiveSubscriptionType(e)} className="flexSpaceCenter">
+                                        <ToggleButton id="subscription-type-show-all" value={1}  className="tagStyle flexCenter font13 shadow">
+                                            Show All
+                                        </ToggleButton>
+                                        <ToggleButton id="subscription-type-free-access" value={2}  className="tagStyle flexCenter font13 shadow">
+                                            Free Access
+                                        </ToggleButton>
+                                        <ToggleButton id="subscription-type-fee-based" value={3}  className="tagStyle flexCenter font13 shadow">
+                                            Fee Based
+                                        </ToggleButton>
+                                </ToggleButtonGroup>
+                            </div>
 
-                    </div>
-
-                    <ColoredLine color="grey"></ColoredLine>
-
-                    <>
-                        <TogglerWrapper>
-                            <label style={{margin: "10px 0"}} className="flexHorizontalCenter">Volatility</label>
-                            <ToggleButtonGroup type="radio" name="options" onChange={(e) => setActiveVolatility(e)}>
-                                <ToggleButton id="valatility-low" value={1} style={{background: "#7620FF"}}>
-                                    Low
-                                </ToggleButton>
-                                <ToggleButton id="valatility-moderate" value={2} style={{margin: "0 5px", background: "#7620FF"}}>
-                                    Moderate
-                                </ToggleButton>
-                                <ToggleButton id="valatility-high" value={3} style={{background: "#7620FF"}}>
-                                    High
-                                </ToggleButton>
-                            </ToggleButtonGroup>
-                        </TogglerWrapper>
-
-                        <TogglerWrapper>
-                            <label style={{margin: "10px 0"}} className="flexHorizontalCenter">Subscription Type</label>
-                            <ToggleButtonGroup type="radio" name="options" defaultValue={4} onChange={(e) => setActiveSubscriptionType(e)}>
-                                    <ToggleButton id="subscription-type-show-all" value={4} style={{background: "#7620FF", active: true}}>
+                            <label style={{margin: "10px 0 0 0"}} className="flexLeft semiBold">Volatility</label>
+                            <div>
+                                <ToggleButtonGroup type="radio" name="Volatility"  defaultValue={4} onChange={(e) => setActiveVolatility(e)} className="flexSpaceCenter">
+                                    <ToggleButton id="valatility-all" value={4} className="tagStyle flexCenter font13 shadow">
                                         Show All
                                     </ToggleButton>
-                                    <ToggleButton id="subscription-type-free-access" value={5} style={{margin: "0 5px", background: "#7620FF"}}>
-                                        Free Access
+                                    <ToggleButton id="valatility-low" value={5} className="tagStyle flexCenter font13 shadow">
+                                        Low
                                     </ToggleButton>
-                                    <ToggleButton id="subscription-type-fee-based" value={6} style={{background: "#7620FF"}}>
-                                        Fee Based
+                                    <ToggleButton id="valatility-moderate" value={6} className="tagStyle flexCenter font13 shadow">
+                                        Medium
                                     </ToggleButton>
-                            </ToggleButtonGroup>
-                        </TogglerWrapper>
+                                    <ToggleButton id="valatility-high" value={7} className="tagStyle flexCenter font13 shadow">
+                                        High
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                            </div>
 
-                        <TogglerWrapper>
-                            <label style={{margin: "10px 0"}} className="flexHorizontalCenter">Risk Type</label>
-                            <ToggleButtonGroup type="radio" name="options" onChange={(e) => setActiveRiskType(e)}>
-                                <ToggleButton id="risk-type-low" value={7} style={{background: "#7620FF"}}>
-                                    Low
-                                </ToggleButton>
-                                <ToggleButton id="risk-type-moderate" value={8} style={{margin: "0 5px", background: "#7620FF"}}>
-                                    Moderate 
-                                </ToggleButton>
-                                <ToggleButton id="risk-type-high" value={9} style={{background: "#7620FF"}}>
-                                    High
-                                </ToggleButton>
-                            </ToggleButtonGroup>
-                        </TogglerWrapper>
-                    </>
-                </form>
-            </Wrapper>
-        </>
+                            <label style={{margin: "20px 0 0 0"}} className="flexLeft semiBold">Risk Type</label>
+                            <div>
+                                <ToggleButtonGroup type="radio" name="RiskType" defaultValue={8} onChange={(e) => setActiveRiskType(e)} className="flexSpaceCenter">
+                                    <ToggleButton id="risk-type-all" value={8} className="tagStyle flexCenter font13 shadow">
+                                        Show All
+                                    </ToggleButton>
+                                    <ToggleButton id="risk-type-low" value={9} className="tagStyle flexCenter font13 shadow">
+                                        Low
+                                    </ToggleButton>
+                                    <ToggleButton id="risk-type-moderate" value={10} className="tagStyle flexCenter font13 shadow">
+                                        Medium 
+                                    </ToggleButton>
+                                    <ToggleButton id="risk-type-high" value={11} className="tagStyle flexCenter font13 shadow">
+                                        High
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                            </div>
+                        </div>
+                    </form>
+                </Wrapper>
+            </div>
+        </React.Fragment>
     );
 };
   
@@ -149,6 +144,15 @@ export default function Filtering() {
           padding-bottom: 40px;
       }
   `;
+
+//   const Wrapper = styled.section`
+//   padding-top: 80px;
+//   width: 100%;
+//   min-height: 840px;
+//   @media (max-width: 960px) {
+//     flex-direction: column;
+//   }
+// `;
   
   const BtnWrapper = styled.div`
     max-width: 100px;

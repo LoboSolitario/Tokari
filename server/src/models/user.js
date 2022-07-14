@@ -27,7 +27,18 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     createdBaskets: [{ basketId: { type: mongoose.Schema.Types.ObjectId, ref: 'Basket' } }],
-    subscribedBaskets: [{ basketId: { type: mongoose.Schema.Types.ObjectId, ref: 'Basket' } }]//to be implemented after adding user roles.
+    subscribedBaskets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Basket' }],
+    investedBaskets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Basket' }],
+    transactionLists: [{
+        basketName: String,
+        investmentAmount: Number,
+        cryptoAlloc: [{
+            cryptoCurrency: String,
+            orderQty: Number,
+            price: Number,
+            orderId: Number
+        }]
+    }]
 }, { timestamps: true });
 
 

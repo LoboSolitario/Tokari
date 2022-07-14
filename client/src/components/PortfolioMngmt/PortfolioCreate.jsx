@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState} from 'react';
 import PortfolioForm from "./PortfolioForm"
 import BasketContext from "../contexts/BasketContext";
 import configOptions from '../../api/configOptions';
@@ -10,11 +10,12 @@ const PortfolioCreate = () => {
     const { baskets, setBaskets } = useContext(BasketContext);
     const baseUrl = process.env.REACT_APP_BASE_URL;  
     const token = localStorage.getItem("token");
+    const [errorMsg, setErrorMsg] = useState('');
    
     const handleOnSubmit = async (basket) => {
         setBaskets([basket,...baskets]);
-        console.log(basket)
-
+        let errorMsgTemp;
+ 
         const headers = {
           "content-type": "application/json",
           "Authorization": "Bearer: " + token
@@ -29,43 +30,34 @@ const PortfolioCreate = () => {
                 "risk": basket.risk,  
                 "rebalanceFee": "12312",
                 "subscriptionFee": basket.subscriptionFee,
-                "cryptoAlloc": basket.cryptoAlloc
+                "cryptoAlloc":  basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0),
+                "cryptoNumber": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0).length
           }),
           json: true 
         };
-        
-        // note that optionsDebug is created only for debugging purposes
-        // const optionsDebug = {
-        //   body: JSON.stringify({
-        //         "basketName": "new" + Date.now(), 
-        //         "overview": "new123", 
-        //         "details": "new123",
-        //         "volatility": "new123", 
-        //         "risk": "new123",  
-        //         "rebalanceFee": 1,
-        //         "subscriptionFee": 5,
-        //         "cryptoAlloc": basket.cryptoAlloc
-        //   }),
-        //   json: true 
-        // };
-        // configOptions("POST", headers, optionsDebug); 
 
         configOptions("POST", headers, options);  
         const response = await fetch(`${baseUrl}/api/baskets/createBasket`, options);
-        console.log(response);
         if(response.ok){
           response.json().then(() => {
-            navigate('/portfoliomain')
+            errorMsgTemp = "";
+            setErrorMsg(errorMsgTemp);
+            navigate('/portfoliomain');
           })
         }
         else{
-          console.log(response.statusText);
+          response.json().then((data)=>{
+            console.log("bad request: ", data.message);
+            errorMsgTemp = "Your basket name is already taken. Please rename your basket⚠️"
+            setErrorMsg(errorMsgTemp);
+          })
         }  
     }
 
     return(
         <React.Fragment>
             <PortfolioForm handleOnSubmit={handleOnSubmit}/>
+            {errorMsg && <p style={{marginTop: "20px", marginBottom: "20px"}} className="errorMsg flexCenter">{errorMsg}</p>}   
         </React.Fragment>
     );
 }

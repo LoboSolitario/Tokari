@@ -4,7 +4,6 @@ var uniqueValidator = require('mongoose-unique-validator');
 const basketSchema = new mongoose.Schema({
     basketName: { 
         type: String, 
-        lowercase: true,
         unique: true,
         required: [true, "Enter a basket Name."],
         match: [/^[a-zA-Z0-9 ]+$/, 'is invalid'],
@@ -20,8 +19,10 @@ const basketSchema = new mongoose.Schema({
     status: Boolean,
     volatility: String,
     risk: String,
+    isFreeBasket: Boolean,
     rebalanceFreq: Number,
     subscriptionFee: Number,
+    cryptoNumber: Number,
     cryptoAlloc: [{
         cryptoSymbol: String,
         weight: Number

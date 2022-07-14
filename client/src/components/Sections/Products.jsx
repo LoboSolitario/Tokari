@@ -3,9 +3,10 @@ import styled from "styled-components";
 // Components
 import BasketBox from "../Elements/BasketBox";
 import FullButton from "../Buttons/FullButton";
-
+import {useNavigate}  from "react-router-dom";
 
 export default function Products() {
+  let navigate = useNavigate();
   return (
     <Wrapper id="products">
       <div className="lightBg" style={{padding: '50px 0 0'}}>
@@ -64,7 +65,7 @@ export default function Products() {
             <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
               <BasketBox
                 basketName="Basket 4"
-                overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
+                overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 risk="Medium"
                 volatility="High"
                 owner="Albert Einstein"
@@ -78,14 +79,14 @@ export default function Products() {
                 overview="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
                 risk="High"
                 volatility="Medium"
-                author="Alan Turing"
+                owner="Alan Turing"
                 //action={() => alert("clicked")}
               />
             </div>
           </div>
           <div className="row flexCenter">
             <div style={{ margin: "50px 0", width: "200px" }}>
-              <FullButton title="Discover" action={() => alert("clicked")} />
+              <FullButton title="Discover" action={() => navigate("/discover")} />
             </div>
           </div>
         </div>

@@ -12,11 +12,15 @@
   "author": "Shouvik Ghosh",
   "license": "MIT",
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.9.0",
+    "@stripe/stripe-js": "^1.32.0",
     "async": "^3.2.4",
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
@@ -24,7 +28,8 @@
     "mongoose": "^6.3.5",
     "mongoose-unique-validator": "^3.1.0",
     "nodemon": "^2.0.16",
-    "password-generator": "^2.3.2"
+    "password-generator": "^2.3.2",
+    "stripe": "^9.11.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
