@@ -147,6 +147,20 @@ const updateUser = (req, res) => {
         .catch(err => res.json(500, err));
 }
 
+// @desc get all baskets of a specific portfolio manager
+// @route GET /api/users/manager/:id
+// @access Public
+const getBasketsOfManager = asyncHandler(async (req, res) => {
+    const managerId = req.params.id;
+    
+    //find the user to be viewed
+    const manager = await User.findById(managerId).select('-password').populate({ path: 'createdBaskets', model: 'Basket' });
+    if (!manager) {
+        res.status(400);
+        throw new Error("Manager not found");
+    }
+})
+
 
 
 // Generate JWT
@@ -164,5 +178,6 @@ module.exports = {
     getUser,
     deleteUser,
     updateUser,
-    getInvestorStats
+    getInvestorStats,
+    getBasketsOfManager
 }
