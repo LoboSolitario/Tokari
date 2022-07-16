@@ -175,6 +175,7 @@ const createBasket = asyncHandler(async (req, res) => {
         volatility: req.body.volatility,
         risk: req.body.risk,
         isFreeBasket: req.body.isFreeBasket,
+        homepage: req.body.homepage,
         rebalanceFreq: req.body.rebalanceFreq,
         subscriptionFee: (req.body.isFreeBasket ? 0 : req.body.subscriptionFee),
         cryptoNumber: req.body.cryptoNumber,
@@ -184,8 +185,7 @@ const createBasket = asyncHandler(async (req, res) => {
     newBasket.save()
         .then(async (basket) => {
             //after creating the basket, append the basket id to the user schema for createdBaskets.
-            const newBasket = { basketId: basket._id }
-            const updatedUser = await User.findByIdAndUpdate(req.user.id, { $push: { createdBaskets: newBasket } }, { new: true });
+            const updatedUser = await User.findByIdAndUpdate(req.user.id, { $push: { createdBaskets: basket._id } }, { new: true });
             let product, price;
             //create a product in stripe
             try {

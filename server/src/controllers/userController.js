@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Basket = require('../models/basket');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler')
@@ -147,6 +148,17 @@ const updateUser = (req, res) => {
         .catch(err => res.json(500, err));
 }
 
+// @desc send the 6 landing page basket
+// @route PATCH /api/users/landingPageBaskets
+// @access Public
+
+const landingPageBaskets = asyncHandler(async (req, res) => {
+    let baskets = await Basket.find({'homepage': true}).limit(6)
+    res.status(200).json(baskets)
+})
+
+
+
 
 
 // Generate JWT
@@ -164,5 +176,6 @@ module.exports = {
     getUser,
     deleteUser,
     updateUser,
-    getInvestorStats
+    getInvestorStats,
+    landingPageBaskets
 }

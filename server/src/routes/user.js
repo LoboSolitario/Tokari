@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllUsers, getUser, registerUser, loginUser, deleteUser, updateUser, getInvestorStats } = require('../controllers/userController')
+const { getAllUsers, getUser, registerUser, loginUser, deleteUser, updateUser, getInvestorStats, landingPageBaskets } = require('../controllers/userController')
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware')
 
@@ -7,6 +7,8 @@ const { protect } = require('../middleware/authMiddleware')
 router.get('/', getAllUsers);
 
 router.get('/investorStats', protect, getInvestorStats);
+
+router.get('/landingPageBaskets', landingPageBaskets)
 
 router.post('/register', registerUser);
 

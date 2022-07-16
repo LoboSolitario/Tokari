@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
         enum: { values: ['admin', 'investor', 'manager'], message: '{VALUE} is not supported' },
         required: true
     },
-    createdBaskets: [{ basketId: { type: mongoose.Schema.Types.ObjectId, ref: 'Basket' } }],
+    createdBaskets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Basket' }],
     subscribedBaskets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Basket' }],
     investedBaskets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Basket' }],
     transactionLists: [{
