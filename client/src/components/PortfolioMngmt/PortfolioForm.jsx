@@ -61,8 +61,8 @@ const PortfolioForm = (props) => {
 
     const checkFreeBasket = () =>{
       if(isFreeBasket === false || isFreeBasket === "false"){
-        if(subscriptionFee === 0 || subscriptionFee === "0" || subscriptionFee === ""){
-          errorMsg = "Please note that subscription fee must be larger than 0 for non-free baskets ⚠️"
+        if(subscriptionFee === 0 || !parseInt(subscriptionFee) > 0 || subscriptionFee === ""){
+          errorMsg = "Please note that subscription fee must be larger than 1 for non-free baskets ⚠️"
           setErrorMsg(errorMsg);
           return false
         }
