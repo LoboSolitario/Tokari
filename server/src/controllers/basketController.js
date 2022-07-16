@@ -329,6 +329,11 @@ const deleteBasket = asyncHandler(async (req, res) => {
         throw new Error("Unauthorised delete.")
     }
     const deletedBasket = await Basket.findByIdAndDelete(req.params.id);
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+        $pullAll:{
+            createdBaskets:[{_id: req.params.id}]
+        }
+    }, { new: true });
     res.status(200).json(deletedBasket);
 })
 
