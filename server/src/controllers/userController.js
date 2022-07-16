@@ -155,10 +155,13 @@ const getBasketsOfManager = asyncHandler(async (req, res) => {
     
     //find the user to be viewed
     const manager = await User.findById(managerId).select('-password').populate({ path: 'createdBaskets', model: 'Basket' });
-    if (!manager) {
+    if (manager) {
+        res.status(201).json(manager)
+    } else {
         res.status(400);
         throw new Error("Manager not found");
     }
+
 })
 
 
