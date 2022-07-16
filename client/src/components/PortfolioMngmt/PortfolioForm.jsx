@@ -14,7 +14,7 @@ const PortfolioForm = (props) => {
       basketName: props.basket ? props.basket.basketName : '',
       risk: props.basket ? props.basket.risk : '',
       volatility: props.basket ? props.basket.volatility : '',
-      subscriptionFee: props.basket ? props.basket.subscriptionFee : 0,
+      subscriptionFee: props.basket ? props.basket.subscriptionFee : '',
       overview: props.basket ? props.basket.overview : '',
       frequency: props.basket ? props.basket.frequency : '',
       details: props.basket ? props.basket.details : '' ,
@@ -51,7 +51,7 @@ const PortfolioForm = (props) => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    const values = [overview, basketName, risk, volatility, subscriptionFee, details];
+    const values = [overview, basketName, risk, volatility, details];
     let errorMsg = '';
 
     const allFieldsFilled = values.every((field) => {
@@ -59,7 +59,21 @@ const PortfolioForm = (props) => {
       return value !== '';
     });
 
-    if (allFieldsFilled && total === 100) {
+    const checkFreeBasket = () =>{
+      if(isFreeBasket === false || isFreeBasket === "false"){
+        if(subscriptionFee === 0 || subscriptionFee === "0" || subscriptionFee === ""){
+          errorMsg = "Please note that subscription fee must be larger than 0 for non-free baskets ⚠️"
+          setErrorMsg(errorMsg);
+          return false
+        }
+      }
+
+      errorMsg = ""
+      setErrorMsg(errorMsg);
+      return true
+    }
+
+    if (allFieldsFilled && total === 100 && checkFreeBasket() === true) {
      
     let cryptoAllocTemp =[];
     
@@ -106,20 +120,18 @@ const PortfolioForm = (props) => {
     }
 
     else if(name ==="isFreeBasket"){
-  
       if(value === "true" || value === true){
-        value = false
+        value = false;
       }
       else if(value === "false" || value === false){
-        value = true
+        value = true;
       }
     }
-    
+
     setBasket((prevState) => ({
         ...prevState,
         [name]: value
       }));
-    console.log("value: ", value, "name: ", name)
   };
 
   const handleInputChangeCrypto = (event) => {

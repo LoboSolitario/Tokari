@@ -5,8 +5,12 @@ import FullButton from "../Buttons/FullButton";
 // Assets
 import HeaderImage from "../../assets/img/header-img.png";
 import Dots from "../../assets/svg/Dots";
+import {useNavigate}  from "react-router-dom";
 
 export default function Header() {
+
+  let navigate = useNavigate();
+
   return (
 
     <Wrapper id="home" className="container flexSpaceCenter">
@@ -17,8 +21,8 @@ export default function Header() {
            Tokari takes the guesswork out of investing by automating your portfolio. 
            Continue your crypto investment journey with a clear advantage.
           </HeaderP>
-          <BtnWrapper>
-            <FullButton title="Get Started" />
+          <BtnWrapper onClick={ ()=>{navigate("discover")}}>
+            <FullButton title="Get Started"/>
           </BtnWrapper>
         </div>
       </LeftSide>
