@@ -8,7 +8,7 @@ import BasketContext from "../contexts/BasketContext";
 export default function PortfolioHeader() {
   let navigate = useNavigate();
   const baskets = React.useContext(BasketContext);
-  console.log("baskets header: ", baskets)
+  // console.log("baskets header: ", baskets)
   const handleOnClick = () => {
     navigate('createBasket')
   }

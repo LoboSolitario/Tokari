@@ -30,6 +30,7 @@ export default function PortfolioHome() {
                     "subscriptionFee": item.subscriptionFee,
                     "overview": item.overview,
                     "details": item.details,
+                    "isFreeBasket": item.isFreeBasket,
                     "cryptoAlloc": item.cryptoAlloc
                 }
                 temp.push(obj);  

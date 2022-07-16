@@ -1,4 +1,5 @@
-import { toBeEmpty } from '@testing-library/jest-dom/dist/matchers';
+import { faBedPulse } from '@fortawesome/free-solid-svg-icons';
+import { toBeEmpty, toHaveFormValues } from '@testing-library/jest-dom/dist/matchers';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Form, Table, ToggleButtonGroup, ToggleButton} from 'react-bootstrap';
@@ -13,10 +14,11 @@ const PortfolioForm = (props) => {
       basketName: props.basket ? props.basket.basketName : '',
       risk: props.basket ? props.basket.risk : '',
       volatility: props.basket ? props.basket.volatility : '',
-      subscriptionFee: props.basket ? props.basket.subscriptionFee : '',
+      subscriptionFee: props.basket ? props.basket.subscriptionFee : 0,
       overview: props.basket ? props.basket.overview : '',
       frequency: props.basket ? props.basket.frequency : '',
       details: props.basket ? props.basket.details : '' ,
+      isFreeBasket:  props.basket ? props.basket.isFreeBasket : true,
       cryptoAlloc: props.basket ? props.basket.cryptoAlloc : []
     };
   });
@@ -45,8 +47,7 @@ const PortfolioForm = (props) => {
 
   const [errorMsg, setErrorMsg] = useState('');
   const [total, setTotal] = useState(('0'));
-  const [isFreeBasket, setBasketCost] = useState('');
-  const { overview, basketName, risk, volatility, subscriptionFee, details, cryptoAlloc} = basket;
+  const { overview, basketName, risk, volatility, subscriptionFee, details, cryptoAlloc, isFreeBasket} = basket;
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
@@ -82,6 +83,7 @@ const PortfolioForm = (props) => {
         volatility,
         subscriptionFee,
         details, 
+        isFreeBasket,
         cryptoAlloc
       };
       props.handleOnSubmit(basket);
@@ -98,13 +100,26 @@ const PortfolioForm = (props) => {
 
   const handleInputChange = (event) => {
     let { name, value } = event.target;
+    
     if(name === "subscriptionFee" && value < 0){
       return value = 0     
     }
+
+    else if(name ==="isFreeBasket"){
+  
+      if(value === "true" || value === true){
+        value = false
+      }
+      else if(value === "false" || value === false){
+        value = true
+      }
+    }
+    
     setBasket((prevState) => ({
         ...prevState,
         [name]: value
       }));
+    console.log("value: ", value, "name: ", name)
   };
 
   const handleInputChangeCrypto = (event) => {
@@ -115,9 +130,6 @@ const PortfolioForm = (props) => {
       }));
   };
 
-  const handleBasketPriceFlag = (event) => {  
-    setBasketCost(value => !value);
-  };
 
   useEffect(()=>{
     let errorMsg = '';
@@ -172,7 +184,7 @@ const PortfolioForm = (props) => {
         <Form.Group>
           <div class="form-check">
                 <label class="form-check-label font12" for="flexCheckDefault">
-                  <input name="isFreeBasket" class="form-check-input" type="checkbox" value={isFreeBasket} id="flexCheckDefault" onClick={handleBasketPriceFlag}/>
+                  <input name="isFreeBasket" class="form-check-input" defaultChecked={isFreeBasket} type="checkbox" value={isFreeBasket} onClick={handleInputChange}/>
                   Free Basket
                 </label>
           </div>

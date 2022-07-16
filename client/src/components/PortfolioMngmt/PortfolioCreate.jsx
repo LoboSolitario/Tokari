@@ -30,6 +30,7 @@ const PortfolioCreate = () => {
                 "risk": basket.risk,  
                 "rebalanceFee": "12312",
                 "subscriptionFee": basket.subscriptionFee,
+                "isFreeBasket": basket.isFreeBasket,
                 "cryptoAlloc":  basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0),
                 "cryptoNumber": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0).length
           }),
