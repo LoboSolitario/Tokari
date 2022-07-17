@@ -93,7 +93,7 @@ function ManagerProfile() {
               {manager.email}
             </div>
             <div className=" flexCol">
-              x
+              {manager.createdBaskets.length}
             </div>
             <div className=" flexCol">
               y
