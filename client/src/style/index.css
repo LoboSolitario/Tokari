@@ -241,6 +241,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+  }
+
+  .flexListDiscover {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: start;
   }
   .flexGrow1{
