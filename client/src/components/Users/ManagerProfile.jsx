@@ -106,7 +106,7 @@ function ManagerProfile() {
       <div className='flexWrapper60' style={{padding: '20px 20px 0 20px'}}>
             <h3 className="box font25 extraBold">Baskets:</h3>
       </div>
-      <div className="flexList container searchBasket flexPro4">
+      <div className="flexList container flexPro4">
 
       {!_.isEmpty(manager.createdBaskets) ? (
         manager.createdBaskets.map((basket) => (
