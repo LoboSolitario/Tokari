@@ -24,7 +24,7 @@ export default function Products() {
             response.data.map(item =>{
                 let obj = {
                     "id": item._id,
-                    "author": item.owner['name'],
+                    "author": item.owner,
                     "basketName": item.basketName,
                     "risk": item.risk,
                     "volatility": item.volatility,

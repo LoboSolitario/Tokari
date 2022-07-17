@@ -264,7 +264,7 @@ const PortfolioForm = (props) => {
             
             {Object.keys(crypto).map((item, key) => (
               <tr>
-              <td>{key + 1}</td>
+              <td></td>
               <td>{item}</td>
                 <td>
                     <Form.Control

@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, {useContext} from "react";
+import React, {useState} from "react";
 import { useEffect } from "react";
-import SubscribedBasketContext from "../contexts/SubscribedBasketContext";
 import SubscribedBasket from "./SubscribedBasket";
 import configOptions from '../../api/configOptions';
 import _ from 'lodash';
@@ -9,9 +8,8 @@ import {useNavigate, NavLink}  from "react-router-dom";
 
 export default function SubscriptionHome() {
 
-  const { baskets, setBaskets } = useContext(SubscribedBasketContext);
+  const [ baskets, setBaskets ] = useState();
   
-  const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
   const baseUrl = process.env.REACT_APP_BASE_URL;  
   const navigate = useNavigate();
