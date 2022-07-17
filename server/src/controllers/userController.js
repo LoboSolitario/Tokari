@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler')
 var hmacSHA256 = require("crypto-js/hmac-sha256");
 const axios = require('axios');
+const sendEmail = require('./emailController/email');
+
 
 const binance_api_key = process.env.BINANCE_API_KEY;
 const binance_api_secret = process.env.BINANCE_API_SECRET;
@@ -79,6 +81,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     if (newUser) {
+        sendEmail(newUser.email, 'New Account Created in Tokari', "Congratulations on creating a new account with tokari");
         res.status(201).json({
             _id: newUser.id,
             name: newUser.name,

@@ -9,6 +9,8 @@ var hmacSHA256 = require("crypto-js/hmac-sha256");
 const { response } = require('express');
 const binance_api_key = process.env.BINANCE_API_KEY;
 const binance_api_secret = process.env.BINANCE_API_SECRET;
+const sendEmail = require('./emailController/email');
+
 
 const cryptoMap = new Map();
 cryptoMap.set('bitcoin', ['BTCUSDT', 21638])
@@ -242,13 +244,24 @@ const editBasket = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("Unauthorised rebalance.")
     }
-    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, req.body, { new: true });
+
+    const subscribedUsers = await User.find({ subscribedBaskets: req.params.id }).select('email');
+    subscribedUsers.forEach((subscribedUser) => {
+        let email_body = "The basket " + basket.basketName + " has been rebalanced by " + user.name + ". Invest according to the new weights to gain the best returns."
+        sendEmail(subscribedUser.email, 'A basket you have subscribed to has been rebalanced', email_body);
+    })
+    const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, doc) => {
+        if (err) {
+            res.status(401).json(err)
+        }
+    });
+    
     res.status(200).json(updatedBasket);
 })
 
-const unsubscribeBasket = asyncHandler(async (req, res)=>{
-     //Check if the passed :id is a valid mongodb _id
-     if (!ObjectId.isValid(req.params.id)) {
+const unsubscribeBasket = asyncHandler(async (req, res) => {
+    //Check if the passed :id is a valid mongodb _id
+    if (!ObjectId.isValid(req.params.id)) {
         res.status(401);
         throw new Error("Incorrect basket id")
     }
@@ -260,8 +273,8 @@ const unsubscribeBasket = asyncHandler(async (req, res)=>{
         throw new Error('User not found.');
     }
     const updatedUser = await User.findByIdAndUpdate(req.user.id, {
-        $pullAll:{
-            subscribedBaskets:[{_id: req.params.id}]
+        $pullAll: {
+            subscribedBaskets: [{ _id: req.params.id }]
         }
     }, { new: true })
     res.status(200).json(updatedUser)
@@ -442,7 +455,7 @@ const investBasket = asyncHandler(async (req, res) => {
             'investedBaskets.': { $ne: basket }
         };
 
-        const user = await User.findByIdAndUpdate(conditions, { $push: {transactionLists: transaction_data }, $addToSet: { investedBaskets: basket } }, { new: true })
+        const user = await User.findByIdAndUpdate(conditions, { $push: { transactionLists: transaction_data }, $addToSet: { investedBaskets: basket } }, { new: true })
         res.status(200).json("Investment successfull")
     }).catch(errors => {
         res.status(400).json(errors)
