@@ -25,6 +25,7 @@ function ManagerProfile() {
           response.data.createdBaskets.map((basket) => (
             basket.id = basket._id
             ))
+          response.data.numberOfCreatedBaskets = response.data.createdBaskets.length
           setManager(response.data)
         } else {
           response.json().then((data)=>{
@@ -93,7 +94,7 @@ function ManagerProfile() {
               {manager.email}
             </div>
             <div className=" flexCol">
-              x
+              {manager.numberOfCreatedBaskets}
             </div>
             <div className=" flexCol">
               y
@@ -106,7 +107,7 @@ function ManagerProfile() {
       <div className='flexWrapper60' style={{padding: '20px 20px 0 20px'}}>
             <h3 className="box font25 extraBold">Baskets:</h3>
       </div>
-      <div className="flexList container searchBasket flexPro4">
+      <div className="flexListDiscover container flexPro4">
 
       {!_.isEmpty(manager.createdBaskets) ? (
         manager.createdBaskets.map((basket) => (
