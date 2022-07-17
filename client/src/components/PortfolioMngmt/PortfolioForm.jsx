@@ -164,7 +164,7 @@ const PortfolioForm = (props) => {
   return (
     <div className="main-form flexHorizontalCenter container" style={{minHeight: "70vh"}}>
       <Form className='font13' onSubmit={handleOnSubmit}>
-      <h3 style={{marginBottom: "10px"}}>General Information</h3>
+      <h3 style={{marginTop: "20px", marginBottom: "10px"}}>General Information</h3>
         <Form.Group controlId="basketName" style={{marginBottom: "10px"}}>
             <Form.Label>Basket Name</Form.Label>
             <Form.Control

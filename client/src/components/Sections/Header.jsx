@@ -21,7 +21,7 @@ export default function Header() {
            Tokari takes the guesswork out of investing by automating your portfolio. 
            Continue your crypto investment journey with a clear advantage.
           </HeaderP>
-          <BtnWrapper onClick={ ()=>{navigate("discover")}}>
+          <BtnWrapper  onClick={ ()=>{navigate("discover")}}>
             <FullButton title="Get Started"/>
           </BtnWrapper>
         </div>

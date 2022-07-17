@@ -28,7 +28,6 @@ export default function PortfolioEdit  ({ history }){
                 "details": basket.details,
                 "volatility": basket.volatility, 
                 "risk": basket.risk,  
-                "rebalanceFee": "12312",
                 "subscriptionFee": basket.subscriptionFee,
                 "isFreeBasket": basket.isFreeBasket,
                 "cryptoAlloc": basket.cryptoAlloc.filter(allocation => allocation.weight && allocation.weight > 0),

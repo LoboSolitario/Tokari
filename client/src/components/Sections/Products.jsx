@@ -68,7 +68,7 @@ export default function Products() {
 
   return (
     <Wrapper id="products">
-      <div className="lightBg" style={{padding: '50px 0 0'}}>
+      <div className="lightBg" style={{padding: '20px 0 0'}}>
         <div className="container">
           <HeaderInfo>
             <h1 className="font40 extraBold">Our Products</h1>
@@ -88,7 +88,7 @@ export default function Products() {
         </div>
 
           <div className="row flexCenter">
-            <div style={{ margin: "50px 0", width: "200px" }}>
+            <div style={{ margin: "20px 0", width: "200px" }}>
               <FullButton title="Discover" action={() => navigate("/discover")} />
             </div>
           </div>
