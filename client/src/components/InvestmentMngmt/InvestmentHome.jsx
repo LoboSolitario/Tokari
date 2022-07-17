@@ -108,7 +108,7 @@ export default function InvestmentHome() {
       <div className="flexList container" style={{minHeight: "72vh"}}>
         {!_.isEmpty(baskets) ? (
           baskets.map((basket)=>(
-              <InvestmentBasket basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
+              <InvestmentBasket key={basket.id} basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
           ))
         ) : (
           <p>You have not yet subscribed to a basket</p>

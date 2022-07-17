@@ -77,7 +77,7 @@ export default function DiscoverBasket() {
             <AllBasket basket={basket} key={basket.id} handleDetailBox={handleDetailBox}/>
           ))
         ) : (
-          <p style={{position:"absolute", top:"50%", left:"50%"}}>No matching results.</p>
+          <p className="flexCenter" style={{padding: "100px 0"}}>No matching results.</p>
         )}
       </div>
     </React.Fragment>

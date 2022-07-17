@@ -97,7 +97,7 @@ export default function SubscriptionHome() {
         <div className="flexList container" style={{minHeight: "72vh"}}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
-                    <SubscribedBasket basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
+                    <SubscribedBasket key={basket.id} basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
                 ))
              ) : (
                 <p>You have not yet subscribed to a basket</p>
