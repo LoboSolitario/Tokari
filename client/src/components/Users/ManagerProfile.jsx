@@ -25,6 +25,7 @@ function ManagerProfile() {
           response.data.createdBaskets.map((basket) => (
             basket.id = basket._id
             ))
+          response.data.numberOfCreatedBaskets = response.data.createdBaskets.length
           setManager(response.data)
         } else {
           response.json().then((data)=>{
@@ -93,7 +94,7 @@ function ManagerProfile() {
               {manager.email}
             </div>
             <div className=" flexCol">
-              {manager.createdBaskets.length}
+              {manager.numberOfCreatedBaskets}
             </div>
             <div className=" flexCol">
               y
