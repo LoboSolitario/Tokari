@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useLocation } from 'react-router-dom'
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 function PieChartComponent() {
-    const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#FF8042", "#AF19FF"];
+    const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#FF8042", "#AF19FF", "#6495ED"];
     const location = useLocation();
     const basket = location.state;
     const [pieData, setPieData] = useState([]);
