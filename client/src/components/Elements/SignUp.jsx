@@ -86,7 +86,7 @@ const SignUp = () => {
             
             options.body = JSON.stringify({});
           }else{
-            setErrMsg('Registration Failed: ' + response.statusText)
+            setErrMsg('Email has been already taken')
           } 
       }
   }

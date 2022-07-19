@@ -67,7 +67,7 @@ export default function SignIn(){
           options.body = JSON.stringify({});
         }
         else{
-          setErrMsg('Sign in Failed: ' + response.statusText);
+          setErrMsg("The email or password is incorrect");
         }  
     }
     return (

@@ -1,13 +1,12 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
-import TransactionContext from "../contexts/TransactionContext";
 import TransactionBasket from "./TransactionBasket";
 import _ from 'lodash';
 
 export default function TransactionHome() {
 
-  const { transactions, setTransactions } = useContext(TransactionContext);
+  const [ transactions, setTransactions ] = useState();
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
