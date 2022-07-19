@@ -494,10 +494,13 @@ input[type="search"] {
   border-radius: 0.6rem;
 }
 
+.filter-logo{
+  filter: invert(100%);
+}
+
 input[type="search"]::placeholder {
   color: rgb(133, 126, 126);
 }
-
 
 
 input[type="search"]:focus {
