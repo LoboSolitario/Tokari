@@ -7,12 +7,16 @@ import { faPlusCircle, faLock} from '@fortawesome/free-solid-svg-icons';
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import PieChartComponent from './PieChart';
-
+import { format, addMonths } from "date-fns";
+import { parseISO } from "date-fns/fp";
 // Screens
 function BasketDetail() {
 const location = useLocation();
 const navigate = useNavigate();
 const basket = location.state;
+const lastdate = format(parseISO(basket.updatedAt), "yyyy-MM-dd");
+const nextdate = format(addMonths(new Date(lastdate), 1), "yyyy-MM-dd");
+
 const handleSubmit = async (event) => {
 
   if (basket.subscriptionFee === 0 || basket.cryptoAlloc) {
@@ -108,13 +112,13 @@ const handleSubmit = async (event) => {
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Cryptocurrencies</p>
                           <p className='font13' style={{ padding: "0 0 7px 0px"}}>{basket.cryptoNumber}</p>                        
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Last rebalance</p>
-                          <p className='font13'>Jun.20, 2022</p>                       
+                          <p className='font13'>{lastdate}</p>                       
                         </div>                     
                         <div className='flexWrapper30'>
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Rebalance frequency</p>
                           <p className='font13' style={{ padding: "0 0 7px 0px"}}>three month</p>
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Next rebalance</p>
-                          <p className='font13'>Sep.20, 2022</p>
+                          <p className='font13'>{nextdate}</p>
                         </div>
                       </div>
                       </Wrapper>                     
