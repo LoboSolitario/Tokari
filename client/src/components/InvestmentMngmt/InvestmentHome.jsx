@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
-import InvestmentBasketContext from "../contexts/InvestmentBasketContext";
 import InvestmentBasket from "./InvestmentBasket";
 import configOptions from '../../api/configOptions';
 import _ from 'lodash';
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function InvestmentHome() {
 
-  const { baskets, setBaskets } = useContext(InvestmentBasketContext);
+  const [baskets, setBaskets ] = useState();
 
   const auth = localStorage.getItem("auth")
   const token = localStorage.getItem("token")
@@ -38,7 +37,6 @@ export default function InvestmentHome() {
           temp.push(obj);
         })
         setBaskets(temp);
-
       }
     }
   }, []);
