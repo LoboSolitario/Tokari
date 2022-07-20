@@ -70,7 +70,7 @@ export default function DiscoverBasket() {
   return (
     <React.Fragment>
 
-      <div className="flexListDiscover container searchBasket flexPro4" >
+      <div className="flexListDiscover container searchBasket flexPro4" style={{ padding: "0 10px 40px 0" }} >
 
         {!_.isEmpty(baskets) ? (
           baskets.map((basket) => (

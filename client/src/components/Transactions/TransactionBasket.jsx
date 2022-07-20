@@ -24,11 +24,11 @@ const TransactionBasket = ({
         <div>
           <div className="container" style={{padding: "25px 0"}}>
             <div className='flexSpaceCenter' style={{ padding: "10px 0"}}>                 
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order ID</p>
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order Quantity</p>
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Fullfillment Price</p>
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Total Holding</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order ID</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order Quantity</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Fullfillment Price</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Total Holding</p>
             </div>
             <p></p>     {/* Arranging color orders */}
             

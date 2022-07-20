@@ -38,7 +38,7 @@ const PortfolioBasket = ({
             </div>
           </div>
         </div>
-        <p className="font12" style={{ height: "120px", padding: "25px 0" }}>
+        <p className="font12" style={{ height: "80px", padding: "25px 0" }}>
           {overview.length > 120 ?
               `${overview.substring(0, 120)}...` : overview
           }
