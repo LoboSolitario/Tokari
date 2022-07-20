@@ -1,11 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import ViewButton from "../Buttons/viewButton";
+import {useNavigate}  from "react-router-dom";
 
 const AllBasket = ({
   basket,
   handleDetailBox
 }) => {
+
+  const navigate = useNavigate();
+
+  const ownerClicked = async () => {
+    navigate(`/manager/${basket.owner._id}`);
+  }
+
   return (
     <Wrapper className="whiteBg radius8 shadow basket">
       <div className="wrapper-header flexSpaceCenter" style={{ padding: "0 0 5px 0" }}>
@@ -19,7 +27,7 @@ const AllBasket = ({
         {basket.overview}
 
       </p>
-      <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by {basket.owner.name}</p>
+      <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name}</span></p>
       <p className="font11">Number of cryptocurrencies:  {basket.cryptoNumber}</p>
 
 

@@ -13,6 +13,7 @@ import Payment from "../../screens/Payment"
 import Detail from "../../screens/Detail";
 import Investing from "../../screens/Investing";
 import AfterI from "../../screens/AfterI";
+import Manager from "../../screens/Manager";
 export default function MainAppRouter() {
     return (
       <>
@@ -36,6 +37,7 @@ export default function MainAppRouter() {
           <Route element={<Detail/>} path="/basket/:id"/>
           <Route element={<Investing/>} path="/basket/invest/:id" />
           <Route element={<AfterI/>} path="/investsuccessfully"/>
+          <Route element={<Manager/>} path="/manager/:id"/>
           {/* <Route exact path="/:id" component={Detail}/> */}
         </Routes>
       </Router>

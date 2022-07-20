@@ -243,6 +243,13 @@
     justify-content: center;
     align-items: center;
   }
+
+  .flexListDiscover {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+  }
   .flexGrow1{
     flex-grow: 1;
   }
@@ -260,6 +267,12 @@
   }
   .flexWrapper60{
     width: 60%
+  }
+  .flexWrapper50{
+    width: 50%
+  }
+  .flexWrapper40{
+    width: 40%
   }
   .flexWrapper30{
     width: 30%
@@ -481,10 +494,13 @@ input[type="search"] {
   border-radius: 0.6rem;
 }
 
+.filter-logo{
+  filter: invert(100%);
+}
+
 input[type="search"]::placeholder {
   color: rgb(133, 126, 126);
 }
-
 
 
 input[type="search"]:focus {

@@ -37,8 +37,7 @@ export default function Products() {
                 temp.push(obj);  
                 return obj           
             })
-            setBasket(temp)
-            console.log("baskets: ", temp);
+            setBasket(temp);
          }
     }
   }, []);

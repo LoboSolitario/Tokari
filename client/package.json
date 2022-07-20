@@ -24,6 +24,7 @@
     "react-scripts": "^5.0.1",
     "react-scroll": "^1.8.7",
     "react-slick": "^0.28.1",
+    "recharts": "^2.1.12",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
     "web-vitals": "^1.1.2"

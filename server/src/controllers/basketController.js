@@ -338,6 +338,11 @@ const deleteBasket = asyncHandler(async (req, res) => {
         throw new Error("Unauthorised delete.")
     }
     const deletedBasket = await Basket.findByIdAndDelete(req.params.id);
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+        $pullAll:{
+            createdBaskets:[{_id: req.params.id}]
+        }
+    }, { new: true });
     res.status(200).json(deletedBasket);
 })
 
@@ -435,11 +440,23 @@ const investBasket = asyncHandler(async (req, res) => {
             'investmentAmount': investment_amount,
             'cryptoAlloc': []
         }
+
         transaction_response.forEach((transaction) => {
+            console.log(transaction)
+            let orderQty , price
+            if(transaction.fills[0]){
+                orderQty = transaction.fills[0].qty; 
+                price = transaction.fills[0].price;
+            }
+            else{
+                orderQty = 0
+                price = 0
+            }
+            
             let a = {
                 'cryptoCurrency': transaction.symbol,
-                'orderQty': transaction.fills[0].qty,
-                'price': transaction.fills[0].price,
+                'orderQty': orderQty,
+                'price': price,
                 'orderId': transaction.orderId
             }
             transaction_data['cryptoAlloc'].push(a)
@@ -453,6 +470,7 @@ const investBasket = asyncHandler(async (req, res) => {
         const user = await User.findByIdAndUpdate(conditions, { $push: {transactionLists: transaction_data }, $addToSet: { investedBaskets: basket } }, { new: true })
         res.status(200).json("Investment successfull")
     }).catch(errors => {
+        console.log(errors)
         res.status(400).json(errors)
         // react on errors.
     })
