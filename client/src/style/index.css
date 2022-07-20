@@ -482,7 +482,6 @@
   /* margin-left:300px; */
 }
 
-
 input[type="search"] {
   border: none;
   background: white;
@@ -642,4 +641,25 @@ input.nosubmit {
 
 .borderRad{
   border-radius: 0.6rem ;
+}
+
+.wave-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-container svg {
+  position: relative;
+  display: block;
+  width: calc(163% + 1.3px);
+  height: 338px;
+  transform: rotateY(180deg);
+}
+
+.wave-container .shape-fill {
+  fill: #7620FF;
 }

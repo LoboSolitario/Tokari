@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 // Components
-import FullButton from "../Buttons/FullButton";
+import FullButton from "../Buttons/OrangeButton";
 // Assets
 import HeaderImage from "../../assets/img/header-img.png";
 import Dots from "../../assets/svg/Dots";
 import {useNavigate}  from "react-router-dom";
+import Wave from "../../assets/svg/Wave.jsx";
+
 
 export default function Header() {
 
@@ -14,28 +16,31 @@ export default function Header() {
   return (
 
     <Wrapper id="home" className="container flexSpaceCenter">
-      <LeftSide className="flexCenter">
+      
+      <LeftSide className="flexCenter" style={{zIndex: 9}}>
         <div>
           <h1 className="extraBold font60">Let us simplify your crypto investment journey</h1>
           <HeaderP className="font13 semiBold">
            Tokari takes the guesswork out of investing by automating your portfolio. 
            Continue your crypto investment journey with a clear advantage.
           </HeaderP>
-          <BtnWrapper  onClick={ ()=>{navigate("discover")}}>
-            <FullButton title="Get Started"/>
+          <BtnWrapper className="pointer" onClick={ ()=>{navigate("discover")}}>
+            <FullButton style={{color: "#F2B300"}}  title="Get Started"/>
           </BtnWrapper>
         </div>
       </LeftSide>
 
+      <div className="wave-container">
+        <Wave/>
+      </div>
+
       <RightSide>
-        <ImageWrapper>
+        <ImageWrapper >
           <Img className="radius8" src={HeaderImage} alt="office" style={{zIndex: 9}} />
-          <DotsWrapper>
-            <Dots />
-          </DotsWrapper>
         </ImageWrapper>
-        <GreyDiv className="lightBg"></GreyDiv>
+        {/* <GreyDiv className="lightBg"></GreyDiv> */}
       </RightSide>
+
     </Wrapper>
   );
 }
@@ -117,7 +122,7 @@ const Img = styled.img`
 const DotsWrapper = styled.div`
   position: absolute;
   right: -100px;
-  bottom: 100px;
+  bottom: -130px;
   z-index: 2;
   @media (max-width: 960px) {
     right: 100px;
@@ -126,5 +131,3 @@ const DotsWrapper = styled.div`
     display: none;
   }
 `;
-
-
