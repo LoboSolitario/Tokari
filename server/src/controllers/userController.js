@@ -153,7 +153,10 @@ const updateUser = (req, res) => {
 // @access Public
 
 const landingPageBaskets = asyncHandler(async (req, res) => {
-    let baskets = await Basket.find({'homepage': true}).limit(6)
+    let baskets = await Basket.find({'homepage': true}).limit(6).populate({
+        path: 'owner',
+        select: { 'name': 1 },
+    });
     res.status(200).json(baskets)
 })
 
