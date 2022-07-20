@@ -20,12 +20,10 @@ function InvestorRouters() {
         <Routes>
           <Route element={<SubscriptionHome />} path="/subscriptions" />
         </Routes>
-      <InvestmentBasketContext.Provider value={{ baskets, setBaskets }}>
         <Routes>
           <Route element={<InvestmentHome />} path="/investments" />
           {/* <Route element={<TransactionHome />} path="/transactions" /> */}
         </Routes>
-      </InvestmentBasketContext.Provider>
       <TransactionContext.Provider value={{ transactions, setTransactions }}>
         <Routes>
           <Route element={<TransactionHome />} path="/transactions" />
