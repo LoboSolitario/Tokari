@@ -26,7 +26,7 @@ export default function InvestmentHome() {
         response.data.map(item => {
           let obj = {
             "id": item._id,
-            "author": item.author,
+            "owner": item.owner,
             "basketName": item.basketName,
             "risk": item.risk,
             "volatility": item.volatility,

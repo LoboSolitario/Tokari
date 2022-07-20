@@ -13,16 +13,15 @@ const SubscribedBasket = ({
     <Wrapper className="whiteBg radius8 shadow basket">
       <div className="wrapper-header flexSpaceCenter">
         <h3 className="font20 extraBold">{basket.basketName}</h3>
-
+      </div>
+      <div className="flexSpaceNull">
+        <p className="font13 extraBold greyColor" style={{ padding: "5px 0 0 0" }}> by <span className="purpleColor">{basket.owner.name}</span></p>
       </div>
 
       <p className="font13" style={{ padding: "30px 0" }}>
         {basket.overview}
       </p>
-      <div className="flexSpaceNull">
-        <p className="font13 extraBold">{basket.author}</p>
-        {/* <p className="font13 greenColor extraBold">{free?"Free Access": ""}</p> */}
-      </div>
+
 
       <div className="flexSpaceNull">
         <p className={' tag  radius6 font11 extraBold ' + (basket.risk === "High" ? "redBg" : basket.risk === "Medium" ? "orangeBg" : "greenBg")}>Risk: {basket.risk}</p>

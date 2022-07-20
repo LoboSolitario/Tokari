@@ -22,13 +22,13 @@ const AllBasket = ({
         </h3>
         <p className="font13 greenColor extraBold">{basket.subscriptionFee === 0 ? "Free Access" : ""}</p>
       </div>
-
+      <p className="font13 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span className=" extraBold purpleColor" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name}</span></p>
       <p className="font13" style={{ padding: "5px 0" }}>
         {basket.overview}
 
       </p>
-      <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name}</span></p>
-      <p className="font11">Number of cryptocurrencies:  {basket.cryptoNumber}</p>
+      
+      <p className="font13">Number of cryptocurrencies:  {basket.cryptoNumber}</p>
 
 
       <div className="flexSpaceNull">

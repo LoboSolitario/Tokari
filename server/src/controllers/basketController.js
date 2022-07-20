@@ -125,7 +125,13 @@ const getUserBaskets = asyncHandler(async (req, res) => {
 // @route GET /api/baskets/userSubscribedBaskets
 // @access private
 const getUserSubscribedBaskets = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user.id).select('-password').populate('subscribedBaskets')
+    const user = await User.findById(req.user.id).select('-password').populate({
+        path: 'subscribedBaskets',
+        populate: {
+            path: 'owner',
+            select: { 'name': 1 },
+        }
+    });
     res.status(200).json(user.subscribedBaskets)
 })
 
@@ -134,7 +140,13 @@ const getUserSubscribedBaskets = asyncHandler(async (req, res) => {
 // @access private
 const getUserInvestedBaskets = asyncHandler(async (req, res) => {
 
-    const user = await User.findById(req.user.id).select('-password').populate('investedBaskets')
+    const user = await User.findById(req.user.id).select('-password').populate({
+        path: 'investedBaskets',
+        populate: {
+            path: 'owner',
+            select: { 'name': 1 },
+        }
+    });
     res.status(200).json(user.investedBaskets)
 })
 
@@ -254,9 +266,9 @@ const editBasket = asyncHandler(async (req, res) => {
     res.status(200).json(updatedBasket);
 })
 
-const unsubscribeBasket = asyncHandler(async (req, res)=>{
-     //Check if the passed :id is a valid mongodb _id
-     if (!ObjectId.isValid(req.params.id)) {
+const unsubscribeBasket = asyncHandler(async (req, res) => {
+    //Check if the passed :id is a valid mongodb _id
+    if (!ObjectId.isValid(req.params.id)) {
         res.status(401);
         throw new Error("Incorrect basket id")
     }
@@ -268,8 +280,8 @@ const unsubscribeBasket = asyncHandler(async (req, res)=>{
         throw new Error('User not found.');
     }
     const updatedUser = await User.findByIdAndUpdate(req.user.id, {
-        $pullAll:{
-            subscribedBaskets:[{_id: req.params.id}]
+        $pullAll: {
+            subscribedBaskets: [{ _id: req.params.id }]
         }
     }, { new: true })
     res.status(200).json(updatedUser)
@@ -339,8 +351,8 @@ const deleteBasket = asyncHandler(async (req, res) => {
     }
     const deletedBasket = await Basket.findByIdAndDelete(req.params.id);
     const updatedUser = await User.findByIdAndUpdate(req.user.id, {
-        $pullAll:{
-            createdBaskets:[{_id: req.params.id}]
+        $pullAll: {
+            createdBaskets: [{ _id: req.params.id }]
         }
     }, { new: true });
     res.status(200).json(deletedBasket);
@@ -443,16 +455,16 @@ const investBasket = asyncHandler(async (req, res) => {
 
         transaction_response.forEach((transaction) => {
             console.log(transaction)
-            let orderQty , price
-            if(transaction.fills[0]){
-                orderQty = transaction.fills[0].qty; 
+            let orderQty, price
+            if (transaction.fills[0]) {
+                orderQty = transaction.fills[0].qty;
                 price = transaction.fills[0].price;
             }
-            else{
+            else {
                 orderQty = 0
                 price = 0
             }
-            
+
             let a = {
                 'cryptoCurrency': transaction.symbol,
                 'orderQty': orderQty,
@@ -467,7 +479,7 @@ const investBasket = asyncHandler(async (req, res) => {
             'investedBaskets.': { $ne: basket }
         };
 
-        const user = await User.findByIdAndUpdate(conditions, { $push: {transactionLists: transaction_data }, $addToSet: { investedBaskets: basket } }, { new: true })
+        const user = await User.findByIdAndUpdate(conditions, { $push: { transactionLists: transaction_data }, $addToSet: { investedBaskets: basket } }, { new: true })
         res.status(200).json("Investment successfull")
     }).catch(errors => {
         console.log(errors)
