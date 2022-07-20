@@ -20,12 +20,12 @@ export default function Header() {
       <LeftSide className="flexCenter" style={{zIndex: 9}}>
         <div>
           <h1 className="extraBold font60">Let us simplify your crypto investment journey</h1>
-          <HeaderP className="font13 semiBold">
+          <HeaderP className="font14 semiBold" style={{color: "black"}}>
            Tokari takes the guesswork out of investing by automating your portfolio. 
            Continue your crypto investment journey with a clear advantage.
           </HeaderP>
           <BtnWrapper className="pointer" onClick={ ()=>{navigate("discover")}}>
-            <FullButton style={{color: "#F2B300"}}  title="Get Started"/>
+            <FullButton title="Get Started"/>
           </BtnWrapper>
         </div>
       </LeftSide>
