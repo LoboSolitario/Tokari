@@ -6,6 +6,9 @@ const asyncHandler = require('express-async-handler')
 var hmacSHA256 = require("crypto-js/hmac-sha256");
 const axios = require('axios');
 const sendEmail = require('./emailController/email');
+const Handlebars = require('handlebars');
+const fs = require('fs');
+const path = require('path');
 
 
 const binance_api_key = process.env.BINANCE_API_KEY;
@@ -81,7 +84,12 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     if (newUser) {
-        sendEmail(newUser.email, 'New Account Created in Tokari', "Congratulations on creating a new account with tokari");
+        var source = fs.readFileSync(path.join(__dirname, '../emailTemplate/welcome.hbs'), 'utf8');
+        var template = Handlebars.compile(source);
+        const replacements = {
+            userName: newUser.name
+        };
+        sendEmail(newUser.email, 'Welcome to Tokari', template(replacements));
         res.status(201).json({
             _id: newUser.id,
             name: newUser.name,

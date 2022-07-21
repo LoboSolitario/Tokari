@@ -10,7 +10,9 @@ const { response } = require('express');
 const binance_api_key = process.env.BINANCE_API_KEY;
 const binance_api_secret = process.env.BINANCE_API_SECRET;
 const sendEmail = require('./emailController/email');
-
+const Handlebars = require('handlebars');
+const fs = require('fs');
+const path = require('path');
 
 const cryptoMap = new Map();
 cryptoMap.set('bitcoin', ['BTCUSDT', 21638])
@@ -260,8 +262,14 @@ const editBasket = asyncHandler(async (req, res) => {
 
     const subscribedUsers = await User.find({ subscribedBaskets: req.params.id }).select('email');
     subscribedUsers.forEach((subscribedUser) => {
-        let email_body = "The basket " + basket.basketName + " has been rebalanced by " + user.name + ". Invest according to the new weights to gain the best returns."
-        sendEmail(subscribedUser.email, 'A basket you have subscribed to has been rebalanced', email_body);
+        var source = fs.readFileSync(path.join(__dirname, '../emailTemplate/rebalance.hbs'), 'utf8');
+        var template = Handlebars.compile(source);
+        const replacements = {
+            basketName: basket.basketName,
+            managerName: user.name,
+            basketURL: "http://localhost:3000/investormain/subscriptions"
+        };
+        sendEmail(subscribedUser.email, 'A basket you have subscribed to has been rebalanced', template(replacements));
     })
     if (req.body.isFreeBasket && req.body.subscriptionFee != 0) {
         req.body.subscriptionFee = 0;
@@ -465,8 +473,8 @@ const investBasket = asyncHandler(async (req, res) => {
         }
 
         transaction_response.forEach((transaction) => {
-            console.log(transaction)
             let orderQty, price
+            // Expired market order due to no liquidity from this symbol.Hence cannot place orders.
             if (transaction.fills[0]) {
                 orderQty = transaction.fills[0].qty;
                 price = transaction.fills[0].price;
@@ -490,7 +498,19 @@ const investBasket = asyncHandler(async (req, res) => {
             'investedBaskets.': { $ne: basket }
         };
 
-        const user = await User.findByIdAndUpdate(conditions, { $push: { transactionLists: transaction_data }, $addToSet: { investedBaskets: basket } }, { new: true })
+        await User.findByIdAndUpdate(conditions, { $push: { transactionLists: transaction_data }, $addToSet: { investedBaskets: basket } }, { new: true }).then((updatedUser) => {
+            try {
+                var source = fs.readFileSync(path.join(__dirname, '../emailTemplate/invest.hbs'), 'utf8');
+                var template = Handlebars.compile(source);
+                const replacements = {
+                    basketName: basket.basketName
+                };
+                sendEmail(updatedUser.email, 'Congrats! Successfully invested in ' + basket.basketName , template(replacements));
+
+            } catch (err) {
+                console.log(err)
+            }
+        })
         res.status(200).json("Investment successfull")
     }).catch(errors => {
         console.log(errors)
