@@ -127,7 +127,13 @@ const getUserBaskets = asyncHandler(async (req, res) => {
 // @route GET /api/baskets/userSubscribedBaskets
 // @access private
 const getUserSubscribedBaskets = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user.id).select('-password').populate('subscribedBaskets')
+    const user = await User.findById(req.user.id).select('-password').populate({
+        path: 'subscribedBaskets',
+        populate: {
+            path: 'owner',
+            select: { 'name': 1 },
+        }
+    });
     res.status(200).json(user.subscribedBaskets)
 })
 
@@ -136,7 +142,13 @@ const getUserSubscribedBaskets = asyncHandler(async (req, res) => {
 // @access private
 const getUserInvestedBaskets = asyncHandler(async (req, res) => {
 
-    const user = await User.findById(req.user.id).select('-password').populate('investedBaskets')
+    const user = await User.findById(req.user.id).select('-password').populate({
+        path: 'investedBaskets',
+        populate: {
+            path: 'owner',
+            select: { 'name': 1 },
+        }
+    });
     res.status(200).json(user.investedBaskets)
 })
 
@@ -176,9 +188,10 @@ const createBasket = asyncHandler(async (req, res) => {
         status: req.body.status,
         volatility: req.body.volatility,
         risk: req.body.risk,
+        isFreeBasket: req.body.isFreeBasket,
         homepage: req.body.homepage,
         rebalanceFreq: req.body.rebalanceFreq,
-        subscriptionFee: req.body.subscriptionFee,
+        subscriptionFee: (req.body.isFreeBasket ? 0 : req.body.subscriptionFee),
         cryptoNumber: req.body.cryptoNumber,
         cryptoAlloc: req.body.cryptoAlloc
     });
@@ -250,12 +263,17 @@ const editBasket = asyncHandler(async (req, res) => {
         let email_body = "The basket " + basket.basketName + " has been rebalanced by " + user.name + ". Invest according to the new weights to gain the best returns."
         sendEmail(subscribedUser.email, 'A basket you have subscribed to has been rebalanced', email_body);
     })
+    if (req.body.isFreeBasket && req.body.subscriptionFee != 0) {
+        req.body.subscriptionFee = 0;
+    }
+    if (!req.body.isFreeBasket && req.body.subscriptionFee === 0) {
+        req.body.isFreeBasket = true;
+    }
     const updatedBasket = await Basket.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, doc) => {
         if (err) {
             res.status(401).json(err)
         }
     });
-    
     res.status(200).json(updatedBasket);
 })
 
@@ -343,6 +361,11 @@ const deleteBasket = asyncHandler(async (req, res) => {
         throw new Error("Unauthorised delete.")
     }
     const deletedBasket = await Basket.findByIdAndDelete(req.params.id);
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+        $pullAll: {
+            createdBaskets: [{ _id: req.params.id }]
+        }
+    }, { new: true });
     res.status(200).json(deletedBasket);
 })
 
@@ -440,11 +463,23 @@ const investBasket = asyncHandler(async (req, res) => {
             'investmentAmount': investment_amount,
             'cryptoAlloc': []
         }
+
         transaction_response.forEach((transaction) => {
+            console.log(transaction)
+            let orderQty, price
+            if (transaction.fills[0]) {
+                orderQty = transaction.fills[0].qty;
+                price = transaction.fills[0].price;
+            }
+            else {
+                orderQty = 0
+                price = 0
+            }
+
             let a = {
                 'cryptoCurrency': transaction.symbol,
-                'orderQty': transaction.fills[0].qty,
-                'price': transaction.fills[0].price,
+                'orderQty': orderQty,
+                'price': price,
                 'orderId': transaction.orderId
             }
             transaction_data['cryptoAlloc'].push(a)
@@ -458,6 +493,7 @@ const investBasket = asyncHandler(async (req, res) => {
         const user = await User.findByIdAndUpdate(conditions, { $push: { transactionLists: transaction_data }, $addToSet: { investedBaskets: basket } }, { new: true })
         res.status(200).json("Investment successfull")
     }).catch(errors => {
+        console.log(errors)
         res.status(400).json(errors)
         // react on errors.
     })

@@ -19,6 +19,7 @@ const basketSchema = new mongoose.Schema({
     homepage: Boolean,
     volatility: String,
     risk: String,
+    isFreeBasket: Boolean,
     rebalanceFreq: Number,
     subscriptionFee: Number,
     cryptoNumber: Number,

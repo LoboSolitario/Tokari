@@ -14,18 +14,18 @@ export default function MoreButton({ title, action, border }) {
 }
 
 const Wrapper = styled.button`
-  border: 1px solid ${(props) => (props.border ? "#24CE80" : "#24CE8D")};
+  border: 1px solid ${(props) => (props.border ? "#762077" : "#7620FF")};
   background-color: ${(props) => (props.border ? "transparent" : "transparent")};
   width: 100%;
   padding: 8px;
   margin-top:10px;
   outline: none;
   font-size: 12px;
-  color: ${(props) => (props.border ? "#24CE8D" : "#24CE8D")};
+  color: ${(props) => (props.border ? "#7620FF" : "#7620FF")};
   :hover {
-    background-color: ${(props) => (props.border ? "transparent" : "#24CE80")};
-    border: 1px solid #24CE8D;
-    color: ${(props) => (props.border ? "#24CE8D" : "#fff")};
+    background-color: ${(props) => (props.border ? "transparent" : "#762077")};
+    border: 1px solid #7620FF;
+    color: ${(props) => (props.border ? "#7620FF" : "#fff")};
   }
 `;
 

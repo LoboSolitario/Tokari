@@ -70,14 +70,14 @@ export default function DiscoverBasket() {
   return (
     <React.Fragment>
 
-      <div className="flexList container searchBasket flexPro4">
+      <div className="flexListDiscover container searchBasket flexPro4" style={{ padding: "0 10px 40px 0" }} >
 
         {!_.isEmpty(baskets) ? (
           baskets.map((basket) => (
             <AllBasket basket={basket} key={basket.id} handleDetailBox={handleDetailBox}/>
           ))
         ) : (
-          <p>No matching results.</p>
+          <p className="flexCenter" style={{padding: "100px 0"}}>No matching results.</p>
         )}
       </div>
     </React.Fragment>

@@ -19,16 +19,16 @@ const TransactionBasket = ({
           <h3 className="font18 extraBold">
             {transaction.basketName}
           </h3>
-          <p className='flexWrapper30 semiBold font13' style={{color: "#00000"}}>  Investment Amount: ${transaction.investmentAmount}</p>
+          <p className='flexWrapper30 semiBold font13' style={{color: "#00000"}}>  Investment Amount: <span className="purpleColor">${transaction.investmentAmount}</span></p>
         </div>
         <div>
           <div className="container" style={{padding: "25px 0"}}>
             <div className='flexSpaceCenter' style={{ padding: "10px 0"}}>                 
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order ID</p>
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order Quantity</p>
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Fullfillment Price</p>
-              <p className='font14 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Total Holding</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order ID</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Order Quantity</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Fullfillment Price</p>
+              <p className='font14  flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Total Holding</p>
             </div>
             <p></p>     {/* Arranging color orders */}
             

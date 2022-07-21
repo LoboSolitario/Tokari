@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faLock} from '@fortawesome/free-solid-svg-icons';
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import PieChartComponent from './PieChart';
 
 // Screens
 function BasketDetail() {
@@ -122,20 +123,24 @@ const handleSubmit = async (event) => {
                     <Wrapper style={{ padding: "1px 0 0 0"}}>
                       <p className='box semiBold'>CryptoCurrencies & Weights</p>
                       {basket.cryptoAlloc ? (
-                      <>
-                      <div className="container" style={{padding: "0 0 25px 0"}}>
-                        <div className='flexSpaceCenter' style={{ padding: "10px 0"}}>                 
-                            <p className='font13 semiBold flexWrapper60' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
-                            <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Weights(%)</p>
+                      <div className='flexSpaceCenter'>
+                        <div className="flexWrapper50" style={{padding: "0 0 25px 0"}}>
+                          <div className='flexSpaceCenter' style={{ padding: "10px 0"}}>                 
+                              <p className='font13 semiBold flexWrapper60' style={{ padding: "0 0 5px 0px"}}>Cryptocurrency</p>
+                              <p className='font13 semiBold flexWrapper30' style={{ padding: "0 0 5px 0px"}}>Weights(%)</p>
+                          </div>
+                          <p></p>     {/* Arranging color orders */}
+                          {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation => 
+                          <div className='flexSpaceCenter tableStripe' style={{ padding: "5px"}}>                                                        
+                              <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>                                              
+                              <p className='flexWrapper30 font13'>{allocation.weight}</p>
+                          </div>)} 
                         </div>
-                        <p></p>     {/* Arranging color orders */}
-                        {(basket.cryptoAlloc) && basket.cryptoAlloc.map(allocation => 
-                        <div className='flexSpaceCenter tableStripe' style={{ padding: "5px"}}>                                                        
-                            <p className='flexWrapper60 font13'>{allocation.cryptoSymbol}</p>                                              
-                            <p className='flexWrapper30 font13'>{allocation.weight}</p>
-                        </div>)} 
-                        </div> 
-                      </> 
+                        <div className='flexWrapper50'>
+                          <PieChartComponent/>
+                        </div>
+                         
+                      </div> 
                     ) : (
                       <Wrapper className='container whiteBg shadow flexCenter' style={{height:'200px'}}>
                         <div  style={{width: '200px'}}>

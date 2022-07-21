@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
-import InvestmentBasketContext from "../contexts/InvestmentBasketContext";
 import InvestmentBasket from "./InvestmentBasket";
 import configOptions from '../../api/configOptions';
 import _ from 'lodash';
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function InvestmentHome() {
 
-  const { baskets, setBaskets } = useContext(InvestmentBasketContext);
+  const [baskets, setBaskets ] = useState();
 
   const auth = localStorage.getItem("auth")
   const token = localStorage.getItem("token")
@@ -27,7 +26,7 @@ export default function InvestmentHome() {
         response.data.map(item => {
           let obj = {
             "id": item._id,
-            "author": item.author,
+            "owner": item.owner,
             "basketName": item.basketName,
             "risk": item.risk,
             "volatility": item.volatility,
@@ -38,7 +37,6 @@ export default function InvestmentHome() {
           temp.push(obj);
         })
         setBaskets(temp);
-
       }
     }
   }, []);
@@ -108,7 +106,7 @@ export default function InvestmentHome() {
       <div className="flexList container" style={{minHeight: "72vh"}}>
         {!_.isEmpty(baskets) ? (
           baskets.map((basket)=>(
-              <InvestmentBasket basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
+              <InvestmentBasket key={basket.id} basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
           ))
         ) : (
           <p>You have not yet subscribed to a basket</p>

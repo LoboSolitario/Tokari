@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, {useContext} from "react";
+import React, {useState} from "react";
 import { useEffect } from "react";
-import SubscribedBasketContext from "../contexts/SubscribedBasketContext";
 import SubscribedBasket from "./SubscribedBasket";
 import configOptions from '../../api/configOptions';
 import _ from 'lodash';
@@ -9,9 +8,8 @@ import {useNavigate, NavLink}  from "react-router-dom";
 
 export default function SubscriptionHome() {
 
-  const { baskets, setBaskets } = useContext(SubscribedBasketContext);
+  const [ baskets, setBaskets ] = useState();
   
-  const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
   const baseUrl = process.env.REACT_APP_BASE_URL;  
   const navigate = useNavigate();
@@ -27,7 +25,7 @@ export default function SubscriptionHome() {
             response.data.map(item =>{
                 let obj = {
                     "id": item._id,
-                    "author": item.author,
+                    "owner": item.owner,
                     "basketName": item.basketName,
                     "risk": item.risk,
                     "volatility": item.volatility,
@@ -97,7 +95,7 @@ export default function SubscriptionHome() {
         <div className="flexList container" style={{minHeight: "72vh"}}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
-                    <SubscribedBasket basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
+                    <SubscribedBasket key={basket.id} basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
                 ))
              ) : (
                 <p>You have not yet subscribed to a basket</p>

@@ -1,6 +1,8 @@
+import { faBedPulse } from '@fortawesome/free-solid-svg-icons';
+import { toBeEmpty, toHaveFormValues } from '@testing-library/jest-dom/dist/matchers';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Form, Table } from 'react-bootstrap';
+import { Form, Table, ToggleButtonGroup, ToggleButton} from 'react-bootstrap';
 import { MenuItem } from 'react-pro-sidebar';
 import FullButton from "../Buttons/FullButton";
 
@@ -16,6 +18,7 @@ const PortfolioForm = (props) => {
       overview: props.basket ? props.basket.overview : '',
       frequency: props.basket ? props.basket.frequency : '',
       details: props.basket ? props.basket.details : '' ,
+      isFreeBasket:  props.basket ? props.basket.isFreeBasket : true,
       cryptoAlloc: props.basket ? props.basket.cryptoAlloc : []
     };
   });
@@ -44,11 +47,11 @@ const PortfolioForm = (props) => {
 
   const [errorMsg, setErrorMsg] = useState('');
   const [total, setTotal] = useState(('0'));
-  const { overview, basketName, risk, volatility, subscriptionFee, details, cryptoAlloc} = basket;
+  const { overview, basketName, risk, volatility, subscriptionFee, details, cryptoAlloc, isFreeBasket} = basket;
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    const values = [overview, basketName, risk, volatility, subscriptionFee, details];
+    const values = [overview, basketName, risk, volatility, details];
     let errorMsg = '';
 
     const allFieldsFilled = values.every((field) => {
@@ -56,7 +59,21 @@ const PortfolioForm = (props) => {
       return value !== '';
     });
 
-    if (allFieldsFilled && total === 100) {
+    const checkFreeBasket = () =>{
+      if(isFreeBasket === false || isFreeBasket === "false"){
+        if(subscriptionFee === 0 || !parseInt(subscriptionFee) > 0 || subscriptionFee === ""){
+          errorMsg = "Please note that subscription fee must be larger than 1 for non-free baskets ⚠️"
+          setErrorMsg(errorMsg);
+          return false
+        }
+      }
+
+      errorMsg = ""
+      setErrorMsg(errorMsg);
+      return true
+    }
+
+    if (allFieldsFilled && total === 100 && checkFreeBasket() === true) {
      
     let cryptoAllocTemp =[];
     
@@ -80,6 +97,7 @@ const PortfolioForm = (props) => {
         volatility,
         subscriptionFee,
         details, 
+        isFreeBasket,
         cryptoAlloc
       };
       props.handleOnSubmit(basket);
@@ -96,9 +114,20 @@ const PortfolioForm = (props) => {
 
   const handleInputChange = (event) => {
     let { name, value } = event.target;
+    
     if(name === "subscriptionFee" && value < 0){
       return value = 0     
     }
+
+    else if(name ==="isFreeBasket"){
+      if(value === "true" || value === true){
+        value = false;
+      }
+      else if(value === "false" || value === false){
+        value = true;
+      }
+    }
+
     setBasket((prevState) => ({
         ...prevState,
         [name]: value
@@ -112,6 +141,7 @@ const PortfolioForm = (props) => {
       [name]: value
       }));
   };
+
 
   useEffect(()=>{
     let errorMsg = '';
@@ -134,7 +164,7 @@ const PortfolioForm = (props) => {
   return (
     <div className="main-form flexHorizontalCenter container" style={{minHeight: "70vh"}}>
       <Form className='font13' onSubmit={handleOnSubmit}>
-      <h3 style={{marginBottom: "10px"}}>General Information</h3>
+      <h3 style={{marginTop: "20px", marginBottom: "10px"}}>General Information</h3>
         <Form.Group controlId="basketName" style={{marginBottom: "10px"}}>
             <Form.Label>Basket Name</Form.Label>
             <Form.Control
@@ -163,7 +193,16 @@ const PortfolioForm = (props) => {
             />
         </Form.Group>
 
-        <Form.Group controlId="subscriptionFee" style={{marginBottom: "10px"}}>
+        <Form.Group>
+          <div class="form-check">
+                <label class="form-check-label font12" for="flexCheckDefault">
+                  <input name="isFreeBasket" class="form-check-input" defaultChecked={isFreeBasket} type="checkbox" value={isFreeBasket} onClick={handleInputChange}/>
+                  Free Basket
+                </label>
+          </div>
+        </Form.Group>
+  
+        <Form.Group className="flexColumn" controlId="subscriptionFee" style={{display: (!isFreeBasket ? 'block' : 'none'), marginBottom: "10px"}}>
             <Form.Label>Subscription Fee</Form.Label>
             <Form.Control
               className="input-control form-control-sm font11"
@@ -225,7 +264,7 @@ const PortfolioForm = (props) => {
             
             {Object.keys(crypto).map((item, key) => (
               <tr>
-              <td>{key + 1}</td>
+              <td></td>
               <td>{item}</td>
                 <td>
                     <Form.Control

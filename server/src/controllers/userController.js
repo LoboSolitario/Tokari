@@ -156,11 +156,31 @@ const updateUser = (req, res) => {
 // @access Public
 
 const landingPageBaskets = asyncHandler(async (req, res) => {
-    let baskets = await Basket.find({'homepage': true}).limit(6)
+    let baskets = await Basket.find({'homepage': true}).limit(6).populate({
+        path: 'owner',
+        select: { 'name': 1 },
+    });
     res.status(200).json(baskets)
 })
 
 
+
+// @desc get all baskets of a specific portfolio manager
+// @route GET /api/users/manager/:id
+// @access Public
+const getBasketsOfManager = asyncHandler(async (req, res) => {
+    const managerId = req.params.id;
+    
+    //find the user to be viewed
+    const manager = await User.findById(managerId).select('-password').populate({ path: 'createdBaskets', model: 'Basket' });
+    if (manager) {
+        res.status(201).json(manager)
+    } else {
+        res.status(400);
+        throw new Error("Manager not found");
+    }
+
+})
 
 
 
@@ -180,5 +200,6 @@ module.exports = {
     deleteUser,
     updateUser,
     getInvestorStats,
-    landingPageBaskets
+    landingPageBaskets,
+    getBasketsOfManager
 }
