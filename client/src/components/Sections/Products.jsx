@@ -24,7 +24,7 @@ export default function Products() {
             response.data.map(item =>{
                 let obj = {
                     "id": item._id,
-                    "author": item.owner,
+                    "owner": item.owner,
                     "basketName": item.basketName,
                     "risk": item.risk,
                     "volatility": item.volatility,
@@ -37,8 +37,7 @@ export default function Products() {
                 temp.push(obj);  
                 return obj           
             })
-            setBasket(temp)
-            console.log("baskets: ", temp);
+            setBasket(temp);
          }
     }
   }, []);
@@ -80,7 +79,7 @@ export default function Products() {
         <div className="flexList">
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
-                    <BasketBox key={basket.id} {...basket} handleDetailBox={handleDetailBox}/>
+                    <BasketBox basket={basket} key={basket.id} {...basket} handleDetailBox={handleDetailBox}/>
                 ))
              ) : (
                 <p>Currently, there is no basket.</p>

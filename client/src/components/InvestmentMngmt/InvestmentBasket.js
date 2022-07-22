@@ -12,7 +12,9 @@ const InvestmentBasket = ({
     <Wrapper className="whiteBg radius8 shadow basket">
       <div className="wrapper-header flexSpaceCenter">
         <h3 className="font20 extraBold">{basket.basketName}</h3>
-
+      </div>
+      <div className="flexSpaceNull">
+        <p className="font13 extraBold greyColor" style={{ padding: "5px 0 0 0" }}> by <span className="purpleColor">{basket.owner.name}</span></p>
       </div>
 
       <p className="font13" style={{ padding: "30px 0" }}>

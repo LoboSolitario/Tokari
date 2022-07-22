@@ -5,6 +5,11 @@ const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler')
 var hmacSHA256 = require("crypto-js/hmac-sha256");
 const axios = require('axios');
+const sendEmail = require('./emailController/email');
+const Handlebars = require('handlebars');
+const fs = require('fs');
+const path = require('path');
+
 
 const binance_api_key = process.env.BINANCE_API_KEY;
 const binance_api_secret = process.env.BINANCE_API_SECRET;
@@ -79,6 +84,12 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     if (newUser) {
+        var source = fs.readFileSync(path.join(__dirname, '../emailTemplate/welcome.hbs'), 'utf8');
+        var template = Handlebars.compile(source);
+        const replacements = {
+            userName: newUser.name
+        };
+        sendEmail(newUser.email, 'Welcome to Tokari', template(replacements));
         res.status(201).json({
             _id: newUser.id,
             name: newUser.name,
@@ -153,7 +164,10 @@ const updateUser = (req, res) => {
 // @access Public
 
 const landingPageBaskets = asyncHandler(async (req, res) => {
-    let baskets = await Basket.find({'homepage': true}).limit(6)
+    let baskets = await Basket.find({'homepage': true}).limit(6).populate({
+        path: 'owner',
+        select: { 'name': 1 },
+    });
     res.status(200).json(baskets)
 })
 
