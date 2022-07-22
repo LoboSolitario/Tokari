@@ -17,7 +17,7 @@ export default function Header() {
 
     <Wrapper id="home" className="container flexSpaceCenter">
       
-      <LeftSide className="flexCenter" style={{zIndex: 9}}>
+      <LeftSide className="flexCenter flexColumn flex" style={{zIndex: 9}}>
         <div>
           <h1 className="extraBold font60">Let us simplify your crypto investment journey</h1>
           <HeaderP className="font14 semiBold" style={{color: "black"}}>
@@ -32,13 +32,12 @@ export default function Header() {
 
       <RightSide>
         <ImageWrapper >
-          <Img className="radius8" src={HeaderImage} alt="office" style={{zIndex: 9, width: "65%"}} />
-        </ImageWrapper>
-        {/* <GreyDiv className="lightBg"></GreyDiv> */}
+          <Img className="radius8" src={HeaderImage} alt="office" style={{zIndex: 9, width: "60%"}} />
+        </ImageWrapper>      
       </RightSide>
 
       <WaveWrapper>
-        <div className="wave-container flex">
+        <div className="wave-container">
           <Wave/>
         </div>
       </WaveWrapper>
@@ -92,7 +91,7 @@ const RightSide = styled.div`
 `;
 const HeaderP = styled.div`
   max-width: 470px;
-  padding: 15px 0 50px 0;
+  padding: 15px 0 20px 0;
   line-height: 1.5rem;
   @media (max-width: 960px) {
     padding: 15px 0 50px 0;
@@ -123,12 +122,12 @@ const ImageWrapper = styled.div`
   position: relative;
   z-index: 9;
   @media (max-width: 960px) {
-    width: 100%;
+    width: 50%;
     justify-content: center;
   }
 `;
 const Img = styled.img`
-  @media (max-width: 2000px) {
+  @media (max-width: 1900px) {
     width: 40%;
     height: auto;
   }

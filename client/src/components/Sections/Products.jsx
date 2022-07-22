@@ -70,7 +70,7 @@ export default function Products() {
       <div className="lightBg" style={{padding: '20px 0 0'}}>
         <div className="container">
           <HeaderInfo>
-            <h1 className="font40 extraBold">Our Products</h1>
+            <h1 className="font40 extraBold">Our Suggested Baskets</h1>
             <p className="font13">
             Choose any of our carefully crafted, efficient and low-fee baskets.
             </p>
