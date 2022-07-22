@@ -663,3 +663,24 @@ input.nosubmit {
 .wave-container .shape-fill {
   fill: #7620FF;
 }
+
+.custom-shape-divider-bottom-1658486706 {
+  position: absolute;
+  left: 0;
+  margin-top: 25vh;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1658486706 svg {
+  position: relative;
+  display: block;
+  width: calc(108% + 1.3px);
+  height: 160px;
+}
+
+.custom-shape-divider-bottom-1658486706 .shape-fill {
+  fill: #7620FF;
+}
