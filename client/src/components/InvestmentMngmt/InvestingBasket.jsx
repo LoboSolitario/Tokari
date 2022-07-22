@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-import FreeIcon from "../../assets/svg/Services/FreeIcon";
+import {ToggleButtonGroup, ToggleButton} from "react-bootstrap"
 import FullButton from "../Buttons/FullButton";
 import configOptions from '../../api/configOptions';
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { Form } from 'react-bootstrap';
 // Screens
 function BasketDetail(props) {
     const [amount, setAmount] = useState(0);
+    const [investmentType, setInvestmentType] = useState(1);
     const basket = props.basket;
     let navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -39,6 +40,13 @@ function BasketDetail(props) {
         }
     }
 
+    const handleInvestmentTypeChange = async (e) => {}
+
+    useEffect(()=>{
+        // setBaskets(filteredBaskets);
+        console.log(investmentType);
+      }, [investmentType]);
+
     return (
         <Wrapper className="flexWrapper100">
         <div className="container50 whiteBg shadow discoverPage">
@@ -51,7 +59,35 @@ function BasketDetail(props) {
                                 </div>
                                 <div className="flexCenter" style={{height: '25vh'}}>
 
+                                {/* <ToggleButtonGroup type="radio" name="SubscriptionType" defaultValue={1} onChange={(e) => setActiveSubscriptionType(e)} className="flexSpaceCenter">
+                                        <ToggleButton id="subscription-type-show-all" value={1}  className="tagStyle flexCenter font13 shadow">
+                                            Show All
+                                        </ToggleButton>
+                                        <ToggleButton id="subscription-type-free-access" value={2}  className="tagStyle flexCenter font13 shadow">
+                                            Free Access
+                                        </ToggleButton>
+                                        <ToggleButton id="subscription-type-fee-based" value={3}  className="tagStyle flexCenter font13 shadow">
+                                            Fee Based
+                                        </ToggleButton>
+                                </ToggleButtonGroup> */}
+
+
+
                                     <div className="flexRow" >
+                                        <ToggleButtonGroup
+                                            // color="primary"
+                                            value={investmentType}
+                                            type="radio"
+                                            exclusive
+                                            defaultValue={1}
+                                            name="InvestmentType"
+                                            onChange={(e) => setInvestmentType(e)}
+                                            // style={{color}}
+                                            >
+                                            <ToggleButton id="monthly-sip-investment-type" className={(investmentType == 1 ? 'Btn-Active' : 'Btn-Deactive')} value={1}>Monthly SIP</ToggleButton>
+                                            <ToggleButton id="one-time-investment-type" className={(investmentType == 2 ? 'Btn-Active' : 'Btn-Deactive')} value={2}>One Time</ToggleButton>
+                                            {console.log("First timee", investmentType)}
+                                        </ToggleButtonGroup>
                                         <Form className='font13' style={{ padding: '0 30px' }}>
                                             <Form.Group controlId="amount">
                                                 <Form.Label>Investment Amount</Form.Label>

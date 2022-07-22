@@ -644,3 +644,14 @@ input.nosubmit {
 .fa-circle-info:hover {
   color: #7620FF;
 }
+
+.Btn-Active {
+  background-color: rgb(164, 141, 206) !important;
+  border-color: rgb(164, 141, 206) !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+.Btn-Deactive {
+  background-color: rgb(237, 232, 237) !important;
+  
+}
