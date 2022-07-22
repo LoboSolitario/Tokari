@@ -30,26 +30,31 @@ export default function Header() {
         </div>
       </LeftSide>
 
-      <div className="wave-container">
-        <Wave/>
-      </div>
-
       <RightSide>
         <ImageWrapper >
-          <Img className="radius8" src={HeaderImage} alt="office" style={{zIndex: 9}} />
+          <Img className="radius8" src={HeaderImage} alt="office" style={{zIndex: 9, width: "65%"}} />
         </ImageWrapper>
         {/* <GreyDiv className="lightBg"></GreyDiv> */}
       </RightSide>
 
+      <WaveWrapper>
+        <div className="wave-container flex">
+          <Wave/>
+        </div>
+      </WaveWrapper>
+      
     </Wrapper>
   );
 }
 
 
 const Wrapper = styled.section`
+  overflow: auto;
   padding-top: 80px;
   width: 100%;
-  min-height: 840px;
+  height: -moz-fit-content;
+  height: -webkit-fit-content;
+  height: -fit-content;
   @media (max-width: 960px) {
     flex-direction: column;
   }
@@ -71,7 +76,7 @@ const RightSide = styled.div`
   width: 50%;
   height: 100%;
   @media (max-width: 960px) {
-    width: 100%;
+   
     order: 1;
     margin-top: 30px;
   }
@@ -114,19 +119,14 @@ const ImageWrapper = styled.div`
   }
 `;
 const Img = styled.img`
-  @media (max-width: 560px) {
-    width: 80%;
+  @media (max-width: 2000px) {
+    width: 40%;
     height: auto;
   }
 `;
-const DotsWrapper = styled.div`
-  position: absolute;
-  right: -100px;
-  bottom: -130px;
-  z-index: 2;
-  @media (max-width: 960px) {
-    right: 100px;
-  }
+const WaveWrapper = styled.div`
+  display: flex;
+  align-items: flex-end;
   @media (max-width: 560px) {
     display: none;
   }
