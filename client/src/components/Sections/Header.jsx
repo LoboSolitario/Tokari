@@ -17,9 +17,8 @@ export default function Header() {
 
     <Wrapper id="home" className="container flexSpaceCenter">
       
-      <LeftSide className="flexCenter flexColumn flex" style={{zIndex: 9}}>
-        <div>
-          <h1 className="extraBold font60">Let us simplify your crypto investment journey</h1>
+      <LeftSide className="flexCenter flexColumn" style={{zIndex: 9}}>
+          <h1 className="extraBold font48">Let us simplify your crypto investment journey</h1>
           <HeaderP className="font14 semiBold" style={{color: "black"}}>
            Tokari takes the guesswork out of investing by automating your portfolio. 
            Continue your crypto investment journey with a clear advantage.
@@ -27,14 +26,13 @@ export default function Header() {
           <BtnWrapper className="pointer" onClick={ ()=>{navigate("discover")}}>
             <FullButton title="Get Started"/>
           </BtnWrapper>
-        </div>
       </LeftSide>
 
-      <RightSide>
+      {/* <RightSide>
         <ImageWrapper >
-          <Img className="radius8" src={HeaderImage} alt="office" style={{zIndex: 9, width: "60%"}} />
+          <Img className="radius8" src={HeaderImage} alt="office" style={{zIndex: 9, width: "70%"}} />
         </ImageWrapper>      
-      </RightSide>
+      </RightSide> */}
 
       <WaveWrapper>
         <div className="wave-container">
@@ -57,6 +55,10 @@ export default function Header() {
 
 
 const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow: auto;
   padding-top: 80px;
   width: 100%;
@@ -69,8 +71,9 @@ const Wrapper = styled.section`
   }
 `;
 const LeftSide = styled.div`
-  width: 50%;
+  width: 70%;
   height: 100%;
+  text-align: center;
   @media (max-width: 960px) {
     width: 100%;
     order: 2;
@@ -90,9 +93,11 @@ const RightSide = styled.div`
   }
 `;
 const HeaderP = styled.div`
-  max-width: 470px;
+  max-width: 700px;
   padding: 15px 0 20px 0;
   line-height: 1.5rem;
+  margin-bottom: 20px;
+  margin-top: 20px;
   @media (max-width: 960px) {
     padding: 15px 0 50px 0;
     text-align: center;
@@ -121,14 +126,15 @@ const ImageWrapper = styled.div`
   justify-content: flex-end;
   position: relative;
   z-index: 9;
-  @media (max-width: 960px) {
-    width: 50%;
+  @media (max-width: 1900px) {
+    width: 90%;
     justify-content: center;
   }
 `;
 const Img = styled.img`
-  @media (max-width: 1900px) {
-    width: 40%;
+  @media (max-width: 1200px) {
+    width: 0%;
+    display: none;
     height: auto;
   }
 `;
