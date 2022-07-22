@@ -640,3 +640,7 @@ input.nosubmit {
 .borderRad{
   border-radius: 0.6rem ;
 }
+
+.fa-circle-info:hover {
+  color: #7620FF;
+}
