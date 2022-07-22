@@ -105,7 +105,7 @@ export default function InvestmentHome() {
 
       </div> */}
 
-      <div className="flexList container" style={{minHeight: "72vh"}}>
+      <div className="flexListDiscover container" style={{minHeight: "58vh"}}>
         {!_.isEmpty(baskets) ? (
           baskets.map((basket)=>(
               <InvestmentBasket key={basket.id} basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />

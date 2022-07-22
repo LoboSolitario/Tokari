@@ -92,7 +92,7 @@ export default function SubscriptionHome() {
 
   return (
     <React.Fragment>
-        <div className="flexList container" style={{minHeight: "72vh"}}>
+        <div className="flexListDiscover container" style={{minHeight: "72vh"}}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
                     <SubscribedBasket key={basket.id} basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
