@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import styled from "styled-components";
 import { useLocation, useNavigate } from 'react-router-dom'
 import FreeIcon from "../../assets/svg/Services/FreeIcon";
@@ -14,6 +14,8 @@ function BasketDetail() {
 const location = useLocation();
 const navigate = useNavigate();
 const basket = location.state;
+const errRef = useRef();
+const [errMsg, setErrMsg] = useState('');
 const lastdate = format(parseISO(basket.updatedAt), "yyyy-MM-dd");
 const nextdate = format(addMonths(new Date(lastdate), 1), "yyyy-MM-dd");
 
@@ -48,15 +50,18 @@ const handleSubmit = async (event) => {
         // error, you should display the localized error message to your
         // customer using `error.message`.
         if (result.error) {
-          alert(result.error.message);
+          // alert(result.error.message);
+          setErrMsg(result.error.message);
         }
       })
       .catch(err => {
         if (err.response.status === 401) {
-          alert("Unauthorised Role Access")
+          // alert("Unauthorised Role Access")
+          setErrMsg("Unauthorised Role Access")
         }
         else {
-          alert("ERROR:", err.response.data)
+          // alert("ERROR:", err.response.data)
+          setErrMsg("ERROR:", err.response.data)
         }
   
       })
@@ -180,7 +185,8 @@ const handleSubmit = async (event) => {
                           {(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "Invest now" : "Subscribe now"}
                         </button>
                       </form>
-                    </div>                                    
+                    </div> 
+                    <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>                                   
                   </div>
                 </div>       
             </div>
