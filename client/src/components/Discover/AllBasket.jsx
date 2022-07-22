@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ViewButton from "../Buttons/viewButton";
-import {useNavigate}  from "react-router-dom";
+import { useNavigate, useLocation }  from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,6 +9,10 @@ const AllBasket = ({
   basket,
   handleDetailBox
 }) => {
+
+  const location = useLocation();
+
+  let onManagerPage = location.pathname.startsWith('/manager');
 
   const navigate = useNavigate();
 
@@ -29,7 +33,7 @@ const AllBasket = ({
         {basket.overview}
 
       </p>
-      <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon className="fa-circle-info" icon={faCircleInfo} /></span></p>
+      {!onManagerPage && <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span className="fa-circle-info" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>}
       <p className="font11">Number of cryptocurrencies:  {basket.cryptoNumber}</p>
 
 

@@ -19,7 +19,7 @@ function ManagerProfile() {
       fetchData();
       async function fetchData() {
 
-        const response = await axios.get(`${baseUrl}/api/users/manager/${managerId}`);   // , { headers: { Authorization: "Bearer: " + token } }
+        const response = await axios.get(`${baseUrl}/api/users/manager/${managerId}`);
         if (response.status) {
           // Setting baskets id fields to view Baskets
           response.data.createdBaskets.map((basket) => (
