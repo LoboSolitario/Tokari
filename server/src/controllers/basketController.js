@@ -195,6 +195,7 @@ const createBasket = asyncHandler(async (req, res) => {
         rebalanceFreq: req.body.rebalanceFreq,
         subscriptionFee: (req.body.isFreeBasket ? 0 : req.body.subscriptionFee),
         cryptoNumber: req.body.cryptoNumber,
+        subscribers: req.body.subscribers,
         cryptoAlloc: req.body.cryptoAlloc
     });
     //save the new basket
@@ -298,6 +299,11 @@ const unsubscribeBasket = asyncHandler(async (req, res) => {
         res.status(401)
         throw new Error('User not found.');
     }
+    await Basket.findByIdAndUpdate(req.params.id, { 
+        $pullAll: {
+            subscribers: [{ _id: req.user.id }]
+        }
+    }, { new: true })
     const updatedUser = await User.findByIdAndUpdate(req.user.id, {
         $pullAll: {
             subscribedBaskets: [{ _id: req.params.id }]

@@ -191,6 +191,32 @@ const getBasketsOfManager = asyncHandler(async (req, res) => {
 })
 
 
+// @desc get stats of a specific portfolio manager
+// @route GET /api/users/stats/manager/:id
+// @access Public
+const getManagerStats = asyncHandler(async (req, res) => {
+    const managerId = req.params.id;
+    var numberOfSubscriber = 0
+    
+    //find the user to be viewed
+    const manager = await User.findById(managerId).select('-password').populate({ path: 'createdBaskets', model: 'Basket' });
+    if (manager) {
+        res.status(201).json(manager)
+    } else {
+        res.status(400);
+        throw new Error("Manager not found");
+    }
+
+    manager.createdBaskets.forEach(basket => {
+        numberOfSubscriber += basket.subscribers.length;
+    });
+
+    console.log("------------------------------");
+    console.log(manager);
+    console.log(numberOfSubscriber);
+    console.log("------------------------------");
+})
+
 
 // Generate JWT
 const generateToken = (id) => {
@@ -209,5 +235,6 @@ module.exports = {
     updateUser,
     getInvestorStats,
     landingPageBaskets,
-    getBasketsOfManager
+    getBasketsOfManager,
+    getManagerStats
 }
