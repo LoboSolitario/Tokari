@@ -72,7 +72,7 @@ const handleSubmit = async (event) => {
                     <div className="flexSpaceNull">
                       <div>
                         <h3 className="box font30 extraBold">{basket.basketName}</h3>
-                        <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span className="fa-circle-info" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>
+                        <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span className="fa-circle-info extraBold purpleColor" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>
                       </div>
                       <div className="box">
                         {basket.subscriptionFee===0 ? <FreeIcon /> : ""}

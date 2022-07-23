@@ -1,12 +1,21 @@
 import React from "react";
 import ViewButton from "../Buttons/viewButton";
 import FreeIcon from "../../assets/svg/Services/FreeIcon";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 const BasketBox = ({
   basket,
   handleDetailBox,
 
 }) => {
+
+  let navigate = useNavigate();
+
+  const ownerClicked = async () => {
+    navigate(`/manager/${basket.owner._id}`);
+  }
 
   return (
     <div className="whiteBg radius8 shadow h-10 flexBasket pointer basketHover" onClick={() => handleDetailBox(basket.id)} style={{ margin: "10px" }}>
@@ -20,7 +29,7 @@ const BasketBox = ({
           {basket.subscriptionFee === "0" ? <FreeIcon /> : ""}
         </div>
         <div className="flexSpaceNull">
-          <p className="font13 extraBold greyColor" style={{ padding: "5px 0 0 0" }}> by <span class="purpleColor">{basket.owner.name}</span></p>
+          <p className="font13 extraBold greyColor" style={{ padding: "5px 0 0 0" }}> by <span className="fa-circle-info extraBold purpleColor" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>
         </div>
       </div>
 

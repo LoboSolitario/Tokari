@@ -2,11 +2,21 @@ import React from "react";
 import styled from "styled-components";
 // import UnsubscribeButton from "../Buttons/UnsubscribeButton"
 import ViewBasketButton from "../Buttons/ViewBasketButton"
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+
 const InvestmentBasket = ({
   basket,
   handleRemoveBox,
   handleDetailBox
 }) => {
+
+  let navigate = useNavigate();
+
+  const ownerClicked = async () => {
+    navigate(`/manager/${basket.owner._id}`);
+  }
 
   return (
     <Wrapper className="whiteBg radius8 shadow basket">
@@ -14,7 +24,7 @@ const InvestmentBasket = ({
         <h3 className="font20 extraBold">{basket.basketName}</h3>
       </div>
       <div className="flexSpaceNull">
-        <p className="font13 extraBold greyColor" style={{ padding: "5px 0 0 0" }}> by <span className="purpleColor">{basket.owner.name}</span></p>
+        <p className="font13 extraBold greyColor" style={{ padding: "5px 0 0 0" }}> by <span className="fa-circle-info extraBold purpleColor" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>
       </div>
 
       <p className="font13" style={{ padding: "30px 0" }}>
