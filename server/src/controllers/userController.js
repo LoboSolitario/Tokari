@@ -211,10 +211,7 @@ const getManagerStats = asyncHandler(async (req, res) => {
         numberOfSubscriber += basket.subscribers.length;
     });
 
-    console.log("------------------------------");
     console.log(manager);
-    console.log(numberOfSubscriber);
-    console.log("------------------------------");
 })
 
 
