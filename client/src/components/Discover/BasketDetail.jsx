@@ -14,6 +14,8 @@ function BasketDetail() {
 const location = useLocation();
 const navigate = useNavigate();
 const basket = location.state;
+const assignedRole =  localStorage.getItem("role");
+console.log(assignedRole)
 const errRef = useRef();
 const [errMsg, setErrMsg] = useState('');
 const lastdate = format(parseISO(basket.updatedAt), "yyyy-MM-dd");
@@ -68,7 +70,7 @@ const handleSubmit = async (event) => {
   }
 }
   return (
-      <div key={basket.id} className="container70 whiteBg shadow discoverPage" >
+      <div key={basket._id} className="container70 whiteBg shadow discoverPage" >
           <div style={{padding: '30px 0'}}>  
               <div className="container">
                 <div className="flexSpaceNull">
@@ -121,7 +123,7 @@ const handleSubmit = async (event) => {
                         </div>                     
                         <div className='flexWrapper30'>
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Rebalance frequency</p>
-                          <p className='font13' style={{ padding: "0 0 7px 0px"}}>three month</p>
+                          <p className='font13' style={{ padding: "0 0 7px 0px"}}>monthly</p>
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Next rebalance</p>
                           <p className='font13'>{nextdate}</p>
                         </div>
@@ -176,16 +178,20 @@ const handleSubmit = async (event) => {
                   <div className="flexWrapper25" >
                     <div className='box textCenter' style={{ padding: "12px 0 0" }}>
                       <p className='font13'>{(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "" : `Subscription fee ${basket.subscriptionFee} $`}</p> 
-                    </div>  
-                    <div>
-                      <form onSubmit={handleSubmit}>
-                        {/* Add a hidden field with the lookup_key of your Price */}
-                        <input type="hidden" name="lookup_key" value={basket._id} />
-                        <button className="subscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
-                          {(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "Invest now" : "Subscribe now"}
-                        </button>
-                      </form>
-                    </div> 
+                    </div>
+                    {assignedRole === "investor" ? (
+                      <div>
+                        <form onSubmit={handleSubmit}>
+                          {/* Add a hidden field with the lookup_key of your Price */}
+                          <input type="hidden" name="lookup_key" value={basket._id} />
+                          <button className="subscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
+                            {(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "Invest now" : "Subscribe now"}
+                          </button>
+                        </form>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                     <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>                                   
                   </div>
                 </div>       
