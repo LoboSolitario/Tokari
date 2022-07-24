@@ -105,7 +105,7 @@ export default function SignIn(){
                 />
               </div>
               <div className="d-grid">
-              <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+              <p style={{color:"red", width: "350px", padding: "0 0 8px 0"}} ref={errRef} className={errMsg ? "font11 errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <BtnWrapper>
                   <FullButton title="Login" />
                 </BtnWrapper>
