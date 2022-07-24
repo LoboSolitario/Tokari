@@ -18,7 +18,7 @@ function Discover() {
       <div className="lightBg">
         <DiscoverHeader />
           <DiscoverContext.Provider value={{ baskets, setBaskets, allBaskets, setAllBaskets }}>
-            <Wrapper className="row container80">
+            <Wrapper className="row container75">
               <Filtering />
               <Routes>
                 <Route element={<DiscoverBasket />} path="/" />

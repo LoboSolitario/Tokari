@@ -72,6 +72,12 @@
     margin: 0 auto;
     padding: 0px 30px;
   }
+  .container75 {
+    width: 75%;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0px 30px;
+  }
 
   .container50 {
     width: 50%;
