@@ -196,6 +196,7 @@ const createBasket = asyncHandler(async (req, res) => {
         subscriptionFee: (req.body.isFreeBasket ? 0 : req.body.subscriptionFee),
         cryptoNumber: req.body.cryptoNumber,
         subscribers: req.body.subscribers,
+        investors: req.body.investors,
         cryptoAlloc: req.body.cryptoAlloc
     });
     //save the new basket
@@ -517,6 +518,11 @@ const investBasket = asyncHandler(async (req, res) => {
                 console.log(err)
             }
         })
+        await Basket.findByIdAndUpdate(req.params.id, { 
+            $push: {
+                investors: req.user.id
+            }
+        }, { new: true })
         res.status(200).json("Investment successfull")
     }).catch(errors => {
         console.log(errors)

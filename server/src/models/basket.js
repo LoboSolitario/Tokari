@@ -24,6 +24,7 @@ const basketSchema = new mongoose.Schema({
     subscriptionFee: Number,
     cryptoNumber: Number,
     subscribers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    investors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     cryptoAlloc: [{
         cryptoSymbol: String,
         weight: Number
