@@ -19,7 +19,7 @@ function ManagerProfile() {
       fetchData();
       async function fetchData() {
 
-        const response = await axios.get(`${baseUrl}/api/users/manager/${managerId}`);   // , { headers: { Authorization: "Bearer: " + token } }
+        const response = await axios.get(`${baseUrl}/api/users/manager/${managerId}`);
         if (response.status) {
           // Setting baskets id fields to view Baskets
           response.data.createdBaskets.map((basket) => (
@@ -62,7 +62,6 @@ function ManagerProfile() {
   return (
     <div key={manager._id} className="container70 whiteBg shadow discoverPage flex flexColumn" >
       <div className='flexWrapper60' style={{padding: '50px 20px 0 20px'}}>
-        <h3 className="box font30 extraBold">Manager Profile</h3>
       </div>
       <div className="container"
         style={{
@@ -76,7 +75,7 @@ function ManagerProfile() {
               {manager.name}
             </div>
             <div className="greyColor flexCol">
-              Email Address
+              Contact
             </div>
             <div className="greyColor flexCol">
               Number of Baskets
@@ -104,10 +103,10 @@ function ManagerProfile() {
         </div>
       </div>
 
-      <div className='flexWrapper60' style={{padding: '20px 20px 0 20px'}}>
-            <h3 className="box font25 extraBold">Baskets:</h3>
+      <div className='flexWrapper60' style={{padding: '20px 20px 0 35px'}}>
+            <h3 className="box font25 extraBold">Basket Offerings</h3>
       </div>
-      <div className="flexListDiscover container flexPro4">
+      <div className="flexListDiscover container flexPro4"  style={{padding: '20px 100px 100px'}}>
 
       {!_.isEmpty(manager.createdBaskets) ? (
         manager.createdBaskets.map((basket) => (

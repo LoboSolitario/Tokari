@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllUsers, getUser, registerUser, loginUser, deleteUser, updateUser, getInvestorStats, landingPageBaskets, getBasketsOfManager  } = require('../controllers/userController')
+const { getAllUsers, getUser, registerUser, loginUser, deleteUser, updateUser, getInvestorStats, landingPageBaskets, getBasketsOfManager, getManagerStats } = require('../controllers/userController')
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware')
 
@@ -21,6 +21,8 @@ router.delete('/deleteUser/:id', deleteUser);
 router.patch('/updateUser/:id', updateUser);
 
 router.get('/manager/:id', getBasketsOfManager);
+
+router.get('/stats/manager/:id', getManagerStats);
 
 
 module.exports = router;

@@ -26,7 +26,7 @@ export default function InvestmentHome() {
         response.data.map(item => {
           let obj = {
             "id": item._id,
-            "author": item.author,
+            "owner": item.owner,
             "basketName": item.basketName,
             "risk": item.risk,
             "volatility": item.volatility,
@@ -37,7 +37,6 @@ export default function InvestmentHome() {
           temp.push(obj);
         })
         setBaskets(temp);
-
       }
     }
   }, []);
@@ -104,7 +103,7 @@ export default function InvestmentHome() {
 
       </div> */}
 
-      <div className="flexList container" style={{minHeight: "72vh"}}>
+      <div className="flexListDiscover container" style={{minHeight: "58vh"}}>
         {!_.isEmpty(baskets) ? (
           baskets.map((basket)=>(
               <InvestmentBasket key={basket.id} basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />

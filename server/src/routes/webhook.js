@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler')
-const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 const Basket = require('../models/basket');
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
+const sendEmail = require('../controllers/emailController/email');
+const Handlebars = require('handlebars');
 
 const stripeWebhook = asyncHandler(async (req, res) => {
 
@@ -15,16 +18,36 @@ const stripeWebhook = asyncHandler(async (req, res) => {
         let userID = session.client_reference_id;
         let basketID = session.metadata.basket_id;
 
+        await Basket.findByIdAndUpdate(basketID, { 
+            $push: {
+                subscribers: userID
+            }
+        }, { new: true })
         const basket = await Basket.findById(basketID);
         if (!basket) {
             res.status(400);
             throw new Error("Basket not found");
         }
-        const user = await User.findByIdAndUpdate(userID, { $push: { subscribedBaskets: basket } }, { new: true })
-        .catch(err => {
-            res.status(400);
-            throw new Error(err);
-        });
+        await User.findByIdAndUpdate(userID, { $push: { subscribedBaskets: basket } }, { new: true })
+            .then((userUpdated) => {
+                try {
+                    var source = fs.readFileSync(path.join(__dirname, '../emailTemplate/subscribe.hbs'), 'utf8');
+                    var template = Handlebars.compile(source);
+                    const replacements = {
+                        basketName: basket.basketName
+                    };
+                    sendEmail(userUpdated.email, 'Subscribed to ' + basket.basketName + " successfully", template(replacements));
+
+                } catch (err) {
+                    console.log(err)
+                }
+
+            })
+            .catch(err => {
+                res.status(400);
+                throw new Error(err);
+            });
+
     }
 
     res.status(200)

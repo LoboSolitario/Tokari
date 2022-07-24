@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 // Assets
-import QuoteIcon from "../../assets/svg/Quotes";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 
 export default function faqBox({ answer, question }) {
   return (
     <Wrapper className="darkBg radius8 flexNullCenter flexColumn">
       <QuoteWrapper>
-        <QuoteIcon />
+        <FontAwesomeIcon className="font40 orangeColor flexCenter" icon={faPaperclip}/>
       </QuoteWrapper>
       <p className="orangeColor font15 semiBold" style={{alignSelf: 'flex-start'}}>
         {question}

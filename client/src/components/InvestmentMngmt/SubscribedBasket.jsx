@@ -3,26 +3,34 @@ import styled from "styled-components";
 import ViewButton from "../Buttons/viewButton";
 import UnsubscribeButton from "../Buttons/UnsubscribeButton"
 import ViewBasketButton from "../Buttons/ViewBasketButton"
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 const SubscribedBasket = ({
   basket,
   handleRemoveBox,
   handleDetailBox
 }) => {
 
+  let navigate = useNavigate();
+
+  const ownerClicked = async () => {
+    navigate(`/manager/${basket.owner._id}`);
+  }
+
   return (
     <Wrapper className="whiteBg radius8 shadow basket">
       <div className="wrapper-header flexSpaceCenter">
         <h3 className="font20 extraBold">{basket.basketName}</h3>
-
+      </div>
+      <div className="flexSpaceNull">
+        <p className="font13 extraBold greyColor" style={{ padding: "5px 0 0 0" }}> by <span className="fa-circle-info extraBold purpleColor" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>
       </div>
 
       <p className="font13" style={{ padding: "30px 0" }}>
         {basket.overview}
       </p>
-      <div className="flexSpaceNull">
-        <p className="font13 extraBold">{basket.author}</p>
-        {/* <p className="font13 greenColor extraBold">{free?"Free Access": ""}</p> */}
-      </div>
+
 
       <div className="flexSpaceNull">
         <p className={' tag  radius6 font11 extraBold ' + (basket.risk === "High" ? "redBg" : basket.risk === "Medium" ? "orangeBg" : "greenBg")}>Risk: {basket.risk}</p>

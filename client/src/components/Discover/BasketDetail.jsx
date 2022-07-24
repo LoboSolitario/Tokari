@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from 'react-router-dom'
 import FreeIcon from "../../assets/svg/Services/FreeIcon";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faLock} from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faLock, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import PieChartComponent from './PieChart';
@@ -69,6 +69,11 @@ const handleSubmit = async (event) => {
       })
   }
 }
+
+  const ownerClicked = async () => {
+    navigate(`/manager/${basket.owner._id}`);
+  }
+
   return (
       <div key={basket._id} className="container70 whiteBg shadow discoverPage" >
           <div style={{padding: '30px 0'}}>  
@@ -78,7 +83,7 @@ const handleSubmit = async (event) => {
                     <div className="flexSpaceNull">
                       <div>
                         <h3 className="box font30 extraBold">{basket.basketName}</h3>
-                        <p className="box font11">Managed by <b> {basket.owner.name}</b></p>
+                        <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span className="fa-circle-info extraBold purpleColor" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>
                       </div>
                       <div className="box">
                         {basket.subscriptionFee===0 ? <FreeIcon /> : ""}
