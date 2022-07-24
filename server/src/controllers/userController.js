@@ -121,10 +121,13 @@ const getInvestorStats = asyncHandler(async (req, res) => {
     totalInvestmentAmount = 0;
     subscriptionCount = user.subscribedBaskets ? user.subscribedBaskets.length : 0;
     user.transactionLists.forEach(transaction => {
-        if (transaction.investmentAmount) {
-            totalInvestmentAmount += transaction.investmentAmount;
-        }
+        let transaction_amt = 0;
+        transaction.cryptoAlloc.forEach((crypto) => {
+            transaction_amt += crypto.price*crypto.orderQty
+        })
+        totalInvestmentAmount += transaction_amt;
     });
+    totalInvestmentAmount = totalInvestmentAmount.toFixed(2);
     const val = "timestamp=" + Date.now();
     const signature = hmacSHA256(val, binance_api_secret).toString();
     const post_url = "https://testnet.binance.vision/api/v3/account?" + val + "&signature=" + signature;
