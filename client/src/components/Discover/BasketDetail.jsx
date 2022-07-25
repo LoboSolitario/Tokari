@@ -80,25 +80,27 @@ const handleSubmit = async (event) => {
               <div className="container">
                 <div className="flexSpaceNull">
                   <div className='flexWrapper60'>
-                    <div className="flexSpaceNull">
+                    <div className="flexRow">
                       <div>
                         <h3 className="box font30 extraBold">{basket.basketName}</h3>
                         <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span className="fa-circle-info extraBold purpleColor" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>
                       </div>
-                      <div className="box">
+                      <div className="box" style={{ padding: "0 8px" }}>
                         {basket.subscriptionFee===0 ? <FreeIcon /> : ""}
                       </div>  
                       
                     </div>
-                    <p className="font13" style={{ padding: "5px 0" }}>
-                      {basket.overview}
-                    </p>
+                    
                   </div>
-                  <div className="flexSpaceNull flexCenter flexWrapper25">
-                    <p className={' tag  radius6 font11 extraBold '+ (basket.risk==="High"? "redBg" : basket.risk==="Medium"? "orangeBg":"greenBg")}>Risk: {basket.risk}</p>
-                    <p className={' tag  radius6 font11 extraBold '+ (basket.volatility==="High"? "redBg" : basket.volatility==="Medium"? "orangeBg":"greenBg")}>Volatility: {basket.volatility}</p>
+                  <div className="flexRow flexCenter">
+                    <p className={' tag  radius6 font11 extraBold ' + (basket.risk === "High" ? "redBg" : basket.risk === "Medium" ? "orangeBg" : "greenBg")}>Risk: {basket.risk}</p>
+                    <p  style={{ padding: "0 5px" }}></p>
+                    <p className={' tag  radius6 font11 extraBold ' + (basket.volatility === "High" ? "redBg" : basket.volatility === "Medium" ? "orangeBg" : "greenBg")}>Volatility: {basket.volatility}</p>
                   </div>
                 </div>
+                <p className="font13 flexWrapper70" style={{ padding: "5px 0" }}>
+                  {basket.overview}
+                </p>
                 <div className="flexSpaceNull">
                   <div className="flexWrapper70">
                     <div style={{ padding: "15px 0 0" }}>
@@ -163,18 +165,26 @@ const handleSubmit = async (event) => {
                           <div className='flexCenter' style={{ padding: "5px 0px"}}>
                             <FontAwesomeIcon icon={faLock} className="font30 purpleColor"/>
                           </div>
-                          <p className='flexCenter font13' style={{ padding: "5px 0px"}}>
-                            Subcribe to see cryptocurrencies 
-                          </p>
-                          <div style={{ padding: "5px 0px"}} className="flexCenter">
-                            <form onSubmit={handleSubmit}>
-                              {/* Add a hidden field with the lookup_key of your Price */}
-                              <input type="hidden" name="lookup_key" value={basket._id} />
-                              <button className="smallsubscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
-                                Subscribe now
-                              </button>
-                            </form>
+                          {assignedRole === "investor" ? (
+                          <div>
+                            <p className='flexCenter font13' style={{ padding: "5px 0px"}}>
+                              Subcribe to see cryptocurrencies 
+                            </p>
+                            <div style={{ padding: "5px 0px"}} className="flexCenter">
+                              <form onSubmit={handleSubmit}>
+                                {/* Add a hidden field with the lookup_key of your Price */}
+                                <input type="hidden" name="lookup_key" value={basket._id} />
+                                <button className="smallsubscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
+                                  Subscribe now
+                                </button>
+                              </form>
+                            </div>
                           </div>
+                          ) : (
+                            <p className='flexCenter font12' style={{ padding: "5px 0px"}}>
+                              Only subscribed investors can see
+                            </p>
+                          )}
                         </div>
                       </Wrapper>
                     )}
