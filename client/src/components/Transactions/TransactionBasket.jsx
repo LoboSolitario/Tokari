@@ -41,8 +41,8 @@ const TransactionBasket = ({
               <p className='flexWrapper30 font13'>{allocation.orderId}</p>
               <p className='flexWrapper30 font13'>{cryptoMap.get(allocation.cryptoCurrency)}</p>
               <p className='flexWrapper30 font13'>{allocation.orderQty}</p>
-              <p className='flexWrapper30 font13'>${allocation.price.toFixed(3)}</p>
-              <p className='flexWrapper30 font13'>${(allocation.price * allocation.orderQty).toFixed(3)}</p>
+              <p className='flexWrapper30 font13'>${allocation.price.toFixed(2)}</p>
+              <p className='flexWrapper30 font13'>${(allocation.price * allocation.orderQty).toFixed(2)}</p>
             </div>)}
         </div>
       </div>
