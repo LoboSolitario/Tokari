@@ -196,7 +196,6 @@ const getBasketsOfManager = asyncHandler(async (req, res) => {
 // @route GET /api/users/stats/manager
 // @access Public
 const getManagerStats = asyncHandler(async (req, res) => {
-    console.log(req.user);
     const managerId = req.user._id;
     var numberOfSubscriber = 0;
     var numberOfInvestor = 0;
