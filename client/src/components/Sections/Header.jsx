@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 // Components
-import FullButton from "../Buttons/FullButton";
+import FullButton from "../Buttons/OrangeButton";
 // Assets
-import HeaderImage from "../../assets/img/header-img.png";
-import Dots from "../../assets/svg/Dots";
+import HeaderImage from "../../assets/img/header-img2.svg";
 import {useNavigate}  from "react-router-dom";
+import Wave from "../../assets/svg/Wave.jsx";
+
 
 export default function Header() {
 
@@ -14,37 +15,44 @@ export default function Header() {
   return (
 
     <Wrapper id="home" className="container flexSpaceCenter">
-      <LeftSide className="flexCenter">
+      
+      <LeftSide className="flexCenter flexColumn flex" style={{zIndex: 9}}>
         <div>
           <h1 className="extraBold font60">Let us simplify your crypto investment journey</h1>
-          <HeaderP className="font13 semiBold">
+          <HeaderP className="font14 semiBold" style={{color: "black"}}>
            Tokari takes the guesswork out of investing by automating your portfolio. 
            Continue your crypto investment journey with a clear advantage.
           </HeaderP>
-          <BtnWrapper  onClick={ ()=>{navigate("discover")}}>
-            <FullButton title="Get Started"/>
+          <BtnWrapper className="pointer" onClick={ ()=>{navigate("discover")}}>
+            <FullButton className="semiBold"title="Get Started"/>
           </BtnWrapper>
         </div>
       </LeftSide>
 
       <RightSide>
-        <ImageWrapper>
-          <Img className="radius8" src={HeaderImage} alt="office" style={{zIndex: 9}} />
-          <DotsWrapper>
-            <Dots />
-          </DotsWrapper>
-        </ImageWrapper>
-        <GreyDiv className="lightBg"></GreyDiv>
+        <ImageWrapper >
+          <Img className="radius8" src={HeaderImage} alt="office" style={{zIndex: 9, width: "60%"}} />
+        </ImageWrapper>      
       </RightSide>
+
+      <WaveWrapper>
+        <div className="wave-container">
+          <Wave/>
+        </div>
+      </WaveWrapper>
     </Wrapper>
   );
 }
 
 
 const Wrapper = styled.section`
+  overflow: auto;
   padding-top: 80px;
   width: 100%;
-  min-height: 840px;
+  min-height: 100vh;
+  height: -moz-fit-content;
+  height: -webkit-fit-content;
+  height: -fit-content;
   @media (max-width: 960px) {
     flex-direction: column;
   }
@@ -66,14 +74,13 @@ const RightSide = styled.div`
   width: 50%;
   height: 100%;
   @media (max-width: 960px) {
-    width: 100%;
     order: 1;
     margin-top: 30px;
   }
 `;
 const HeaderP = styled.div`
   max-width: 470px;
-  padding: 15px 0 50px 0;
+  padding: 15px 0 20px 0;
   line-height: 1.5rem;
   @media (max-width: 960px) {
     padding: 15px 0 50px 0;
@@ -87,44 +94,25 @@ const BtnWrapper = styled.div`
     margin: 0 auto;
   }
 `;
-const GreyDiv = styled.div`
-  width: 30%;
-  height: 700px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 0;
-  @media (max-width: 960px) {
-    display: none;
-  }
-`;
 const ImageWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   position: relative;
   z-index: 9;
   @media (max-width: 960px) {
-    width: 100%;
+    width: 0%;
     justify-content: center;
   }
 `;
 const Img = styled.img`
-  @media (max-width: 560px) {
-    width: 80%;
+  @media (max-width: 960px) {
+    width: 0%;
+    display: none;
     height: auto;
   }
 `;
-const DotsWrapper = styled.div`
-  position: absolute;
-  right: -100px;
-  bottom: 100px;
-  z-index: 2;
-  @media (max-width: 960px) {
-    right: 100px;
-  }
+const WaveWrapper = styled.div`  
   @media (max-width: 560px) {
     display: none;
   }
 `;
-
-

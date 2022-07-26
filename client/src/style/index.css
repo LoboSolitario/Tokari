@@ -496,7 +496,6 @@
   /* margin-left:300px; */
 }
 
-
 input[type="search"] {
   border: none;
   background: white;
@@ -674,4 +673,47 @@ input.nosubmit {
   background-color: rgb(237, 232, 237) !important;
   border-color: rgb(237, 232, 237) !important;
   color: rgb(0, 0, 0) !important;
+}
+
+.wave-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  height: 450px;
+}
+
+.wave-container svg {
+  position: relative;
+  display: block;
+  width: calc(163% + 1.3px);
+  height: 338px;
+  transform: rotateY(180deg);
+}
+
+.wave-container .shape-fill {
+  fill: #7620FF;
+}
+
+.custom-shape-divider-bottom-1658486706 {
+  position: absolute;
+  left: 0;
+  margin-top: 25vh;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1658486706 svg {
+  position: relative;
+  display: block;
+  width: calc(108% + 1.3px);
+  height: 160px;
+}
+
+.custom-shape-divider-bottom-1658486706 .shape-fill {
+  fill: #7620FF;
 }
