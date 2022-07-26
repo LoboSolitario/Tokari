@@ -22,7 +22,7 @@ router.patch('/updateUser/:id', updateUser);
 
 router.get('/manager/:id', getBasketsOfManager);
 
-router.get('/stats/manager/:id', getManagerStats);
+router.get('/stats/manager/', protect, getManagerStats);
 
 
 module.exports = router;

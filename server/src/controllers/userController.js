@@ -193,10 +193,11 @@ const getBasketsOfManager = asyncHandler(async (req, res) => {
 
 
 // @desc get stats of a specific portfolio manager
-// @route GET /api/users/stats/manager/:id
+// @route GET /api/users/stats/manager
 // @access Public
 const getManagerStats = asyncHandler(async (req, res) => {
-    const managerId = req.params.id;
+    console.log(req.user);
+    const managerId = req.user._id;
     var numberOfSubscriber = 0;
     var numberOfInvestor = 0;
     
