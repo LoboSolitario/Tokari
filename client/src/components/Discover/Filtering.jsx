@@ -69,7 +69,7 @@ export default function Filtering() {
                         <div className="mb-3">
                             <input
                                 type="search"
-                                className="form-control font13 nosubmit"
+                                className="form-control font12 nosubmit"
                                 onChange={(e) => setSearchKeyword(e.target.value)}
                                 placeholder="Try &quot;Top Market Cap&quot; or &quot;Ecosystem&quot;"
                                 value={searchKeyword}
@@ -82,13 +82,13 @@ export default function Filtering() {
                             <label style={{margin: "20px 0 0 0"}} className="flexLeft semiBold">Subscription Type</label>
                             <div>
                                 <ToggleButtonGroup type="radio" name="SubscriptionType" defaultValue={1} onChange={(e) => setActiveSubscriptionType(e)} className="flexSpaceCenter">
-                                        <ToggleButton id="subscription-type-show-all" value={1}  className="tagStyle flexCenter font13 shadow">
+                                        <ToggleButton id="subscription-type-show-all" value={1}  className="tagStyle flexCenter font12 shadow">
                                             Show All
                                         </ToggleButton>
-                                        <ToggleButton id="subscription-type-free-access" value={2}  className="tagStyle flexCenter font13 shadow">
+                                        <ToggleButton id="subscription-type-free-access" value={2}  className="tagStyle flexCenter font12 shadow">
                                             Free Access
                                         </ToggleButton>
-                                        <ToggleButton id="subscription-type-fee-based" value={3}  className="tagStyle flexCenter font13 shadow">
+                                        <ToggleButton id="subscription-type-fee-based" value={3}  className="tagStyle flexCenter font12 shadow">
                                             Fee Based
                                         </ToggleButton>
                                 </ToggleButtonGroup>
@@ -97,16 +97,16 @@ export default function Filtering() {
                             <label style={{margin: "10px 0 0 0"}} className="flexLeft semiBold">Volatility</label>
                             <div>
                                 <ToggleButtonGroup type="radio" name="Volatility"  defaultValue={4} onChange={(e) => setActiveVolatility(e)} className="flexSpaceCenter">
-                                    <ToggleButton id="valatility-all" value={4} className="tagStyle flexCenter font13 shadow">
+                                    <ToggleButton id="valatility-all" value={4} className="tagStyle flexCenter font12 shadow">
                                         Show All
                                     </ToggleButton>
-                                    <ToggleButton id="valatility-low" value={5} className="tagStyle flexCenter font13 shadow">
+                                    <ToggleButton id="valatility-low" value={5} className="tagStyle flexCenter font12 shadow">
                                         Low
                                     </ToggleButton>
-                                    <ToggleButton id="valatility-moderate" value={6} className="tagStyle flexCenter font13 shadow">
+                                    <ToggleButton id="valatility-moderate" value={6} className="tagStyle flexCenter font12 shadow">
                                         Medium
                                     </ToggleButton>
-                                    <ToggleButton id="valatility-high" value={7} className="tagStyle flexCenter font13 shadow">
+                                    <ToggleButton id="valatility-high" value={7} className="tagStyle flexCenter font12 shadow">
                                         High
                                     </ToggleButton>
                                 </ToggleButtonGroup>
@@ -115,16 +115,16 @@ export default function Filtering() {
                             <label style={{margin: "20px 0 0 0"}} className="flexLeft semiBold">Risk Type</label>
                             <div>
                                 <ToggleButtonGroup type="radio" name="RiskType" defaultValue={8} onChange={(e) => setActiveRiskType(e)} className="flexSpaceCenter">
-                                    <ToggleButton id="risk-type-all" value={8} className="tagStyle flexCenter font13 shadow">
+                                    <ToggleButton id="risk-type-all" value={8} className="tagStyle flexCenter font12 shadow">
                                         Show All
                                     </ToggleButton>
-                                    <ToggleButton id="risk-type-low" value={9} className="tagStyle flexCenter font13 shadow">
+                                    <ToggleButton id="risk-type-low" value={9} className="tagStyle flexCenter font12 shadow">
                                         Low
                                     </ToggleButton>
-                                    <ToggleButton id="risk-type-moderate" value={10} className="tagStyle flexCenter font13 shadow">
+                                    <ToggleButton id="risk-type-moderate" value={10} className="tagStyle flexCenter font12 shadow">
                                         Medium 
                                     </ToggleButton>
-                                    <ToggleButton id="risk-type-high" value={11} className="tagStyle flexCenter font13 shadow">
+                                    <ToggleButton id="risk-type-high" value={11} className="tagStyle flexCenter font12 shadow">
                                         High
                                     </ToggleButton>
                                 </ToggleButtonGroup>

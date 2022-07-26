@@ -1,12 +1,11 @@
 import React from "react";
-import { useState } from 'react';
 import styled from "styled-components";
 import TopNavbar from "../components/Nav/TopNavbar";
 import Footer from "../components/Sections/Footer";
 import AfterInvest from "../components/Transactions/AfterInvest";
 
 export default function AfterI() {
-  const [showItem, setShowItem] = useState(false);
+  
   return (
     <>
       <TopNavbar />

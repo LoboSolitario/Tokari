@@ -3,7 +3,7 @@ import TopNavbar from '../components/Nav/TopNavbar';
 import ManagerProfile from '../components/Users/ManagerProfile';
 import Footer from '../components/Sections/Footer';
 
-function Detail() {
+function Manager() {
 
   return (
     <>
@@ -14,4 +14,4 @@ function Detail() {
     
   );
 }
-export default Detail
+export default Manager

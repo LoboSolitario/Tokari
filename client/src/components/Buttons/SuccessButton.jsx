@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function FullButton({ title, action, border }) {
+export default function SuccessButton({ title, action, border }) {
   return (
     <Wrapper
       className="animate pointer radius8"

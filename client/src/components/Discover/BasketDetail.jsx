@@ -1,18 +1,25 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import styled from "styled-components";
 import { useLocation, useNavigate } from 'react-router-dom'
 import FreeIcon from "../../assets/svg/Services/FreeIcon";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faLock} from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faLock, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import PieChartComponent from './PieChart';
-
+import { format, addMonths } from "date-fns";
+import { parseISO } from "date-fns/fp";
 // Screens
 function BasketDetail() {
 const location = useLocation();
 const navigate = useNavigate();
 const basket = location.state;
+const assignedRole =  localStorage.getItem("role");
+const errRef = useRef();
+const [errMsg, setErrMsg] = useState('');
+const lastdate = format(parseISO(basket.updatedAt), "yyyy-MM-dd");
+const nextdate = format(addMonths(new Date(lastdate), 1), "yyyy-MM-dd");
+
 const handleSubmit = async (event) => {
 
   if (basket.subscriptionFee === 0 || basket.cryptoAlloc) {
@@ -44,45 +51,55 @@ const handleSubmit = async (event) => {
         // error, you should display the localized error message to your
         // customer using `error.message`.
         if (result.error) {
-          alert(result.error.message);
+          // alert(result.error.message);
+          setErrMsg(result.error.message);
         }
       })
       .catch(err => {
         if (err.response.status === 401) {
-          alert("Unauthorised Role Access")
+          // alert("Unauthorised Role Access")
+          setErrMsg("Unauthorised Role Access")
         }
         else {
-          alert("ERROR:", err.response.data)
+          // alert("ERROR:", err.response.data)
+          setErrMsg("ERROR:", err.response.data)
         }
   
       })
   }
 }
+
+  const ownerClicked = async () => {
+    navigate(`/manager/${basket.owner._id}`);
+  }
+
   return (
       <div key={basket.id} className="container70 whiteBg shadow discoverPage" >
           <div style={{padding: '30px 0'}}>  
               <div className="container">
                 <div className="flexSpaceNull">
                   <div className='flexWrapper60'>
-                    <div className="flexSpaceNull">
+                    <div className="flexRow">
                       <div>
                         <h3 className="box font30 extraBold">{basket.basketName}</h3>
-                        <p className="box font11">Managed by <b> {basket.owner.name}</b></p>
+                        <p className="font11 greyColor" style={{ padding: "0 0 5px 0" }}>Managed by <span className="fa-circle-info extraBold purpleColor" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>
                       </div>
-                      <div className="box">
+                      <div className="box" style={{ padding: "0 8px" }}>
                         {basket.subscriptionFee===0 ? <FreeIcon /> : ""}
                       </div>  
                       
                     </div>
-                    <p className="font13" style={{ padding: "5px 0" }}>
-                      {basket.overview}
-                    </p>
+                    
                   </div>
-                  <div className="flexSpaceNull flexCenter flexWrapper25">
-                    <p className={' tag  radius6 font11 extraBold '+ (basket.risk==="High"? "redBg" : basket.risk==="Medium"? "orangeBg":"greenBg")}>Risk: {basket.risk}</p>
-                    <p className={' tag  radius6 font11 extraBold '+ (basket.volatility==="High"? "redBg" : basket.volatility==="Medium"? "orangeBg":"greenBg")}>Volatility: {basket.volatility}</p>
+                  <div className="flexRow flexCenter">
+                    <p className={' tag  radius6 font11 extraBold ' + (basket.risk === "High" ? "redBg" : basket.risk === "Medium" ? "orangeBg" : "greenBg")}>Risk: {basket.risk}</p>
+                    <p  style={{ padding: "0 5px" }}></p>
+                    <p className={' tag  radius6 font11 extraBold ' + (basket.volatility === "High" ? "redBg" : basket.volatility === "Medium" ? "orangeBg" : "greenBg")}>Volatility: {basket.volatility}</p>
                   </div>
                 </div>
+                <p className="font13 flexWrapper70" style={{ padding: "5px 0" }}>
+                  {basket.overview}
+                </p>
                 <div className="flexSpaceNull">
                   <div className="flexWrapper70">
                     <div style={{ padding: "15px 0 0" }}>
@@ -108,13 +125,13 @@ const handleSubmit = async (event) => {
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Cryptocurrencies</p>
                           <p className='font13' style={{ padding: "0 0 7px 0px"}}>{basket.cryptoNumber}</p>                        
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Last rebalance</p>
-                          <p className='font13'>Jun.20, 2022</p>                       
+                          <p className='font13'>{lastdate}</p>                       
                         </div>                     
                         <div className='flexWrapper30'>
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Rebalance frequency</p>
-                          <p className='font13' style={{ padding: "0 0 7px 0px"}}>three month</p>
+                          <p className='font13' style={{ padding: "0 0 7px 0px"}}>monthly</p>
                           <p className='font13 semiBold' style={{ padding: "0 0 5px 0px"}}>Next rebalance</p>
-                          <p className='font13'>Sep.20, 2022</p>
+                          <p className='font13'>{nextdate}</p>
                         </div>
                       </div>
                       </Wrapper>                     
@@ -147,18 +164,26 @@ const handleSubmit = async (event) => {
                           <div className='flexCenter' style={{ padding: "5px 0px"}}>
                             <FontAwesomeIcon icon={faLock} className="font30 purpleColor"/>
                           </div>
-                          <p className='flexCenter font13' style={{ padding: "5px 0px"}}>
-                            Subcribe to see cryptocurrencies 
-                          </p>
-                          <div style={{ padding: "5px 0px"}} className="flexCenter">
-                            <form onSubmit={handleSubmit}>
-                              {/* Add a hidden field with the lookup_key of your Price */}
-                              <input type="hidden" name="lookup_key" value={basket._id} />
-                              <button className="smallsubscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
-                                Subscribe now
-                              </button>
-                            </form>
+                          {assignedRole === "investor" ? (
+                          <div>
+                            <p className='flexCenter font13' style={{ padding: "5px 0px"}}>
+                              Subcribe to see cryptocurrencies 
+                            </p>
+                            <div style={{ padding: "5px 0px"}} className="flexCenter">
+                              <form onSubmit={handleSubmit}>
+                                {/* Add a hidden field with the lookup_key of your Price */}
+                                <input type="hidden" name="lookup_key" value={basket._id} />
+                                <button className="smallsubscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
+                                  Subscribe now
+                                </button>
+                              </form>
+                            </div>
                           </div>
+                          ) : (
+                            <p className='flexCenter font12' style={{ padding: "5px 0px"}}>
+                              Only subscribed investors can see
+                            </p>
+                          )}
                         </div>
                       </Wrapper>
                     )}
@@ -167,16 +192,21 @@ const handleSubmit = async (event) => {
                   <div className="flexWrapper25" >
                     <div className='box textCenter' style={{ padding: "12px 0 0" }}>
                       <p className='font13'>{(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "" : `Subscription fee ${basket.subscriptionFee} $`}</p> 
-                    </div>  
-                    <div>
-                      <form onSubmit={handleSubmit}>
-                        {/* Add a hidden field with the lookup_key of your Price */}
-                        <input type="hidden" name="lookup_key" value={basket._id} />
-                        <button className="subscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
-                          {(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "Invest now" : "Subscribe now"}
-                        </button>
-                      </form>
-                    </div>                                    
+                    </div>
+                    {assignedRole === "investor" ? (
+                      <div>
+                        <form onSubmit={handleSubmit}>
+                          {/* Add a hidden field with the lookup_key of your Price */}
+                          <input type="hidden" name="lookup_key" value={basket._id} />
+                          <button className="subscribeButton animate pointer radius6" id="checkout-and-portal-button" type="submit">
+                            {(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "Invest now" : "Subscribe now"}
+                          </button>
+                        </form>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>                                   
                   </div>
                 </div>       
             </div>

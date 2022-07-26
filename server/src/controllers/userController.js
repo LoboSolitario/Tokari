@@ -5,6 +5,11 @@ const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler')
 var hmacSHA256 = require("crypto-js/hmac-sha256");
 const axios = require('axios');
+const sendEmail = require('./emailController/email');
+const Handlebars = require('handlebars');
+const fs = require('fs');
+const path = require('path');
+
 
 const binance_api_key = process.env.BINANCE_API_KEY;
 const binance_api_secret = process.env.BINANCE_API_SECRET;
@@ -71,7 +76,8 @@ const registerUser = asyncHandler(async (req, res) => {
             name: name,
             email: email,
             password: hashedPassword,
-            role: role
+            role: role,
+            totalRevenue: 0
         })
     } catch (error) {
         res.status(400);
@@ -79,6 +85,12 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     if (newUser) {
+        var source = fs.readFileSync(path.join(__dirname, '../emailTemplate/welcome.hbs'), 'utf8');
+        var template = Handlebars.compile(source);
+        const replacements = {
+            userName: newUser.name
+        };
+        sendEmail(newUser.email, 'Welcome to Tokari', template(replacements));
         res.status(201).json({
             _id: newUser.id,
             name: newUser.name,
@@ -110,10 +122,13 @@ const getInvestorStats = asyncHandler(async (req, res) => {
     totalInvestmentAmount = 0;
     subscriptionCount = user.subscribedBaskets ? user.subscribedBaskets.length : 0;
     user.transactionLists.forEach(transaction => {
-        if (transaction.investmentAmount) {
-            totalInvestmentAmount += transaction.investmentAmount;
-        }
+        let transaction_amt = 0;
+        transaction.cryptoAlloc.forEach((crypto) => {
+            transaction_amt += crypto.price*crypto.orderQty
+        })
+        totalInvestmentAmount += transaction_amt;
     });
+    totalInvestmentAmount = totalInvestmentAmount.toFixed(2);
     const val = "timestamp=" + Date.now();
     const signature = hmacSHA256(val, binance_api_secret).toString();
     const post_url = "https://testnet.binance.vision/api/v3/account?" + val + "&signature=" + signature;
@@ -153,7 +168,10 @@ const updateUser = (req, res) => {
 // @access Public
 
 const landingPageBaskets = asyncHandler(async (req, res) => {
-    let baskets = await Basket.find({'homepage': true}).limit(6)
+    let baskets = await Basket.find({'homepage': true}).limit(6).populate({
+        path: 'owner',
+        select: { 'name': 1 },
+    });
     res.status(200).json(baskets)
 })
 
@@ -177,6 +195,33 @@ const getBasketsOfManager = asyncHandler(async (req, res) => {
 })
 
 
+// @desc get stats of a specific portfolio manager
+// @route GET /api/users/stats/manager
+// @access Public
+const getManagerStats = asyncHandler(async (req, res) => {
+    const managerId = req.user._id;
+    var numberOfSubscriber = 0;
+    var numberOfInvestor = 0;
+    
+    //find the user to be viewed
+    const manager = await User.findById(managerId).select('-password').populate({ path: 'createdBaskets', model: 'Basket' });
+    if (!manager) {
+        res.status(400);
+        throw new Error("Manager not found");
+    }
+
+    manager.createdBaskets.forEach(basket => {
+        numberOfSubscriber += basket.subscribers.length;
+        numberOfInvestor += basket.investors.length;
+    });
+
+    res.status(200).json({
+        numberOfSubscriber: numberOfSubscriber,
+        numberOfInvestor: numberOfInvestor,
+        totalRevenue: manager.totalRevenue
+    });
+})
+
 
 // Generate JWT
 const generateToken = (id) => {
@@ -195,5 +240,6 @@ module.exports = {
     updateUser,
     getInvestorStats,
     landingPageBaskets,
-    getBasketsOfManager
+    getBasketsOfManager,
+    getManagerStats
 }

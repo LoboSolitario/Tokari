@@ -4,13 +4,10 @@ import styled from "styled-components";
 
 function FAQ() {
   return (
-    <div className="whiteBg" style={{padding: '50px 0'}}>
+    <div className="lightBg" style={{padding: '50px 0'}}>
         <div className="container">
             <HeaderInfo>
             <h1 className="font40 extraBold">Frequently Asked Questions</h1>
-            <p className="font13">
-                Can't find the answer? Check our extended FAQ on GitBook or contact us.
-            </p>
             </HeaderInfo>
             <FaqSlider />
         </div>

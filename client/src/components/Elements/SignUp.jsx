@@ -86,7 +86,7 @@ const SignUp = () => {
             
             options.body = JSON.stringify({});
           }else{
-            setErrMsg('Registration Failed: ' + response.statusText)
+            setErrMsg('Email has been already taken')
           } 
       }
   }
@@ -181,7 +181,7 @@ const SignUp = () => {
                 </div>
               ))}
             </Form>
-            <p style={{color:"red", width: "350px"}} ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+            <p style={{color:"red", width: "350px", padding: "0 0 8px 0"}} ref={errRef} className={errMsg ? "font11 errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
               <BtnWrapper>
                 <FullButton title="Register" />
               </BtnWrapper>

@@ -24,7 +24,7 @@ export default function Products() {
             response.data.map(item =>{
                 let obj = {
                     "id": item._id,
-                    "author": item.owner,
+                    "owner": item.owner,
                     "basketName": item.basketName,
                     "risk": item.risk,
                     "volatility": item.volatility,
@@ -37,8 +37,7 @@ export default function Products() {
                 temp.push(obj);  
                 return obj           
             })
-            setBasket(temp)
-            console.log("baskets: ", temp);
+            setBasket(temp);
          }
     }
   }, []);
@@ -68,10 +67,10 @@ export default function Products() {
 
   return (
     <Wrapper id="products">
-      <div className="lightBg" style={{padding: '20px 0 0'}}>
+      <div className="whiteBg" style={{padding: '20px 0 0'}}>
         <div className="container">
           <HeaderInfo>
-            <h1 className="font40 extraBold">Our Products</h1>
+            <h1 className="font40 extraBold">Our Suggested Baskets</h1>
             <p className="font13">
             Choose any of our carefully crafted, efficient and low-fee baskets.
             </p>
@@ -80,7 +79,7 @@ export default function Products() {
         <div className="flexList">
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
-                    <BasketBox key={basket.id} {...basket} handleDetailBox={handleDetailBox}/>
+                    <BasketBox basket={basket} key={basket.id} {...basket} handleDetailBox={handleDetailBox}/>
                 ))
              ) : (
                 <p>Currently, there is no basket.</p>
