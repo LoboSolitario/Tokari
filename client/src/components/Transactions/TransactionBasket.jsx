@@ -55,7 +55,8 @@ const Wrapper = styled.div`
 width: 100%;
 text-align: left;
 padding: 20px 30px;
-margin-top: 30px;
+margin-top: 20px;
+margin-bottom: 20px;
 `;
 
 export default TransactionBasket;

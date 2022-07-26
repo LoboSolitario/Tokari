@@ -55,6 +55,7 @@ const Wrapper = styled.div`
   text-align: left;
   padding: 20px 30px;
   margin: 10px;
+  min-height: 280px;
 `;
 
 export default SubscribedBasket;
