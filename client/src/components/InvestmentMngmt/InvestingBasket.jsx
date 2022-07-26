@@ -40,12 +40,7 @@ function InvestingBasket(props) {
         }
     }
 
-    const handleInvestmentTypeChange = async (e) => {}
 
-    useEffect(()=>{
-        // setBaskets(filteredBaskets);
-        console.log(investmentType);
-      }, [investmentType]);
 
     return (
         <Wrapper className="flexWrapper100" >
@@ -70,7 +65,6 @@ function InvestingBasket(props) {
                                 >
                                 <ToggleButton style={{margin: "auto"}} id="monthly-sip-investment-type" className={(investmentType == 1 ? 'Btn-Active' : 'Btn-Deactive')} value={1}>Monthly SIP</ToggleButton>
                                 <ToggleButton style={{margin: "auto"}} id="one-time-investment-type" className={(investmentType == 2 ? 'Btn-Active' : 'Btn-Deactive')} value={2}>One Time</ToggleButton>
-                                {console.log("First timee", investmentType)}
                             </ToggleButtonGroup>
                             <Form className='font13 flexGrow4' style={{ padding: '0 30px' }}>
                                 <Form.Group controlId="amount" >

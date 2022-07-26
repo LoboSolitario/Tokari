@@ -38,6 +38,9 @@ export default function InvestmentHome() {
         })
         setBaskets(temp);
       }
+      else{
+        console.log("Error", response.statusText)
+      }
     }
   }, []);
 

@@ -48,7 +48,6 @@ function ManagerProfile() {
   
       configOptions("GET", headers, options);
       const response = await fetch(`${baseUrl}/api/baskets/basket/${id}`, options);
-      console.log(response);
       if(response.ok){
         response.json().then((data) => {
           navigate(`/basket/${id}`, {state:data});
