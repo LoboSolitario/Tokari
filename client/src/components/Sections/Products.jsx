@@ -67,7 +67,7 @@ export default function Products() {
 
   return (
     <Wrapper id="products">
-      <div className="lightBg" style={{padding: '20px 0 0'}}>
+      <div className="whiteBg" style={{padding: '20px 0 0'}}>
         <div className="container">
           <HeaderInfo>
             <h1 className="font40 extraBold">Our Suggested Baskets</h1>
