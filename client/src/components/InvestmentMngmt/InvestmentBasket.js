@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import UnsubscribeButton from "../Buttons/UnsubscribeButton"
 import ViewBasketButton from "../Buttons/ViewBasketButton"
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,7 +27,9 @@ const InvestmentBasket = ({
       </div>
 
       <p className="font13" style={{ padding: "30px 0" }}>
-        {basket.overview}
+        {basket.overview.length > 120 ?
+              `${basket.overview.substring(0, 120)}...` : basket.overview
+        }
       </p>
       <div className="flexSpaceNull">
         <p className="font13 extraBold">{basket.author}</p>
@@ -42,9 +43,7 @@ const InvestmentBasket = ({
       <div className=" flexCenter">
         <div style={{ width: "100px" }}>
           <ViewBasketButton title="View Basket" action={() => handleDetailBox(basket.id)} />
-        </div> <div style={{ width: "100px" }}>
-          {/* <UnsubscribeButton title="Unsubscribe" action={() => handleRemoveBox(basket.id)} /> */}
-        </div>
+        </div> 
       </div>
     </Wrapper>
   );

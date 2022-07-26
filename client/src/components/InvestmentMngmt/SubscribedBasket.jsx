@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ViewButton from "../Buttons/viewButton";
 import UnsubscribeButton from "../Buttons/UnsubscribeButton"
 import ViewBasketButton from "../Buttons/ViewBasketButton"
 import { useNavigate } from "react-router-dom";
@@ -28,7 +27,9 @@ const SubscribedBasket = ({
       </div>
 
       <p className="font13" style={{ padding: "30px 0" }}>
-        {basket.overview}
+        {basket.overview.length > 120 ?
+              `${basket.overview.substring(0, 120)}...` : basket.overview
+        }
       </p>
 
 
