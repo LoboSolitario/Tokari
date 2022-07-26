@@ -1,7 +1,8 @@
 const express = require('express');
 const { getAllUsers, getUser, registerUser, loginUser, deleteUser, updateUser, getInvestorStats, landingPageBaskets, getBasketsOfManager, getManagerStats } = require('../controllers/userController')
 const router = express.Router();
-const { protect } = require('../middleware/authMiddleware')
+const { protect, authRole } = require('../middleware/authMiddleware')
+const {ROLE} = require('../permissions')
 
 
 router.get('/', getAllUsers);
@@ -22,7 +23,7 @@ router.patch('/updateUser/:id', updateUser);
 
 router.get('/manager/:id', getBasketsOfManager);
 
-router.get('/stats/manager/:id', getManagerStats);
+router.get('/stats/manager/', protect, authRole(ROLE.MANAGER), getManagerStats);
 
 
 module.exports = router;

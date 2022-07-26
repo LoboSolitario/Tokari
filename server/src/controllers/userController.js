@@ -76,7 +76,8 @@ const registerUser = asyncHandler(async (req, res) => {
             name: name,
             email: email,
             password: hashedPassword,
-            role: role
+            role: role,
+            totalRevenue: 0
         })
     } catch (error) {
         res.status(400);
@@ -195,26 +196,30 @@ const getBasketsOfManager = asyncHandler(async (req, res) => {
 
 
 // @desc get stats of a specific portfolio manager
-// @route GET /api/users/stats/manager/:id
+// @route GET /api/users/stats/manager
 // @access Public
 const getManagerStats = asyncHandler(async (req, res) => {
-    const managerId = req.params.id;
-    var numberOfSubscriber = 0
+    const managerId = req.user._id;
+    var numberOfSubscriber = 0;
+    var numberOfInvestor = 0;
     
     //find the user to be viewed
     const manager = await User.findById(managerId).select('-password').populate({ path: 'createdBaskets', model: 'Basket' });
-    if (manager) {
-        res.status(201).json(manager)
-    } else {
+    if (!manager) {
         res.status(400);
         throw new Error("Manager not found");
     }
 
     manager.createdBaskets.forEach(basket => {
         numberOfSubscriber += basket.subscribers.length;
+        numberOfInvestor += basket.investors.length;
     });
 
-    console.log(manager);
+    res.status(200).json({
+        numberOfSubscriber: numberOfSubscriber,
+        numberOfInvestor: numberOfInvestor,
+        totalRevenue: manager.totalRevenue
+    });
 })
 
 

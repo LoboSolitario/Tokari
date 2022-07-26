@@ -28,6 +28,10 @@ const stripeWebhook = asyncHandler(async (req, res) => {
             res.status(400);
             throw new Error("Basket not found");
         }
+
+        // Update total revenue of the manager
+        await User.findByIdAndUpdate(basket.owner, { $inc: { totalRevenue: basket.subscriptionFee } }, { new: true });
+
         await User.findByIdAndUpdate(userID, { $push: { subscribedBaskets: basket } }, { new: true })
             .then((userUpdated) => {
                 try {
