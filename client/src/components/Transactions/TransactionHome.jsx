@@ -8,7 +8,6 @@ export default function TransactionHome() {
 
   const [ transactions, setTransactions ] = useState();
   const baseUrl = process.env.REACT_APP_BASE_URL;
-  const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
 
   useEffect(() => {
@@ -36,7 +35,7 @@ export default function TransactionHome() {
         {!_.isEmpty(transactions) ? (
           transactions.map((transaction) => (
             <div className="container70">
-              <TransactionBasket transaction={transaction}/>
+              <TransactionBasket key={transaction.id} transaction={transaction}/>
             </div>
           ))
         ) : (

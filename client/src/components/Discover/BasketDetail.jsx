@@ -15,7 +15,6 @@ const location = useLocation();
 const navigate = useNavigate();
 const basket = location.state;
 const assignedRole =  localStorage.getItem("role");
-console.log(assignedRole)
 const errRef = useRef();
 const [errMsg, setErrMsg] = useState('');
 const lastdate = format(parseISO(basket.updatedAt), "yyyy-MM-dd");
@@ -75,7 +74,7 @@ const handleSubmit = async (event) => {
   }
 
   return (
-      <div key={basket._id} className="container70 whiteBg shadow discoverPage" >
+      <div key={basket.id} className="container70 whiteBg shadow discoverPage" >
           <div style={{padding: '30px 0'}}>  
               <div className="container">
                 <div className="flexSpaceNull">
