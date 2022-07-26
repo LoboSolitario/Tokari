@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Form } from 'react-bootstrap';
 
 // Screens
-function BasketDetail(props) {
+function InvestingBasket(props) {
     const [amount, setAmount] = useState(0);
     const [investmentType, setInvestmentType] = useState(1);
     const basket = props.basket;
@@ -123,4 +123,4 @@ const Wrapper = styled.div`
 width: 100%;
 text-align: left;
 `;
-export default BasketDetail
+export default InvestingBasket

@@ -4,7 +4,7 @@ import InvestingBasket from '../components/InvestmentMngmt/InvestingBasket';
 import Footer from '../components/Sections/Footer';
 import { useLocation } from 'react-router-dom'
 
-function Detail() {
+function Investing() {
   const location = useLocation();
   const basket = location.state;
 
@@ -17,4 +17,4 @@ function Detail() {
     
   );
 }
-export default Detail
+export default Investing

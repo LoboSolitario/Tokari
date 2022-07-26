@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function FailureButton({ title, action, border }) {
+export default function ViewBasketButton({ title, action, border }) {
   return (
     <Wrapper
       className="animate pointer radius8"
