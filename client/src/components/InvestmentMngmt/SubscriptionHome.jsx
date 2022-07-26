@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import SubscribedBasket from "./SubscribedBasket";
 import configOptions from '../../api/configOptions';
 import _ from 'lodash';
-import {useNavigate, NavLink}  from "react-router-dom";
+import {useNavigate}  from "react-router-dom";
 
 export default function SubscriptionHome() {
 
@@ -92,7 +92,7 @@ export default function SubscriptionHome() {
 
   return (
     <React.Fragment>
-        <div className="flexList container" style={{minHeight: "72vh"}}>
+        <div className="flexListDiscover container" style={{minHeight: "72vh"}}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
                     <SubscribedBasket key={basket.id} basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />

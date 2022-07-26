@@ -1,17 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import TopNavbar from '../Nav/TopNavbar';
 import InvestmentHeader from '../InvestmentMngmt/InvestmentHeader';
 import Footer from '../../components/Sections/Footer';
-import TransactionContext from '../contexts/TransactionContext';
-import React,  { useState }  from 'react';
+import React from 'react';
 import SubscriptionHome from '../InvestmentMngmt/SubscriptionHome'
 import InvestmentHome from '../InvestmentMngmt/InvestmentHome';
 import InvestorNavbar from '../Nav/InvestorNavbar';
 import TransactionHome from '../Transactions/TransactionHome';
 
 function InvestorRouters() {
-  const [baskets, setBaskets] = useState([]);
-  const [transactions, setTransactions] = useState([]);
+
   return (
     <div>
       <TopNavbar/>
@@ -21,14 +19,17 @@ function InvestorRouters() {
           <Route element={<SubscriptionHome />} path="/subscriptions" />
         </Routes>
         <Routes>
-          <Route element={<InvestmentHome />} path="/investments" />
-          {/* <Route element={<TransactionHome />} path="/transactions" /> */}
         </Routes>
-      <TransactionContext.Provider value={{ transactions, setTransactions }}>
+        <Routes>
+          <Route element={<InvestmentHome />} path="/investments" />
+        </Routes>
+        <Routes>
+        </Routes>
         <Routes>
           <Route element={<TransactionHome />} path="/transactions" />
         </Routes>
-      </TransactionContext.Provider>
+        <Routes>
+        </Routes>
       <Footer />
     </div>
   )

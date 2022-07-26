@@ -18,6 +18,11 @@ const stripeWebhook = asyncHandler(async (req, res) => {
         let userID = session.client_reference_id;
         let basketID = session.metadata.basket_id;
 
+        await Basket.findByIdAndUpdate(basketID, { 
+            $push: {
+                subscribers: userID
+            }
+        }, { new: true })
         const basket = await Basket.findById(basketID);
         if (!basket) {
             res.status(400);

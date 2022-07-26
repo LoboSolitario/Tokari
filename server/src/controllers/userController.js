@@ -121,10 +121,13 @@ const getInvestorStats = asyncHandler(async (req, res) => {
     totalInvestmentAmount = 0;
     subscriptionCount = user.subscribedBaskets ? user.subscribedBaskets.length : 0;
     user.transactionLists.forEach(transaction => {
-        if (transaction.investmentAmount) {
-            totalInvestmentAmount += transaction.investmentAmount;
-        }
+        let transaction_amt = 0;
+        transaction.cryptoAlloc.forEach((crypto) => {
+            transaction_amt += crypto.price*crypto.orderQty
+        })
+        totalInvestmentAmount += transaction_amt;
     });
+    totalInvestmentAmount = totalInvestmentAmount.toFixed(2);
     const val = "timestamp=" + Date.now();
     const signature = hmacSHA256(val, binance_api_secret).toString();
     const post_url = "https://testnet.binance.vision/api/v3/account?" + val + "&signature=" + signature;
@@ -191,6 +194,29 @@ const getBasketsOfManager = asyncHandler(async (req, res) => {
 })
 
 
+// @desc get stats of a specific portfolio manager
+// @route GET /api/users/stats/manager/:id
+// @access Public
+const getManagerStats = asyncHandler(async (req, res) => {
+    const managerId = req.params.id;
+    var numberOfSubscriber = 0
+    
+    //find the user to be viewed
+    const manager = await User.findById(managerId).select('-password').populate({ path: 'createdBaskets', model: 'Basket' });
+    if (manager) {
+        res.status(201).json(manager)
+    } else {
+        res.status(400);
+        throw new Error("Manager not found");
+    }
+
+    manager.createdBaskets.forEach(basket => {
+        numberOfSubscriber += basket.subscribers.length;
+    });
+
+    console.log(manager);
+})
+
 
 // Generate JWT
 const generateToken = (id) => {
@@ -209,5 +235,6 @@ module.exports = {
     updateUser,
     getInvestorStats,
     landingPageBaskets,
-    getBasketsOfManager
+    getBasketsOfManager,
+    getManagerStats
 }

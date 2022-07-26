@@ -33,6 +33,49 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             Home
           </Link>
         </li>
+        
+        {localStorage.getItem("role") === "manager"?
+          (<Link
+            to="/portfoliomain"
+            onClick={() => toggleSidebar(!sidebarOpen)}
+            activeclass="active"
+            className="whiteColor"
+            style={{ padding: "10px 15px" }}
+            offset={-60}
+          > 
+          <li className="semiBold font15 pointer">
+              Management
+          </li>
+          </Link>):
+          localStorage.getItem("role") === "investor"?
+          (<Link
+           to="/investormain/subscriptions"
+           onClick={() => toggleSidebar(!sidebarOpen)}
+            activeclass="active"
+            className="whiteColor"
+            style={{ padding: "10px 15px" }}
+            offset={-60}
+          >
+          <li className="semiBold font15 pointer">
+            Investments
+          </li>
+          </Link>)
+         :
+         (<Link to="/login">
+         </Link>
+          )}
+        <li className="semiBold font15 pointer">
+          <Link
+            onClick={() => toggleSidebar(!sidebarOpen)}
+            activeclass="active"
+            className="semiBold font15 pointer radius8 lightBg"
+            style={{ padding: "10px 15px" }}
+            to="/discover"
+            offset={-60}
+          >
+            Discover
+          </Link>
+        </li>
         <li className="semiBold font15 pointer">
           {localStorage.getItem("token")?(
             <Link onClick={()=>{
@@ -60,18 +103,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
           )}
         </li>
 
-        <li className="semiBold font15 pointer">
-          <Link
-            onClick={() => toggleSidebar(!sidebarOpen)}
-            activeclass="active"
-            className="semiBold font15 pointer radius8 lightBg"
-            style={{ padding: "10px 15px" }}
-            to="/discover"
-            offset={-60}
-          >
-            Discover
-          </Link>
-        </li>
+        
   
       </UlStyle>
       {/* <UlStyle className="flexSpaceCenter">

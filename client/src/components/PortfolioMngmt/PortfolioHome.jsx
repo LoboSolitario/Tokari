@@ -90,7 +90,7 @@ export default function PortfolioHome() {
 
   return (
     <React.Fragment>
-        <div className="flexList container" style={{marginTop:"30px", marginBottom:"50px",minHeight: "70vh" }}>
+        <div className="flexListDiscover container" style={{marginTop:"30px", marginBottom:"50px",minHeight: "70vh" }}>
              {!_.isEmpty(baskets) ? (
                 baskets.map((basket)=>(
                     <PortfolioBasket key={basket.id} {...basket} handleRemoveBox={handleRemoveBox}  handleDetailBox={handleDetailBox}/>
