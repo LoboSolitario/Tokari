@@ -12,7 +12,7 @@ import Discover from "../../screens/Discover";
 import Payment from "../../screens/Payment"
 import Detail from "../../screens/Detail";
 import Investing from "../../screens/Investing";
-import AfterI from "../../screens/AfterI";
+import AfterI from "../../screens/AfterInvestment";
 import Manager from "../../screens/Manager";
 export default function MainAppRouter() {
     return (
