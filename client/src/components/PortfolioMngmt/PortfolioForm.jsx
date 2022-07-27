@@ -166,7 +166,7 @@ const PortfolioForm = (props) => {
       <Form className='font13' onSubmit={handleOnSubmit}>
       <h3 style={{marginTop: "20px", marginBottom: "10px"}}>General Information</h3>
         <Form.Group controlId="basketName" style={{marginBottom: "10px"}}>
-            <Form.Label>Basket Name</Form.Label>
+            <Form.Label><strong>Basket Name</strong></Form.Label>
             <Form.Control
               className="input-control form-control-sm font11"
               type="text"
@@ -179,7 +179,7 @@ const PortfolioForm = (props) => {
         </Form.Group>
 
         <Form.Group controlId="overview" style={{marginBottom: "10px"}}>
-            <Form.Label>Overview</Form.Label>
+            <Form.Label><strong>Overview</strong></Form.Label>
             <textarea
               style={{minWidth: "100%"}}
               className="flex input-control form-control-sm font11"
@@ -197,7 +197,7 @@ const PortfolioForm = (props) => {
           <div class="form-check">
                 <label class="form-check-label font12" for="flexCheckDefault">
                   <input name="isFreeBasket" class="form-check-input" defaultChecked={isFreeBasket} type="checkbox" value={isFreeBasket} onClick={handleInputChange}/>
-                  Free Basket
+                  <strong>Free Basket</strong>
                 </label>
           </div>
         </Form.Group>
@@ -215,7 +215,7 @@ const PortfolioForm = (props) => {
         </Form.Group>
 
         <Form.Group controlId="frequency" style={{marginBottom: "15px"}}>
-          <Form.Label>Details</Form.Label>
+          <Form.Label><strong>Details</strong></Form.Label>
           <textarea
             style={{minWidth: "100%"}}
             className="flex input-control form-control-sm font11"
@@ -255,9 +255,9 @@ const PortfolioForm = (props) => {
       <Table border hover size="sm">
           <thead>
             <tr>
-              <th>#</th>
-              <th>name</th>
-              <th>weight</th>
+              <th></th>
+              <th>Crypto Currency</th>
+              <th>Weight Distribution</th>
             </tr>
           </thead>
           <tbody>
