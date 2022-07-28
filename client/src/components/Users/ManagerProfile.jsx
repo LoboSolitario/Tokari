@@ -13,6 +13,7 @@ function ManagerProfile() {
     const token = localStorage.getItem("token")
     const managerId = useParams().id;
     const [manager, setManager] = useState({});
+    const [numberOfSubscriber, setNumberOfSubscriber] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,11 +22,15 @@ function ManagerProfile() {
 
         const response = await axios.get(`${baseUrl}/api/users/manager/${managerId}`);
         if (response.status) {
+          // Counting the number of Subscribers
+          response.data.createdBaskets.forEach(basket => {
+            setNumberOfSubscriber(numberOfSubscriber + basket.subscribers.length)
+          })
           // Setting baskets id fields to view Baskets
           response.data.createdBaskets.map((basket) => (
             basket.id = basket._id
             ))
-          response.data.numberOfCreatedBaskets = response.data.createdBaskets.length
+          response.data.numberOfCreatedBaskets = response.data.createdBaskets.length;
           setManager(response.data)
         } else {
           response.json().then((data)=>{
@@ -95,7 +100,7 @@ function ManagerProfile() {
               {manager.numberOfCreatedBaskets}
             </div>
             <div className=" flexCol">
-              y
+              {numberOfSubscriber}
             </div>
 
           </div>
