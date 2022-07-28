@@ -2,26 +2,24 @@ import React, {useEffect, useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router';
-import BasketContext from "../contexts/BasketContext";
 import axios from "axios";
 
 export default function PortfolioHeader() {
   let navigate = useNavigate();
   const token = localStorage.getItem("token")
   const baseUrl = process.env.REACT_APP_BASE_URL;
-  const [subscriptionCount, setsubscriptionCount] = useState([])
-  const [totalInvestmentAmount, settotalInvestmentAmount] = useState([])
-  const [currentBinanceBalance, setcurrentBinanceBalance] = useState([])
+  const [numberOfSubscriber, setNumberOfSubscriber] = useState([])
+  const [numberOfInvestor, setNumberOfInvestor] = useState([])
+  const [totalRevenue, setTotalRevenue] = useState([])
 
   useEffect(() => {
     fetchData();
     async function fetchData() {
-      const response = await axios.get(`${baseUrl}/api/users/stats/manager/`, { headers: { Authorization: "Bearer: " + token } });
+      const response = await axios.get(`${baseUrl}/api/users/stats/manager`, { headers: { Authorization: "Bearer: " + token } });
       if (response.statusText === "OK") {
-        console.log("response: ", response.data)
-        setsubscriptionCount(response.data.numberOfSubscriber)
-        settotalInvestmentAmount(response.data.numberOfInvestor)
-        setcurrentBinanceBalance(response.data.totalRevenue)
+        setNumberOfSubscriber(response.data.numberOfSubscriber)
+        setNumberOfInvestor(response.data.numberOfInvestor)
+        setTotalRevenue(response.data.totalRevenue)
       } else{
         console.log("err", response.statusText)
       }
@@ -55,15 +53,20 @@ export default function PortfolioHeader() {
       </div>
 
       <div className="greyColor flexColumn">
-        <div>Total baskets:</div>
-          <div>1</div>
-        </div>
+        <div>Total revenue:</div>
+          ${totalRevenue}
+      </div>
 
       <div className="greyColor flexColumn">
         <div>Total subscriptions:</div>
-          <div>1</div>
-        </div>
+          ${numberOfSubscriber}
       </div>
+
+      <div className="greyColor flexColumn">
+          <div>Total investors: </div> 
+          ${numberOfInvestor}
+      </div>
+   </div>
   )
 }
 

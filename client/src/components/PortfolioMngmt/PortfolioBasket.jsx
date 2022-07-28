@@ -43,13 +43,13 @@ const PortfolioBasket = ({
               `${overview.substring(0, 120)}...` : overview
           }
         </p>
-        <div className="flexSpaceNull">
+        <div className="flexSpaceNull" style={{marginTop: "15px"}}>
           <p className={' tag  radius6 font11 extraBold '+ (risk==="High"? "redBg" : risk==="Medium"? "orangeBg":"greenBg")}>Risk: {risk}</p>
           <p className={' tag  radius6 font11 extraBold '+ (volatility==="High"? "redBg" : volatility==="Medium"? "orangeBg":"greenBg")}>Volatility: {volatility}</p>
         </div>
-        <div className="row flexCenter flexSpaceNull">
-            <div style={{ width: "100px", marginBottom: "10px"}}>
-              <MoreButton title="View" action={() => handleDetailBox(id)}/>
+        <div className="row flexCenter">
+            <div style={{ width: "150px", marginBottom: "10px"}}>
+              <MoreButton title="View Basket" action={() => handleDetailBox(id)}/>
             </div>
         </div>
       </Wrapper>
