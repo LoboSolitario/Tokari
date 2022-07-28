@@ -53,18 +53,24 @@ export default function PortfolioHeader() {
       </div>
 
       <div className="greyColor flexColumn">
-        <div>Total revenue:</div>
+        <div>Total revenue</div>
+        <div style={{color: "black", paddingTop: "10px"}}>
           ${totalRevenue}
+        </div>
       </div>
 
       <div className="greyColor flexColumn">
-        <div>Total subscriptions:</div>
-          ${numberOfSubscriber}
+        <div>Total subscriptions</div>
+        <div style={{color: "black", paddingTop: "10px"}}>
+          {numberOfSubscriber}
+        </div>
       </div>
 
       <div className="greyColor flexColumn">
-          <div>Total investors: </div> 
-          ${numberOfInvestor}
+          <div>Total investors</div> 
+          <div style={{color: "black", paddingTop: "10px"}}>
+            {numberOfInvestor}  
+          </div>
       </div>
    </div>
   )

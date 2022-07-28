@@ -6,7 +6,6 @@ import LogoImg from "../../assets/svg/LogoFooter";
 import RedditIcon from "../../assets/svg/RedditFooter";
 import TwitterIcon from "../../assets/svg/TwitterFooter";
 import DiscordIcon from "../../assets/svg/DiscordFooter";
-import LinkedinIcon from "../../assets/svg/LinkedInFooter";
 
 
 export default function Footer() {
@@ -32,17 +31,14 @@ export default function Footer() {
               © {getCurrentYear()} - <span className="orangeColor font13">tokari</span> All Right Reserved
             </StyleP>
             <div>
-              <a style={{ marginLeft: "5px"}} rel="noreferrer" href="https://twitter.com" target="_blank">
+              <a style={{ marginLeft: "5px"}} rel="noreferrer" href="https://twitter.com/dorjochir1" target="_blank">
                 <TwitterIcon/>  
               </a>
-              <a style={{ marginLeft: "5px"}} rel="noreferrer" href="https://reddit.com" target="_blank">
+              <a style={{ marginLeft: "5px"}} rel="noreferrer" href="https://www.reddit.com/r/tokari/" target="_blank">
                 <RedditIcon/>
               </a>
-              <a style={{ marginLeft: "5px"}} rel="noreferrer" href="https://discord.com" target="_blank">
+              <a style={{ marginLeft: "5px"}} rel="noreferrer" href="https://discord.gg/sr9AdFq9" target="_blank">
                 <DiscordIcon/>
-              </a>
-              <a style={{ marginLeft: "5px"}} rel="noreferrer" href="https://linkedin.com" target="_blank">
-                <LinkedinIcon/>
               </a>
             </div>
           </InnerWrapper>
