@@ -36,8 +36,10 @@ npm start
 
 Then, it will automatically open default browser and redirect to the frontend path. If it is not redirected access it by [http://localhost:3000](http://localhost:3000).
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
+
 You will also see any lint errors in the console.
+
 ### Backend Configuration
 
 Keep frontend server up and running. Open another terminal and change directory to project directory.
