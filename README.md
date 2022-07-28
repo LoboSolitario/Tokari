@@ -94,50 +94,50 @@ stripe listen --forward-to localhost:4600/webhook
 
 ## Folder structure
 
-.
-├── LICENSE
-├── Notes.md
-├── README.md
-├── client
-│   ├── nginx
-│   │   └── default.conf
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── public
-│   └── src
-│       ├── api
-│       ├── assets
-│       │   ├── fonts
-│       │   ├── img
-│       │   └── svg
-│       ├── components
-│       │   ├── AppRouters
-│       │   ├── Buttons
-│       │   ├── Discover
-│       │   ├── Elements
-│       │   ├── InvestmentMngmt
-│       │   ├── Nav
-│       │   ├── PortfolioMngmt
-│       │   ├── Sections
-│       │   ├── Transactions
-│       │   ├── Users
-│       │   ├── contexts
-│       │   └── payment
-│       ├── index.js
-│       ├── screens
-│       └── style
-│           └── index.css
-├── package-lock.json
-├── package.json
-├── server
-│   ├── index.js
-│   ├── package-lock.json
-│   ├── package.json
-│   └── src
-│       ├── controllers
-│       │   ├── emailController
-│       ├── db.js
-│       ├── emailTemplate
-│       ├── middleware
-│       ├── models
-│       └── routes
+    .
+    ├── LICENSE
+    ├── Notes.md
+    ├── README.md
+    ├── client
+    │   ├── nginx
+    │   │   └── default.conf
+    │   ├── package-lock.json
+    │   ├── package.json
+    │   ├── public
+    │   └── src
+    │       ├── api
+    │       ├── assets
+    │       │   ├── fonts
+    │       │   ├── img
+    │       │   └── svg
+    │       ├── components
+    │       │   ├── AppRouters
+    │       │   ├── Buttons
+    │       │   ├── Discover
+    │       │   ├── Elements
+    │       │   ├── InvestmentMngmt
+    │       │   ├── Nav
+    │       │   ├── PortfolioMngmt
+    │       │   ├── Sections
+    │       │   ├── Transactions
+    │       │   ├── Users
+    │       │   ├── contexts
+    │       │   └── payment
+    │       ├── index.js
+    │       ├── screens
+    │       └── style
+    │           └── index.css
+    ├── package-lock.json
+    ├── package.json
+    ├── server
+    │   ├── index.js
+    │   ├── package-lock.json
+    │   ├── package.json
+    │   └── src
+    │       ├── controllers
+    │       │   ├── emailController
+    │       ├── db.js
+    │       ├── emailTemplate
+    │       ├── middleware
+    │       ├── models
+    │       └── routes
