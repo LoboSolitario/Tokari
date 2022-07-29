@@ -15,11 +15,11 @@ const AllBasket = ({
   let onManagerPage = location.pathname.startsWith('/manager');
 
   const navigate = useNavigate();
-
+  //navigate to manager page
   const ownerClicked = async () => {
     navigate(`/manager/${basket.owner._id}`);
   }
-
+  //basket box style in discover page 
   return (
     <Wrapper className="whiteBg radius8 shadow basket">
       <div className="flexSpaceCenter"> 

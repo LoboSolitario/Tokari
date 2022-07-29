@@ -9,7 +9,7 @@ export default function TransactionHome() {
   const [ transactions, setTransactions ] = useState();
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const token = localStorage.getItem("token")
-
+  //get all transactions of the user
   useEffect(() => {
     fetchData();
     async function fetchData() {
@@ -24,7 +24,7 @@ export default function TransactionHome() {
           }
           temp.push(obj);
         })
-        setTransactions(temp.reverse());
+        setTransactions(temp.reverse());//Most recently completed transactions are shown at the top
       }
     }
   }, []);

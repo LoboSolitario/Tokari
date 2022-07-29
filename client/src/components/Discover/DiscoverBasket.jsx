@@ -15,7 +15,7 @@ export default function DiscoverBasket() {
   const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
   const navigate = useNavigate();
-
+  //Get all the baskets
   useEffect(() => {
     fetchData();
     async function fetchData() {
@@ -42,7 +42,7 @@ export default function DiscoverBasket() {
       }
     }
   }, []);
-
+  //Capture the id of the selected basket
   const handleDetailBox = async (id) => {
 
     const headers = {

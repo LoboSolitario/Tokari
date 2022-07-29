@@ -17,8 +17,8 @@ function PieChartComponent() {
             temp.push(obj);
         })
         setPieData(temp);
-    },[basket.cryptoAlloc])
-    
+    },[basket.cryptoAlloc]) //will only be executed again when 'basket.cryptoAlloc' changes
+    //Set the action on mouseover
     const CustomTooltip = ({ active, payload, label }) => {
         if (active) {
             return (
@@ -39,20 +39,20 @@ function PieChartComponent() {
 
     return (
         <div style={{ width: '100%', height: 210 }}>
-            <ResponsiveContainer>
+            <ResponsiveContainer>{/*A container component to make charts adapt to the size of parent container. */}
                 <PieChart>
                     <Pie
                         data={pieData}
                         color="#000000"
                         dataKey="value"
                         nameKey="name"
-                        cx="50%"
+                        cx="50%" //The x-coordinate of center
                         cy="50%"
                         outerRadius={80}
                         fill="#8884d8"
                     >
                         {pieData.map((entry, index) => (
-                            <Cell
+                            <Cell  //specify attributes of each child
                             key={`cell-${index}`}
                             fill={COLORS[index % COLORS.length]}
                             />

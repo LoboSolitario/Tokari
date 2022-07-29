@@ -11,20 +11,26 @@ import { format, addMonths } from "date-fns";
 import { parseISO } from "date-fns/fp";
 // Screens
 function BasketDetail() {
+
 const location = useLocation();
 const navigate = useNavigate();
 const basket = location.state;
+
 const assignedRole =  localStorage.getItem("role");
+
 const errRef = useRef();
 const [errMsg, setErrMsg] = useState('');
-const lastdate = format(parseISO(basket.updatedAt), "yyyy-MM-dd");
-const nextdate = format(addMonths(new Date(lastdate), 1), "yyyy-MM-dd");
+
+const lastdate = format(parseISO(basket.updatedAt), "yyyy-MM-dd");  //get last update date
+const nextdate = format(addMonths(new Date(lastdate), 1), "yyyy-MM-dd");  //rebalance frequency: monthly
 
 const handleSubmit = async (event) => {
-
+  // Perform investment functions for free baskets or subscribed baskets
   if (basket.subscriptionFee === 0 || basket.cryptoAlloc) {
     navigate(`/basket/invest/${basket._id}`, {state:basket});
-  } else {
+  } 
+  // Perform subscription function for unsubscribed basket (integrate stripe)
+  else {
     const stripePromise = loadStripe(
       'pk_test_51LG4BtLrYzCcT1VhaohAqZIhPa8mvakR4rd9z2dI7VN0iEOKAtP73PSw1pNRE0kF4VH9bSUNxkkqdDOuEXjrzJee00Gz2np472'
     );
@@ -51,17 +57,14 @@ const handleSubmit = async (event) => {
         // error, you should display the localized error message to your
         // customer using `error.message`.
         if (result.error) {
-          // alert(result.error.message);
           setErrMsg(result.error.message);
         }
       })
       .catch(err => {
         if (err.response.status === 401) {
-          // alert("Unauthorised Role Access")
           setErrMsg("Unauthorised Role Access")
         }
         else {
-          // alert("ERROR:", err.response.data)
           setErrMsg("ERROR:", err.response.data)
         }
   
@@ -72,12 +75,12 @@ const handleSubmit = async (event) => {
   const ownerClicked = async () => {
     navigate(`/manager/${basket.owner._id}`);
   }
-
+  // Display of specific basket information
   return (
-      <div key={basket.id} className="container70 whiteBg shadow discoverPage" >
+      <div key={basket._id} className="container70 whiteBg shadow discoverPage" >
           <div style={{padding: '30px 0'}}>  
               <div className="container">
-                <div className="flexSpaceNull">
+                <div className="flexSpaceNull"> {/*The Basket Information and Subscriptions section is divided into two columns for UI */}
                   <div className='flexWrapper60'>
                     <div className="flexRow">
                       <div>
@@ -139,7 +142,7 @@ const handleSubmit = async (event) => {
                   
                     <Wrapper style={{ padding: "1px 0 0 0"}}>
                       <p className='box semiBold'>CryptoCurrencies & Weights</p>
-                      {basket.cryptoAlloc ? (
+                      {basket.cryptoAlloc ? ( //Determine whether to display cryptocurrencies and weights
                       <div className='flexSpaceCenter'>
                         <div className="flexWrapper50" style={{padding: "0 0 25px 0"}}>
                           <div className='flexSpaceCenter' style={{ padding: "10px 0"}}>                 
@@ -180,6 +183,7 @@ const handleSubmit = async (event) => {
                             </div>
                           </div>
                           ) : (
+                            //Hide subscription features from managers
                             <p className='flexCenter font12' style={{ padding: "5px 0px"}}>
                               Only subscribed investors can see
                             </p>
@@ -193,7 +197,7 @@ const handleSubmit = async (event) => {
                     <div className='box textCenter' style={{ padding: "12px 0 0" }}>
                       <p className='font13'>{(basket.subscriptionFee===0 || basket.cryptoAlloc) ? "" : `Subscription fee ${basket.subscriptionFee} $`}</p> 
                     </div>
-                    {assignedRole === "investor" ? (
+                    {assignedRole === "investor" ? ( //Hide subscription features from managers
                       <div>
                         <form onSubmit={handleSubmit}>
                           {/* Add a hidden field with the lookup_key of your Price */}

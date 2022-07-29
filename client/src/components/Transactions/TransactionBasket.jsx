@@ -10,7 +10,7 @@ const TransactionBasket = ({
   })
   transaction_amt = transaction_amt.toFixed(2)
 
-  const cryptoMap = new Map();
+  const cryptoMap = new Map(); //Map to the name of the cryptocurrency used in the frontend(reality) 
   cryptoMap.set('BTCUSDT', "Bitcoin")
   cryptoMap.set('ETHUSDT', "Ethereum")
   cryptoMap.set('LTCUSDT', "Litecoin")

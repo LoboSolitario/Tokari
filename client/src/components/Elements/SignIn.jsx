@@ -72,14 +72,14 @@ export default function SignIn(){
     }
     return (
       <WrapperLogin className="whiteBg radius8 shadow container">
-        {localStorage.getItem("token")?(
+        {localStorage.getItem("token")?( //Get token, log in successfully
           <Wrapper className="container flexSpaceCenter flexColumn">
                 <div style={{marginBottom: "20px"}} className="p">You have been successfully logged in!</div>
               <BtnWrapper onClick={ ()=>{navigate("/");}}>
                 <FullButton title="visit home page" to="/"/>
               </BtnWrapper>
             </Wrapper>
-        ):(
+        ):( // set data, do post request
           <Wrapper className="container flexSpaceCenter">
             <form onSubmit={handleSubmit} style={{maxWidth: "200px"}}>
               <h3 className='semiBold textCenter'>Sign In</h3>
@@ -112,7 +112,7 @@ export default function SignIn(){
               </div>
               
               <div style={{marginTop: "20px",fontSize: "12px"}} className="flexSpaceCenter">New to Tokari?
-                <NavLink
+                <NavLink  //navigate to sign up page
                   style={{marginLeft: "10px", color: "#7620FF"}}
                   to="/signup"
                   className={"active"}
