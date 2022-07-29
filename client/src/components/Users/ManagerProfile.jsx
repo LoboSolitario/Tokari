@@ -40,6 +40,7 @@ function ManagerProfile() {
       }
     }, []);
 
+    // This function is used when listing the baskets in <AllBasket /> component.
     const handleDetailBox = async (id) => {
 
       const headers = {
