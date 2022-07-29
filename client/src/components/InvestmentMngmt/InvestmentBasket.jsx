@@ -26,8 +26,8 @@ const InvestmentBasket = ({
       </div>
 
       <p className="font13" style={{ padding: "30px 0" }}>
-        {basket.overview.length > 120 ?
-              `${basket.overview.substring(0, 120)}...` : basket.overview
+        {basket.overview.length > 80 ?
+              `${basket.overview.substring(0, 80)}...` : basket.overview
         }
       </p>
       <div className="flexSpaceNull">
