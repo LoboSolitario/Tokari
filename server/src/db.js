@@ -11,4 +11,3 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }).then(
 });
 
 module.exports = mongoose;
-// export default mongoose;

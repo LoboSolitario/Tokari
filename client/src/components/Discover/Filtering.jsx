@@ -22,8 +22,8 @@ export default function Filtering() {
         setSubmittedSearchKeyword(searchKeyword)
     }
 
+    // All the filterings are applied with this useEffect Hook
     useEffect(()=>{
-
 
         let filteredBaskets = [...allBaskets];
 
@@ -144,15 +144,6 @@ export default function Filtering() {
           padding-bottom: 40px;
       }
   `;
-
-//   const Wrapper = styled.section`
-//   padding-top: 80px;
-//   width: 100%;
-//   min-height: 840px;
-//   @media (max-width: 960px) {
-//     flex-direction: column;
-//   }
-// `;
   
   const BtnWrapper = styled.div`
     max-width: 100px;
