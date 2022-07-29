@@ -18,7 +18,7 @@ const BasketBox = ({
   }
 
   return (
-    <div className="whiteBg radius8 shadow h-10 flexBasket pointer basketHover" onClick={() => handleDetailBox(basket.id)} style={{ margin: "10px" }}>
+    <div className="whiteBg radius8 shadow h-10 flexBasket basketHover" style={{ margin: "10px" }}>
       <div className="flexHead">
         <div className="flexSpaceNull">
           <h5 className="extraBold flexStart pointer" style={{ padding: "20px 0 0 0" }}>

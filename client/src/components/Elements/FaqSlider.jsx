@@ -41,8 +41,8 @@ export default function FaqSlider() {
         <LogoWrapper className="flexCenter">
           <FaqBox
             answer="The investors may find a basket to subscribe to either directly in our Suggested Baskets
-             section or on the Discover page with the help of filters. On the Discover page, the investors can filter the matched baskets according to their volatility, subscription type, and risk type
-             When the investors find their baskets, they read more about them by clicking the View Basket button. If they like a certain basket, they may subscribe to them through our Strip checkout."
+             section or on the Discover page with the help of filters. On the Discover page, the investors can filter the matched baskets according to their volatility, subscription type, and risk type.
+             When the investors find their baskets, they read more about them by clicking the View Basket button. If they like a certain basket, they may subscribe to them through our Stripe checkout."
             question="How does a subscription work?"
           />
         </LogoWrapper>

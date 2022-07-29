@@ -26,7 +26,7 @@ const InvestmentBasket = ({
         <p className="font13 extraBold greyColor" style={{ padding: "5px 0 0 0" }}> by <span className="fa-circle-info extraBold purpleColor" onClick={ownerClicked} style={{cursor: "pointer"}}>{basket.owner.name} <FontAwesomeIcon icon={faCircleInfo} /></span></p>
       </div>
 
-      <p className="font13" style={{ padding: "30px 0" }}>
+      <p className="font13" style={{height: "130px", padding: "30px 0" }}>
         {basket.overview.length > 120 ?
               `${basket.overview.substring(0, 120)}...` : basket.overview
         }
