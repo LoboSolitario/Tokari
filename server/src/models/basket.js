@@ -6,7 +6,7 @@ const basketSchema = new mongoose.Schema({
         type: String, 
         unique: true,
         required: [true, "Enter a basket Name."],
-        match: [/^[a-zA-Z0-9.-/ ]+$/, 'is invalid'],
+        match: [/^[a-zA-Z0-9./\- ]+$/, 'is invalid'],
         index: true 
     }, 
     owner: {
