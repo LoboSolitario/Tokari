@@ -7,7 +7,6 @@ import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 const InvestmentBasket = ({
   basket,
-  handleRemoveBox,
   handleDetailBox
 }) => {
 
@@ -33,7 +32,6 @@ const InvestmentBasket = ({
       </p>
       <div className="flexSpaceNull">
         <p className="font13 extraBold">{basket.author}</p>
-        {/* <p className="font13 greenColor extraBold">{free?"Free Access": ""}</p> */}
       </div>
 
       <div className="flexSpaceNull">

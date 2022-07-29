@@ -19,7 +19,7 @@ function PieChartComponent() {
         setPieData(temp);
     },[basket.cryptoAlloc]) //will only be executed again when 'basket.cryptoAlloc' changes
     //Set the action on mouseover
-    const CustomTooltip = ({ active, payload, label }) => {
+    const CustomTooltip = ({ active, payload }) => {
         if (active) {
             return (
             <div

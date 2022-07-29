@@ -1,5 +1,4 @@
 import React,  {useState} from 'react'
-import { useNavigate } from 'react-router';
 import { useEffect } from "react";
 import axios from "axios";
 
@@ -9,7 +8,6 @@ export default function InvestmentHeader() {
   const [currentBinanceBalance, setcurrentBinanceBalance] = useState([])
   const token = localStorage.getItem("token")
   const baseUrl = process.env.REACT_APP_BASE_URL;
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();

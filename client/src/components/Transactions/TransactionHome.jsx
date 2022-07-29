@@ -20,7 +20,9 @@ export default function TransactionHome() {
           let obj = {
             "basketName": item.basketName, 
             "investmentAmount": item.investmentAmount,
-            "cryptoAlloc": item.cryptoAlloc
+            "cryptoAlloc": item.cryptoAlloc,
+            "_id": item._id,
+            "key": item._id
           }
           temp.push(obj);
         })
@@ -35,7 +37,7 @@ export default function TransactionHome() {
         {!_.isEmpty(transactions) ? (
           transactions.map((transaction) => (
             <div className="container70">
-              <TransactionBasket key={transaction.id} transaction={transaction}/>
+              <TransactionBasket key={transaction._id} transaction={transaction}/>
             </div>
           ))
         ) : (

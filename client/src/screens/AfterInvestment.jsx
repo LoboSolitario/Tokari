@@ -4,7 +4,7 @@ import TopNavbar from "../components/Nav/TopNavbar";
 import Footer from "../components/Sections/Footer";
 import AfterInvest from "../components/Transactions/AfterInvest";
 
-export default function AfterI() {
+export default function AfterInvestment() {
   
   return (
     <>

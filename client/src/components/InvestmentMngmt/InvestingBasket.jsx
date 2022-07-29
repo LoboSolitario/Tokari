@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import {ToggleButtonGroup, ToggleButton} from "react-bootstrap"
 import FullButton from "../Buttons/FullButton";
@@ -31,7 +31,7 @@ function InvestingBasket(props) {
         configOptions("POST", headers, options);
         const response = await fetch(`${baseUrl}/api/baskets/invest/${basket._id}`, options);
         if (response.ok) {
-            response.json().then((data) => {
+            response.json().then(() => {
                 navigate('/investsuccessfully');
             })
         }

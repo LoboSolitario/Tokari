@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useContext } from "react";
 import { useEffect } from "react";
 import {useNavigate}  from "react-router-dom";
-import styled from "styled-components";
 import DiscoverContext from "../contexts/DiscoverContext";
 import AllBasket from "./AllBasket";
 import configOptions from '../../api/configOptions';
@@ -12,7 +11,6 @@ export default function DiscoverBasket() {
 
   const { baskets, setBaskets, allBaskets, setAllBaskets } = useContext(DiscoverContext);
   const baseUrl = process.env.REACT_APP_BASE_URL;
-  const auth =  localStorage.getItem("auth")
   const token = localStorage.getItem("token")
   const navigate = useNavigate();
   //Get all the baskets
@@ -84,12 +82,4 @@ export default function DiscoverBasket() {
   )
 }
 
-const Wrapper = styled.section`
-  padding-top: 80px;
-  width: 100%;
-  min-height: 840px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
-`;
 

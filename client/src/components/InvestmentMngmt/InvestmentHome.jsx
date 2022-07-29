@@ -10,7 +10,6 @@ export default function InvestmentHome() {
 
   const [ baskets, setBaskets ] = useState();
 
-  const auth = localStorage.getItem("auth")
   const token = localStorage.getItem("token")
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
@@ -44,30 +43,6 @@ export default function InvestmentHome() {
     }
   }, []);
 
-  const handleRemoveBox = async (id) => {
-
-    const headers = {
-      "content-type": "application/json",
-      "Authorization": "Bearer: " + token
-    };
-
-    const options = {
-      json: true
-    };
-
-    configOptions("DELETE", headers, options);
-
-    const response = await fetch(`${baseUrl}/api/baskets/deleteBasket/${id}`, options);
-    if (response.ok) {
-      response.json().then(() => {
-        setBaskets(baskets.filter((basket) => basket.id !== id));
-      })
-    }
-    else {
-      console.log(response.statusText);
-    }
-  };
-
   const handleDetailBox = async (id) => {
 
     const headers = {
@@ -95,24 +70,13 @@ export default function InvestmentHome() {
 
   return (
     <React.Fragment>
-      {/* <div className="flexColumn container" style={{ minHeight: "72vh" }}>
-        <div className="font25">
-          It sure is quiet here
-        </div>
-        <div className="greyColor">
-          Discover and invest in a basket to start tracking
-        </div>
-
-
-      </div> */}
-
       <div className="flexListDiscover container" style={{minHeight: "72vh"}}>
         {!_.isEmpty(baskets) ? (
           baskets.map((basket)=>(
-              <InvestmentBasket key={basket.id} basket={basket} handleRemoveBox={handleRemoveBox} handleDetailBox={handleDetailBox} />
+              <InvestmentBasket key={basket.id} basket={basket} handleDetailBox={handleDetailBox} />
           ))
         ) : (
-          <p>You have not yet subscribed to a basket</p>
+          <p>You have not invested in any baskets</p>
         )}
       </div>
     </React.Fragment>
