@@ -15,12 +15,12 @@ const fs = require('fs');
 const path = require('path');
 
 const cryptoMap = new Map();
-cryptoMap.set('bitcoin', ['BTCUSDT', 22853.361])
-cryptoMap.set('ethereum', ['ETHUSDT', 1627.322])
-cryptoMap.set('litecoin', ['LTCUSDT', 58.806])
-cryptoMap.set('tron', ['TRXUSDT', 0.0683])
-cryptoMap.set('xrp', ['XRPUSDT', 0.358])
-cryptoMap.set('binancecoin', ['BNBUSDT', 269.15])
+cryptoMap.set('bitcoin', ['BTCUSDT', 24041.89])
+cryptoMap.set('ethereum', ['ETHUSDT', 1723.13])
+cryptoMap.set('litecoin', ['LTCUSDT', 62.14])
+cryptoMap.set('tron', ['TRXUSDT', 0.070])
+cryptoMap.set('xrp', ['XRPUSDT', 0.374])
+cryptoMap.set('binancecoin', ['BNBUSDT', 291.40])
 
 // @desc seed for crypto data
 // @route GET /api/baskets/cryptoseed
