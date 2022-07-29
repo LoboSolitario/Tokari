@@ -17,7 +17,7 @@ export default function FaqBox({ answer, question }) {
       </p>
       <br />
       <p className="whiteColor font13" style={{ paddingBottom: "30px" }}>
-      {showMore ? answer : `${answer.substring(0, 150)}...`}
+      {showMore ? answer : `${answer.substring(0, 155)}...`}
       <button onClick={() => setShowMore(!showMore)} className="btn font15 orangeColor semiBold" style={{display: "block", marginLeft: "-15px", marginTop: "15px"}}>
        {showMore ? "Show less" : "Show more"}  
       </button>

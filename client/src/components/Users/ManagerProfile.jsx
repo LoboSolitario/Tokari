@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from "styled-components";
 import { useParams } from 'react-router-dom'
 import axios from "axios";
 import AllBasket from "../Discover/AllBasket";
@@ -66,47 +65,34 @@ function ManagerProfile() {
 
   return (
     <div key={manager._id} className="container70 whiteBg shadow discoverPage flex flexColumn" >
-      <div className='flexWrapper60' style={{padding: '50px 20px 0 20px'}}>
-      </div>
-      <div className="container"
-        style={{
-          display: "in-block",
-          marginTop: "20px",
-          marginBottom: "0px"
-        }}>
-        <div className="lightBg metricsBox borderRad ">
-          <div className="flex">
-            <div className="semiBold font25  flexColBig">
+      
+      <div className="lightBg metricsBox borderRad" style={{marginTop: "70px"}}>
+          <div className="flexRow flexNullCenter flexCenterAndSpaced">
+            <div className="semiBold font20">
               {manager.name}
             </div>
-            <div className="greyColor flexCol">
-              Contact
-            </div>
-            <div className="greyColor flexCol">
-              Number of Baskets
-            </div>
-            <div className="greyColor flexCol">
-              Number of Subscribers
+            <div className="greyColor flexColumn">
+              <div>Total Baskets</div>
+              <div style={{color: "black", paddingTop: "10px"}}>
+                {manager.numberOfCreatedBaskets}
+              </div>
             </div>
 
-          </div>
-          <div className="flexRowGap ">
-            <div className="greyColor flexColBig">
-              
-            </div>
-            <div className=" flexCol">
-              {manager.email}
-            </div>
-            <div className=" flexCol">
-              {manager.numberOfCreatedBaskets}
-            </div>
-            <div className=" flexCol">
-              {numberOfSubscriber}
+            <div className="greyColor flexColumn">
+                <div>Total Subscribers</div> 
+                <div style={{color: "black", paddingTop: "10px"}}>
+                  {numberOfSubscriber}  
+                </div>
             </div>
 
+            <div className="greyColor flexColumn">
+                <div>Contact</div> 
+                <div style={{color: "black", paddingTop: "10px"}}>
+                  {manager.email}  
+                </div>
+            </div>
           </div>
         </div>
-      </div>
 
       <div className='flexWrapper60' style={{padding: '20px 20px 0 35px'}}>
             <h3 className="box font25 extraBold">Basket Offerings</h3>
@@ -125,10 +111,4 @@ function ManagerProfile() {
     
   );
 }
-const Wrapper = styled.div`
-width: 100%;
-text-align: left;
-padding: 20px 30px;
-margin-top: 30px;
-`;
 export default ManagerProfile
